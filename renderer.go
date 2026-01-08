@@ -30,25 +30,39 @@ func NewSVGRenderer() *SVGRenderer {
 
 // RenderHeatmap renders a heatmap as SVG
 func (r *SVGRenderer) RenderHeatmap(data HeatmapData, bounds Bounds, config RenderConfig) Output {
-	// TODO: Implementation to be extracted from repobeats
-	// Will call either RenderLinearHeatmap or RenderWeeksHeatmap based on data.Type
-	return SVGOutput("")
+	var svg string
+
+	// Determine color from config
+	color := config.Color
+	if color == "" && config.DesignTokens != nil {
+		color = config.DesignTokens.Color
+	}
+
+	// Call appropriate heatmap renderer based on type
+	if data.Type == "weeks" {
+		svg = RenderWeeksHeatmap(data, bounds.X, bounds.Y, bounds.Width, bounds.Height, color, config.DesignTokens)
+	} else {
+		// Default to linear heatmap
+		svg = RenderLinearHeatmap(data, bounds.X, bounds.Y, bounds.Width, bounds.Height, color, config.DesignTokens)
+	}
+
+	return SVGOutput(svg)
 }
 
 // RenderLineGraph renders a line graph as SVG
 func (r *SVGRenderer) RenderLineGraph(data LineGraphData, bounds Bounds, config RenderConfig) Output {
-	// TODO: Implementation to be extracted from repobeats
-	return SVGOutput("")
+	svg := RenderLineGraph(data, bounds.X, bounds.Y, bounds.Width, bounds.Height, config.DesignTokens)
+	return SVGOutput(svg)
 }
 
 // RenderBarChart renders a bar chart as SVG
 func (r *SVGRenderer) RenderBarChart(data BarChartData, bounds Bounds, config RenderConfig) Output {
-	// TODO: Implementation to be extracted from repobeats
-	return SVGOutput("")
+	svg := RenderBarChart(data, bounds.X, bounds.Y, bounds.Width, bounds.Height, config.DesignTokens)
+	return SVGOutput(svg)
 }
 
 // RenderStatCard renders a stat card as SVG
 func (r *SVGRenderer) RenderStatCard(data StatCardData, bounds Bounds, config RenderConfig) Output {
-	// TODO: Implementation to be extracted from repobeats
-	return SVGOutput("")
+	svg := RenderStatCard(data, bounds.X, bounds.Y, bounds.Width, bounds.Height, config.DesignTokens)
+	return SVGOutput(svg)
 }

@@ -6,7 +6,7 @@ import (
 	"time"
 
 	design "github.com/SCKelemen/design-system"
-	rendersvg "github.com/SCKelemen/svg"
+	"github.com/SCKelemen/svg"
 )
 
 // RenderLinearHeatmap renders a linear (horizontal) heatmap
@@ -67,8 +67,8 @@ func RenderLinearHeatmap(data HeatmapData, x, y int, width, height int, color st
 		squareX := float64(i) * (squareSize + 1.0)
 
 		// Use adjusted color with luminance instead of opacity
-		style := rendersvg.Style{Fill: adjustedColor}
-		b.WriteString(rendersvg.RoundedRect(squareX, squareY, squareSize, squareSize, 2, 0, style))
+		style := svg.Style{Fill: adjustedColor}
+		b.WriteString(svg.RoundedRect(squareX, squareY, squareSize, squareSize, 2, 0, style))
 		b.WriteString("\n")
 	}
 
@@ -169,8 +169,8 @@ func RenderWeeksHeatmap(data HeatmapData, x, y int, width, height int, color str
 			cellY := float64(dayOfWeek) * cellSize
 
 			// Use adjusted color with luminance instead of opacity
-			style := rendersvg.Style{Fill: adjustedColor}
-			b.WriteString(rendersvg.RoundedRect(cellX, cellY, cellSize, cellSize, 2, 0, style))
+			style := svg.Style{Fill: adjustedColor}
+			b.WriteString(svg.RoundedRect(cellX, cellY, cellSize, cellSize, 2, 0, style))
 			b.WriteString("\n")
 
 			currentDate = currentDate.AddDate(0, 0, 1)
@@ -182,14 +182,14 @@ func RenderWeeksHeatmap(data HeatmapData, x, y int, width, height int, color str
 	dayLabels := []string{"", "Mon", "", "Wed", "", "Fri", ""}
 	for i, label := range dayLabels {
 		if label != "" {
-			textStyle := rendersvg.Style{
+			textStyle := svg.Style{
 				Fill:             designTokens.Color,
 				Class:            "mono smaller",
-				TextAnchor:       rendersvg.TextAnchorEnd,
-				DominantBaseline: rendersvg.DominantBaselineMiddle,
+				TextAnchor:       svg.TextAnchorEnd,
+				DominantBaseline: svg.DominantBaselineMiddle,
 			}
 			labelY := float64(i)*cellSize + cellSize/2
-			b.WriteString(rendersvg.Text(label, -5, labelY, textStyle))
+			b.WriteString(svg.Text(label, -5, labelY, textStyle))
 			b.WriteString("\n")
 		}
 	}

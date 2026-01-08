@@ -6,7 +6,7 @@ import (
 	"sync/atomic"
 
 	design "github.com/SCKelemen/design-system"
-	rendersvg "github.com/SCKelemen/svg"
+	"github.com/SCKelemen/svg"
 )
 
 // Global counter for unique gradient IDs
@@ -53,12 +53,12 @@ func RenderLineGraph(data LineGraphData, x, y int, width, height int, designToke
 		}
 
 		// Create a vertical gradient from color to transparent
-		gradient := rendersvg.SimpleLinearGradient(gradientID, data.FillColor, "rgba(0,0,0,0)", 90)
+		gradient := svg.SimpleLinearGradient(gradientID, data.FillColor, "rgba(0,0,0,0)", 90)
 		b.WriteString("<defs>")
 		b.WriteString(gradient)
 		b.WriteString("</defs>")
 
-		fillValue = rendersvg.GradientURL(gradientID)
+		fillValue = svg.GradientURL(gradientID)
 	} else {
 		fillValue = data.FillColor
 	}
@@ -73,21 +73,21 @@ func RenderLineGraph(data LineGraphData, x, y int, width, height int, designToke
 		gridY := float64(height) * float64(i) / float64(gridLines)
 		value := minValue + int(float64(valueRange)*float64(gridLines-i)/float64(gridLines))
 
-		lineStyle := rendersvg.Style{
+		lineStyle := svg.Style{
 			Stroke:      "rgba(255,255,255,0.1)",
 			StrokeWidth: 1,
 		}
-		b.WriteString(rendersvg.Line(0, gridY, float64(width), gridY, lineStyle))
+		b.WriteString(svg.Line(0, gridY, float64(width), gridY, lineStyle))
 		b.WriteString("\n")
 
-		textStyle := rendersvg.Style{
+		textStyle := svg.Style{
 			Fill:             designTokens.Color,
 			Class:            "mono smaller",
 			Opacity:          0.5,
-			TextAnchor:       rendersvg.TextAnchorEnd,
-			DominantBaseline: rendersvg.DominantBaselineMiddle,
+			TextAnchor:       svg.TextAnchorEnd,
+			DominantBaseline: svg.DominantBaselineMiddle,
 		}
-		b.WriteString(rendersvg.Text(fmt.Sprintf("%d", value), float64(width-5), gridY, textStyle))
+		b.WriteString(svg.Text(fmt.Sprintf("%d", value), float64(width-5), gridY, textStyle))
 		b.WriteString("\n")
 	}
 
@@ -112,14 +112,14 @@ func RenderLineGraph(data LineGraphData, x, y int, width, height int, designToke
 
 		path.WriteString(fmt.Sprintf("L %d %d Z", plotWidth, height))
 
-		pathStyle := rendersvg.Style{
+		pathStyle := svg.Style{
 			Fill: fillValue,
 		}
 		// Only apply opacity if not using gradient (gradient handles its own transparency)
 		if !data.UseGradient {
 			pathStyle.FillOpacity = 0.2
 		}
-		b.WriteString(rendersvg.Path(path.String(), pathStyle))
+		b.WriteString(svg.Path(path.String(), pathStyle))
 		b.WriteString("\n")
 	}
 
@@ -142,14 +142,14 @@ func RenderLineGraph(data LineGraphData, x, y int, width, height int, designToke
 			}
 		}
 
-		pathStyle := rendersvg.Style{
+		pathStyle := svg.Style{
 			Fill:           "none",
 			Stroke:         data.Color,
 			StrokeWidth:    2,
-			StrokeLinecap:  rendersvg.StrokeLinecapRound,
-			StrokeLinejoin: rendersvg.StrokeLinejoinRound,
+			StrokeLinecap:  svg.StrokeLinecapRound,
+			StrokeLinejoin: svg.StrokeLinejoinRound,
 		}
-		b.WriteString(rendersvg.Path(path.String(), pathStyle))
+		b.WriteString(svg.Path(path.String(), pathStyle))
 		b.WriteString("\n")
 	}
 
@@ -163,12 +163,12 @@ func RenderLineGraph(data LineGraphData, x, y int, width, height int, designToke
 		pointX := float64(i) * pointWidth
 		pointY := float64(height) - (float64(point.Value-minValue)/float64(valueRange))*float64(height)
 
-		circleStyle := rendersvg.Style{
+		circleStyle := svg.Style{
 			Fill:        data.Color,
 			Stroke:      designTokens.Background,
 			StrokeWidth: 1,
 		}
-		b.WriteString(rendersvg.Circle(pointX, pointY, 3, circleStyle))
+		b.WriteString(svg.Circle(pointX, pointY, 3, circleStyle))
 		b.WriteString("\n")
 	}
 

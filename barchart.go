@@ -6,7 +6,7 @@ import (
 
 	"github.com/SCKelemen/color"
 	design "github.com/SCKelemen/design-system"
-	rendersvg "github.com/SCKelemen/svg"
+	"github.com/SCKelemen/svg"
 )
 
 // RenderBarChart renders a bar chart
@@ -67,8 +67,8 @@ func RenderBarChart(data BarChartData, x, y int, width, height int, designTokens
 			if primaryY < 0 {
 				primaryY = 0
 			}
-			primaryStyle := rendersvg.Style{Fill: lighterColor}
-			b.WriteString(rendersvg.Rect(barX, primaryY, barWidth, primaryHeight, primaryStyle))
+			primaryStyle := svg.Style{Fill: lighterColor}
+			b.WriteString(svg.Rect(barX, primaryY, barWidth, primaryHeight, primaryStyle))
 			b.WriteString("\n")
 
 			// Secondary bar (closed) - darker color, stacked on top
@@ -78,8 +78,8 @@ func RenderBarChart(data BarChartData, x, y int, width, height int, designTokens
 					secondaryY = 0
 					secondaryHeight = primaryY
 				}
-				secondaryStyle := rendersvg.Style{Fill: data.Color}
-				b.WriteString(rendersvg.Rect(barX, secondaryY, barWidth, secondaryHeight, secondaryStyle))
+				secondaryStyle := svg.Style{Fill: data.Color}
+				b.WriteString(svg.Rect(barX, secondaryY, barWidth, secondaryHeight, secondaryStyle))
 				b.WriteString("\n")
 			}
 		} else {
@@ -93,8 +93,8 @@ func RenderBarChart(data BarChartData, x, y int, width, height int, designTokens
 				barY = 0
 				barHeight = baseY
 			}
-			barStyle := rendersvg.Style{Fill: data.Color}
-			b.WriteString(rendersvg.Rect(barX, barY, barWidth, barHeight, barStyle))
+			barStyle := svg.Style{Fill: data.Color}
+			b.WriteString(svg.Rect(barX, barY, barWidth, barHeight, barStyle))
 			b.WriteString("\n")
 		}
 	}

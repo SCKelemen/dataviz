@@ -36,6 +36,10 @@ type LineGraphData struct {
 	GradientID  string              // Optional custom gradient ID (auto-generated if empty)
 	ColorSpace  color.GradientSpace // Color space for gradient interpolation
 	Label       string
+	Smooth      bool    // If true, use smooth curves instead of straight lines
+	Tension     float64 // Curve tension (0-1), only used if Smooth is true. 0.3 is recommended
+	MarkerType  string  // Marker type: "circle", "square", "diamond", "triangle", "dot", "" (none)
+	MarkerSize  float64 // Size of markers in pixels (default: 3)
 }
 
 // BarChartData represents data for a bar chart
@@ -66,6 +70,38 @@ type StatCardData struct {
 	TrendColor2 string           // Secondary color for trend (darker)
 	Legend1     string           // Label for first legend item
 	Legend2     string           // Label for second legend item
+}
+
+// AreaChartData represents data for an area chart
+type AreaChartData struct {
+	Points      []TimeSeriesData
+	Color       string
+	FillColor   string
+	UseGradient bool                // If true, use gradient fill
+	GradientID  string              // Optional custom gradient ID
+	ColorSpace  color.GradientSpace // Color space for gradient interpolation
+	Label       string
+	Smooth      bool    // If true, use smooth curves
+	Tension     float64 // Curve tension (0-1), 0.3 recommended
+	BaselineY   int     // Y value for baseline (default: bottom of chart)
+	Stacked     bool    // For multiple series (future enhancement)
+}
+
+// ScatterPlotData represents data for a scatter plot
+type ScatterPlotData struct {
+	Points     []ScatterPoint
+	Color      string
+	Label      string
+	MarkerType string  // Marker shape: "circle", "square", "diamond", "triangle", "cross", "x", "dot"
+	MarkerSize float64 // Size of markers in pixels
+}
+
+// ScatterPoint represents a single point in a scatter plot
+type ScatterPoint struct {
+	Date  time.Time
+	Value int
+	Size  float64 // Optional: custom size for this point (0 = use default)
+	Label string  // Optional: label for this specific point
 }
 
 // Card represents a visual card container

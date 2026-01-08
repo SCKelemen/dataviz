@@ -9,11 +9,8 @@ import (
 	"github.com/SCKelemen/svg"
 )
 
-// Global counter for unique gradient IDs
-var gradientCounter int64
-
-// RenderLineGraph renders a line graph
-func RenderLineGraph(data LineGraphData, x, y int, width, height int, designTokens *design.DesignTokens) string {
+// RenderAreaChart renders an area chart
+func RenderAreaChart(data AreaChartData, x, y int, width, height int, designTokens *design.DesignTokens) string {
 	var b strings.Builder
 
 	if len(data.Points) == 0 {
@@ -49,7 +46,7 @@ func RenderLineGraph(data LineGraphData, x, y int, width, height int, designToke
 	if data.UseGradient && data.FillColor != "" {
 		gradientID := data.GradientID
 		if gradientID == "" {
-			gradientID = fmt.Sprintf("lineGraphGradient-%d", atomic.AddInt64(&gradientCounter, 1))
+			gradientID = fmt.Sprintf("areaChartGradient-%d", atomic.AddInt64(&gradientCounter, 1))
 		}
 
 		// Create a vertical gradient from color to transparent
@@ -61,6 +58,9 @@ func RenderLineGraph(data LineGraphData, x, y int, width, height int, designToke
 		fillValue = svg.GradientURL(gradientID)
 	} else {
 		fillValue = data.FillColor
+		if fillValue == "" {
+			fillValue = data.Color // Use line color if no fill color specified
+		}
 	}
 
 	// Reserve space for graduations and labels
@@ -105,37 +105,43 @@ func RenderLineGraph(data LineGraphData, x, y int, width, height int, designToke
 		}
 	}
 
-	// Draw filled area (if fill color specified)
-	if data.FillColor != "" && len(data.Points) > 1 {
+	// Determine baseline
+	baselineY := float64(height)
+	if data.BaselineY > 0 {
+		baselineY = float64(height) - (float64(data.BaselineY-minValue)/float64(valueRange))*float64(height)
+	}
+
+	// Draw filled area
+	if len(data.Points) > 1 {
 		var areaPath string
 		if data.Smooth {
 			tension := data.Tension
 			if tension == 0 {
 				tension = 0.3 // Default tension
 			}
-			areaPath = svg.SmoothAreaPath(scaledPoints, float64(height), tension)
+			areaPath = svg.SmoothAreaPath(scaledPoints, baselineY, tension)
 		} else {
-			areaPath = svg.AreaPath(scaledPoints, float64(height))
+			areaPath = svg.AreaPath(scaledPoints, baselineY)
 		}
 
 		pathStyle := svg.Style{
 			Fill: fillValue,
 		}
-		// Only apply opacity if not using gradient (gradient handles its own transparency)
+		// Apply opacity if not using gradient
 		if !data.UseGradient {
-			pathStyle.FillOpacity = 0.2
+			pathStyle.FillOpacity = 0.4
 		}
 		b.WriteString(svg.Path(areaPath, pathStyle))
 		b.WriteString("\n")
 	}
 
-	// Draw line using PathBuilder
-	if len(data.Points) > 1 {
+	// Draw border line
+	if data.Color != "" && len(data.Points) > 1 {
 		var linePath string
 		if data.Smooth {
 			tension := data.Tension
 			if tension == 0 {
-				tension = 0.3 // Default tension
+				tension = 0.3
 			}
 			linePath = svg.SmoothLinePath(scaledPoints, tension)
 		} else {
@@ -151,49 +157,6 @@ func RenderLineGraph(data LineGraphData, x, y int, width, height int, designToke
 		}
 		b.WriteString(svg.Path(linePath, pathStyle))
 		b.WriteString("\n")
-	}
-
-	// Draw points with custom markers if specified
-	if data.MarkerType != "" {
-		markerSize := data.MarkerSize
-		if markerSize == 0 {
-			markerSize = 3 // Default size
-		}
-
-		for _, point := range scaledPoints {
-			markerStyle := svg.Style{
-				Fill:        data.Color,
-				Stroke:      designTokens.Background,
-				StrokeWidth: 1,
-			}
-
-			switch data.MarkerType {
-			case "circle", "dot":
-				b.WriteString(svg.Circle(point.X, point.Y, markerSize, markerStyle))
-			case "square":
-				halfSize := markerSize
-				b.WriteString(svg.Rect(point.X-halfSize, point.Y-halfSize, halfSize*2, halfSize*2, markerStyle))
-			case "diamond":
-				diamondPoints := []svg.Point{
-					{X: point.X, Y: point.Y - markerSize},
-					{X: point.X + markerSize, Y: point.Y},
-					{X: point.X, Y: point.Y + markerSize},
-					{X: point.X - markerSize, Y: point.Y},
-				}
-				b.WriteString(svg.Polygon(diamondPoints, markerStyle))
-			case "triangle":
-				trianglePoints := []svg.Point{
-					{X: point.X, Y: point.Y - markerSize},
-					{X: point.X + markerSize, Y: point.Y + markerSize},
-					{X: point.X - markerSize, Y: point.Y + markerSize},
-				}
-				b.WriteString(svg.Polygon(trianglePoints, markerStyle))
-			default:
-				// Default to circle
-				b.WriteString(svg.Circle(point.X, point.Y, markerSize, markerStyle))
-			}
-			b.WriteString("\n")
-		}
 	}
 
 	b.WriteString(`</g>`)

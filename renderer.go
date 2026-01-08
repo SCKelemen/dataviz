@@ -18,6 +18,8 @@ type Renderer interface {
 	RenderLineGraph(data LineGraphData, bounds Bounds, config RenderConfig) Output
 	RenderBarChart(data BarChartData, bounds Bounds, config RenderConfig) Output
 	RenderStatCard(data StatCardData, bounds Bounds, config RenderConfig) Output
+	RenderAreaChart(data AreaChartData, bounds Bounds, config RenderConfig) Output
+	RenderScatterPlot(data ScatterPlotData, bounds Bounds, config RenderConfig) Output
 }
 
 // SVGRenderer implements SVG rendering
@@ -64,5 +66,17 @@ func (r *SVGRenderer) RenderBarChart(data BarChartData, bounds Bounds, config Re
 // RenderStatCard renders a stat card as SVG
 func (r *SVGRenderer) RenderStatCard(data StatCardData, bounds Bounds, config RenderConfig) Output {
 	svg := RenderStatCard(data, bounds.X, bounds.Y, bounds.Width, bounds.Height, config.DesignTokens)
+	return SVGOutput(svg)
+}
+
+// RenderAreaChart renders an area chart as SVG
+func (r *SVGRenderer) RenderAreaChart(data AreaChartData, bounds Bounds, config RenderConfig) Output {
+	svg := RenderAreaChart(data, bounds.X, bounds.Y, bounds.Width, bounds.Height, config.DesignTokens)
+	return SVGOutput(svg)
+}
+
+// RenderScatterPlot renders a scatter plot as SVG
+func (r *SVGRenderer) RenderScatterPlot(data ScatterPlotData, bounds Bounds, config RenderConfig) Output {
+	svg := RenderScatterPlot(data, bounds.X, bounds.Y, bounds.Width, bounds.Height, config.DesignTokens)
 	return SVGOutput(svg)
 }

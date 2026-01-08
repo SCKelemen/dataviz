@@ -46,6 +46,16 @@ func (r *TerminalRenderer) RenderStatCard(data StatCardData, bounds Bounds, conf
 	return r.renderStatCardTerminal(data, bounds, config)
 }
 
+// RenderAreaChart renders an area chart to terminal
+func (r *TerminalRenderer) RenderAreaChart(data AreaChartData, bounds Bounds, config RenderConfig) Output {
+	return r.renderAreaChartTerminal(data, bounds, config)
+}
+
+// RenderScatterPlot renders a scatter plot to terminal
+func (r *TerminalRenderer) RenderScatterPlot(data ScatterPlotData, bounds Bounds, config RenderConfig) Output {
+	return r.renderScatterPlotTerminal(data, bounds, config)
+}
+
 // renderLinearHeatmapTerminal renders a linear heatmap using block characters
 func (r *TerminalRenderer) renderLinearHeatmapTerminal(data HeatmapData, bounds Bounds, config RenderConfig) Output {
 	var b strings.Builder
@@ -368,6 +378,155 @@ func (r *TerminalRenderer) renderStatCardTerminal(data StatCardData, bounds Boun
 	b.WriteString("└")
 	b.WriteString(strings.Repeat("─", bounds.Width-2))
 	b.WriteString("┘\n")
+
+	return TerminalOutput{Content: b.String()}
+}
+
+// renderAreaChartTerminal renders an area chart to terminal
+func (r *TerminalRenderer) renderAreaChartTerminal(data AreaChartData, bounds Bounds, config RenderConfig) Output {
+	var b strings.Builder
+
+	if len(data.Points) == 0 {
+		return TerminalOutput{Content: ""}
+	}
+
+	// Find min/max for scaling
+	minValue, maxValue := data.Points[0].Value, data.Points[0].Value
+	for _, point := range data.Points {
+		if point.Value < minValue {
+			minValue = point.Value
+		}
+		if point.Value > maxValue {
+			maxValue = point.Value
+		}
+	}
+
+	valueRange := maxValue - minValue
+	if valueRange == 0 {
+		valueRange = 1
+	}
+
+	// Use block characters to fill the area
+	height := bounds.Height
+	if height > 20 {
+		height = 20
+	}
+	width := bounds.Width
+	if width > len(data.Points) {
+		width = len(data.Points)
+	}
+
+	// Create a 2D grid
+	grid := make([][]string, height)
+	for i := range grid {
+		grid[i] = make([]string, width)
+		for j := range grid[i] {
+			grid[i][j] = " "
+		}
+	}
+
+	// Fill area under the curve
+	for i := 0; i < width && i < len(data.Points); i++ {
+		point := data.Points[i]
+		y := float64(height-1) - (float64(point.Value-minValue)/float64(valueRange))*float64(height-1)
+		yInt := int(math.Round(y))
+
+		// Fill from bottom to y
+		for row := yInt; row < height; row++ {
+			if row >= 0 && row < height {
+				grid[row][i] = "█"
+			}
+		}
+	}
+
+	// Render grid
+	for y := 0; y < height; y++ {
+		for x := 0; x < width; x++ {
+			b.WriteString(grid[y][x])
+		}
+		b.WriteString("\n")
+	}
+
+	return TerminalOutput{Content: b.String()}
+}
+
+// renderScatterPlotTerminal renders a scatter plot to terminal
+func (r *TerminalRenderer) renderScatterPlotTerminal(data ScatterPlotData, bounds Bounds, config RenderConfig) Output {
+	var b strings.Builder
+
+	if len(data.Points) == 0 {
+		return TerminalOutput{Content: ""}
+	}
+
+	// Find min/max for scaling
+	minValue, maxValue := data.Points[0].Value, data.Points[0].Value
+	for _, point := range data.Points {
+		if point.Value < minValue {
+			minValue = point.Value
+		}
+		if point.Value > maxValue {
+			maxValue = point.Value
+		}
+	}
+
+	valueRange := maxValue - minValue
+	if valueRange == 0 {
+		valueRange = 1
+	}
+
+	// Use ASCII art for scatter plot
+	height := bounds.Height
+	if height > 20 {
+		height = 20
+	}
+	width := bounds.Width
+	if width > len(data.Points) {
+		width = len(data.Points)
+	}
+
+	// Create a 2D grid
+	grid := make([][]string, height)
+	for i := range grid {
+		grid[i] = make([]string, width)
+		for j := range grid[i] {
+			grid[i][j] = " "
+		}
+	}
+
+	// Map marker types to characters
+	markerChar := "●"
+	switch data.MarkerType {
+	case "square":
+		markerChar = "■"
+	case "diamond":
+		markerChar = "◆"
+	case "triangle":
+		markerChar = "▲"
+	case "cross":
+		markerChar = "+"
+	case "x":
+		markerChar = "×"
+	case "dot", "circle":
+		markerChar = "●"
+	}
+
+	// Plot points
+	for i := 0; i < width && i < len(data.Points); i++ {
+		point := data.Points[i]
+		y := float64(height-1) - (float64(point.Value-minValue)/float64(valueRange))*float64(height-1)
+		yInt := int(math.Round(y))
+		if yInt >= 0 && yInt < height {
+			grid[yInt][i] = markerChar
+		}
+	}
+
+	// Render grid
+	for y := 0; y < height; y++ {
+		for x := 0; x < width; x++ {
+			b.WriteString(grid[y][x])
+		}
+		b.WriteString("\n")
+	}
 
 	return TerminalOutput{Content: b.String()}
 }

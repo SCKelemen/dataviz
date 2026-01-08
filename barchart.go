@@ -6,7 +6,7 @@ import (
 
 	"github.com/SCKelemen/color"
 	design "github.com/SCKelemen/design-system"
-	rendersvg "github.com/SCKelemen/render-svg"
+	rendersvg "github.com/SCKelemen/svg"
 )
 
 // RenderBarChart renders a bar chart

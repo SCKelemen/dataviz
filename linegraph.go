@@ -6,7 +6,7 @@ import (
 	"sync/atomic"
 
 	design "github.com/SCKelemen/design-system"
-	rendersvg "github.com/SCKelemen/render-svg"
+	rendersvg "github.com/SCKelemen/svg"
 )
 
 // Global counter for unique gradient IDs

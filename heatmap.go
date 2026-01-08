@@ -6,7 +6,7 @@ import (
 	"time"
 
 	design "github.com/SCKelemen/design-system"
-	rendersvg "github.com/SCKelemen/render-svg"
+	rendersvg "github.com/SCKelemen/svg"
 )
 
 // RenderLinearHeatmap renders a linear (horizontal) heatmap

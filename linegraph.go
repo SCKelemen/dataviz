@@ -91,26 +91,23 @@ func RenderLineGraph(data LineGraphData, x, y int, width, height int, designToke
 		b.WriteString("\n")
 	}
 
+	// Calculate scaled points
+	pointWidth := float64(plotWidth) / float64(len(data.Points)-1)
+	if len(data.Points) == 1 {
+		pointWidth = 0
+	}
+
+	scaledPoints := make([]svg.Point, len(data.Points))
+	for i, point := range data.Points {
+		scaledPoints[i] = svg.Point{
+			X: float64(i) * pointWidth,
+			Y: float64(height) - (float64(point.Value-minValue)/float64(valueRange))*float64(height),
+		}
+	}
+
 	// Draw filled area (if fill color specified)
 	if data.FillColor != "" && len(data.Points) > 1 {
-		var path strings.Builder
-		path.WriteString(fmt.Sprintf("M 0 %d ", height))
-
-		pointWidth := float64(plotWidth) / float64(len(data.Points)-1)
-		if len(data.Points) == 1 {
-			pointWidth = 0
-		}
-		for i, point := range data.Points {
-			pointX := float64(i) * pointWidth
-			pointY := float64(height) - (float64(point.Value-minValue)/float64(valueRange))*float64(height)
-			if i == 0 {
-				path.WriteString(fmt.Sprintf("L %.1f %.1f ", pointX, pointY))
-			} else {
-				path.WriteString(fmt.Sprintf("L %.1f %.1f ", pointX, pointY))
-			}
-		}
-
-		path.WriteString(fmt.Sprintf("L %d %d Z", plotWidth, height))
+		areaPath := svg.AreaPath(scaledPoints, float64(height))
 
 		pathStyle := svg.Style{
 			Fill: fillValue,
@@ -119,28 +116,13 @@ func RenderLineGraph(data LineGraphData, x, y int, width, height int, designToke
 		if !data.UseGradient {
 			pathStyle.FillOpacity = 0.2
 		}
-		b.WriteString(svg.Path(path.String(), pathStyle))
+		b.WriteString(svg.Path(areaPath, pathStyle))
 		b.WriteString("\n")
 	}
 
-	// Draw line
+	// Draw line using PathBuilder
 	if len(data.Points) > 1 {
-		var path strings.Builder
-		pointWidth := float64(plotWidth) / float64(len(data.Points)-1)
-		if len(data.Points) == 1 {
-			pointWidth = 0
-		}
-
-		for i, point := range data.Points {
-			pointX := float64(i) * pointWidth
-			pointY := float64(height) - (float64(point.Value-minValue)/float64(valueRange))*float64(height)
-
-			if i == 0 {
-				path.WriteString(fmt.Sprintf("M %.1f %.1f ", pointX, pointY))
-			} else {
-				path.WriteString(fmt.Sprintf("L %.1f %.1f ", pointX, pointY))
-			}
-		}
+		linePath := svg.PolylinePath(scaledPoints)
 
 		pathStyle := svg.Style{
 			Fill:           "none",
@@ -149,26 +131,18 @@ func RenderLineGraph(data LineGraphData, x, y int, width, height int, designToke
 			StrokeLinecap:  svg.StrokeLinecapRound,
 			StrokeLinejoin: svg.StrokeLinejoinRound,
 		}
-		b.WriteString(svg.Path(path.String(), pathStyle))
+		b.WriteString(svg.Path(linePath, pathStyle))
 		b.WriteString("\n")
 	}
 
 	// Draw points
-	pointWidth := float64(plotWidth) / float64(len(data.Points)-1)
-	if len(data.Points) == 1 {
-		pointWidth = 0
-	}
-
-	for i, point := range data.Points {
-		pointX := float64(i) * pointWidth
-		pointY := float64(height) - (float64(point.Value-minValue)/float64(valueRange))*float64(height)
-
+	for _, point := range scaledPoints {
 		circleStyle := svg.Style{
 			Fill:        data.Color,
 			Stroke:      designTokens.Background,
 			StrokeWidth: 1,
 		}
-		b.WriteString(svg.Circle(pointX, pointY, 3, circleStyle))
+		b.WriteString(svg.Circle(point.X, point.Y, 3, circleStyle))
 		b.WriteString("\n")
 	}
 

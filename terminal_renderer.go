@@ -305,7 +305,7 @@ func (r *TerminalRenderer) renderStatCardTerminal(data StatCardData, bounds Boun
 
 	// Title
 	b.WriteString(fmt.Sprintf("┌─ %s ", data.Title))
-	b.WriteString(strings.Repeat("─", bounds.Width-len(data.Title)-4))
+	b.WriteString(strings.Repeat("─", bounds.Width-len(data.Title)-5))
 	b.WriteString("┐\n")
 
 	// Value

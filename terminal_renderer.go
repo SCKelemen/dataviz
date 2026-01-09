@@ -379,18 +379,36 @@ func (r *TerminalRenderer) renderBarChartTerminal(data BarChartData, bounds Boun
 	ansiColor := ColorForeground(barColor, colorMode)
 	ansiReset := "\x1b[0m"
 
+	// Find max label length to account for spacing
+	maxLabelLen := 0
+	for i := 0; i < numBars; i++ {
+		if i < len(data.Bars) && len(data.Bars[i].Label) > maxLabelLen {
+			maxLabelLen = len(data.Bars[i].Label)
+		}
+	}
+
+	// Calculate available width for bars (leave room for labels and spacing)
+	labelSpace := maxLabelLen + 3 // 2 spaces + label
+	if labelSpace > bounds.Width/2 {
+		labelSpace = bounds.Width / 2
+	}
+	maxBarWidth := bounds.Width - labelSpace
+	if maxBarWidth < 10 {
+		maxBarWidth = 10
+	}
+
 	// Render each bar
 	for i := 0; i < numBars; i++ {
 		bar := data.Bars[i]
 
-		// Calculate bar length (up to bounds.Width)
+		// Calculate bar length proportional to value
 		totalValue := bar.Value + bar.Secondary
-		barLength := int((float64(totalValue) / float64(maxValue)) * float64(bounds.Width-10))
+		barLength := int((float64(totalValue) / float64(maxValue)) * float64(maxBarWidth))
 
 		if data.Stacked && bar.Secondary > 0 {
 			// Stacked bars with different colors
-			primaryLength := int((float64(bar.Value) / float64(maxValue)) * float64(bounds.Width-10))
-			secondaryLength := int((float64(bar.Secondary) / float64(maxValue)) * float64(bounds.Width-10))
+			primaryLength := int((float64(bar.Value) / float64(maxValue)) * float64(maxBarWidth))
+			secondaryLength := int((float64(bar.Secondary) / float64(maxValue)) * float64(maxBarWidth))
 
 			// Primary (lighter color)
 			if ansiColor != "" {

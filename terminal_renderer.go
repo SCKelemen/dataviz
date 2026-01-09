@@ -56,7 +56,7 @@ func (r *TerminalRenderer) RenderScatterPlot(data ScatterPlotData, bounds Bounds
 	return r.renderScatterPlotTerminal(data, bounds, config)
 }
 
-// renderLinearHeatmapTerminal renders a linear heatmap using block characters
+// renderLinearHeatmapTerminal renders a linear heatmap using block characters with color gradients
 func (r *TerminalRenderer) renderLinearHeatmapTerminal(data HeatmapData, bounds Bounds, config RenderConfig) Output {
 	var b strings.Builder
 
@@ -84,7 +84,32 @@ func (r *TerminalRenderer) renderLinearHeatmapTerminal(data HeatmapData, bounds 
 		numDays = bounds.Width
 	}
 
-	// Render blocks
+	// Determine color mode
+	colorMode := TerminalColorTrue
+	if config.DesignTokens != nil && config.DesignTokens.Mode == "basic" {
+		colorMode = TerminalColor256
+	}
+
+	// Get base color from config
+	baseColor := config.Color
+	if baseColor == "" && config.DesignTokens != nil {
+		baseColor = config.DesignTokens.Accent
+	}
+	if baseColor == "" {
+		baseColor = "#40C463" // GitHub green
+	}
+
+	// Create color gradient from low to high intensity
+	lowColor := "#161B22"  // Dark background
+	highColor := baseColor // Accent color
+
+	// Generate gradient colors
+	gradientSteps := 5
+	gradient := InterpolateColorGradient(lowColor, highColor, gradientSteps, colorMode)
+
+	ansiReset := "\x1b[0m"
+
+	// Render blocks with color
 	for i := 0; i < numDays; i++ {
 		if i >= len(data.Days) {
 			break
@@ -95,14 +120,28 @@ func (r *TerminalRenderer) renderLinearHeatmapTerminal(data HeatmapData, bounds 
 		if blockIndex >= len(blocks) {
 			blockIndex = len(blocks) - 1
 		}
+
+		// Get color for this intensity
+		colorIndex := int(ratio * float64(len(gradient)-1))
+		if colorIndex >= len(gradient) {
+			colorIndex = len(gradient) - 1
+		}
+
+		// Apply color
+		if gradient[colorIndex] != "" {
+			b.WriteString(gradient[colorIndex])
+		}
 		b.WriteString(blocks[blockIndex])
+		if gradient[colorIndex] != "" {
+			b.WriteString(ansiReset)
+		}
 	}
 	b.WriteString("\n")
 
 	return TerminalOutput{Content: b.String()}
 }
 
-// renderWeeksHeatmapTerminal renders a GitHub-style weeks heatmap
+// renderWeeksHeatmapTerminal renders a GitHub-style weeks heatmap with color gradients
 func (r *TerminalRenderer) renderWeeksHeatmapTerminal(data HeatmapData, bounds Bounds, config RenderConfig) Output {
 	var b strings.Builder
 
@@ -148,9 +187,34 @@ func (r *TerminalRenderer) renderWeeksHeatmapTerminal(data HeatmapData, bounds B
 		startDate = startDate.AddDate(0, 0, -weekday)
 	}
 
+	// Determine color mode
+	colorMode := TerminalColorTrue
+	if config.DesignTokens != nil && config.DesignTokens.Mode == "basic" {
+		colorMode = TerminalColor256
+	}
+
+	// Get base color from config
+	baseColor := config.Color
+	if baseColor == "" && config.DesignTokens != nil {
+		baseColor = config.DesignTokens.Accent
+	}
+	if baseColor == "" {
+		baseColor = "#40C463" // GitHub green
+	}
+
+	// Create color gradient from low to high intensity
+	lowColor := "#161B22"  // Dark background
+	highColor := baseColor // Accent color
+
+	// Generate gradient colors
+	gradientSteps := 5
+	gradient := InterpolateColorGradient(lowColor, highColor, gradientSteps, colorMode)
+
+	ansiReset := "\x1b[0m"
+
 	currentDate := startDate
 
-	// Render grid
+	// Render grid with colors
 	for day := 0; day < 7; day++ {
 		for week := 0; week < weeks; week++ {
 			key := currentDate.Format("2006-01-02")
@@ -160,7 +224,21 @@ func (r *TerminalRenderer) renderWeeksHeatmapTerminal(data HeatmapData, bounds B
 			if blockIndex >= len(blocks) {
 				blockIndex = len(blocks) - 1
 			}
+
+			// Get color for this intensity
+			colorIndex := int(ratio * float64(len(gradient)-1))
+			if colorIndex >= len(gradient) {
+				colorIndex = len(gradient) - 1
+			}
+
+			// Apply color
+			if gradient[colorIndex] != "" {
+				b.WriteString(gradient[colorIndex])
+			}
 			b.WriteString(blocks[blockIndex])
+			if gradient[colorIndex] != "" {
+				b.WriteString(ansiReset)
+			}
 			b.WriteString(" ")
 			currentDate = currentDate.AddDate(0, 0, 1)
 		}
@@ -194,65 +272,70 @@ func (r *TerminalRenderer) renderLineGraphTerminal(data LineGraphData, bounds Bo
 		valueRange = 1
 	}
 
-	// Use simple ASCII line graph for terminal
-	height := bounds.Height
-	if height > 20 {
-		height = 20
-	}
+	// Use braille characters for smooth rendering
 	width := bounds.Width
-	if width > len(data.Points) {
-		width = len(data.Points)
+	if width > 120 {
+		width = 120
+	}
+	height := bounds.Height
+	if height > 30 {
+		height = 30
 	}
 
-	// Create a 2D grid
-	grid := make([][]string, height)
-	for i := range grid {
-		grid[i] = make([]string, width)
-		for j := range grid[i] {
-			grid[i][j] = " "
+	// Create braille canvas (each char is 2x4 pixels)
+	canvas := NewBrailleCanvas(width, height)
+
+	// Convert data points to canvas coordinates
+	braillePoints := make([]Point, 0, len(data.Points))
+	for i, point := range data.Points {
+		// X coordinate: scale to canvas width
+		x := float64(i) / float64(len(data.Points)-1) * float64(width*2-1)
+		if math.IsNaN(x) {
+			x = 0
 		}
+
+		// Y coordinate: invert because canvas Y increases downward
+		normalizedY := float64(point.Value-minValue) / float64(valueRange)
+		y := float64(height*4-1) - (normalizedY * float64(height*4-1))
+		if math.IsNaN(y) {
+			y = float64(height*4 - 1)
+		}
+
+		braillePoints = append(braillePoints, Point{X: x, Y: y})
 	}
 
-	// Plot points
-	for i := 0; i < width && i < len(data.Points); i++ {
-		point := data.Points[i]
-		y := float64(height-1) - (float64(point.Value-minValue)/float64(valueRange))*float64(height-1)
-		yInt := int(math.Round(y))
-		if yInt >= 0 && yInt < height {
-			grid[yInt][i] = "•"
-		}
+	// Draw the curve
+	canvas.DrawCurve(braillePoints)
 
-		// Draw line to next point
-		if i < width-1 && i < len(data.Points)-1 {
-			nextPoint := data.Points[i+1]
-			nextY := float64(height-1) - (float64(nextPoint.Value-minValue)/float64(valueRange))*float64(height-1)
-			nextYInt := int(math.Round(nextY))
+	// Render canvas to string
+	rendered := canvas.Render()
 
-			// Draw vertical line between points
-			startY, endY := yInt, nextYInt
-			if startY > endY {
-				startY, endY = endY, startY
-			}
-			for y := startY; y <= endY && y < height; y++ {
-				if grid[y][i] == " " {
-					grid[y][i] = "│"
-				}
-			}
-		}
+	// Apply color if specified
+	colorMode := TerminalColorTrue
+	if config.DesignTokens != nil && config.DesignTokens.Mode == "basic" {
+		colorMode = TerminalColor256
 	}
 
-	// Render grid
-	for y := 0; y < height; y++ {
-		for x := 0; x < width; x++ {
-			b.WriteString(grid[y][x])
-		}
-		b.WriteString("\n")
+	lineColor := data.Color
+	if lineColor == "" {
+		lineColor = "#2196F3" // Default blue
+	}
+
+	ansiColor := ColorForeground(lineColor, colorMode)
+	ansiReset := "\x1b[0m"
+
+	if ansiColor != "" {
+		b.WriteString(ansiColor)
+	}
+	b.WriteString(rendered)
+	if ansiColor != "" {
+		b.WriteString(ansiReset)
 	}
 
 	return TerminalOutput{Content: b.String()}
 }
 
-// renderBarChartTerminal renders a bar chart using block characters
+// renderBarChartTerminal renders a bar chart using block characters with colors
 func (r *TerminalRenderer) renderBarChartTerminal(data BarChartData, bounds Bounds, config RenderConfig) Output {
 	var b strings.Builder
 
@@ -278,6 +361,24 @@ func (r *TerminalRenderer) renderBarChartTerminal(data BarChartData, bounds Boun
 		numBars = bounds.Width / 3
 	}
 
+	// Determine color mode
+	colorMode := TerminalColorTrue
+	if config.DesignTokens != nil && config.DesignTokens.Mode == "basic" {
+		colorMode = TerminalColor256
+	}
+
+	// Get bar color
+	barColor := data.Color
+	if barColor == "" && config.DesignTokens != nil {
+		barColor = config.DesignTokens.Accent
+	}
+	if barColor == "" {
+		barColor = "#2196F3" // Default blue
+	}
+
+	ansiColor := ColorForeground(barColor, colorMode)
+	ansiReset := "\x1b[0m"
+
 	// Render each bar
 	for i := 0; i < numBars; i++ {
 		bar := data.Bars[i]
@@ -287,17 +388,36 @@ func (r *TerminalRenderer) renderBarChartTerminal(data BarChartData, bounds Boun
 		barLength := int((float64(totalValue) / float64(maxValue)) * float64(bounds.Width-10))
 
 		if data.Stacked && bar.Secondary > 0 {
-			// Stacked bars
+			// Stacked bars with different colors
 			primaryLength := int((float64(bar.Value) / float64(maxValue)) * float64(bounds.Width-10))
 			secondaryLength := int((float64(bar.Secondary) / float64(maxValue)) * float64(bounds.Width-10))
 
-			// Primary (lighter)
+			// Primary (lighter color)
+			if ansiColor != "" {
+				b.WriteString(ansiColor)
+			}
 			b.WriteString(strings.Repeat("▒", primaryLength))
-			// Secondary (darker)
+			if ansiColor != "" {
+				b.WriteString(ansiReset)
+			}
+
+			// Secondary (darker/full color)
+			if ansiColor != "" {
+				b.WriteString(ansiColor)
+			}
 			b.WriteString(strings.Repeat("█", secondaryLength))
+			if ansiColor != "" {
+				b.WriteString(ansiReset)
+			}
 		} else {
-			// Single bar
+			// Single bar with color
+			if ansiColor != "" {
+				b.WriteString(ansiColor)
+			}
 			b.WriteString(strings.Repeat("█", barLength))
+			if ansiColor != "" {
+				b.WriteString(ansiReset)
+			}
 		}
 
 		if bar.Label != "" {

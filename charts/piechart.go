@@ -8,6 +8,8 @@ import (
 	"github.com/SCKelemen/color"
 	"github.com/SCKelemen/dataviz/charts/legends"
 	"github.com/SCKelemen/dataviz/scales"
+	"github.com/SCKelemen/svg"
+	"github.com/SCKelemen/units"
 )
 
 // Default color palette for pie charts
@@ -73,18 +75,23 @@ func RenderPieChart(data PieChartData, x, y int, width, height int, title string
 		innerRadius = radius * 0.4 // 40% hole
 	}
 
-	// Start building SVG
+	// Start building SVG content
 	var sb strings.Builder
-	sb.WriteString(fmt.Sprintf(`<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d">`,
-		width, height))
 
 	// Background
-	sb.WriteString(fmt.Sprintf(`<rect width="%d" height="%d" fill="#FFFFFF"/>`, width, height))
+	bgStyle := svg.Style{Fill: "#FFFFFF"}
+	sb.WriteString(svg.Rect(0, 0, float64(width), float64(height), bgStyle))
 
 	// Title
 	if title != "" {
-		sb.WriteString(fmt.Sprintf(`<text x="%d" y="25" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#333" text-anchor="middle">%s</text>`,
-			width/2, title))
+		titleStyle := svg.Style{
+			Fill:             "#333",
+			FontFamily:       "Arial, sans-serif",
+			FontSize:         units.Px(16),
+			FontWeight:       "bold",
+			TextAnchor:       svg.TextAnchorMiddle,
+		}
+		sb.WriteString(svg.Text(title, float64(width)/2, 25, titleStyle))
 	}
 
 	// Draw slices
@@ -112,8 +119,15 @@ func RenderPieChart(data PieChartData, x, y int, width, height int, title string
 				labelX := centerX + labelRadius*math.Cos(midAngle)
 				labelY := centerY + labelRadius*math.Sin(midAngle)
 
-				sb.WriteString(fmt.Sprintf(`<text x="%.2f" y="%.2f" font-family="Arial, sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" font-weight="bold">%.1f%%</text>`,
-					labelX, labelY, percentage))
+				labelStyle := svg.Style{
+					Fill:             "#FFFFFF",
+					FontFamily:       "Arial, sans-serif",
+					FontSize:         units.Px(12),
+					FontWeight:       "bold",
+					TextAnchor:       svg.TextAnchorMiddle,
+					DominantBaseline: svg.DominantBaselineMiddle,
+				}
+				sb.WriteString(svg.Text(fmt.Sprintf("%.1f%%", percentage), labelX, labelY, labelStyle))
 			}
 		}
 
@@ -143,7 +157,6 @@ func RenderPieChart(data PieChartData, x, y int, width, height int, title string
 		sb.WriteString(legend.Render(width, height))
 	}
 
-	sb.WriteString(`</svg>`)
 	return sb.String()
 }
 
@@ -161,7 +174,7 @@ func renderPieSlice(cx, cy, outerRadius, innerRadius, startAngle, endAngle float
 		largeArc = 1
 	}
 
-	var path string
+	var pathData string
 	if innerRadius > 0 {
 		// Donut mode: draw annular sector
 		x3 := cx + innerRadius*math.Cos(endAngle)
@@ -169,32 +182,48 @@ func renderPieSlice(cx, cy, outerRadius, innerRadius, startAngle, endAngle float
 		x4 := cx + innerRadius*math.Cos(startAngle)
 		y4 := cy + innerRadius*math.Sin(startAngle)
 
-		path = fmt.Sprintf(`<path d="M %.2f %.2f A %.2f %.2f 0 %d 1 %.2f %.2f L %.2f %.2f A %.2f %.2f 0 %d 0 %.2f %.2f Z" fill="%s" stroke="#FFFFFF" stroke-width="2"/>`,
+		pathData = fmt.Sprintf("M %.2f %.2f A %.2f %.2f 0 %d 1 %.2f %.2f L %.2f %.2f A %.2f %.2f 0 %d 0 %.2f %.2f Z",
 			x1, y1, outerRadius, outerRadius, largeArc, x2, y2,
-			x3, y3, innerRadius, innerRadius, largeArc, x4, y4, color)
+			x3, y3, innerRadius, innerRadius, largeArc, x4, y4)
 	} else {
 		// Pie mode: draw sector from center
-		path = fmt.Sprintf(`<path d="M %.2f %.2f L %.2f %.2f A %.2f %.2f 0 %d 1 %.2f %.2f Z" fill="%s" stroke="#FFFFFF" stroke-width="2"/>`,
-			cx, cy, x1, y1, outerRadius, outerRadius, largeArc, x2, y2, color)
+		pathData = fmt.Sprintf("M %.2f %.2f L %.2f %.2f A %.2f %.2f 0 %d 1 %.2f %.2f Z",
+			cx, cy, x1, y1, outerRadius, outerRadius, largeArc, x2, y2)
 	}
 
-	return path
+	style := svg.Style{
+		Fill:        color,
+		Stroke:      "#FFFFFF",
+		StrokeWidth: 2,
+	}
+
+	return svg.Path(pathData, style)
 }
 
-// renderEmptyPieChart generates an SVG for when there's no data
+// renderEmptyPieChart generates SVG content for when there's no data
 func renderEmptyPieChart(width, height int, title string) string {
 	var sb strings.Builder
-	sb.WriteString(fmt.Sprintf(`<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d">`,
-		width, height))
-	sb.WriteString(fmt.Sprintf(`<rect width="%d" height="%d" fill="#FFFFFF"/>`, width, height))
+
+	bgStyle := svg.Style{Fill: "#FFFFFF"}
+	sb.WriteString(svg.Rect(0, 0, float64(width), float64(height), bgStyle))
 
 	if title != "" {
-		sb.WriteString(fmt.Sprintf(`<text x="%d" y="25" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#333" text-anchor="middle">%s</text>`,
-			width/2, title))
+		titleStyle := svg.Style{
+			Fill:       "#333",
+			FontFamily: "Arial, sans-serif",
+			FontSize:   units.Px(16),
+			FontWeight: "bold",
+			TextAnchor: svg.TextAnchorMiddle,
+		}
+		sb.WriteString(svg.Text(title, float64(width)/2, 25, titleStyle))
 	}
 
-	sb.WriteString(fmt.Sprintf(`<text x="%d" y="%d" font-family="Arial, sans-serif" font-size="14" fill="#999" text-anchor="middle">No data available</text>`,
-		width/2, height/2))
-	sb.WriteString(`</svg>`)
+	emptyStyle := svg.Style{
+		Fill:       "#999",
+		FontFamily: "Arial, sans-serif",
+		FontSize:   units.Px(14),
+		TextAnchor: svg.TextAnchorMiddle,
+	}
+	sb.WriteString(svg.Text("No data available", float64(width)/2, float64(height)/2, emptyStyle))
 	return sb.String()
 }

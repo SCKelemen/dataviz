@@ -7,10 +7,12 @@ import (
 	"github.com/SCKelemen/color"
 	design "github.com/SCKelemen/design-system"
 	"github.com/SCKelemen/dataviz/charts/legends"
+	"github.com/SCKelemen/dataviz/scales"
 	"github.com/SCKelemen/svg"
+	"github.com/SCKelemen/units"
 )
 
-// RenderBarChart renders a bar chart
+// RenderBarChart renders a bar chart using scales and axes
 func RenderBarChart(data BarChartData, x, y int, width, height int, designTokens *design.DesignTokens) string {
 	var b strings.Builder
 
@@ -18,7 +20,7 @@ func RenderBarChart(data BarChartData, x, y int, width, height int, designTokens
 		return ""
 	}
 
-	// Find max value
+	// Find max value for domain
 	maxValue := 0
 	for _, bar := range data.Bars {
 		total := bar.Value + bar.Secondary
@@ -30,17 +32,37 @@ func RenderBarChart(data BarChartData, x, y int, width, height int, designTokens
 		maxValue = 1
 	}
 
-	// Bars are 7.7px wide with spacing
-	barWidth := 7.7
-	barSpacing := float64(width)/float64(len(data.Bars)) - barWidth
+	// Create category labels for X-axis
+	categories := make([]string, len(data.Bars))
+	for i, bar := range data.Bars {
+		if bar.Label != "" {
+			categories[i] = bar.Label
+		} else {
+			categories[i] = fmt.Sprintf("%d", i)
+		}
+	}
+
+	// Create BandScale for X-axis (categorical positioning)
+	xScale := scales.NewBandScale(
+		categories,
+		[2]units.Length{units.Px(0), units.Px(float64(width))},
+	).Padding(0.2) // 20% padding between bars
+
+	// Create LinearScale for Y-axis (value to height)
+	// Domain: [0, maxValue], Range: [height, 0] (inverted for SVG coordinates)
+	yScale := scales.NewLinearScale(
+		[2]float64{0, float64(maxValue)},
+		[2]units.Length{units.Px(float64(height)), units.Px(0)},
+	).Nice(5) // Nice rounding for axis ticks
 
 	b.WriteString(fmt.Sprintf(`<g transform="translate(%d, %d)">`, x, y))
 
-	// Calculate base Y position (bars grow upward from bottom)
-	baseY := float64(height)
-
+	// Render bars using scales
+	bandwidth := xScale.Bandwidth()
 	for i, bar := range data.Bars {
-		barX := float64(i)*(barWidth+barSpacing) + 1.0 // +1 for offset
+		// Get X position from BandScale
+		barX := xScale.Apply(categories[i]).Value
+		barWidth := bandwidth.Value
 
 		if data.Stacked {
 			// Stacked bars: opened (lighter) on bottom, closed (darker) on top
@@ -51,51 +73,33 @@ func RenderBarChart(data BarChartData, x, y int, width, height int, designTokens
 				lighterColor = color.RGBToHex(lightened)
 			}
 
-			// Calculate heights scaled to maxValue
-			primaryHeight := (float64(bar.Value) / float64(maxValue)) * float64(height)
-			secondaryHeight := (float64(bar.Secondary) / float64(maxValue)) * float64(height)
-			totalHeight := primaryHeight + secondaryHeight
-
-			// Scale down if total height exceeds container
-			if totalHeight > float64(height) {
-				scale := float64(height) / totalHeight
-				primaryHeight *= scale
-				secondaryHeight *= scale
-			}
+			// Use Y scale to map values to positions
+			baseY := yScale.Apply(0.0).Value                               // Bottom (y=0 maps to height)
+			primaryTop := yScale.Apply(float64(bar.Value)).Value           // Top of primary bar
+			secondaryTop := yScale.Apply(float64(bar.Value + bar.Secondary)).Value // Top of secondary bar
 
 			// Primary bar (opened) - lighter color, on bottom
-			primaryY := baseY - primaryHeight
-			if primaryY < 0 {
-				primaryY = 0
-			}
+			primaryHeight := baseY - primaryTop
 			primaryStyle := svg.Style{Fill: lighterColor}
-			b.WriteString(svg.Rect(barX, primaryY, barWidth, primaryHeight, primaryStyle))
+			b.WriteString(svg.Rect(barX, primaryTop, barWidth, primaryHeight, primaryStyle))
 			b.WriteString("\n")
 
 			// Secondary bar (closed) - darker color, stacked on top
 			if bar.Secondary > 0 {
-				secondaryY := primaryY - secondaryHeight
-				if secondaryY < 0 {
-					secondaryY = 0
-					secondaryHeight = primaryY
-				}
+				secondaryHeight := primaryTop - secondaryTop
 				secondaryStyle := svg.Style{Fill: data.Color}
-				b.WriteString(svg.Rect(barX, secondaryY, barWidth, secondaryHeight, secondaryStyle))
+				b.WriteString(svg.Rect(barX, secondaryTop, barWidth, secondaryHeight, secondaryStyle))
 				b.WriteString("\n")
 			}
 		} else {
 			// Single bar
-			barHeight := (float64(bar.Value) / float64(maxValue)) * float64(height)
-			if barHeight > float64(height) {
-				barHeight = float64(height)
-			}
-			barY := baseY - barHeight
-			if barY < 0 {
-				barY = 0
-				barHeight = baseY
-			}
+			// Use Y scale to map value to position
+			baseY := yScale.Apply(0.0).Value             // Bottom
+			barTop := yScale.Apply(float64(bar.Value)).Value // Top of bar
+			barHeight := baseY - barTop
+
 			barStyle := svg.Style{Fill: data.Color}
-			b.WriteString(svg.Rect(barX, barY, barWidth, barHeight, barStyle))
+			b.WriteString(svg.Rect(barX, barTop, barWidth, barHeight, barStyle))
 			b.WriteString("\n")
 		}
 	}

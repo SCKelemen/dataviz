@@ -5,7 +5,9 @@ import (
 	"strings"
 	"sync/atomic"
 
+	"github.com/SCKelemen/color"
 	design "github.com/SCKelemen/design-system"
+	"github.com/SCKelemen/dataviz/charts/legends"
 	"github.com/SCKelemen/svg"
 )
 
@@ -160,5 +162,31 @@ func RenderAreaChart(data AreaChartData, x, y int, width, height int, designToke
 	}
 
 	b.WriteString(`</g>`)
+
+	// Add legend if label is provided
+	if data.Label != "" {
+		// Use fill color for legend, fallback to line color
+		legendColorHex := data.FillColor
+		if legendColorHex == "" {
+			legendColorHex = data.Color
+		}
+
+		legendColor, err := color.HexToRGB(legendColorHex)
+		if err != nil {
+			legendColor, _ = color.HexToRGB("#000000")
+		}
+
+		items := []legends.LegendItem{
+			legends.Item(data.Label, legends.Swatch(legendColor)),
+		}
+
+		legend := legends.New(items,
+			legends.WithPosition(legends.PositionTopRight),
+			legends.WithLayout(legends.LayoutVertical),
+		)
+
+		b.WriteString(legend.Render(width, height))
+	}
+
 	return b.String()
 }

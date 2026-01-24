@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/SCKelemen/color"
 	design "github.com/SCKelemen/design-system"
+	"github.com/SCKelemen/dataviz/charts/legends"
 )
 
 // RenderStatCard renders a statistics card
@@ -72,18 +74,35 @@ func RenderStatCard(data StatCardData, x, y int, width, height int, designTokens
 		legendX := float64(width) - float64(designTokens.Layout.CardPaddingRight) - totalLegendWidth
 		legendY := 15
 
-		// First legend
-		b.WriteString(fmt.Sprintf(`<rect x="%.0f" y="%d" width="%.0f" height="%.0f" rx="10" fill="%s"/>`,
-			legendX, legendY, legendSize, legendSize, data.TrendColor))
+		// Parse colors
+		trendColor1, err := color.HexToRGB(data.TrendColor)
+		if err != nil {
+			trendColor1, _ = color.HexToRGB("#000000")
+		}
+
+		// First legend - use unified Symbol
+		swatch1 := legends.NewColorSwatch(trendColor1, legendSize)
+		b.WriteString(fmt.Sprintf(`<g transform="translate(%.0f, %d)">`, legendX, legendY))
+		b.WriteString(swatch1.Render())
+		b.WriteString(`</g>`)
+
 		textX := legendX + legendSize + textSpacing
 		b.WriteString(fmt.Sprintf(`<text x="%.0f" y="%.0f" class="sans smaller" fill="%s" dominant-baseline="middle">%s</text>`,
 			textX, float64(legendY)+legendSize/2, data.TrendColor, data.Legend1))
 
 		// Second legend (if provided)
 		if data.Legend2 != "" && data.TrendColor2 != "" {
+			trendColor2, err := color.HexToRGB(data.TrendColor2)
+			if err != nil {
+				trendColor2, _ = color.HexToRGB("#000000")
+			}
+
 			legendY2 := legendY + int(legendSpacing)
-			b.WriteString(fmt.Sprintf(`<rect x="%.0f" y="%d" width="%.0f" height="%.0f" rx="10" fill="%s"/>`,
-				legendX, legendY2, legendSize, legendSize, data.TrendColor2))
+			swatch2 := legends.NewColorSwatch(trendColor2, legendSize)
+			b.WriteString(fmt.Sprintf(`<g transform="translate(%.0f, %d)">`, legendX, legendY2))
+			b.WriteString(swatch2.Render())
+			b.WriteString(`</g>`)
+
 			b.WriteString(fmt.Sprintf(`<text x="%.0f" y="%.0f" class="sans smaller" fill="%s" dominant-baseline="middle">%s</text>`,
 				textX, float64(legendY2)+legendSize/2, data.TrendColor2, data.Legend2))
 		}

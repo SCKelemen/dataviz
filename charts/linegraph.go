@@ -5,7 +5,9 @@ import (
 	"strings"
 	"sync/atomic"
 
+	"github.com/SCKelemen/color"
 	design "github.com/SCKelemen/design-system"
+	"github.com/SCKelemen/dataviz/charts/legends"
 	"github.com/SCKelemen/svg"
 )
 
@@ -197,5 +199,34 @@ func RenderLineGraph(data LineGraphData, x, y int, width, height int, designToke
 	}
 
 	b.WriteString(`</g>`)
+
+	// Add legend if label is provided
+	if data.Label != "" {
+		lineColor, err := color.HexToRGB(data.Color)
+		if err != nil {
+			lineColor, _ = color.HexToRGB("#000000")
+		}
+
+		var symbol legends.Symbol
+		if data.MarkerType != "" {
+			// Line with marker
+			symbol = legends.NewLineSample(lineColor, 2, 25).WithMarker(data.MarkerType, 6)
+		} else {
+			// Plain line
+			symbol = legends.NewLineSample(lineColor, 2, 25)
+		}
+
+		items := []legends.LegendItem{
+			legends.Item(data.Label, symbol),
+		}
+
+		legend := legends.New(items,
+			legends.WithPosition(legends.PositionTopRight),
+			legends.WithLayout(legends.LayoutVertical),
+		)
+
+		b.WriteString(legend.Render(width, height))
+	}
+
 	return b.String()
 }

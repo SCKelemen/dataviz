@@ -6,6 +6,7 @@ import (
 
 	"github.com/SCKelemen/color"
 	design "github.com/SCKelemen/design-system"
+	"github.com/SCKelemen/dataviz/charts/legends"
 	"github.com/SCKelemen/svg"
 )
 
@@ -100,5 +101,43 @@ func RenderBarChart(data BarChartData, x, y int, width, height int, designTokens
 	}
 
 	b.WriteString(`</g>`)
+
+	// Add legend if label is provided
+	if data.Label != "" {
+		barColor, err := color.ParseColor(data.Color)
+		if err != nil {
+			barColor, _ = color.HexToRGB("#000000")
+		}
+
+		if data.Stacked {
+			// For stacked bars, show two legend items
+			lighterColor := color.Lighten(barColor, 0.3)
+
+			items := []legends.LegendItem{
+				legends.Item(data.Label+" (closed)", legends.Swatch(barColor)),
+				legends.Item(data.Label+" (opened)", legends.Swatch(lighterColor)),
+			}
+
+			legend := legends.New(items,
+				legends.WithPosition(legends.PositionTopRight),
+				legends.WithLayout(legends.LayoutVertical),
+			)
+
+			b.WriteString(legend.Render(width, height))
+		} else {
+			// Single bar legend
+			items := []legends.LegendItem{
+				legends.Item(data.Label, legends.Swatch(barColor)),
+			}
+
+			legend := legends.New(items,
+				legends.WithPosition(legends.PositionTopRight),
+				legends.WithLayout(legends.LayoutVertical),
+			)
+
+			b.WriteString(legend.Render(width, height))
+		}
+	}
+
 	return b.String()
 }

@@ -4,6 +4,9 @@ import (
 	"fmt"
 	"math"
 	"strings"
+
+	"github.com/SCKelemen/color"
+	"github.com/SCKelemen/dataviz/charts/legends"
 )
 
 // Default color palette for pie charts
@@ -37,16 +40,12 @@ func RenderPieChart(data PieChartData, x, y int, width, height int, title string
 		colors = defaultPieColors
 	}
 
-	// Chart dimensions with space for title and legend
+	// Chart dimensions with space for title
 	titleHeight := 40
-	legendHeight := 0
-	if showLegend {
-		legendHeight = len(data.Slices)*25 + 20
-	}
 
 	centerX := float64(x) + float64(width)/2
-	centerY := float64(y) + float64(height-legendHeight)/2 + float64(titleHeight)
-	radius := math.Min(float64(width), float64(height-titleHeight-legendHeight))/2 - 60
+	centerY := float64(y) + float64(height)/2 + float64(titleHeight)/2
+	radius := math.Min(float64(width), float64(height-titleHeight))/2 - 80
 
 	// Calculate inner radius for donut mode
 	innerRadius := 0.0
@@ -102,21 +101,35 @@ func RenderPieChart(data PieChartData, x, y int, width, height int, title string
 
 	// Draw legend if enabled
 	if showLegend {
-		legendY := height - legendHeight + 10
-		for i, slice := range data.Slices {
-			color := colors[i%len(colors)]
-			y := legendY + i*25
-
-			// Color box
-			sb.WriteString(fmt.Sprintf(`<rect x="20" y="%d" width="15" height="15" fill="%s"/>`,
-				y, color))
-
-			// Label
-			percentage := (slice.Value / total) * 100
-			label := fmt.Sprintf("%s (%.1f%%)", slice.Label, percentage)
-			sb.WriteString(fmt.Sprintf(`<text x="40" y="%d" font-family="Arial, sans-serif" font-size="12" fill="#333">%s</text>`,
-				y+12, label))
+		// Parse colors from hex strings
+		parsedColors := make([]color.Color, len(colors))
+		for i, hexColor := range colors {
+			c, err := color.HexToRGB(hexColor)
+			if err != nil {
+				// Fallback to black if parsing fails
+				c, _ = color.HexToRGB("#000000")
+			}
+			parsedColors[i] = c
 		}
+
+		// Create legend items
+		items := make([]legends.LegendItem, len(data.Slices))
+		for i, slice := range data.Slices {
+			percentage := (slice.Value / total) * 100
+			items[i] = legends.ItemWithValue(
+				slice.Label,
+				legends.Swatch(parsedColors[i%len(parsedColors)]),
+				fmt.Sprintf("%.1f%%", percentage),
+			)
+		}
+
+		// Create and render legend
+		legend := legends.New(items,
+			legends.WithPosition(legends.PositionBottomLeft),
+			legends.WithLayout(legends.LayoutVertical),
+		)
+
+		sb.WriteString(legend.Render(width, height))
 	}
 
 	sb.WriteString(`</svg>`)

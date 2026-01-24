@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/SCKelemen/color"
 	design "github.com/SCKelemen/design-system"
+	"github.com/SCKelemen/dataviz/charts/legends"
 	"github.com/SCKelemen/svg"
 )
 
@@ -158,5 +160,28 @@ func RenderScatterPlot(data ScatterPlotData, x, y int, width, height int, design
 	}
 
 	b.WriteString(`</g>`)
+
+	// Add legend if label is provided
+	if data.Label != "" {
+		plotColor, err := color.HexToRGB(data.Color)
+		if err != nil {
+			plotColor, _ = color.HexToRGB("#000000")
+		}
+
+		// Use marker symbol for scatter plot legend
+		symbol := legends.NewMarkerSymbol(markerType, plotColor, 10)
+
+		items := []legends.LegendItem{
+			legends.Item(data.Label, symbol),
+		}
+
+		legend := legends.New(items,
+			legends.WithPosition(legends.PositionTopRight),
+			legends.WithLayout(legends.LayoutVertical),
+		)
+
+		b.WriteString(legend.Render(width, height))
+	}
+
 	return b.String()
 }

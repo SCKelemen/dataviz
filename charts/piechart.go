@@ -78,10 +78,6 @@ func RenderPieChart(data PieChartData, x, y int, width, height int, title string
 	// Start building SVG content
 	var sb strings.Builder
 
-	// Background
-	bgStyle := svg.Style{Fill: "#FFFFFF"}
-	sb.WriteString(svg.Rect(0, 0, float64(width), float64(height), bgStyle))
-
 	// Title
 	if title != "" {
 		titleStyle := svg.Style{
@@ -203,9 +199,6 @@ func renderPieSlice(cx, cy, outerRadius, innerRadius, startAngle, endAngle float
 // renderEmptyPieChart generates SVG content for when there's no data
 func renderEmptyPieChart(width, height int, title string) string {
 	var sb strings.Builder
-
-	bgStyle := svg.Style{Fill: "#FFFFFF"}
-	sb.WriteString(svg.Rect(0, 0, float64(width), float64(height), bgStyle))
 
 	if title != "" {
 		titleStyle := svg.Style{

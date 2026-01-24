@@ -1,0 +1,43 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+dataviz-mcp
+dataviz-mcp-*
+viz-cli
+viz-cli-*
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.out
+coverage.html
+coverage.txt
+
+# Go workspace file
+go.work
+go.work.sum
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+dist/
+build/
+bin/
+
+# Temporary files
+tmp/
+temp/
+*.tmp

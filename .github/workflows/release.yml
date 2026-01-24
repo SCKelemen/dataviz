@@ -1,0 +1,60 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.23'
+
+    - name: Run tests
+      run: go test -v ./...
+
+    - name: Build binaries
+      run: |
+        # Build for multiple platforms
+        GOOS=linux GOARCH=amd64 go build -o dataviz-mcp-linux-amd64 ./cmd/dataviz-mcp
+        GOOS=linux GOARCH=arm64 go build -o dataviz-mcp-linux-arm64 ./cmd/dataviz-mcp
+        GOOS=darwin GOARCH=amd64 go build -o dataviz-mcp-darwin-amd64 ./cmd/dataviz-mcp
+        GOOS=darwin GOARCH=arm64 go build -o dataviz-mcp-darwin-arm64 ./cmd/dataviz-mcp
+        GOOS=windows GOARCH=amd64 go build -o dataviz-mcp-windows-amd64.exe ./cmd/dataviz-mcp
+
+        GOOS=linux GOARCH=amd64 go build -o viz-cli-linux-amd64 ./cmd/viz-cli
+        GOOS=linux GOARCH=arm64 go build -o viz-cli-linux-arm64 ./cmd/viz-cli
+        GOOS=darwin GOARCH=amd64 go build -o viz-cli-darwin-amd64 ./cmd/viz-cli
+        GOOS=darwin GOARCH=arm64 go build -o viz-cli-darwin-arm64 ./cmd/viz-cli
+        GOOS=windows GOARCH=amd64 go build -o viz-cli-windows-amd64.exe ./cmd/viz-cli
+
+    - name: Create checksums
+      run: |
+        sha256sum dataviz-mcp-* viz-cli-* > checksums.txt
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          dataviz-mcp-*
+          viz-cli-*
+          checksums.txt
+        generate_release_notes: true
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

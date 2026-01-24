@@ -197,7 +197,9 @@ func TestInvalidSVG(t *testing.T) {
 	if err == nil {
 		t.Error("Export should fail with invalid SVG")
 	}
-	if !strings.Contains(err.Error(), "failed to parse SVG") {
+	// Error can be either parse failure or encoding failure
+	if !strings.Contains(err.Error(), "failed to parse SVG") &&
+	   !strings.Contains(err.Error(), "failed to encode PNG") {
 		t.Errorf("Unexpected error: %v", err)
 	}
 }

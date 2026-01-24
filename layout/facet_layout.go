@@ -6,41 +6,20 @@ import (
 	"strings"
 
 	"github.com/SCKelemen/dataviz/transforms"
+	"github.com/SCKelemen/layout"
 	"github.com/SCKelemen/svg"
 	"github.com/SCKelemen/units"
 )
 
-// FacetLayout defines how facets are arranged
-type FacetLayout string
-
-const (
-	FacetWrap   FacetLayout = "wrap"   // Wrap into rows (specify columns)
-	FacetLayoutGrid FacetLayout = "grid"   // Fixed grid (specify rows and cols)
-	FacetCustom FacetLayout = "custom" // Custom positioning
-)
-
-// ScaleSharing defines how scales are shared across facets
-type ScaleSharing string
-
-const (
-	ScaleShareNone ScaleSharing = "none" // Independent scales per facet
-	ScaleShareX    ScaleSharing = "x"    // Share X scale only
-	ScaleShareY    ScaleSharing = "y"    // Share Y scale only
-	ScaleShareXY   ScaleSharing = "xy"   // Share both X and Y scales
-)
-
 // Facet represents a specification for creating small multiples
-type Facet struct {
+type FacetSpec struct {
 	// Field to facet by (DataPoint.Group or other field)
 	Field string
 
-	// How to arrange facets
-	Layout FacetLayout
-
-	// Number of columns (for wrap layout)
+	// Number of columns
 	NCols int
 
-	// Number of rows (for grid layout)
+	// Number of rows (0 = auto)
 	NRows int
 
 	// Scale sharing strategy
@@ -53,83 +32,87 @@ type Facet struct {
 	Order []string
 
 	// Gap between facets
-	Gap units.Length
+	Gap float64
 
-	// Margin around each facet
-	FacetMargin Margin
+	// Margin around each facet plot area
+	FacetMargin float64
 }
 
-// NewFacet creates a new facet specification
-func NewFacet(field string) *Facet {
-	return &Facet{
+// ScaleSharing defines how scales are shared across facets
+type ScaleSharing string
+
+const (
+	ScaleShareNone ScaleSharing = "none" // Independent scales per facet
+	ScaleShareX    ScaleSharing = "x"    // Share X scale only
+	ScaleShareY    ScaleSharing = "y"    // Share Y scale only
+	ScaleShareXY   ScaleSharing = "xy"   // Share both X and Y scales
+)
+
+// NewFacetSpec creates a new facet specification
+func NewFacetSpec(field string) *FacetSpec {
+	return &FacetSpec{
 		Field:        field,
-		Layout:       FacetWrap,
 		NCols:        2,
 		NRows:        0,
 		ScaleSharing: ScaleShareNone,
 		ShowTitles:   true,
-		Gap:          units.Px(10),
-		FacetMargin:  Uniform(units.Px(5)),
+		Gap:          10,
+		FacetMargin:  5,
 	}
 }
 
-// WithLayout sets the facet layout
-func (f *Facet) WithLayout(layout FacetLayout) *Facet {
-	f.Layout = layout
-	return f
-}
-
-// WithCols sets the number of columns (wrap layout)
-func (f *Facet) WithCols(cols int) *Facet {
+// WithCols sets the number of columns
+func (f *FacetSpec) WithCols(cols int) *FacetSpec {
 	f.NCols = cols
 	return f
 }
 
-// WithRows sets the number of rows (grid layout)
-func (f *Facet) WithRows(rows int) *Facet {
+// WithRows sets the number of rows
+func (f *FacetSpec) WithRows(rows int) *FacetSpec {
 	f.NRows = rows
 	return f
 }
 
 // WithScaleSharing sets the scale sharing strategy
-func (f *Facet) WithScaleSharing(sharing ScaleSharing) *Facet {
+func (f *FacetSpec) WithScaleSharing(sharing ScaleSharing) *FacetSpec {
 	f.ScaleSharing = sharing
 	return f
 }
 
 // WithTitles sets whether to show titles
-func (f *Facet) WithTitles(show bool) *Facet {
+func (f *FacetSpec) WithTitles(show bool) *FacetSpec {
 	f.ShowTitles = show
 	return f
 }
 
 // WithOrder sets custom ordering for facet values
-func (f *Facet) WithOrder(order []string) *Facet {
+func (f *FacetSpec) WithOrder(order []string) *FacetSpec {
 	f.Order = order
 	return f
 }
 
 // WithGap sets the gap between facets
-func (f *Facet) WithGap(gap units.Length) *Facet {
+func (f *FacetSpec) WithGap(gap float64) *FacetSpec {
 	f.Gap = gap
 	return f
 }
 
 // WithFacetMargin sets the margin around each facet
-func (f *Facet) WithFacetMargin(margin Margin) *Facet {
+func (f *FacetSpec) WithFacetMargin(margin float64) *FacetSpec {
 	f.FacetMargin = margin
 	return f
 }
 
 // FacetData holds data split by facet values
 type FacetData struct {
-	Value string              // Facet category value
-	Data  []transforms.DataPoint // Data points for this facet
-	Index int                 // Position in facet order
+	Value string                     // Facet category value
+	Data  []transforms.DataPoint     // Data points for this facet
+	Index int                        // Position in facet order
+	Node  *layout.Node               // Layout node for this facet
 }
 
 // Split splits data into facets based on the field
-func (f *Facet) Split(data []transforms.DataPoint) []FacetData {
+func (f *FacetSpec) Split(data []transforms.DataPoint) []FacetData {
 	if len(data) == 0 {
 		return nil
 	}
@@ -224,119 +207,143 @@ func (f *Facet) Split(data []transforms.DataPoint) []FacetData {
 	return facets
 }
 
-// CalculateDimensions calculates grid dimensions based on layout and number of facets
-func (f *Facet) CalculateDimensions(numFacets int) (rows, cols int) {
-	switch f.Layout {
-	case FacetLayoutGrid:
-		if f.NRows > 0 && f.NCols > 0 {
-			return f.NRows, f.NCols
-		}
-		if f.NRows > 0 {
-			cols = (numFacets + f.NRows - 1) / f.NRows
-			return f.NRows, cols
-		}
-		if f.NCols > 0 {
-			rows = (numFacets + f.NCols - 1) / f.NCols
-			return rows, f.NCols
-		}
-		// Default: try to make square
-		cols = int(float64(numFacets) + 0.5)
-		rows = (numFacets + cols - 1) / cols
-		return rows, cols
+// CalculateDimensions calculates grid dimensions based on number of facets
+func (f *FacetSpec) CalculateDimensions(numFacets int) (rows, cols int) {
+	cols = f.NCols
+	if cols <= 0 {
+		cols = 2
+	}
 
-	case FacetWrap:
-		fallthrough
-	default:
-		cols = f.NCols
-		if cols <= 0 {
-			cols = 2
-		}
+	rows = f.NRows
+	if rows <= 0 {
 		rows = (numFacets + cols - 1) / cols
-		return rows, cols
+	}
+
+	return rows, cols
+}
+
+// BuildLayout creates a CSS Grid layout for facets
+func (f *FacetSpec) BuildLayout(numFacets int, width, height float64) *layout.Node {
+	rows, cols := f.CalculateDimensions(numFacets)
+
+	// Create CSS Grid
+	root := ChartGridWithGap(rows, cols, f.Gap)
+	root.Style.Width = layout.Px(width)
+	root.Style.Height = layout.Px(height)
+
+	return root
+}
+
+// FacetPlot creates a faceted visualization
+type FacetPlot struct {
+	Spec   *FacetSpec
+	Width  float64
+	Height float64
+	Data   []transforms.DataPoint
+
+	// Renderer for each facet cell
+	CellRenderer func(data []transforms.DataPoint, bounds layout.Rect) string
+
+	// Optional title renderer
+	TitleRenderer func(value string, bounds layout.Rect) string
+}
+
+// NewFacetPlot creates a new faceted plot
+func NewFacetPlot(spec *FacetSpec, width, height float64) *FacetPlot {
+	return &FacetPlot{
+		Spec:   spec,
+		Width:  width,
+		Height: height,
 	}
 }
 
-// FacetRenderer renders multiple charts in a faceted layout
-type FacetRenderer struct {
-	// Facet specification
-	Facet *Facet
-
-	// Grid layout
-	Grid *FacetGrid
-
-	// Chart renderer function
-	// Takes data and bounds, returns SVG content
-	ChartRenderer func(data []transforms.DataPoint, bounds Rect) string
-
-	// Title renderer function (optional)
-	TitleRenderer func(value string, bounds Rect) string
+// WithData sets the data
+func (fp *FacetPlot) WithData(data []transforms.DataPoint) *FacetPlot {
+	fp.Data = data
+	return fp
 }
 
-// NewFacetRenderer creates a new facet renderer
-func NewFacetRenderer(facet *Facet, width, height units.Length) *FacetRenderer {
-	// Calculate dimensions
-	rows, cols := facet.CalculateDimensions(1) // Will recalculate with actual data
+// WithCellRenderer sets the cell renderer
+func (fp *FacetPlot) WithCellRenderer(renderer func(data []transforms.DataPoint, bounds layout.Rect) string) *FacetPlot {
+	fp.CellRenderer = renderer
+	return fp
+}
 
-	// Create grid
-	grid := NewFacetGrid(width, height, rows, cols)
-	grid.SetGap(facet.Gap)
-	grid.SetFacetMargin(facet.FacetMargin)
-	grid.SetShowTitles(facet.ShowTitles)
-	grid.SetScaleSharing(facet.ScaleSharing)
-
-	return &FacetRenderer{
-		Facet: facet,
-		Grid:  grid,
-	}
+// WithTitleRenderer sets the title renderer
+func (fp *FacetPlot) WithTitleRenderer(renderer func(value string, bounds layout.Rect) string) *FacetPlot {
+	fp.TitleRenderer = renderer
+	return fp
 }
 
 // Render renders the faceted plot
-func (fr *FacetRenderer) Render(data []transforms.DataPoint) string {
-	if fr.ChartRenderer == nil {
+func (fp *FacetPlot) Render() string {
+	if fp.CellRenderer == nil {
 		return ""
 	}
 
 	// Split data into facets
-	facets := fr.Facet.Split(data)
+	facets := fp.Spec.Split(fp.Data)
 	if len(facets) == 0 {
 		return ""
 	}
 
-	// Recalculate grid dimensions
-	rows, cols := fr.Facet.CalculateDimensions(len(facets))
-	fr.Grid.rows = rows
-	fr.Grid.cols = cols
+	// Build grid layout
+	root := fp.Spec.BuildLayout(len(facets), fp.Width, fp.Height)
 
-	// Create SVG
+	// Create nodes for each facet
+	for i := range facets {
+		facetNode := &layout.Node{
+			Style: layout.Style{
+				Display: layout.DisplayBlock,
+			},
+		}
+
+		// Add padding if specified
+		if fp.Spec.FacetMargin > 0 {
+			facetNode = WithPadding(facetNode, fp.Spec.FacetMargin)
+		}
+
+		facets[i].Node = facetNode
+		root.AddChild(facetNode)
+	}
+
+	// Compute layout
+	constraints := layout.Loose(fp.Width, fp.Height)
+	ctx := layout.NewLayoutContext(fp.Width, fp.Height, 16)
+	layout.Layout(root, constraints, ctx)
+
+	// Render to SVG
 	var sb strings.Builder
 	sb.WriteString(fmt.Sprintf(`<svg viewBox="0 0 %f %f" xmlns="http://www.w3.org/2000/svg">`,
-		fr.Grid.bounds.Width.Value, fr.Grid.bounds.Height.Value))
+		fp.Width, fp.Height))
 	sb.WriteString("\n")
 
 	// Render each facet
 	for _, facet := range facets {
-		if facet.Index >= rows*cols {
-			break // Grid is full
-		}
-
-		row := facet.Index / cols
-		col := facet.Index % cols
-
-		// Get cell bounds
-		cellBounds := fr.Grid.FacetCell(row, col)
+		// Create group with transform
+		sb.WriteString(fmt.Sprintf(`<g transform="translate(%f,%f)">`,
+			facet.Node.Rect.X, facet.Node.Rect.Y))
+		sb.WriteString("\n")
 
 		// Render title if enabled
-		if fr.Facet.ShowTitles {
-			titleBounds := fr.Grid.FacetTitleArea(row, col)
-			if fr.TitleRenderer != nil {
-				sb.WriteString(fr.TitleRenderer(facet.Value, titleBounds))
+		if fp.Spec.ShowTitles {
+			titleHeight := 20.0
+			titleBounds := layout.Rect{
+				X:      0,
+				Y:      0,
+				Width:  facet.Node.Rect.Width,
+				Height: titleHeight,
+			}
+
+			if fp.TitleRenderer != nil {
+				sb.WriteString(fp.TitleRenderer(facet.Value, titleBounds))
 			} else {
 				// Default title rendering
 				sb.WriteString("  ")
 				sb.WriteString(svg.Text(
 					facet.Value,
-					titleBounds.X.Value+titleBounds.Width.Value/2,
-					titleBounds.Y.Value+titleBounds.Height.Value/2,
+					facet.Node.Rect.Width/2,
+					titleHeight/2,
 					svg.Style{
 						TextAnchor: "middle",
 						FontSize:   units.Px(12),
@@ -348,28 +355,26 @@ func (fr *FacetRenderer) Render(data []transforms.DataPoint) string {
 		}
 
 		// Render chart
-		chartSVG := fr.ChartRenderer(facet.Data, cellBounds)
+		chartBounds := layout.Rect{
+			X:      0,
+			Y:      0,
+			Width:  facet.Node.Rect.Width,
+			Height: facet.Node.Rect.Height,
+		}
+
+		if fp.Spec.ShowTitles {
+			chartBounds.Y = 20
+			chartBounds.Height -= 20
+		}
+
+		chartSVG := fp.CellRenderer(facet.Data, chartBounds)
 		sb.WriteString(chartSVG)
+
+		sb.WriteString("</g>\n")
 	}
 
 	sb.WriteString("</svg>\n")
 	return sb.String()
-}
-
-// FacetedChart is a convenience wrapper for creating faceted plots
-type FacetedChart struct {
-	Data          []transforms.DataPoint
-	Facet         *Facet
-	Width         units.Length
-	Height        units.Length
-	ChartRenderer func(data []transforms.DataPoint, bounds Rect) string
-}
-
-// Render renders the faceted chart
-func (fc *FacetedChart) Render() string {
-	renderer := NewFacetRenderer(fc.Facet, fc.Width, fc.Height)
-	renderer.ChartRenderer = fc.ChartRenderer
-	return renderer.Render(fc.Data)
 }
 
 // ComputeSharedDomain calculates shared domain across all facets

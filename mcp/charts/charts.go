@@ -688,6 +688,390 @@ func convertTreeNode(node *types.TreeNode) *maincharts.TreeNode {
 	return result
 }
 
+// New chart creation functions
+
+// CreateLollipop creates a lollipop chart
+func CreateLollipop(config types.LollipopConfig) (string, error) {
+	data := &maincharts.LollipopData{
+		Values: make([]maincharts.LollipopPoint, len(config.Values)),
+		Color:  config.Color,
+	}
+
+	for i, v := range config.Values {
+		data.Values[i] = maincharts.LollipopPoint{
+			Label: v.Label,
+			Value: v.Value,
+			Color: v.Color,
+		}
+	}
+
+	spec := maincharts.LollipopSpec{
+		Data:       data,
+		Width:      float64(config.Width),
+		Height:     float64(config.Height),
+		Horizontal: config.Horizontal,
+		ShowLabels: true,
+		ShowGrid:   true,
+		Title:      config.Title,
+	}
+
+	return maincharts.RenderLollipop(spec), nil
+}
+
+// CreateDensity creates a density plot
+func CreateDensity(config types.DensityConfig) (string, error) {
+	data := make([]*maincharts.SimpleDensityData, len(config.Data))
+	for i, d := range config.Data {
+		data[i] = &maincharts.SimpleDensityData{
+			Values: d.Values,
+			Label:  d.Label,
+			Color:  d.Color,
+		}
+	}
+
+	spec := maincharts.SimpleDensitySpec{
+		Data:     data,
+		Width:    float64(config.Width),
+		Height:   float64(config.Height),
+		ShowFill: config.ShowFill,
+		ShowRug:  config.ShowRug,
+		Title:    config.Title,
+	}
+
+	return maincharts.RenderSimpleDensity(spec), nil
+}
+
+// CreateConnectedScatter creates a connected scatter plot
+func CreateConnectedScatter(config types.ConnectedScatterConfig) (string, error) {
+	series := make([]*maincharts.ConnectedScatterSeries, len(config.Series))
+	for i, s := range config.Series {
+		points := make([]maincharts.ConnectedScatterPoint, len(s.Points))
+		for j, p := range s.Points {
+			points[j] = maincharts.ConnectedScatterPoint{
+				X:     p.X,
+				Y:     p.Y,
+				Label: p.Label,
+			}
+		}
+		series[i] = &maincharts.ConnectedScatterSeries{
+			Points:     points,
+			Label:      s.Label,
+			Color:      s.Color,
+			MarkerType: s.MarkerType,
+		}
+	}
+
+	spec := maincharts.ConnectedScatterSpec{
+		Series:      series,
+		Width:       float64(config.Width),
+		Height:      float64(config.Height),
+		ShowGrid:    true,
+		ShowMarkers: true,
+		ShowLines:   true,
+		Title:       config.Title,
+	}
+
+	return maincharts.RenderConnectedScatter(spec), nil
+}
+
+// CreateStackedArea creates a stacked area chart
+func CreateStackedArea(config types.StackedAreaConfig) (string, error) {
+	points := make([]maincharts.StackedAreaPoint, len(config.Points))
+	for i, p := range config.Points {
+		points[i] = maincharts.StackedAreaPoint{
+			X:      p.X,
+			Values: p.Values,
+		}
+	}
+
+	series := make([]maincharts.StackedAreaSeries, len(config.Series))
+	for i, s := range config.Series {
+		series[i] = maincharts.StackedAreaSeries{
+			Label: s.Label,
+			Color: s.Color,
+		}
+	}
+
+	spec := maincharts.StackedAreaSpec{
+		Points:   points,
+		Series:   series,
+		Width:    float64(config.Width),
+		Height:   float64(config.Height),
+		ShowGrid: true,
+		Title:    config.Title,
+	}
+
+	return maincharts.RenderStackedArea(spec), nil
+}
+
+// CreateStreamChart creates a stream chart
+func CreateStreamChart(config types.StreamChartConfig) (string, error) {
+	points := make([]maincharts.StreamPoint, len(config.Points))
+	for i, p := range config.Points {
+		points[i] = maincharts.StreamPoint{
+			X:      p.X,
+			Values: p.Values,
+		}
+	}
+
+	series := make([]maincharts.StreamSeries, len(config.Series))
+	for i, s := range config.Series {
+		series[i] = maincharts.StreamSeries{
+			Label: s.Label,
+			Color: s.Color,
+		}
+	}
+
+	spec := maincharts.StreamChartSpec{
+		Points:     points,
+		Series:     series,
+		Width:      float64(config.Width),
+		Height:     float64(config.Height),
+		Layout:     config.Layout,
+		ShowLegend: true,
+		Title:      config.Title,
+	}
+
+	return maincharts.RenderStreamChart(spec), nil
+}
+
+// CreateCorrelogram creates a correlogram
+func CreateCorrelogram(config types.CorrelogramConfig) (string, error) {
+	matrix := maincharts.CorrelationMatrix{
+		Variables: config.Variables,
+		Matrix:    config.Matrix,
+	}
+
+	spec := maincharts.CorrelogramSpec{
+		Data:         matrix,
+		Width:        float64(config.Width),
+		Height:       float64(config.Height),
+		ShowValues:   true,
+		ShowDiagonal: true,
+		TriangleMode: "full",
+		ColorScheme:  "redblue",
+		Title:        config.Title,
+	}
+
+	return maincharts.RenderCorrelogram(spec), nil
+}
+
+// CreateRadar creates a radar chart
+func CreateRadar(config types.RadarConfig) (string, error) {
+	axes := make([]maincharts.RadarAxis, len(config.Axes))
+	for i, a := range config.Axes {
+		axes[i] = maincharts.RadarAxis{
+			Label: a.Label,
+			Min:   a.Min,
+			Max:   a.Max,
+		}
+	}
+
+	series := make([]*maincharts.RadarSeries, len(config.Series))
+	for i, s := range config.Series {
+		series[i] = &maincharts.RadarSeries{
+			Label:  s.Label,
+			Values: s.Values,
+			Color:  s.Color,
+		}
+	}
+
+	spec := maincharts.RadarChartSpec{
+		Axes:       axes,
+		Series:     series,
+		Width:      float64(config.Width),
+		Height:     float64(config.Height),
+		ShowGrid:   true,
+		ShowLabels: true,
+		GridLevels: 5,
+		Title:      config.Title,
+	}
+
+	return maincharts.RenderRadarChart(spec), nil
+}
+
+// CreateParallel creates a parallel coordinates chart
+func CreateParallel(config types.ParallelConfig) (string, error) {
+	axes := make([]maincharts.ParallelAxis, len(config.Axes))
+	for i, a := range config.Axes {
+		axes[i] = maincharts.ParallelAxis{
+			Label: a.Label,
+			Min:   a.Min,
+			Max:   a.Max,
+		}
+	}
+
+	data := make([]maincharts.ParallelDataPoint, len(config.Data))
+	for i, d := range config.Data {
+		data[i] = maincharts.ParallelDataPoint{
+			Values: d.Values,
+			Color:  d.Color,
+		}
+	}
+
+	spec := maincharts.ParallelCoordinatesSpec{
+		Axes:           axes,
+		Data:           data,
+		Width:          float64(config.Width),
+		Height:         float64(config.Height),
+		ShowAxesLabels: true,
+		ShowTicks:      true,
+		Title:          config.Title,
+	}
+
+	return maincharts.RenderParallelCoordinates(spec), nil
+}
+
+// CreateWordCloud creates a word cloud
+func CreateWordCloud(config types.WordCloudConfig) (string, error) {
+	words := make([]maincharts.WordCloudWord, len(config.Words))
+	for i, w := range config.Words {
+		words[i] = maincharts.WordCloudWord{
+			Text:      w.Text,
+			Frequency: w.Frequency,
+			Color:     w.Color,
+		}
+	}
+
+	spec := maincharts.WordCloudSpec{
+		Words:  words,
+		Width:  float64(config.Width),
+		Height: float64(config.Height),
+		Layout: config.Layout,
+		Title:  config.Title,
+	}
+
+	return maincharts.RenderWordCloud(spec), nil
+}
+
+// CreateSankey creates a Sankey diagram
+func CreateSankey(config types.SankeyConfig) (string, error) {
+	nodes := make([]maincharts.SankeyNode, len(config.Nodes))
+	for i, n := range config.Nodes {
+		nodes[i] = maincharts.SankeyNode{
+			ID:    n.ID,
+			Label: n.Label,
+			Color: n.Color,
+		}
+	}
+
+	links := make([]maincharts.SankeyLink, len(config.Links))
+	for i, l := range config.Links {
+		links[i] = maincharts.SankeyLink{
+			Source: l.Source,
+			Target: l.Target,
+			Value:  l.Value,
+			Color:  l.Color,
+		}
+	}
+
+	spec := maincharts.SankeySpec{
+		Nodes:      nodes,
+		Links:      links,
+		Width:      float64(config.Width),
+		Height:     float64(config.Height),
+		ShowLabels: true,
+		Title:      config.Title,
+	}
+
+	return maincharts.RenderSankey(spec), nil
+}
+
+// CreateChord creates a chord diagram
+func CreateChord(config types.ChordConfig) (string, error) {
+	entities := make([]maincharts.ChordEntity, len(config.Entities))
+	for i, e := range config.Entities {
+		entities[i] = maincharts.ChordEntity{
+			ID:    e.ID,
+			Label: e.Label,
+			Color: e.Color,
+		}
+	}
+
+	relations := make([]maincharts.ChordRelation, len(config.Relations))
+	for i, r := range config.Relations {
+		relations[i] = maincharts.ChordRelation{
+			Source: r.Source,
+			Target: r.Target,
+			Value:  r.Value,
+		}
+	}
+
+	spec := maincharts.ChordDiagramSpec{
+		Entities:   entities,
+		Relations:  relations,
+		Width:      float64(config.Width),
+		Height:     float64(config.Height),
+		ShowLabels: true,
+		Title:      config.Title,
+	}
+
+	return maincharts.RenderChordDiagram(spec), nil
+}
+
+// CreateCircularBar creates a circular bar plot
+func CreateCircularBar(config types.CircularBarConfig) (string, error) {
+	data := make([]maincharts.CircularBarPoint, len(config.Data))
+	for i, d := range config.Data {
+		data[i] = maincharts.CircularBarPoint{
+			Label: d.Label,
+			Value: d.Value,
+			Color: d.Color,
+		}
+	}
+
+	spec := maincharts.CircularBarPlotSpec{
+		Data:           data,
+		Width:          float64(config.Width),
+		Height:         float64(config.Height),
+		InnerRadius:    config.InnerRadius,
+		ShowLabels:     false,
+		ShowAxisLabels: true,
+		Title:          config.Title,
+	}
+
+	return maincharts.RenderCircularBarPlot(spec), nil
+}
+
+// CreateDendrogram creates a dendrogram
+func CreateDendrogram(config types.DendrogramConfig) (string, error) {
+	// Convert types.DendrogramNode to maincharts.DendrogramNode
+	var convertNode func(*types.DendrogramNode) *maincharts.DendrogramNode
+	convertNode = func(node *types.DendrogramNode) *maincharts.DendrogramNode {
+		if node == nil {
+			return nil
+		}
+
+		result := &maincharts.DendrogramNode{
+			Label:  node.Label,
+			Height: node.Height,
+		}
+
+		if len(node.Children) > 0 {
+			result.Children = make([]*maincharts.DendrogramNode, len(node.Children))
+			for i, child := range node.Children {
+				result.Children[i] = convertNode(child)
+			}
+		}
+
+		return result
+	}
+
+	root := convertNode(config.Root)
+
+	spec := maincharts.DendrogramSpec{
+		Root:        root,
+		Width:       float64(config.Width),
+		Height:      float64(config.Height),
+		Orientation: config.Orientation,
+		ShowLabels:  true,
+		ShowHeights: true,
+		Title:       config.Title,
+	}
+
+	return maincharts.RenderDendrogram(spec), nil
+}
+
 // Keep unused imports to avoid compiler errors
 var _ = units.Pixel
 var _ *color.Color

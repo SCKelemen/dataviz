@@ -191,3 +191,216 @@ type OHLCConfig struct {
 	ChartConfig
 	Data []CandlestickDataPoint `json:"data"` // Reuse same data structure
 }
+
+// New chart type configurations
+
+// LollipopPoint represents a single lollipop
+type LollipopPoint struct {
+	Label string  `json:"label"`
+	Value float64 `json:"value"`
+	Color string  `json:"color,omitempty"`
+}
+
+// LollipopConfig configuration for lollipop charts
+type LollipopConfig struct {
+	ChartConfig
+	Values     []LollipopPoint `json:"values"`
+	Color      string          `json:"color,omitempty"`
+	Horizontal bool            `json:"horizontal,omitempty"`
+}
+
+// DensityDataSet represents a density distribution
+type DensityDataSet struct {
+	Values []float64 `json:"values"`
+	Label  string    `json:"label,omitempty"`
+	Color  string    `json:"color,omitempty"`
+}
+
+// DensityConfig configuration for density plots
+type DensityConfig struct {
+	ChartConfig
+	Data     []DensityDataSet `json:"data"`
+	ShowFill bool             `json:"show_fill,omitempty"`
+	ShowRug  bool             `json:"show_rug,omitempty"`
+}
+
+// ConnectedScatterPoint represents a point in connected scatter
+type ConnectedScatterPoint struct {
+	X     float64 `json:"x"`
+	Y     float64 `json:"y"`
+	Label string  `json:"label,omitempty"`
+}
+
+// ConnectedScatterSeries represents a series
+type ConnectedScatterSeries struct {
+	Points     []ConnectedScatterPoint `json:"points"`
+	Label      string                  `json:"label,omitempty"`
+	Color      string                  `json:"color,omitempty"`
+	MarkerType string                  `json:"marker_type,omitempty"`
+}
+
+// ConnectedScatterConfig configuration for connected scatter plots
+type ConnectedScatterConfig struct {
+	ChartConfig
+	Series []ConnectedScatterSeries `json:"series"`
+}
+
+// StackedAreaPoint represents a point with multiple values
+type StackedAreaPoint struct {
+	X      float64   `json:"x"`
+	Values []float64 `json:"values"`
+}
+
+// StackedAreaSeries represents series metadata
+type StackedAreaSeries struct {
+	Label string `json:"label"`
+	Color string `json:"color,omitempty"`
+}
+
+// StackedAreaConfig configuration for stacked area charts
+type StackedAreaConfig struct {
+	ChartConfig
+	Points []StackedAreaPoint  `json:"points"`
+	Series []StackedAreaSeries `json:"series"`
+}
+
+// StreamChartConfig configuration for stream charts
+type StreamChartConfig struct {
+	ChartConfig
+	Points []StackedAreaPoint  `json:"points"` // Reuse stacked area point
+	Series []StackedAreaSeries `json:"series"` // Reuse stacked area series
+	Layout string              `json:"layout,omitempty"`
+}
+
+// CorrelogramConfig configuration for correlograms
+type CorrelogramConfig struct {
+	ChartConfig
+	Variables []string    `json:"variables"`
+	Matrix    [][]float64 `json:"matrix"`
+}
+
+// RadarAxis represents an axis in radar chart
+type RadarAxis struct {
+	Label string  `json:"label"`
+	Min   float64 `json:"min"`
+	Max   float64 `json:"max"`
+}
+
+// RadarSeries represents a data series
+type RadarSeries struct {
+	Label  string    `json:"label"`
+	Values []float64 `json:"values"`
+	Color  string    `json:"color,omitempty"`
+}
+
+// RadarConfig configuration for radar charts
+type RadarConfig struct {
+	ChartConfig
+	Axes   []RadarAxis   `json:"axes"`
+	Series []RadarSeries `json:"series"`
+}
+
+// ParallelAxis represents an axis in parallel coordinates
+type ParallelAxis struct {
+	Label string  `json:"label"`
+	Min   float64 `json:"min"`
+	Max   float64 `json:"max"`
+}
+
+// ParallelDataPoint represents a data point
+type ParallelDataPoint struct {
+	Values []float64 `json:"values"`
+	Color  string    `json:"color,omitempty"`
+}
+
+// ParallelConfig configuration for parallel coordinates
+type ParallelConfig struct {
+	ChartConfig
+	Axes []ParallelAxis      `json:"axes"`
+	Data []ParallelDataPoint `json:"data"`
+}
+
+// WordCloudWord represents a word in word cloud
+type WordCloudWord struct {
+	Text      string  `json:"text"`
+	Frequency float64 `json:"frequency"`
+	Color     string  `json:"color,omitempty"`
+}
+
+// WordCloudConfig configuration for word clouds
+type WordCloudConfig struct {
+	ChartConfig
+	Words  []WordCloudWord `json:"words"`
+	Layout string          `json:"layout,omitempty"`
+}
+
+// SankeyNode represents a node in Sankey diagram
+type SankeyNode struct {
+	ID    string `json:"id"`
+	Label string `json:"label"`
+	Color string `json:"color,omitempty"`
+}
+
+// SankeyLink represents a link in Sankey diagram
+type SankeyLink struct {
+	Source string  `json:"source"`
+	Target string  `json:"target"`
+	Value  float64 `json:"value"`
+	Color  string  `json:"color,omitempty"`
+}
+
+// SankeyConfig configuration for Sankey diagrams
+type SankeyConfig struct {
+	ChartConfig
+	Nodes []SankeyNode `json:"nodes"`
+	Links []SankeyLink `json:"links"`
+}
+
+// ChordEntity represents an entity in chord diagram
+type ChordEntity struct {
+	ID    string `json:"id"`
+	Label string `json:"label"`
+	Color string `json:"color,omitempty"`
+}
+
+// ChordRelation represents a relation in chord diagram
+type ChordRelation struct {
+	Source string  `json:"source"`
+	Target string  `json:"target"`
+	Value  float64 `json:"value"`
+}
+
+// ChordConfig configuration for chord diagrams
+type ChordConfig struct {
+	ChartConfig
+	Entities  []ChordEntity   `json:"entities"`
+	Relations []ChordRelation `json:"relations"`
+}
+
+// CircularBarPoint represents a point in circular bar plot
+type CircularBarPoint struct {
+	Label string  `json:"label"`
+	Value float64 `json:"value"`
+	Color string  `json:"color,omitempty"`
+}
+
+// CircularBarConfig configuration for circular bar plots
+type CircularBarConfig struct {
+	ChartConfig
+	Data        []CircularBarPoint `json:"data"`
+	InnerRadius float64            `json:"inner_radius,omitempty"`
+}
+
+// DendrogramNode represents a node in dendrogram (recursive)
+type DendrogramNode struct {
+	Label    string            `json:"label,omitempty"`
+	Height   float64           `json:"height"`
+	Children []*DendrogramNode `json:"children,omitempty"`
+}
+
+// DendrogramConfig configuration for dendrograms
+type DendrogramConfig struct {
+	ChartConfig
+	Root        *DendrogramNode `json:"root"`
+	Orientation string          `json:"orientation,omitempty"`
+}

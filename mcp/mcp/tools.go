@@ -539,7 +539,497 @@ func (s *Server) RegisterTools() {
 		s.handleOHLC,
 	)
 
-	fmt.Println("Registered 15 chart generation tools")
+	// Tool: lollipop
+	s.server.AddTool(
+		&mcp.Tool{
+			Name:        "lollipop",
+			Description: "Generate a lollipop chart with stems and circles",
+			InputSchema: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"title": map[string]interface{}{"type": "string", "description": "Chart title"},
+					"values": map[string]interface{}{
+						"type":        "array",
+						"description": "Array of {label, value, color?} objects",
+						"items": map[string]interface{}{
+							"type": "object",
+							"properties": map[string]interface{}{
+								"label": map[string]string{"type": "string"},
+								"value": map[string]string{"type": "number"},
+								"color": map[string]string{"type": "string"},
+							},
+							"required": []string{"label", "value"},
+						},
+					},
+					"color":      map[string]interface{}{"type": "string", "description": "Default color for all lollipops"},
+					"horizontal": map[string]interface{}{"type": "boolean", "default": false, "description": "Horizontal orientation"},
+					"width":      map[string]interface{}{"type": "number", "default": 800},
+					"height":     map[string]interface{}{"type": "number", "default": 600},
+				},
+				"required": []string{"values"},
+			},
+		},
+		s.handleLollipop,
+	)
+
+	// Tool: density
+	s.server.AddTool(
+		&mcp.Tool{
+			Name:        "density",
+			Description: "Generate a kernel density estimation plot",
+			InputSchema: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"title": map[string]interface{}{"type": "string", "description": "Chart title"},
+					"data": map[string]interface{}{
+						"type":        "array",
+						"description": "Array of {values[], label?, color?} datasets",
+						"items": map[string]interface{}{
+							"type": "object",
+							"properties": map[string]interface{}{
+								"values": map[string]interface{}{"type": "array", "items": map[string]string{"type": "number"}},
+								"label":  map[string]string{"type": "string"},
+								"color":  map[string]string{"type": "string"},
+							},
+							"required": []string{"values"},
+						},
+					},
+					"show_fill": map[string]interface{}{"type": "boolean", "default": true},
+					"show_rug":  map[string]interface{}{"type": "boolean", "default": false},
+					"width":     map[string]interface{}{"type": "number", "default": 800},
+					"height":    map[string]interface{}{"type": "number", "default": 600},
+				},
+				"required": []string{"data"},
+			},
+		},
+		s.handleDensity,
+	)
+
+	// Tool: connected_scatter
+	s.server.AddTool(
+		&mcp.Tool{
+			Name:        "connected_scatter",
+			Description: "Generate a connected scatter plot with lines between points",
+			InputSchema: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"title": map[string]interface{}{"type": "string", "description": "Chart title"},
+					"series": map[string]interface{}{
+						"type":        "array",
+						"description": "Array of series with points",
+						"items": map[string]interface{}{
+							"type": "object",
+							"properties": map[string]interface{}{
+								"points": map[string]interface{}{
+									"type": "array",
+									"items": map[string]interface{}{
+										"type": "object",
+										"properties": map[string]interface{}{
+											"x":     map[string]string{"type": "number"},
+											"y":     map[string]string{"type": "number"},
+											"label": map[string]string{"type": "string"},
+										},
+										"required": []string{"x", "y"},
+									},
+								},
+								"label":       map[string]string{"type": "string"},
+								"color":       map[string]string{"type": "string"},
+								"marker_type": map[string]string{"type": "string"},
+							},
+							"required": []string{"points"},
+						},
+					},
+					"width":  map[string]interface{}{"type": "number", "default": 800},
+					"height": map[string]interface{}{"type": "number", "default": 600},
+				},
+				"required": []string{"series"},
+			},
+		},
+		s.handleConnectedScatter,
+	)
+
+	// Tool: stacked_area
+	s.server.AddTool(
+		&mcp.Tool{
+			Name:        "stacked_area",
+			Description: "Generate a stacked area chart",
+			InputSchema: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"title": map[string]interface{}{"type": "string", "description": "Chart title"},
+					"points": map[string]interface{}{
+						"type":        "array",
+						"description": "Array of {x, values[]} points",
+						"items": map[string]interface{}{
+							"type": "object",
+							"properties": map[string]interface{}{
+								"x":      map[string]string{"type": "number"},
+								"values": map[string]interface{}{"type": "array", "items": map[string]string{"type": "number"}},
+							},
+							"required": []string{"x", "values"},
+						},
+					},
+					"series": map[string]interface{}{
+						"type":        "array",
+						"description": "Array of {label, color?} series metadata",
+						"items": map[string]interface{}{
+							"type": "object",
+							"properties": map[string]interface{}{
+								"label": map[string]string{"type": "string"},
+								"color": map[string]string{"type": "string"},
+							},
+							"required": []string{"label"},
+						},
+					},
+					"width":  map[string]interface{}{"type": "number", "default": 800},
+					"height": map[string]interface{}{"type": "number", "default": 600},
+				},
+				"required": []string{"points", "series"},
+			},
+		},
+		s.handleStackedArea,
+	)
+
+	// Tool: streamchart
+	s.server.AddTool(
+		&mcp.Tool{
+			Name:        "streamchart",
+			Description: "Generate a streamchart (flowing stacked area)",
+			InputSchema: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"title": map[string]interface{}{"type": "string", "description": "Chart title"},
+					"points": map[string]interface{}{
+						"type":        "array",
+						"description": "Array of {x, values[]} points",
+						"items": map[string]interface{}{
+							"type": "object",
+							"properties": map[string]interface{}{
+								"x":      map[string]string{"type": "number"},
+								"values": map[string]interface{}{"type": "array", "items": map[string]string{"type": "number"}},
+							},
+							"required": []string{"x", "values"},
+						},
+					},
+					"series": map[string]interface{}{
+						"type":        "array",
+						"description": "Array of {label, color?} series metadata",
+						"items": map[string]interface{}{
+							"type": "object",
+							"properties": map[string]interface{}{
+								"label": map[string]string{"type": "string"},
+								"color": map[string]string{"type": "string"},
+							},
+							"required": []string{"label"},
+						},
+					},
+					"layout": map[string]interface{}{"type": "string", "description": "Layout type", "default": "wiggle"},
+					"width":  map[string]interface{}{"type": "number", "default": 800},
+					"height": map[string]interface{}{"type": "number", "default": 600},
+				},
+				"required": []string{"points", "series"},
+			},
+		},
+		s.handleStreamChart,
+	)
+
+	// Tool: correlogram
+	s.server.AddTool(
+		&mcp.Tool{
+			Name:        "correlogram",
+			Description: "Generate a correlogram (correlation matrix visualization)",
+			InputSchema: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"title":     map[string]interface{}{"type": "string", "description": "Chart title"},
+					"variables": map[string]interface{}{"type": "array", "items": map[string]string{"type": "string"}, "description": "Variable names"},
+					"matrix": map[string]interface{}{
+						"type":        "array",
+						"description": "Correlation matrix (2D array of values)",
+						"items": map[string]interface{}{
+							"type":  "array",
+							"items": map[string]string{"type": "number"},
+						},
+					},
+					"width":  map[string]interface{}{"type": "number", "default": 800},
+					"height": map[string]interface{}{"type": "number", "default": 800},
+				},
+				"required": []string{"variables", "matrix"},
+			},
+		},
+		s.handleCorrelogram,
+	)
+
+	// Tool: radar
+	s.server.AddTool(
+		&mcp.Tool{
+			Name:        "radar",
+			Description: "Generate a radar (spider) chart",
+			InputSchema: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"title": map[string]interface{}{"type": "string", "description": "Chart title"},
+					"axes": map[string]interface{}{
+						"type":        "array",
+						"description": "Array of {label, min, max} axes",
+						"items": map[string]interface{}{
+							"type": "object",
+							"properties": map[string]interface{}{
+								"label": map[string]string{"type": "string"},
+								"min":   map[string]string{"type": "number"},
+								"max":   map[string]string{"type": "number"},
+							},
+							"required": []string{"label", "min", "max"},
+						},
+					},
+					"series": map[string]interface{}{
+						"type":        "array",
+						"description": "Array of {label, values[], color?} series",
+						"items": map[string]interface{}{
+							"type": "object",
+							"properties": map[string]interface{}{
+								"label":  map[string]string{"type": "string"},
+								"values": map[string]interface{}{"type": "array", "items": map[string]string{"type": "number"}},
+								"color":  map[string]string{"type": "string"},
+							},
+							"required": []string{"label", "values"},
+						},
+					},
+					"width":  map[string]interface{}{"type": "number", "default": 600},
+					"height": map[string]interface{}{"type": "number", "default": 600},
+				},
+				"required": []string{"axes", "series"},
+			},
+		},
+		s.handleRadar,
+	)
+
+	// Tool: parallel
+	s.server.AddTool(
+		&mcp.Tool{
+			Name:        "parallel",
+			Description: "Generate a parallel coordinates plot",
+			InputSchema: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"title": map[string]interface{}{"type": "string", "description": "Chart title"},
+					"axes": map[string]interface{}{
+						"type":        "array",
+						"description": "Array of {label, min, max} axes",
+						"items": map[string]interface{}{
+							"type": "object",
+							"properties": map[string]interface{}{
+								"label": map[string]string{"type": "string"},
+								"min":   map[string]string{"type": "number"},
+								"max":   map[string]string{"type": "number"},
+							},
+							"required": []string{"label", "min", "max"},
+						},
+					},
+					"data": map[string]interface{}{
+						"type":        "array",
+						"description": "Array of {values[], color?} data points",
+						"items": map[string]interface{}{
+							"type": "object",
+							"properties": map[string]interface{}{
+								"values": map[string]interface{}{"type": "array", "items": map[string]string{"type": "number"}},
+								"color":  map[string]string{"type": "string"},
+							},
+							"required": []string{"values"},
+						},
+					},
+					"width":  map[string]interface{}{"type": "number", "default": 800},
+					"height": map[string]interface{}{"type": "number", "default": 600},
+				},
+				"required": []string{"axes", "data"},
+			},
+		},
+		s.handleParallel,
+	)
+
+	// Tool: wordcloud
+	s.server.AddTool(
+		&mcp.Tool{
+			Name:        "wordcloud",
+			Description: "Generate a word cloud visualization",
+			InputSchema: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"title": map[string]interface{}{"type": "string", "description": "Chart title"},
+					"words": map[string]interface{}{
+						"type":        "array",
+						"description": "Array of {text, frequency, color?} words",
+						"items": map[string]interface{}{
+							"type": "object",
+							"properties": map[string]interface{}{
+								"text":      map[string]string{"type": "string"},
+								"frequency": map[string]string{"type": "number"},
+								"color":     map[string]string{"type": "string"},
+							},
+							"required": []string{"text", "frequency"},
+						},
+					},
+					"layout": map[string]interface{}{"type": "string", "description": "Layout algorithm", "default": "spiral"},
+					"width":  map[string]interface{}{"type": "number", "default": 800},
+					"height": map[string]interface{}{"type": "number", "default": 600},
+				},
+				"required": []string{"words"},
+			},
+		},
+		s.handleWordCloud,
+	)
+
+	// Tool: sankey
+	s.server.AddTool(
+		&mcp.Tool{
+			Name:        "sankey",
+			Description: "Generate a Sankey diagram for flow visualization",
+			InputSchema: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"title": map[string]interface{}{"type": "string", "description": "Chart title"},
+					"nodes": map[string]interface{}{
+						"type":        "array",
+						"description": "Array of {id, label, color?} nodes",
+						"items": map[string]interface{}{
+							"type": "object",
+							"properties": map[string]interface{}{
+								"id":    map[string]string{"type": "string"},
+								"label": map[string]string{"type": "string"},
+								"color": map[string]string{"type": "string"},
+							},
+							"required": []string{"id", "label"},
+						},
+					},
+					"links": map[string]interface{}{
+						"type":        "array",
+						"description": "Array of {source, target, value, color?} links",
+						"items": map[string]interface{}{
+							"type": "object",
+							"properties": map[string]interface{}{
+								"source": map[string]string{"type": "string"},
+								"target": map[string]string{"type": "string"},
+								"value":  map[string]string{"type": "number"},
+								"color":  map[string]string{"type": "string"},
+							},
+							"required": []string{"source", "target", "value"},
+						},
+					},
+					"width":  map[string]interface{}{"type": "number", "default": 1000},
+					"height": map[string]interface{}{"type": "number", "default": 600},
+				},
+				"required": []string{"nodes", "links"},
+			},
+		},
+		s.handleSankey,
+	)
+
+	// Tool: chord
+	s.server.AddTool(
+		&mcp.Tool{
+			Name:        "chord",
+			Description: "Generate a chord diagram for relationships",
+			InputSchema: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"title": map[string]interface{}{"type": "string", "description": "Chart title"},
+					"entities": map[string]interface{}{
+						"type":        "array",
+						"description": "Array of {id, label, color?} entities",
+						"items": map[string]interface{}{
+							"type": "object",
+							"properties": map[string]interface{}{
+								"id":    map[string]string{"type": "string"},
+								"label": map[string]string{"type": "string"},
+								"color": map[string]string{"type": "string"},
+							},
+							"required": []string{"id", "label"},
+						},
+					},
+					"relations": map[string]interface{}{
+						"type":        "array",
+						"description": "Array of {source, target, value} relations",
+						"items": map[string]interface{}{
+							"type": "object",
+							"properties": map[string]interface{}{
+								"source": map[string]string{"type": "string"},
+								"target": map[string]string{"type": "string"},
+								"value":  map[string]string{"type": "number"},
+							},
+							"required": []string{"source", "target", "value"},
+						},
+					},
+					"width":  map[string]interface{}{"type": "number", "default": 800},
+					"height": map[string]interface{}{"type": "number", "default": 800},
+				},
+				"required": []string{"entities", "relations"},
+			},
+		},
+		s.handleChord,
+	)
+
+	// Tool: circular_bar
+	s.server.AddTool(
+		&mcp.Tool{
+			Name:        "circular_bar",
+			Description: "Generate a circular bar plot",
+			InputSchema: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"title": map[string]interface{}{"type": "string", "description": "Chart title"},
+					"data": map[string]interface{}{
+						"type":        "array",
+						"description": "Array of {label, value, color?} data points",
+						"items": map[string]interface{}{
+							"type": "object",
+							"properties": map[string]interface{}{
+								"label": map[string]string{"type": "string"},
+								"value": map[string]string{"type": "number"},
+								"color": map[string]string{"type": "string"},
+							},
+							"required": []string{"label", "value"},
+						},
+					},
+					"inner_radius": map[string]interface{}{"type": "number", "description": "Inner radius ratio", "default": 0.3},
+					"width":        map[string]interface{}{"type": "number", "default": 800},
+					"height":       map[string]interface{}{"type": "number", "default": 800},
+				},
+				"required": []string{"data"},
+			},
+		},
+		s.handleCircularBar,
+	)
+
+	// Tool: dendrogram
+	s.server.AddTool(
+		&mcp.Tool{
+			Name:        "dendrogram",
+			Description: "Generate a dendrogram (hierarchical clustering tree)",
+			InputSchema: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"title": map[string]interface{}{"type": "string", "description": "Chart title"},
+					"root": map[string]interface{}{
+						"type":        "object",
+						"description": "Root node with recursive children structure",
+						"properties": map[string]interface{}{
+							"label":    map[string]string{"type": "string"},
+							"height":   map[string]string{"type": "number"},
+							"children": map[string]interface{}{"type": "array", "items": map[string]string{"type": "object"}},
+						},
+						"required": []string{"height"},
+					},
+					"orientation": map[string]interface{}{"type": "string", "description": "vertical or horizontal", "default": "horizontal"},
+					"width":       map[string]interface{}{"type": "number", "default": 800},
+					"height":      map[string]interface{}{"type": "number", "default": 600},
+				},
+				"required": []string{"root"},
+			},
+		},
+		s.handleDendrogram,
+	)
+
+	fmt.Println("Registered 28 chart generation tools")
 }
 
 // handleBarChart handles the bar_chart tool
@@ -963,6 +1453,370 @@ func (s *Server) handleOHLC(ctx context.Context, request *mcp.CallToolRequest) (
 	svg, err := charts.CreateOHLC(config)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create OHLC chart: %w", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{
+				Text: fmt.Sprintf("```svg\n%s\n```", svg),
+			},
+		},
+	}, nil
+}
+
+// handleLollipop handles the lollipop tool
+func (s *Server) handleLollipop(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	var config types.LollipopConfig
+	if err := parseArguments(request.Params.Arguments, &config); err != nil {
+		return nil, fmt.Errorf("invalid arguments: %w", err)
+	}
+
+	if config.Width == 0 {
+		config.Width = 800
+	}
+	if config.Height == 0 {
+		config.Height = 600
+	}
+
+	svg, err := charts.CreateLollipop(config)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create lollipop chart: %w", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{
+				Text: fmt.Sprintf("```svg\n%s\n```", svg),
+			},
+		},
+	}, nil
+}
+
+// handleDensity handles the density tool
+func (s *Server) handleDensity(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	var config types.DensityConfig
+	if err := parseArguments(request.Params.Arguments, &config); err != nil {
+		return nil, fmt.Errorf("invalid arguments: %w", err)
+	}
+
+	if config.Width == 0 {
+		config.Width = 800
+	}
+	if config.Height == 0 {
+		config.Height = 600
+	}
+
+	svg, err := charts.CreateDensity(config)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create density plot: %w", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{
+				Text: fmt.Sprintf("```svg\n%s\n```", svg),
+			},
+		},
+	}, nil
+}
+
+// handleConnectedScatter handles the connected_scatter tool
+func (s *Server) handleConnectedScatter(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	var config types.ConnectedScatterConfig
+	if err := parseArguments(request.Params.Arguments, &config); err != nil {
+		return nil, fmt.Errorf("invalid arguments: %w", err)
+	}
+
+	if config.Width == 0 {
+		config.Width = 800
+	}
+	if config.Height == 0 {
+		config.Height = 600
+	}
+
+	svg, err := charts.CreateConnectedScatter(config)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create connected scatter plot: %w", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{
+				Text: fmt.Sprintf("```svg\n%s\n```", svg),
+			},
+		},
+	}, nil
+}
+
+// handleStackedArea handles the stacked_area tool
+func (s *Server) handleStackedArea(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	var config types.StackedAreaConfig
+	if err := parseArguments(request.Params.Arguments, &config); err != nil {
+		return nil, fmt.Errorf("invalid arguments: %w", err)
+	}
+
+	if config.Width == 0 {
+		config.Width = 800
+	}
+	if config.Height == 0 {
+		config.Height = 600
+	}
+
+	svg, err := charts.CreateStackedArea(config)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create stacked area chart: %w", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{
+				Text: fmt.Sprintf("```svg\n%s\n```", svg),
+			},
+		},
+	}, nil
+}
+
+// handleStreamChart handles the streamchart tool
+func (s *Server) handleStreamChart(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	var config types.StreamChartConfig
+	if err := parseArguments(request.Params.Arguments, &config); err != nil {
+		return nil, fmt.Errorf("invalid arguments: %w", err)
+	}
+
+	if config.Width == 0 {
+		config.Width = 800
+	}
+	if config.Height == 0 {
+		config.Height = 600
+	}
+
+	svg, err := charts.CreateStreamChart(config)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create streamchart: %w", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{
+				Text: fmt.Sprintf("```svg\n%s\n```", svg),
+			},
+		},
+	}, nil
+}
+
+// handleCorrelogram handles the correlogram tool
+func (s *Server) handleCorrelogram(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	var config types.CorrelogramConfig
+	if err := parseArguments(request.Params.Arguments, &config); err != nil {
+		return nil, fmt.Errorf("invalid arguments: %w", err)
+	}
+
+	if config.Width == 0 {
+		config.Width = 800
+	}
+	if config.Height == 0 {
+		config.Height = 800
+	}
+
+	svg, err := charts.CreateCorrelogram(config)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create correlogram: %w", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{
+				Text: fmt.Sprintf("```svg\n%s\n```", svg),
+			},
+		},
+	}, nil
+}
+
+// handleRadar handles the radar tool
+func (s *Server) handleRadar(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	var config types.RadarConfig
+	if err := parseArguments(request.Params.Arguments, &config); err != nil {
+		return nil, fmt.Errorf("invalid arguments: %w", err)
+	}
+
+	if config.Width == 0 {
+		config.Width = 600
+	}
+	if config.Height == 0 {
+		config.Height = 600
+	}
+
+	svg, err := charts.CreateRadar(config)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create radar chart: %w", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{
+				Text: fmt.Sprintf("```svg\n%s\n```", svg),
+			},
+		},
+	}, nil
+}
+
+// handleParallel handles the parallel tool
+func (s *Server) handleParallel(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	var config types.ParallelConfig
+	if err := parseArguments(request.Params.Arguments, &config); err != nil {
+		return nil, fmt.Errorf("invalid arguments: %w", err)
+	}
+
+	if config.Width == 0 {
+		config.Width = 800
+	}
+	if config.Height == 0 {
+		config.Height = 600
+	}
+
+	svg, err := charts.CreateParallel(config)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create parallel coordinates plot: %w", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{
+				Text: fmt.Sprintf("```svg\n%s\n```", svg),
+			},
+		},
+	}, nil
+}
+
+// handleWordCloud handles the wordcloud tool
+func (s *Server) handleWordCloud(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	var config types.WordCloudConfig
+	if err := parseArguments(request.Params.Arguments, &config); err != nil {
+		return nil, fmt.Errorf("invalid arguments: %w", err)
+	}
+
+	if config.Width == 0 {
+		config.Width = 800
+	}
+	if config.Height == 0 {
+		config.Height = 600
+	}
+
+	svg, err := charts.CreateWordCloud(config)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create word cloud: %w", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{
+				Text: fmt.Sprintf("```svg\n%s\n```", svg),
+			},
+		},
+	}, nil
+}
+
+// handleSankey handles the sankey tool
+func (s *Server) handleSankey(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	var config types.SankeyConfig
+	if err := parseArguments(request.Params.Arguments, &config); err != nil {
+		return nil, fmt.Errorf("invalid arguments: %w", err)
+	}
+
+	if config.Width == 0 {
+		config.Width = 1000
+	}
+	if config.Height == 0 {
+		config.Height = 600
+	}
+
+	svg, err := charts.CreateSankey(config)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create Sankey diagram: %w", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{
+				Text: fmt.Sprintf("```svg\n%s\n```", svg),
+			},
+		},
+	}, nil
+}
+
+// handleChord handles the chord tool
+func (s *Server) handleChord(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	var config types.ChordConfig
+	if err := parseArguments(request.Params.Arguments, &config); err != nil {
+		return nil, fmt.Errorf("invalid arguments: %w", err)
+	}
+
+	if config.Width == 0 {
+		config.Width = 800
+	}
+	if config.Height == 0 {
+		config.Height = 800
+	}
+
+	svg, err := charts.CreateChord(config)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create chord diagram: %w", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{
+				Text: fmt.Sprintf("```svg\n%s\n```", svg),
+			},
+		},
+	}, nil
+}
+
+// handleCircularBar handles the circular_bar tool
+func (s *Server) handleCircularBar(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	var config types.CircularBarConfig
+	if err := parseArguments(request.Params.Arguments, &config); err != nil {
+		return nil, fmt.Errorf("invalid arguments: %w", err)
+	}
+
+	if config.Width == 0 {
+		config.Width = 800
+	}
+	if config.Height == 0 {
+		config.Height = 800
+	}
+
+	svg, err := charts.CreateCircularBar(config)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create circular bar plot: %w", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{
+				Text: fmt.Sprintf("```svg\n%s\n```", svg),
+			},
+		},
+	}, nil
+}
+
+// handleDendrogram handles the dendrogram tool
+func (s *Server) handleDendrogram(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	var config types.DendrogramConfig
+	if err := parseArguments(request.Params.Arguments, &config); err != nil {
+		return nil, fmt.Errorf("invalid arguments: %w", err)
+	}
+
+	if config.Width == 0 {
+		config.Width = 800
+	}
+	if config.Height == 0 {
+		config.Height = 600
+	}
+
+	svg, err := charts.CreateDendrogram(config)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create dendrogram: %w", err)
 	}
 
 	return &mcp.CallToolResult{

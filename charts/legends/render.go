@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/SCKelemen/color"
+	"github.com/SCKelemen/layout"
 )
 
 // Bounds represents the dimensions and position of the legend
@@ -22,10 +23,13 @@ func (l *Legend) Render(chartWidth, chartHeight int) string {
 		return ""
 	}
 
-	// Calculate legend dimensions
-	bounds := l.calculateBounds()
+	// Build and layout the legend tree
+	layoutNode := l.buildLayoutTree()
+	constraints := layout.Unconstrained()
+	size := layout.LayoutSimple(layoutNode, constraints)
 
 	// Calculate position based on Position setting
+	bounds := Bounds{Width: size.Width, Height: size.Height}
 	x, y := l.calculatePosition(bounds, chartWidth, chartHeight)
 
 	var sb strings.Builder
@@ -49,29 +53,12 @@ func (l *Legend) Render(chartWidth, chartHeight int) string {
 		}
 
 		sb.WriteString(fmt.Sprintf(`  <rect x="0" y="0" width="%.1f" height="%.1f" fill="%s" stroke="%s" stroke-width="%.1f"/>`,
-			bounds.Width, bounds.Height, bg, stroke, strokeWidth))
+			size.Width, size.Height, bg, stroke, strokeWidth))
 		sb.WriteString("\n")
 	}
 
-	// Render items
-	padding := l.Style.Padding.Raw()
-	itemX := padding
-	itemY := padding
-
-	for i, item := range l.Items {
-		// Calculate item position based on layout
-		if l.Layout == LayoutHorizontal && i > 0 {
-			// Horizontal: move right
-			prevSymbol := l.Items[i-1].Symbol
-			itemX += prevSymbol.Width() + l.Style.SymbolSpacing.Raw() + estimateTextWidth(l.Items[i-1].Label, l.Style.FontSize.Raw()) + l.Style.ItemSpacing.Raw()
-		} else if l.Layout == LayoutVertical && i > 0 {
-			// Vertical: move down
-			itemY += maxSymbolHeight(l.Items[i-1].Symbol) + l.Style.ItemSpacing.Raw()
-		}
-
-		// Render item
-		sb.WriteString(l.renderItem(item, itemX, itemY))
-	}
+	// Render items using layout positions
+	sb.WriteString(l.renderLayoutTree(layoutNode))
 
 	sb.WriteString("</g>")
 	sb.WriteString("\n")
@@ -79,93 +66,141 @@ func (l *Legend) Render(chartWidth, chartHeight int) string {
 	return sb.String()
 }
 
-// renderItem renders a single legend item
-func (l *Legend) renderItem(item LegendItem, x, y float64) string {
+// renderLayoutTree walks the layout tree and renders legend items
+func (l *Legend) renderLayoutTree(node *layout.Node) string {
 	var sb strings.Builder
 
-	symbolHeight := item.Symbol.Height()
-	symbolWidth := item.Symbol.Width()
-
-	// Center symbol vertically with text
-	fontSize := l.Style.FontSize.Raw()
-	symbolY := y + (fontSize-symbolHeight)/2
-
-	// Symbol
-	sb.WriteString(fmt.Sprintf(`  <g transform="translate(%.1f,%.1f)">`, x, symbolY))
-	sb.WriteString(item.Symbol.Render())
-	sb.WriteString("</g>\n")
-
-	// Label
-	labelX := x + symbolWidth + l.Style.SymbolSpacing.Raw()
-	labelY := y + fontSize*0.85 // Baseline adjustment
-
-	labelText := item.Label
-	if item.Value != "" {
-		labelText = fmt.Sprintf("%s (%s)", item.Label, item.Value)
-	}
-
-	sb.WriteString(fmt.Sprintf(`  <text x="%.1f" y="%.1f" font-family="%s" font-size="%.1f" fill="%s">%s</text>`,
-		labelX, labelY, l.Style.FontFamily, fontSize, color.RGBToHex(l.Style.TextColor), labelText))
-	sb.WriteString("\n")
+	// Walk the layout tree and render items at their computed positions
+	l.walkLayoutTree(node, 0, &sb)
 
 	return sb.String()
 }
 
-// calculateBounds calculates the dimensions of the legend
+// walkLayoutTree recursively walks the layout tree
+func (l *Legend) walkLayoutTree(node *layout.Node, itemIndex int, sb *strings.Builder) int {
+	// If this is a leaf node (no children), it's a symbol or text element
+	if len(node.Children) == 0 {
+		return itemIndex
+	}
+
+	// For container nodes, walk children
+	for _, child := range node.Children {
+		// Check if this child contains an item (has 3 children: symbol, spacer, text)
+		if len(child.Children) == 3 && itemIndex < len(l.Items) {
+			// This is an item node
+			item := l.Items[itemIndex]
+			symbolNode := child.Children[0]
+			textNode := child.Children[2]
+
+			// Render symbol at its computed position
+			symbolX := child.Rect.X + symbolNode.Rect.X
+			symbolY := child.Rect.Y + symbolNode.Rect.Y
+
+			sb.WriteString(fmt.Sprintf(`  <g transform="translate(%.1f,%.1f)">`, symbolX, symbolY))
+			sb.WriteString(item.Symbol.Render())
+			sb.WriteString("</g>\n")
+
+			// Render text at its computed position
+			labelText := item.Label
+			if item.Value != "" {
+				labelText = fmt.Sprintf("%s (%s)", item.Label, item.Value)
+			}
+
+			textX := child.Rect.X + textNode.Rect.X
+			textY := child.Rect.Y + textNode.Rect.Y + l.Style.FontSize.Raw()*0.85 // Baseline adjustment
+
+			sb.WriteString(fmt.Sprintf(`  <text x="%.1f" y="%.1f" font-family="%s" font-size="%.1f" fill="%s">%s</text>`,
+				textX, textY, l.Style.FontFamily, l.Style.FontSize.Raw(), color.RGBToHex(l.Style.TextColor), labelText))
+			sb.WriteString("\n")
+
+			itemIndex++
+		} else {
+			// Recurse into container
+			itemIndex = l.walkLayoutTree(child, itemIndex, sb)
+		}
+	}
+
+	return itemIndex
+}
+
+
+// calculateBounds calculates the dimensions of the legend using layout engine
 func (l *Legend) calculateBounds() Bounds {
 	if len(l.Items) == 0 {
 		return Bounds{}
 	}
 
+	// Build layout tree
+	layoutNode := l.buildLayoutTree()
+
+	// Layout with unconstrained size to get natural dimensions
+	constraints := layout.Unconstrained()
+	size := layout.LayoutSimple(layoutNode, constraints)
+
+	return Bounds{
+		Width:  size.Width,
+		Height: size.Height,
+	}
+}
+
+// buildLayoutTree creates a layout.Node tree for the legend
+func (l *Legend) buildLayoutTree() *layout.Node {
 	padding := l.Style.Padding.Raw()
 	itemSpacing := l.Style.ItemSpacing.Raw()
 	symbolSpacing := l.Style.SymbolSpacing.Raw()
 	fontSize := l.Style.FontSize.Raw()
 
-	var width, height float64
+	// Create item nodes
+	itemNodes := make([]*layout.Node, len(l.Items))
+	for i, item := range l.Items {
+		// Each item is an HStack: [Symbol | spacing | Text]
+		symbolNode := layout.Fixed(item.Symbol.Width(), item.Symbol.Height())
 
+		labelText := item.Label
+		if item.Value != "" {
+			labelText = fmt.Sprintf("%s (%s)", item.Label, item.Value)
+		}
+		textWidth := estimateTextWidth(labelText, fontSize)
+		textNode := layout.Fixed(textWidth, fontSize)
+
+		itemNode := layout.HStack(
+			symbolNode,
+			layout.Fixed(symbolSpacing, 1), // Spacing between symbol and text
+			textNode,
+		)
+
+		// Add spacing between items (except last)
+		if i > 0 {
+			if l.Layout == LayoutHorizontal {
+				// Horizontal spacing
+				itemNodes[i] = itemNode
+				itemNodes[i].Style.Margin = layout.Spacing{
+					Left: layout.Px(itemSpacing),
+				}
+			} else {
+				// Vertical spacing
+				itemNodes[i] = itemNode
+				itemNodes[i].Style.Margin = layout.Spacing{
+					Top: layout.Px(itemSpacing),
+				}
+			}
+		} else {
+			itemNodes[i] = itemNode
+		}
+	}
+
+	// Create container based on layout mode
+	var container *layout.Node
 	if l.Layout == LayoutHorizontal {
-		// Horizontal: sum widths, max height
-		for i, item := range l.Items {
-			itemWidth := item.Symbol.Width() + symbolSpacing + estimateTextWidth(item.Label, fontSize)
-			if item.Value != "" {
-				itemWidth += estimateTextWidth(fmt.Sprintf(" (%s)", item.Value), fontSize)
-			}
-			width += itemWidth
-
-			if i > 0 {
-				width += itemSpacing
-			}
-
-			itemHeight := maxFloat(item.Symbol.Height(), fontSize)
-			if itemHeight > height {
-				height = itemHeight
-			}
-		}
-	} else { // LayoutVertical
-		// Vertical: max width, sum heights
-		for i, item := range l.Items {
-			itemWidth := item.Symbol.Width() + symbolSpacing + estimateTextWidth(item.Label, fontSize)
-			if item.Value != "" {
-				itemWidth += estimateTextWidth(fmt.Sprintf(" (%s)", item.Value), fontSize)
-			}
-			if itemWidth > width {
-				width = itemWidth
-			}
-
-			itemHeight := maxFloat(item.Symbol.Height(), fontSize)
-			height += itemHeight
-
-			if i > 0 {
-				height += itemSpacing
-			}
-		}
+		container = layout.HStack(itemNodes...)
+	} else {
+		container = layout.VStack(itemNodes...)
 	}
 
-	return Bounds{
-		Width:  width + 2*padding,
-		Height: height + 2*padding,
-	}
+	// Add padding to container
+	container.Style.Padding = layout.Uniform(layout.Px(padding))
+
+	return container
 }
 
 // calculatePosition calculates the x,y position based on Position setting
@@ -230,13 +265,3 @@ func estimateTextWidth(text string, fontSize float64) float64 {
 	return float64(len(text)) * fontSize * 0.6
 }
 
-func maxSymbolHeight(symbol Symbol) float64 {
-	return symbol.Height()
-}
-
-func maxFloat(a, b float64) float64 {
-	if a > b {
-		return a
-	}
-	return b
-}

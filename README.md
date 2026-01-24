@@ -49,23 +49,21 @@ This library provides **chart implementations and visualization tools**:
 ### Use Cases
 
 **1. Data Visualization & Charting**
-- Line graphs, bar charts, scatter plots, heatmaps, pie charts
+- Line graphs, area charts, bar charts, scatter plots, heatmaps, stat cards
 - Time-series visualization with `time.Time` types
-- Gradients, markers, stacked bars
+- Smooth curves with configurable tension (Bezier interpolation)
+- Custom markers: circle, square, diamond, triangle, cross, x, dot
+- Gradients, fills, stacked bars
 - Design token integration for consistent styling
 - Dual output: SVG for web, Terminal for CLI
 
-**2. Image Export**
-- Convert any SVG chart to PNG or JPEG
-- Configurable dimensions and quality
-- Auto-dimension calculation from SVG viewBox
-
-**3. AI Agent Integration**
+**2. AI Agent Integration**
 - MCP server for Claude Code and other MCP clients
 - Generic data types (interface{}, float64) for multi-source data
 - Composable with other MCP servers (Omnitron, file systems, APIs)
+- Includes pie/donut charts (MCP-specific implementation)
 
-**4. Command-Line Tools**
+**3. Command-Line Tools**
 - viz-cli: Interactive terminal chart viewer
 - dataviz-mcp: MCP server for AI agents
 
@@ -75,26 +73,22 @@ This library provides **chart implementations and visualization tools**:
 
 #### `charts/`
 High-level charting API with multiple chart types:
-- **Line graphs** with area fill, gradients, markers
+- **Line graphs** with smooth curves, tension control, area fill, gradients, markers
+- **Area charts** with smooth curves and gradient fills
 - **Bar charts** with stacked support
-- **Scatter plots** with multiple series
+- **Scatter plots** with custom markers (7 types)
 - **Heatmaps** (linear and GitHub-style weeks view)
-- **Pie/donut charts**
+- **Stat cards** with change indicators and mini trend graphs
 - **Time-series** support with `time.Time` types
 - **Dual output**: SVG and Terminal rendering
 
+**Features:**
+- Smooth curves: Bezier interpolation with configurable tension (0-1)
+- Markers: circle, square, diamond, triangle, cross, x, dot
+- Gradients: Vertical fade with opacity control
+- Terminal: ANSI colors + Braille dots for high-resolution
+
 Built on top of [SCKelemen/layout](https://github.com/SCKelemen/layout) for positioning and layout.
-
-### Image Export
-
-#### `export/`
-Image conversion utilities:
-- SVG → PNG conversion with configurable dimensions
-- SVG → JPEG conversion with quality settings
-- Auto-dimension calculation from SVG viewBox
-- Aspect ratio preservation
-
-Uses `github.com/srwiley/oksvg` and `rasterx` for rasterization.
 
 ### MCP Server
 
@@ -190,28 +184,7 @@ svgChart := charts.RenderLineChart(data, config)
 termChart := charts.RenderLineChartTerminal(data, config)
 ```
 
-### 3. Image Export
-
-```go
-import "github.com/SCKelemen/dataviz/export"
-
-// Convert SVG to PNG
-opts := export.ExportOptions{
-    Format: export.FormatPNG,
-    Width: 1200,
-    Height: 600,
-}
-
-pngData, err := export.Export(svgChart, opts)
-if err != nil {
-    log.Fatal(err)
-}
-
-// Save to file
-os.WriteFile("chart.png", pngData, 0644)
-```
-
-### 4. With Design Tokens (Optional)
+### 3. With Design Tokens (Optional)
 
 ```go
 import (
@@ -233,7 +206,7 @@ config := charts.LineChartConfig{
 svgChart := charts.RenderLineChart(data, config)
 ```
 
-### 5. Interactive Dashboard
+### 4. Interactive Dashboard
 
 ```go
 import (

@@ -1,0 +1,98 @@
+Reading from stdin...
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+<rect x="100.00" y="100.00" width="100.00" height="100.00" fill="rgb(0,0,255)" stroke="#ffffff" stroke-width="2.00"/>
+<text x="150.00" y="150.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">1.00</text>
+<rect x="200.00" y="100.00" width="100.00" height="100.00" fill="rgb(38,38,255)" stroke="#ffffff" stroke-width="2.00"/>
+<text x="250.00" y="150.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">0.85</text>
+<rect x="300.00" y="100.00" width="100.00" height="100.00" fill="rgb(140,140,255)" stroke="#ffffff" stroke-width="2.00"/>
+<text x="350.00" y="150.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">0.45</text>
+<rect x="400.00" y="100.00" width="100.00" height="100.00" fill="rgb(173,173,255)" stroke="#ffffff" stroke-width="2.00"/>
+<text x="450.00" y="150.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">0.32</text>
+<rect x="100.00" y="200.00" width="100.00" height="100.00" fill="rgb(38,38,255)" stroke="#ffffff" stroke-width="2.00"/>
+<text x="150.00" y="250.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">0.85</text>
+<rect x="200.00" y="200.00" width="100.00" height="100.00" fill="rgb(0,0,255)" stroke="#ffffff" stroke-width="2.00"/>
+<text x="250.00" y="250.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">1.00</text>
+<rect x="300.00" y="200.00" width="100.00" height="100.00" fill="rgb(122,122,255)" stroke="#ffffff" stroke-width="2.00"/>
+<text x="350.00" y="250.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">0.52</text>
+<rect x="400.00" y="200.00" width="100.00" height="100.00" fill="rgb(150,150,255)" stroke="#ffffff" stroke-width="2.00"/>
+<text x="450.00" y="250.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">0.41</text>
+<rect x="100.00" y="300.00" width="100.00" height="100.00" fill="rgb(140,140,255)" stroke="#ffffff" stroke-width="2.00"/>
+<text x="150.00" y="350.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">0.45</text>
+<rect x="200.00" y="300.00" width="100.00" height="100.00" fill="rgb(122,122,255)" stroke="#ffffff" stroke-width="2.00"/>
+<text x="250.00" y="350.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">0.52</text>
+<rect x="300.00" y="300.00" width="100.00" height="100.00" fill="rgb(0,0,255)" stroke="#ffffff" stroke-width="2.00"/>
+<text x="350.00" y="350.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">1.00</text>
+<rect x="400.00" y="300.00" width="100.00" height="100.00" fill="rgb(81,81,255)" stroke="#ffffff" stroke-width="2.00"/>
+<text x="450.00" y="350.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">0.68</text>
+<rect x="100.00" y="400.00" width="100.00" height="100.00" fill="rgb(173,173,255)" stroke="#ffffff" stroke-width="2.00"/>
+<text x="150.00" y="450.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">0.32</text>
+<rect x="200.00" y="400.00" width="100.00" height="100.00" fill="rgb(150,150,255)" stroke="#ffffff" stroke-width="2.00"/>
+<text x="250.00" y="450.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">0.41</text>
+<rect x="300.00" y="400.00" width="100.00" height="100.00" fill="rgb(81,81,255)" stroke="#ffffff" stroke-width="2.00"/>
+<text x="350.00" y="450.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">0.68</text>
+<rect x="400.00" y="400.00" width="100.00" height="100.00" fill="rgb(0,0,255)" stroke="#ffffff" stroke-width="2.00"/>
+<text x="450.00" y="450.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">1.00</text>
+<text x="90.00" y="150.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">Height</text>
+<text x="90.00" y="250.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">Weight</text>
+<text x="90.00" y="350.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">Age</text>
+<text x="90.00" y="450.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">Income</text>
+<text x="150.00" y="510.00" text-anchor="start" font-size="10" font-family="sans-serif" transform="rotate(45 150.00 510.00)">Height</text>
+<text x="250.00" y="510.00" text-anchor="start" font-size="10" font-family="sans-serif" transform="rotate(45 250.00 510.00)">Weight</text>
+<text x="350.00" y="510.00" text-anchor="start" font-size="10" font-family="sans-serif" transform="rotate(45 350.00 510.00)">Age</text>
+<text x="450.00" y="510.00" text-anchor="start" font-size="10" font-family="sans-serif" transform="rotate(45 450.00 510.00)">Income</text>
+<rect x="720.00" y="100.00" width="20.00" height="9.00" fill="rgb(0,0,255)" stroke="none"/>
+<rect x="720.00" y="108.00" width="20.00" height="9.00" fill="rgb(10,10,255)" stroke="none"/>
+<rect x="720.00" y="116.00" width="20.00" height="9.00" fill="rgb(20,20,255)" stroke="none"/>
+<rect x="720.00" y="124.00" width="20.00" height="9.00" fill="rgb(31,31,255)" stroke="none"/>
+<rect x="720.00" y="132.00" width="20.00" height="9.00" fill="rgb(41,41,255)" stroke="none"/>
+<rect x="720.00" y="140.00" width="20.00" height="9.00" fill="rgb(52,52,255)" stroke="none"/>
+<rect x="720.00" y="148.00" width="20.00" height="9.00" fill="rgb(62,62,255)" stroke="none"/>
+<rect x="720.00" y="156.00" width="20.00" height="9.00" fill="rgb(72,72,255)" stroke="none"/>
+<rect x="720.00" y="164.00" width="20.00" height="9.00" fill="rgb(83,83,255)" stroke="none"/>
+<rect x="720.00" y="172.00" width="20.00" height="9.00" fill="rgb(93,93,255)" stroke="none"/>
+<rect x="720.00" y="180.00" width="20.00" height="9.00" fill="rgb(104,104,255)" stroke="none"/>
+<rect x="720.00" y="188.00" width="20.00" height="9.00" fill="rgb(114,114,255)" stroke="none"/>
+<rect x="720.00" y="196.00" width="20.00" height="9.00" fill="rgb(124,124,255)" stroke="none"/>
+<rect x="720.00" y="204.00" width="20.00" height="9.00" fill="rgb(135,135,255)" stroke="none"/>
+<rect x="720.00" y="212.00" width="20.00" height="9.00" fill="rgb(145,145,255)" stroke="none"/>
+<rect x="720.00" y="220.00" width="20.00" height="9.00" fill="rgb(156,156,255)" stroke="none"/>
+<rect x="720.00" y="228.00" width="20.00" height="9.00" fill="rgb(166,166,255)" stroke="none"/>
+<rect x="720.00" y="236.00" width="20.00" height="9.00" fill="rgb(176,176,255)" stroke="none"/>
+<rect x="720.00" y="244.00" width="20.00" height="9.00" fill="rgb(187,187,255)" stroke="none"/>
+<rect x="720.00" y="252.00" width="20.00" height="9.00" fill="rgb(197,197,255)" stroke="none"/>
+<rect x="720.00" y="260.00" width="20.00" height="9.00" fill="rgb(208,208,255)" stroke="none"/>
+<rect x="720.00" y="268.00" width="20.00" height="9.00" fill="rgb(218,218,255)" stroke="none"/>
+<rect x="720.00" y="276.00" width="20.00" height="9.00" fill="rgb(228,228,255)" stroke="none"/>
+<rect x="720.00" y="284.00" width="20.00" height="9.00" fill="rgb(239,239,255)" stroke="none"/>
+<rect x="720.00" y="292.00" width="20.00" height="9.00" fill="rgb(249,249,255)" stroke="none"/>
+<rect x="720.00" y="300.00" width="20.00" height="9.00" fill="rgb(255,249,249)" stroke="none"/>
+<rect x="720.00" y="308.00" width="20.00" height="9.00" fill="rgb(255,239,239)" stroke="none"/>
+<rect x="720.00" y="316.00" width="20.00" height="9.00" fill="rgb(255,228,228)" stroke="none"/>
+<rect x="720.00" y="324.00" width="20.00" height="9.00" fill="rgb(255,218,218)" stroke="none"/>
+<rect x="720.00" y="332.00" width="20.00" height="9.00" fill="rgb(255,208,208)" stroke="none"/>
+<rect x="720.00" y="340.00" width="20.00" height="9.00" fill="rgb(255,197,197)" stroke="none"/>
+<rect x="720.00" y="348.00" width="20.00" height="9.00" fill="rgb(255,187,187)" stroke="none"/>
+<rect x="720.00" y="356.00" width="20.00" height="9.00" fill="rgb(255,176,176)" stroke="none"/>
+<rect x="720.00" y="364.00" width="20.00" height="9.00" fill="rgb(255,166,166)" stroke="none"/>
+<rect x="720.00" y="372.00" width="20.00" height="9.00" fill="rgb(255,156,156)" stroke="none"/>
+<rect x="720.00" y="380.00" width="20.00" height="9.00" fill="rgb(255,145,145)" stroke="none"/>
+<rect x="720.00" y="388.00" width="20.00" height="9.00" fill="rgb(255,135,135)" stroke="none"/>
+<rect x="720.00" y="396.00" width="20.00" height="9.00" fill="rgb(255,124,124)" stroke="none"/>
+<rect x="720.00" y="404.00" width="20.00" height="9.00" fill="rgb(255,114,114)" stroke="none"/>
+<rect x="720.00" y="412.00" width="20.00" height="9.00" fill="rgb(255,104,104)" stroke="none"/>
+<rect x="720.00" y="420.00" width="20.00" height="9.00" fill="rgb(255,93,93)" stroke="none"/>
+<rect x="720.00" y="428.00" width="20.00" height="9.00" fill="rgb(255,83,83)" stroke="none"/>
+<rect x="720.00" y="436.00" width="20.00" height="9.00" fill="rgb(255,72,72)" stroke="none"/>
+<rect x="720.00" y="444.00" width="20.00" height="9.00" fill="rgb(255,62,62)" stroke="none"/>
+<rect x="720.00" y="452.00" width="20.00" height="9.00" fill="rgb(255,52,52)" stroke="none"/>
+<rect x="720.00" y="460.00" width="20.00" height="9.00" fill="rgb(255,41,41)" stroke="none"/>
+<rect x="720.00" y="468.00" width="20.00" height="9.00" fill="rgb(255,31,31)" stroke="none"/>
+<rect x="720.00" y="476.00" width="20.00" height="9.00" fill="rgb(255,20,20)" stroke="none"/>
+<rect x="720.00" y="484.00" width="20.00" height="9.00" fill="rgb(255,10,10)" stroke="none"/>
+<rect x="720.00" y="492.00" width="20.00" height="9.00" fill="rgb(255,0,0)" stroke="none"/>
+<rect x="720.00" y="100.00" width="20.00" height="400.00" fill="none" stroke="#374151" stroke-width="1.00"/>
+<text x="745.00" y="100.00" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">+1</text>
+<text x="745.00" y="300.00" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">0</text>
+<text x="745.00" y="500.00" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">-1</text>
+
+</svg>

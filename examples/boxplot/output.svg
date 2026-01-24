@@ -1,0 +1,25 @@
+Reading from stdin...
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+<line x1="160.00" y1="536.89" x2="160.00" y2="224.89" stroke="#333" stroke-width="1.00"/>
+<line x1="160.00" y1="120.89" x2="160.00" y2="432.89" stroke="#333" stroke-width="1.00"/>
+<line x1="138.40" y1="536.89" x2="181.60" y2="536.89" stroke="#333" stroke-width="1.00"/>
+<line x1="138.40" y1="120.89" x2="181.60" y2="120.89" stroke="#333" stroke-width="1.00"/>
+<rect x="88.00" y="224.89" width="144.00" height="208.00" fill="#3B82F6" stroke="#333" stroke-width="1.50" opacity="0.70"/>
+<line x1="88.00" y1="328.89" x2="232.00" y2="328.89" stroke="#333" stroke-width="2.00"/>
+<text x="160.00" y="580.00" text-anchor="middle" font-family="sans-serif" font-size="12.00px">Group A</text>
+<line x1="400.00" y1="444.44" x2="400.00" y2="138.22" stroke="#333" stroke-width="1.00"/>
+<line x1="400.00" y1="40.00" x2="400.00" y2="340.44" stroke="#333" stroke-width="1.00"/>
+<line x1="378.40" y1="444.44" x2="421.60" y2="444.44" stroke="#333" stroke-width="1.00"/>
+<line x1="378.40" y1="40.00" x2="421.60" y2="40.00" stroke="#333" stroke-width="1.00"/>
+<rect x="328.00" y="138.22" width="144.00" height="202.22" fill="#3B82F6" stroke="#333" stroke-width="1.50" opacity="0.70"/>
+<line x1="328.00" y1="236.44" x2="472.00" y2="236.44" stroke="#333" stroke-width="2.00"/>
+<text x="400.00" y="580.00" text-anchor="middle" font-family="sans-serif" font-size="12.00px">Group B</text>
+<line x1="640.00" y1="560.00" x2="640.00" y2="253.78" stroke="#333" stroke-width="1.00"/>
+<line x1="640.00" y1="155.56" x2="640.00" y2="456.00" stroke="#333" stroke-width="1.00"/>
+<line x1="618.40" y1="560.00" x2="661.60" y2="560.00" stroke="#333" stroke-width="1.00"/>
+<line x1="618.40" y1="155.56" x2="661.60" y2="155.56" stroke="#333" stroke-width="1.00"/>
+<rect x="568.00" y="253.78" width="144.00" height="202.22" fill="#3B82F6" stroke="#333" stroke-width="1.50" opacity="0.70"/>
+<line x1="568.00" y1="352.00" x2="712.00" y2="352.00" stroke="#333" stroke-width="2.00"/>
+<text x="640.00" y="580.00" text-anchor="middle" font-family="sans-serif" font-size="12.00px">Group C</text>
+
+</svg>

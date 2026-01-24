@@ -1,0 +1,11 @@
+{
+  "values": [
+    {"label": "Product A", "value": 23},
+    {"label": "Product B", "value": 45},
+    {"label": "Product C", "value": 67},
+    {"label": "Product D", "value": 89},
+    {"label": "Product E", "value": 56},
+    {"label": "Product F", "value": 34}
+  ],
+  "color": "#3b82f6"
+}

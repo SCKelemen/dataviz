@@ -1,0 +1,21 @@
+{
+  "axes": [
+    {"label": "Speed", "min": 0, "max": 100},
+    {"label": "Strength", "min": 0, "max": 100},
+    {"label": "Intelligence", "min": 0, "max": 100},
+    {"label": "Agility", "min": 0, "max": 100},
+    {"label": "Stamina", "min": 0, "max": 100}
+  ],
+  "series": [
+    {
+      "label": "Character A",
+      "values": [80, 60, 90, 70, 85],
+      "color": "#3b82f6"
+    },
+    {
+      "label": "Character B",
+      "values": [70, 85, 65, 90, 75],
+      "color": "#ef4444"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "data": {
+    "rows": ["Product A", "Product B", "Product C", "Product D"],
+    "columns": ["Q1", "Q2", "Q3", "Q4"],
+    "values": [
+      [23, 45, 67, 89],
+      [34, 56, 78, 90],
+      [12, 34, 56, 78],
+      [45, 67, 89, 23]
+    ]
+  },
+  "show_value": true
+}

@@ -1,0 +1,37 @@
+Reading from stdin...
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+<line x1="740.00" y1="297.50" x2="740.00" y2="160.00" stroke="#374151" stroke-width="2.00"/>
+<line x1="740.00" y1="160.00" x2="400.00" y2="160.00" stroke="#374151" stroke-width="2.00"/>
+<line x1="400.00" y1="160.00" x2="400.00" y2="110.00" stroke="#374151" stroke-width="2.00"/>
+<line x1="400.00" y1="110.00" x2="60.00" y2="110.00" stroke="#374151" stroke-width="2.00"/>
+<line x1="400.00" y1="160.00" x2="400.00" y2="210.00" stroke="#374151" stroke-width="2.00"/>
+<line x1="400.00" y1="210.00" x2="60.00" y2="210.00" stroke="#374151" stroke-width="2.00"/>
+<line x1="740.00" y1="297.50" x2="740.00" y2="435.00" stroke="#374151" stroke-width="2.00"/>
+<line x1="740.00" y1="435.00" x2="536.00" y2="435.00" stroke="#374151" stroke-width="2.00"/>
+<line x1="536.00" y1="435.00" x2="536.00" y2="360.00" stroke="#374151" stroke-width="2.00"/>
+<line x1="536.00" y1="360.00" x2="264.00" y2="360.00" stroke="#374151" stroke-width="2.00"/>
+<line x1="264.00" y1="360.00" x2="264.00" y2="310.00" stroke="#374151" stroke-width="2.00"/>
+<line x1="264.00" y1="310.00" x2="60.00" y2="310.00" stroke="#374151" stroke-width="2.00"/>
+<line x1="264.00" y1="360.00" x2="264.00" y2="410.00" stroke="#374151" stroke-width="2.00"/>
+<line x1="264.00" y1="410.00" x2="60.00" y2="410.00" stroke="#374151" stroke-width="2.00"/>
+<line x1="536.00" y1="435.00" x2="536.00" y2="510.00" stroke="#374151" stroke-width="2.00"/>
+<line x1="536.00" y1="510.00" x2="60.00" y2="510.00" stroke="#374151" stroke-width="2.00"/>
+<text x="745.00" y="110.00" text-anchor="start" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">A</text>
+<text x="745.00" y="210.00" text-anchor="start" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">B</text>
+<text x="745.00" y="310.00" text-anchor="start" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">C</text>
+<text x="745.00" y="410.00" text-anchor="start" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">D</text>
+<text x="745.00" y="510.00" text-anchor="start" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">E</text>
+<text x="60.00" y="50.00" fill="#6b7280" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="9.00px">0.00</text>
+<line x1="60.00" y1="55.00" x2="60.00" y2="60.00" stroke="#d1d5db" stroke-width="1.00"/>
+<text x="196.00" y="50.00" fill="#6b7280" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="9.00px">2.00</text>
+<line x1="196.00" y1="55.00" x2="196.00" y2="60.00" stroke="#d1d5db" stroke-width="1.00"/>
+<text x="332.00" y="50.00" fill="#6b7280" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="9.00px">4.00</text>
+<line x1="332.00" y1="55.00" x2="332.00" y2="60.00" stroke="#d1d5db" stroke-width="1.00"/>
+<text x="468.00" y="50.00" fill="#6b7280" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="9.00px">6.00</text>
+<line x1="468.00" y1="55.00" x2="468.00" y2="60.00" stroke="#d1d5db" stroke-width="1.00"/>
+<text x="604.00" y="50.00" fill="#6b7280" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="9.00px">8.00</text>
+<line x1="604.00" y1="55.00" x2="604.00" y2="60.00" stroke="#d1d5db" stroke-width="1.00"/>
+<text x="740.00" y="50.00" fill="#6b7280" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="9.00px">10.00</text>
+<line x1="740.00" y1="55.00" x2="740.00" y2="60.00" stroke="#d1d5db" stroke-width="1.00"/>
+
+</svg>

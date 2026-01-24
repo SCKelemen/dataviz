@@ -1,0 +1,42 @@
+Reading from stdin...
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+<circle cx="400.00" cy="300.00" r="44.00" fill="none" stroke="#e5e7eb" stroke-width="1.00"/>
+<circle cx="400.00" cy="300.00" r="88.00" fill="none" stroke="#e5e7eb" stroke-width="1.00"/>
+<circle cx="400.00" cy="300.00" r="132.00" fill="none" stroke="#e5e7eb" stroke-width="1.00"/>
+<circle cx="400.00" cy="300.00" r="176.00" fill="none" stroke="#e5e7eb" stroke-width="1.00"/>
+<circle cx="400.00" cy="300.00" r="220.00" fill="none" stroke="#e5e7eb" stroke-width="1.00"/>
+<text x="405.00" y="256.00" fill="#6b7280" text-anchor="start" font-family="sans-serif" font-size="9.00px">20%</text>
+<text x="405.00" y="212.00" fill="#6b7280" text-anchor="start" font-family="sans-serif" font-size="9.00px">40%</text>
+<text x="405.00" y="168.00" fill="#6b7280" text-anchor="start" font-family="sans-serif" font-size="9.00px">60%</text>
+<text x="405.00" y="124.00" fill="#6b7280" text-anchor="start" font-family="sans-serif" font-size="9.00px">80%</text>
+<text x="405.00" y="80.00" fill="#6b7280" text-anchor="start" font-family="sans-serif" font-size="9.00px">100%</text>
+<line x1="400.00" y1="300.00" x2="400.00" y2="80.00" stroke="#9ca3af" stroke-width="1.50"/>
+<text x="400.00" y="60.00" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="11.00px" font-weight="bold">Speed</text>
+<line x1="400.00" y1="300.00" x2="609.23" y2="232.02" stroke="#9ca3af" stroke-width="1.50"/>
+<text x="628.25" y="225.84" text-anchor="start" dominant-baseline="middle" font-family="sans-serif" font-size="11.00px" font-weight="bold">Strength</text>
+<line x1="400.00" y1="300.00" x2="529.31" y2="477.98" stroke="#9ca3af" stroke-width="1.50"/>
+<text x="541.07" y="494.16" text-anchor="start" dominant-baseline="middle" font-family="sans-serif" font-size="11.00px" font-weight="bold">Intelligence</text>
+<line x1="400.00" y1="300.00" x2="270.69" y2="477.98" stroke="#9ca3af" stroke-width="1.50"/>
+<text x="258.93" y="494.16" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="11.00px" font-weight="bold">Agility</text>
+<line x1="400.00" y1="300.00" x2="190.77" y2="232.02" stroke="#9ca3af" stroke-width="1.50"/>
+<text x="171.75" y="225.84" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="11.00px" font-weight="bold">Stamina</text>
+<path d="M 400.00 124.00 L 525.54 259.21 L 516.38 460.19 L 309.48 424.59 L 222.15 242.21 Z" fill="#3b82f6" stroke="none" fill-opacity="0.30"/>
+<path d="M 400.00 124.00 L 525.54 259.21 L 516.38 460.19 L 309.48 424.59 L 222.15 242.21 Z" fill="none" stroke="#3b82f6" stroke-width="2.00"/>
+<circle cx="400.00" cy="124.00" r="4.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="525.54" cy="259.21" r="4.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="516.38" cy="460.19" r="4.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="309.48" cy="424.59" r="4.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="222.15" cy="242.21" r="4.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
+<path d="M 400.00 146.00 L 577.85 242.21 L 484.05 415.69 L 283.62 460.19 L 243.08 249.01 Z" fill="#ef4444" stroke="none" fill-opacity="0.30"/>
+<path d="M 400.00 146.00 L 577.85 242.21 L 484.05 415.69 L 283.62 460.19 L 243.08 249.01 Z" fill="none" stroke="#ef4444" stroke-width="2.00"/>
+<circle cx="400.00" cy="146.00" r="4.00" fill="#ef4444" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="577.85" cy="242.21" r="4.00" fill="#ef4444" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="484.05" cy="415.69" r="4.00" fill="#ef4444" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="283.62" cy="460.19" r="4.00" fill="#ef4444" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="243.08" cy="249.01" r="4.00" fill="#ef4444" stroke="#ffffff" stroke-width="2.00"/>
+<rect x="20.00" y="532.00" width="20.00" height="16.00" fill="#3b82f6" stroke="#3b82f6" stroke-width="2.00" fill-opacity="0.50"/>
+<text x="45.00" y="540.00" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">Character A</text>
+<rect x="20.00" y="557.00" width="20.00" height="16.00" fill="#ef4444" stroke="#ef4444" stroke-width="2.00" fill-opacity="0.50"/>
+<text x="45.00" y="565.00" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">Character B</text>
+
+</svg>

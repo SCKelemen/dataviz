@@ -1,0 +1,15 @@
+{
+  "points": [
+    {"x": 0, "values": [10, 20, 15]},
+    {"x": 1, "values": [15, 25, 18]},
+    {"x": 2, "values": [12, 28, 20]},
+    {"x": 3, "values": [18, 22, 22]},
+    {"x": 4, "values": [20, 30, 25]},
+    {"x": 5, "values": [25, 35, 28]}
+  ],
+  "series": [
+    {"label": "Series A", "color": "#3b82f6"},
+    {"label": "Series B", "color": "#10b981"},
+    {"label": "Series C", "color": "#f59e0b"}
+  ]
+}

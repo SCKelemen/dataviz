@@ -1,0 +1,27 @@
+{
+  "data": {
+    "name": "Company",
+    "value": 100,
+    "children": [
+      {
+        "name": "Engineering",
+        "value": 45,
+        "children": [
+          {"name": "Backend", "value": 25},
+          {"name": "Frontend", "value": 20}
+        ]
+      },
+      {
+        "name": "Sales",
+        "value": 30,
+        "children": [
+          {"name": "Enterprise", "value": 18},
+          {"name": "SMB", "value": 12}
+        ]
+      },
+      {"name": "Marketing", "value": 15},
+      {"name": "HR", "value": 10}
+    ]
+  },
+  "show_labels": true
+}

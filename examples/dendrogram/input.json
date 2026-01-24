@@ -1,0 +1,32 @@
+{
+  "root": {
+    "label": "",
+    "height": 10,
+    "children": [
+      {
+        "label": "",
+        "height": 5,
+        "children": [
+          {"label": "A", "height": 0},
+          {"label": "B", "height": 0}
+        ]
+      },
+      {
+        "label": "",
+        "height": 7,
+        "children": [
+          {
+            "label": "",
+            "height": 3,
+            "children": [
+              {"label": "C", "height": 0},
+              {"label": "D", "height": 0}
+            ]
+          },
+          {"label": "E", "height": 0}
+        ]
+      }
+    ]
+  },
+  "orientation": "horizontal"
+}

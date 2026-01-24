@@ -1,0 +1,17 @@
+{
+  "data": [
+    {"label": "Jan", "value": 23},
+    {"label": "Feb", "value": 45},
+    {"label": "Mar", "value": 67},
+    {"label": "Apr", "value": 89},
+    {"label": "May", "value": 56},
+    {"label": "Jun", "value": 78},
+    {"label": "Jul", "value": 90},
+    {"label": "Aug", "value": 65},
+    {"label": "Sep", "value": 43},
+    {"label": "Oct", "value": 87},
+    {"label": "Nov", "value": 54},
+    {"label": "Dec", "value": 76}
+  ],
+  "inner_radius": 0.3
+}

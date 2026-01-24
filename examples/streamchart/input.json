@@ -1,0 +1,17 @@
+{
+  "points": [
+    {"x": 0, "values": [10, 20, 15, 8]},
+    {"x": 1, "values": [15, 25, 18, 12]},
+    {"x": 2, "values": [12, 28, 20, 10]},
+    {"x": 3, "values": [18, 22, 22, 14]},
+    {"x": 4, "values": [20, 30, 25, 16]},
+    {"x": 5, "values": [25, 35, 28, 18]}
+  ],
+  "series": [
+    {"label": "Layer 1", "color": "#3b82f6"},
+    {"label": "Layer 2", "color": "#10b981"},
+    {"label": "Layer 3", "color": "#f59e0b"},
+    {"label": "Layer 4", "color": "#ef4444"}
+  ],
+  "layout": "wiggle"
+}

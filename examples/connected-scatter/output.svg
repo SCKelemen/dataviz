@@ -1,0 +1,46 @@
+Reading from stdin...
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+<line x1="60.00" y1="60.00" x2="740.00" y2="60.00" stroke="#e5e7eb" stroke-width="1.00"/>
+<line x1="60.00" y1="156.00" x2="740.00" y2="156.00" stroke="#e5e7eb" stroke-width="1.00"/>
+<line x1="60.00" y1="252.00" x2="740.00" y2="252.00" stroke="#e5e7eb" stroke-width="1.00"/>
+<line x1="60.00" y1="348.00" x2="740.00" y2="348.00" stroke="#e5e7eb" stroke-width="1.00"/>
+<line x1="60.00" y1="444.00" x2="740.00" y2="444.00" stroke="#e5e7eb" stroke-width="1.00"/>
+<line x1="60.00" y1="540.00" x2="740.00" y2="540.00" stroke="#e5e7eb" stroke-width="1.00"/>
+<line x1="60.00" y1="60.00" x2="60.00" y2="540.00" stroke="#e5e7eb" stroke-width="1.00"/>
+<line x1="196.00" y1="60.00" x2="196.00" y2="540.00" stroke="#e5e7eb" stroke-width="1.00"/>
+<line x1="332.00" y1="60.00" x2="332.00" y2="540.00" stroke="#e5e7eb" stroke-width="1.00"/>
+<line x1="468.00" y1="60.00" x2="468.00" y2="540.00" stroke="#e5e7eb" stroke-width="1.00"/>
+<line x1="604.00" y1="60.00" x2="604.00" y2="540.00" stroke="#e5e7eb" stroke-width="1.00"/>
+<line x1="740.00" y1="60.00" x2="740.00" y2="540.00" stroke="#e5e7eb" stroke-width="1.00"/>
+<line x1="60.00" y1="60.00" x2="60.00" y2="540.00" stroke="#374151" stroke-width="2.00"/>
+<line x1="60.00" y1="540.00" x2="740.00" y2="540.00" stroke="#374151" stroke-width="2.00"/>
+<path d="M 90.91 518.18 L 228.28 345.93 L 365.66 426.32 L 503.03 231.10 L 640.40 150.72" fill="none" stroke="#3b82f6" stroke-width="2.00"/>
+<circle cx="90.91" cy="518.18" r="5.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="228.28" cy="345.93" r="5.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="365.66" cy="426.32" r="5.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="503.03" cy="231.10" r="5.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="640.40" cy="150.72" r="5.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
+<path d="M 159.60 460.77 L 296.97 288.52 L 434.34 368.90 L 571.72 173.68 L 709.09 81.82" fill="none" stroke="#ef4444" stroke-width="2.00"/>
+<circle cx="159.60" cy="460.77" r="5.00" fill="#ef4444" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="296.97" cy="288.52" r="5.00" fill="#ef4444" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="434.34" cy="368.90" r="5.00" fill="#ef4444" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="571.72" cy="173.68" r="5.00" fill="#ef4444" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="709.09" cy="81.82" r="5.00" fill="#ef4444" stroke="#ffffff" stroke-width="2.00"/>
+<text x="60.00" y="550.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">7.75</text>
+<text x="196.00" y="550.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">17.65</text>
+<text x="332.00" y="550.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">27.55</text>
+<text x="468.00" y="550.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">37.45</text>
+<text x="604.00" y="550.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">47.35</text>
+<text x="740.00" y="550.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">57.25</text>
+<text x="50.00" y="540.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">18.10</text>
+<text x="50.00" y="444.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">26.46</text>
+<text x="50.00" y="348.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">34.82</text>
+<text x="50.00" y="252.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">43.18</text>
+<text x="50.00" y="156.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">51.54</text>
+<text x="50.00" y="60.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">59.90</text>
+<line x1="80.00" y1="80.00" x2="110.00" y2="80.00" stroke="#3b82f6" stroke-width="3.00"/>
+<text x="115.00" y="80.00" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">Path A</text>
+<line x1="80.00" y1="105.00" x2="110.00" y2="105.00" stroke="#ef4444" stroke-width="3.00"/>
+<text x="115.00" y="105.00" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">Path B</text>
+
+</svg>

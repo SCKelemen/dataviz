@@ -1,0 +1,16 @@
+{
+  "words": [
+    {"text": "Data", "frequency": 100},
+    {"text": "Visualization", "frequency": 85},
+    {"text": "Charts", "frequency": 70},
+    {"text": "SVG", "frequency": 60},
+    {"text": "Graphics", "frequency": 55},
+    {"text": "Analytics", "frequency": 50},
+    {"text": "Plots", "frequency": 45},
+    {"text": "Statistics", "frequency": 40},
+    {"text": "Analysis", "frequency": 35},
+    {"text": "Metrics", "frequency": 30},
+    {"text": "Dashboard", "frequency": 25},
+    {"text": "Insights", "frequency": 20}
+  ]
+}

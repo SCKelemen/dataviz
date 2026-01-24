@@ -1,0 +1,19 @@
+Reading from stdin...
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+<line x1="50.00" y1="304.36" x2="50.00" y2="522.38" stroke="#10B981" stroke-width="2.00"/>
+<line x1="47.00" y1="449.71" x2="50.00" y2="449.71" stroke="#10B981" stroke-width="2.00"/>
+<line x1="50.00" y1="377.03" x2="53.00" y2="377.03" stroke="#10B981" stroke-width="2.00"/>
+<line x1="50.00" y1="231.69" x2="50.00" y2="449.71" stroke="#10B981" stroke-width="2.00"/>
+<line x1="47.00" y1="377.03" x2="50.00" y2="377.03" stroke="#10B981" stroke-width="2.00"/>
+<line x1="50.00" y1="275.29" x2="53.00" y2="275.29" stroke="#10B981" stroke-width="2.00"/>
+<line x1="50.00" y1="188.08" x2="50.00" y2="333.43" stroke="#EF4444" stroke-width="2.00"/>
+<line x1="47.00" y1="275.29" x2="50.00" y2="275.29" stroke="#EF4444" stroke-width="2.00"/>
+<line x1="50.00" y1="304.36" x2="53.00" y2="304.36" stroke="#EF4444" stroke-width="2.00"/>
+<line x1="50.00" y1="159.01" x2="50.00" y2="377.03" stroke="#10B981" stroke-width="2.00"/>
+<line x1="47.00" y1="304.36" x2="50.00" y2="304.36" stroke="#10B981" stroke-width="2.00"/>
+<line x1="50.00" y1="188.08" x2="53.00" y2="188.08" stroke="#10B981" stroke-width="2.00"/>
+<line x1="50.00" y1="86.34" x2="50.00" y2="231.69" stroke="#10B981" stroke-width="2.00"/>
+<line x1="47.00" y1="188.08" x2="50.00" y2="188.08" stroke="#10B981" stroke-width="2.00"/>
+<line x1="50.00" y1="129.94" x2="53.00" y2="129.94" stroke="#10B981" stroke-width="2.00"/>
+
+</svg>

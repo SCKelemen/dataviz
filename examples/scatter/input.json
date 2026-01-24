@@ -1,0 +1,14 @@
+{
+  "data": [
+    {"x": 23, "y": 45, "label": "A"},
+    {"x": 67, "y": 89, "label": "B"},
+    {"x": 12, "y": 56, "label": "C"},
+    {"x": 78, "y": 34, "label": "D"},
+    {"x": 45, "y": 67, "label": "E"},
+    {"x": 90, "y": 23, "label": "F"},
+    {"x": 34, "y": 78, "label": "G"},
+    {"x": 56, "y": 12, "label": "H"}
+  ],
+  "x_label": "Feature A",
+  "y_label": "Feature B"
+}

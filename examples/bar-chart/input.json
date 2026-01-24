@@ -1,0 +1,9 @@
+{
+  "data": [
+    {"label": "Q1", "value": 23000},
+    {"label": "Q2", "value": 45000},
+    {"label": "Q3", "value": 67000},
+    {"label": "Q4", "value": 89000},
+    {"label": "Q5", "value": 56000}
+  ]
+}

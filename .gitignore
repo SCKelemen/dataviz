@@ -41,4 +41,8 @@ bin/
 tmp/
 temp/
 *.tmp
+
+# Test SVG outputs (but allow examples/**/output.svg)
+examples/test_*.svg
 examples/*.svg
+!examples/**/output.svg

@@ -1,0 +1,18 @@
+{
+  "entities": [
+    {"id": "A", "label": "Department A"},
+    {"id": "B", "label": "Department B"},
+    {"id": "C", "label": "Department C"},
+    {"id": "D", "label": "Department D"},
+    {"id": "E", "label": "Department E"}
+  ],
+  "relations": [
+    {"source": "A", "target": "B", "value": 50},
+    {"source": "A", "target": "C", "value": 30},
+    {"source": "B", "target": "C", "value": 40},
+    {"source": "B", "target": "D", "value": 25},
+    {"source": "C", "target": "D", "value": 35},
+    {"source": "C", "target": "E", "value": 20},
+    {"source": "D", "target": "E", "value": 45}
+  ]
+}

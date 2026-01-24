@@ -1,0 +1,9 @@
+{
+  "data": [
+    {"label": "Chrome", "value": 63.5},
+    {"label": "Safari", "value": 19.3},
+    {"label": "Firefox", "value": 9.2},
+    {"label": "Edge", "value": 5.1},
+    {"label": "Other", "value": 2.9}
+  ]
+}

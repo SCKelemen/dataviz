@@ -1,4 +1,17 @@
-Reading from stdin...
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+<path d="M 400.00 210.00 L 400.00 105.00 A 195.00 195.00 0 1 1 400.00 105.00 L 400.00 210.00 A 90.00 90.00 0 1 0 400.00 210.00 Z" fill="#3B82F6" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<g transform="rotate(90.00 400.00 442.50)"><text x="400.00" y="442.50" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px" font-weight="bold">Root</text></g>
+<path d="M 400.00 105.00 L 400.00 0.00 A 300.00 300.00 0 1 1 223.66 542.71 L 285.38 457.76 A 195.00 195.00 0 1 0 400.00 105.00 Z" fill="#10B981" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<g transform="rotate(18.00 635.39 376.48)"><text x="635.39" y="376.48" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px" font-weight="bold">Branch A</text></g>
+<path d="M 400.00 0.00 L 400.00 -105.00 A 405.00 405.00 0 0 1 785.18 425.15 L 685.32 392.71 A 300.00 300.00 0 0 0 400.00 0.00 Z" fill="#F59E0B" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<g transform="rotate(-36.00 685.18 92.81)"><text x="685.18" y="92.81" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px" font-weight="bold">Leaf A1</text></g>
+<path d="M 685.32 392.71 L 785.18 425.15 A 405.00 405.00 0 0 1 161.95 627.65 L 223.66 542.71 A 300.00 300.00 0 0 0 685.32 392.71 Z" fill="#F59E0B" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<g transform="rotate(72.00 508.93 635.25)"><text x="508.93" y="635.25" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px" font-weight="bold">Leaf A2</text></g>
+<path d="M 285.38 457.76 L 223.66 542.71 A 300.00 300.00 0 0 1 400.00 0.00 L 400.00 105.00 A 195.00 195.00 0 0 0 285.38 457.76 Z" fill="#10B981" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<g transform="rotate(198.00 164.61 223.52)"><text x="164.61" y="223.52" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px" font-weight="bold">Branch B</text></g>
+<path d="M 223.66 542.71 L 161.95 627.65 A 405.00 405.00 0 0 1 14.82 174.85 L 114.68 207.29 A 300.00 300.00 0 0 0 223.66 542.71 Z" fill="#F59E0B" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<g transform="rotate(162.00 64.75 408.93)"><text x="64.75" y="408.93" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px" font-weight="bold">Leaf B1</text></g>
+<path d="M 114.68 207.29 L 14.82 174.85 A 405.00 405.00 0 0 1 400.00 -105.00 L 400.00 0.00 A 300.00 300.00 0 0 0 114.68 207.29 Z" fill="#F59E0B" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<g transform="rotate(234.00 192.81 14.82)"><text x="192.81" y="14.82" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px" font-weight="bold">Leaf B2</text></g>
 
 </svg>

@@ -47,6 +47,16 @@ These charts work with the CLI tool (`viz-cli <type> < input.json > output.svg`)
 - `candlestick` - OHLC candlestick chart
 - `ohlc` - OHLC bar chart
 
+### Legacy Charts
+- `bar-chart` - Simple bar chart (legacy renderer)
+- `line-graph` - Time series line graph (legacy renderer)
+- `heatmap` - Contribution calendar heatmap (legacy renderer)
+
+### Placeholder Charts (MCP Only)
+These charts display a placeholder message in CLI but work fully in MCP server:
+- `pie` - Pie/donut chart (use MCP server)
+- `scatter` - Basic scatter plot (use MCP server)
+
 ## Usage
 
 Generate an SVG from example data:

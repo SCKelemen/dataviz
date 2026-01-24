@@ -1,4 +1,19 @@
-Reading from stdin...
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+<rect x="2.00" y="2.00" width="796.00" height="196.00" fill="#3B82F6" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="400.00" y="100.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Root</text>
+<rect x="2.00" y="202.00" width="356.00" height="129.33" fill="#10B981" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="180.00" y="266.67" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Category A</text>
+<rect x="2.00" y="335.33" width="156.00" height="84.89" fill="#F59E0B" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="80.00" y="377.78" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Item A1</text>
+<rect x="162.00" y="335.33" width="196.00" height="84.89" fill="#F59E0B" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="260.00" y="377.78" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Item A2</text>
+<rect x="362.00" y="202.00" width="276.00" height="129.33" fill="#10B981" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="500.00" y="266.67" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Category B</text>
+<rect x="362.00" y="335.33" width="116.00" height="84.89" fill="#F59E0B" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="420.00" y="377.78" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Item B1</text>
+<rect x="482.00" y="335.33" width="156.00" height="84.89" fill="#F59E0B" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="560.00" y="377.78" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Item B2</text>
+<rect x="642.00" y="202.00" width="156.00" height="129.33" fill="#10B981" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="720.00" y="266.67" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Category C</text>
 
 </svg>

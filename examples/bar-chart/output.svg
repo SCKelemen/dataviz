@@ -1,4 +1,13 @@
-Reading from stdin...
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+<g transform="translate(0, 0)"><rect x="30.77" y="462.00" width="123.08" height="138.00" fill="#3b82f6"/>
+<rect x="184.62" y="330.00" width="123.08" height="270.00" fill="#3b82f6"/>
+<rect x="338.46" y="198.00" width="123.08" height="402.00" fill="#3b82f6"/>
+<rect x="492.31" y="66.00" width="123.08" height="534.00" fill="#3b82f6"/>
+<rect x="646.15" y="264.00" width="123.08" height="336.00" fill="#3b82f6"/>
+</g><g class="legend" transform="translate(629.6,10.0)">
+  <rect x="0" y="0" width="160.4" height="32.0" fill="none" stroke="#e5e7eb" stroke-width="1.0"/>
+  <g transform="translate(10.0,10.0)"><rect width="12.0" height="12.0" fill="#3b82f6" stroke="#000" stroke-width="0.5" stroke-opacity="0.2"/></g>
+  <text x="28.0" y="20.2" font-family="Arial, sans-serif" font-size="12.0" fill="#374151">Quarterly Revenue</text>
+</g>
 
 </svg>

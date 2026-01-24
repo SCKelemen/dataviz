@@ -1,4 +1,15 @@
-Reading from stdin...
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+<rect x="2.00" y="2.00" width="356.00" height="329.33" fill="#F59E0B" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="180.00" y="166.67" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="16.00px" font-weight="bold">Backend</text>
+<rect x="2.00" y="335.33" width="356.00" height="262.67" fill="#F59E0B" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="180.00" y="466.67" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="16.00px" font-weight="bold">Frontend</text>
+<rect x="362.00" y="2.00" width="236.00" height="356.00" fill="#F59E0B" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="480.00" y="180.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="16.00px" font-weight="bold">Enterprise</text>
+<rect x="362.00" y="362.00" width="236.00" height="236.00" fill="#F59E0B" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="480.00" y="480.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="16.00px" font-weight="bold">SMB</text>
+<rect x="602.00" y="2.00" width="116.00" height="596.00" fill="#10B981" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="660.00" y="300.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Marketing</text>
+<rect x="722.00" y="2.00" width="76.00" height="596.00" fill="#10B981" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="760.00" y="300.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px" font-weight="bold">HR</text>
 
 </svg>

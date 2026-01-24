@@ -1,9 +1,11 @@
 {
-  "data": [
-    {"label": "Q1", "value": 23000},
-    {"label": "Q2", "value": 45000},
-    {"label": "Q3", "value": 67000},
-    {"label": "Q4", "value": 89000},
-    {"label": "Q5", "value": 56000}
-  ]
+  "Bars": [
+    {"Value": 23000},
+    {"Value": 45000},
+    {"Value": 67000},
+    {"Value": 89000},
+    {"Value": 56000}
+  ],
+  "Color": "#3b82f6",
+  "Label": "Quarterly Revenue"
 }

@@ -1,21 +1,19 @@
 {
-  "data": {
-    "name": "Organization",
-    "value": 100,
-    "children": [
-      {
-        "name": "Department A",
-        "value": 50,
-        "children": [
-          {"name": "Team A1", "value": 25},
-          {"name": "Team A2", "value": 25}
-        ]
-      },
-      {
-        "name": "Department B",
-        "value": 30},
-      {"name": "Department C", "value": 20}
-    ]
-  },
-  "show_labels": true
+  "name": "Organization",
+  "value": 100,
+  "children": [
+    {
+      "name": "Department A",
+      "value": 50,
+      "children": [
+        {"name": "Team A1", "value": 25},
+        {"name": "Team A2", "value": 25}
+      ]
+    },
+    {
+      "name": "Department B",
+      "value": 30
+    },
+    {"name": "Department C", "value": 20}
+  ]
 }

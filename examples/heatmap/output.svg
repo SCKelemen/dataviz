@@ -1,4 +1,13 @@
-Reading from stdin...
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
-
+<g transform="translate(0, 0)"><rect x="0.00" y="8.00" width="79.10" height="79.10" rx="2.00" ry="2.00" fill="#66c8fc"/>
+<rect x="80.10" y="8.00" width="79.10" height="79.10" rx="2.00" ry="2.00" fill="#4db5fb"/>
+<rect x="160.20" y="8.00" width="79.10" height="79.10" rx="2.00" ry="2.00" fill="#79d4fd"/>
+<rect x="240.30" y="8.00" width="79.10" height="79.10" rx="2.00" ry="2.00" fill="#3b99f9"/>
+<rect x="320.40" y="8.00" width="79.10" height="79.10" rx="2.00" ry="2.00" fill="#55bcfb"/>
+<rect x="400.50" y="8.00" width="79.10" height="79.10" rx="2.00" ry="2.00" fill="#98e5fe"/>
+<rect x="480.60" y="8.00" width="79.10" height="79.10" rx="2.00" ry="2.00" fill="#83dafd"/>
+<rect x="560.70" y="8.00" width="79.10" height="79.10" rx="2.00" ry="2.00" fill="#3b82f5"/>
+<rect x="640.80" y="8.00" width="79.10" height="79.10" rx="2.00" ry="2.00" fill="#41a7fa"/>
+<rect x="720.90" y="8.00" width="79.10" height="79.10" rx="2.00" ry="2.00" fill="#5dc2fc"/>
+</g>
 </svg>

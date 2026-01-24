@@ -1,2 +1,27 @@
-Reading from stdin...
-Unknown chart type: line-chart
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+<g transform="translate(0, 0)"><g class="axis axis-right">
+  <line x1="795.00" y1="600.00" x2="795.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="795.00" y1="600.00" x2="801.00" y2="600.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="795.00" y1="600.00" x2="-5.00" y2="600.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="804.00" y="600.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">10000</text>
+  <line x1="795.00" y1="450.00" x2="801.00" y2="450.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="795.00" y1="450.00" x2="-5.00" y2="450.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="804.00" y="450.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">15000</text>
+  <line x1="795.00" y1="300.00" x2="801.00" y2="300.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="795.00" y1="300.00" x2="-5.00" y2="300.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="804.00" y="300.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">20000</text>
+  <line x1="795.00" y1="150.00" x2="801.00" y2="150.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="795.00" y1="150.00" x2="-5.00" y2="150.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="804.00" y="150.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">25000</text>
+  <line x1="795.00" y1="0.00" x2="801.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="795.00" y1="0.00" x2="-5.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="804.00" y="0.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">30000</text>
+</g>
+<path d="M 0.00 540.00 C 46.50 477.00, 65.00 357.00, 155.00 330.00 C 245.00 303.00, 210.00 504.00, 300.00 450.00 C 390.00 396.00, 363.50 213.00, 455.00 150.00 C 546.50 87.00, 513.50 285.00, 605.00 240.00 C 696.50 195.00, 713.50 72.00, 760.00 0.00" fill="none" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round" stroke-linejoin="round"/>
+</g><g class="legend" transform="translate(688.6,10.0)">
+  <rect x="0" y="0" width="101.4" height="32.0" fill="none" stroke="#e5e7eb" stroke-width="1.0"/>
+  <g transform="translate(10.0,10.0)"><line x1="0" y1="1.0" x2="25.0" y2="1.0" stroke="#3b82f6" stroke-width="2.0"/></g>
+  <text x="41.0" y="20.2" font-family="Arial, sans-serif" font-size="12.0" fill="#374151">Revenue</text>
+</g>
+
+</svg>

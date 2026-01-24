@@ -1,25 +1,22 @@
 {
-  "data": {
-    "name": "Root",
-    "value": 100,
-    "children": [
-      {
-        "name": "Branch A",
-        "value": 60,
-        "children": [
-          {"name": "Leaf A1", "value": 30},
-          {"name": "Leaf A2", "value": 30}
-        ]
-      },
-      {
-        "name": "Branch B",
-        "value": 40,
-        "children": [
-          {"name": "Leaf B1", "value": 20},
-          {"name": "Leaf B2", "value": 20}
-        ]
-      }
-    ]
-  },
-  "show_labels": true
+  "name": "Root",
+  "value": 100,
+  "children": [
+    {
+      "name": "Branch A",
+      "value": 60,
+      "children": [
+        {"name": "Leaf A1", "value": 30},
+        {"name": "Leaf A2", "value": 30}
+      ]
+    },
+    {
+      "name": "Branch B",
+      "value": 40,
+      "children": [
+        {"name": "Leaf B1", "value": 20},
+        {"name": "Leaf B2", "value": 20}
+      ]
+    }
+  ]
 }

@@ -1,5 +1,11 @@
-Reading from stdin...
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
-<circle cx="400.00" cy="300.00" r="-2.00" fill="#3B82F6" stroke="#ffffff" stroke-width="2.00" opacity="0.70"/>
+<circle cx="400.00" cy="300.00" r="96.00" fill="#F59E0B" stroke="#ffffff" stroke-width="2.00" opacity="0.70"/>
+<text x="400.00" y="300.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px" font-weight="bold">Team A1</text>
+<circle cx="597.00" cy="300.00" r="96.00" fill="#F59E0B" stroke="#ffffff" stroke-width="2.00" opacity="0.70"/>
+<text x="597.00" y="300.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px" font-weight="bold">Team A2</text>
+<circle cx="706.16" cy="300.00" r="131.45" fill="#10B981" stroke="#ffffff" stroke-width="2.00" opacity="0.70"/>
+<text x="706.16" y="300.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px" font-weight="bold">Department B</text>
+<circle cx="93.84" cy="300.00" r="107.33" fill="#10B981" stroke="#ffffff" stroke-width="2.00" opacity="0.70"/>
+<text x="93.84" y="300.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px" font-weight="bold">Department C</text>
 
 </svg>

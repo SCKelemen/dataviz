@@ -201,6 +201,112 @@ The current library has a split between:
 
 This creates type mismatches and code duplication. Adopting Observable Plot's architecture unifies both approaches.
 
+### Foundation: SCKelemen Ecosystem
+**Critical Principle:** All Observable Plot components will be built on top of the existing SCKelemen foundation libraries. We will NOT reimplement primitives that already exist.
+
+**Dependency Map:**
+
+| Observable Plot Component | SCKelemen Foundation | Rationale |
+|--------------------------|---------------------|-----------|
+| **Marks** (SVG output) | `SCKelemen/svg` | Use SVG primitives (Path, Circle, Rect, Text) instead of string building |
+| **Scales** (color) | `SCKelemen/color` | OKLCH perceptually uniform color interpolation for heatmaps, gradients |
+| **Legends** (layout) | `SCKelemen/layout` | Use flexbox for legend positioning, text layout for wrapping |
+| **Facets** (layout) | `SCKelemen/layout` | CSS Grid for facet layouts, automatic spacing |
+| **Formats** (text) | `SCKelemen/text`, `SCKelemen/unicode` | Unicode-aware text operations, proper measurement |
+| **Markers** (geometry) | `SCKelemen/svg` | Reuse SVG marker definitions |
+| **Axes** (text layout) | `SCKelemen/layout`, `SCKelemen/text` | Text measurement for tick labels, rotation |
+| **Charts** (styling) | `SCKelemen/design-system` | Design tokens for colors, typography, spacing |
+| **Dimensions** (units) | `SCKelemen/units` | Type-safe CSS units (px, em, rem, %) |
+| **Terminal output** | `SCKelemen/cli` | ANSI colors, Braille dots for terminal rendering |
+
+**Example: Mark Implementation Using svg Package**
+```go
+// BAD: String building (current approach)
+func renderCircle(cx, cy, r float64, fill string) string {
+    return fmt.Sprintf(`<circle cx="%.2f" cy="%.2f" r="%.2f" fill="%s"/>`, cx, cy, r, fill)
+}
+
+// GOOD: Using SCKelemen/svg primitives
+import "github.com/SCKelemen/svg"
+
+func renderCircle(cx, cy, r float64, fill color.Color) svg.Element {
+    return svg.Circle(
+        svg.CX(units.Px(cx)),
+        svg.CY(units.Px(cy)),
+        svg.R(units.Px(r)),
+        svg.Fill(fill),
+    )
+}
+```
+
+**Example: Legend Layout Using layout Package**
+```go
+// GOOD: Using SCKelemen/layout for flexbox
+import "github.com/SCKelemen/layout"
+
+func renderLegend(items []LegendItem) layout.Node {
+    return layout.Flex(
+        layout.Direction(layout.Row),
+        layout.Gap(units.Px(10)),
+        layout.Children(
+            lo.Map(items, func(item LegendItem) layout.Node {
+                return layout.Flex(
+                    layout.Direction(layout.Row),
+                    layout.AlignItems(layout.Center),
+                    layout.Gap(units.Px(5)),
+                    layout.Children(
+                        colorSwatch(item.Color),
+                        layout.Text(item.Label),
+                    ),
+                )
+            }),
+        ),
+    )
+}
+```
+
+**Example: Color Scale Using color Package**
+```go
+// GOOD: Using SCKelemen/color for OKLCH interpolation
+import "github.com/SCKelemen/color"
+
+func colorScale(value float64, min, max float64) color.Color {
+    // Interpolate in OKLCH space (perceptually uniform)
+    start := color.FromHex("#3b82f6") // Blue
+    end := color.FromHex("#ef4444")   // Red
+    t := (value - min) / (max - min)
+    return color.Mix(start, end, t, color.OKLCH)
+}
+```
+
+**Benefits of This Approach:**
+1. **No Duplication**: Reuse battle-tested primitives (SVG, layout, color)
+2. **Consistency**: All visualizations use same foundation (design tokens, units)
+3. **Modularity**: Replace components independently (e.g., swap color implementation)
+4. **Type Safety**: Use `units.Px` instead of `float64`, `color.Color` instead of `string`
+5. **Maintainability**: Fix bugs once in foundation, all charts benefit
+6. **Performance**: Foundation libraries are optimized (e.g., color space conversions)
+7. **Unicode**: Proper text handling via `unicode` package (UAX#9, UAX#14, UAX#29, etc.)
+
+**Migration Strategy:**
+- Phase 1: Continue using string building for SVG (backwards compatibility)
+- Phase 2: Refactor internals to use `svg` package, keep API stable
+- Phase 3: Expose `svg.Element` return types for advanced users
+- Phase 4: Deprecate string-based APIs (major version bump)
+
+**Foundation Package Versions:**
+All implementations should target latest stable versions:
+- `SCKelemen/svg@v1.x.x`
+- `SCKelemen/layout@v1.x.x`
+- `SCKelemen/color@v1.x.x`
+- `SCKelemen/design-system@v1.x.x`
+- `SCKelemen/unicode@v1.x.x`
+- `SCKelemen/text@v1.x.x`
+- `SCKelemen/units@v1.x.x`
+- `SCKelemen/cli@v1.x.x`
+
+**Note:** The SCKelemen foundation is designed for general-purpose use (web browsers, repository badges, etc.), so investments in dataviz architecture benefit the entire ecosystem.
+
 ### Core Components
 
 #### 1. Scales (Priority: High)

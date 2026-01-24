@@ -1,13 +1,13 @@
 # DataViz
 
-**Chart and data visualization library for Go with dual output modes (SVG + Terminal) and image export.**
+**Chart and data visualization library for Go with dual output modes (SVG + Terminal).**
 
 [![License: BearWare 1.0](https://img.shields.io/badge/license-BearWare%201.0-blue.svg)](LICENSE)
 [![Go Version](https://img.shields.io/badge/go-1.23+-blue.svg)](https://go.dev/dl/)
 
 ## Overview
 
-DataViz provides high-level charting APIs built on top of the general-purpose [SCKelemen rendering stack](https://github.com/SCKelemen/layout). It focuses on **chart-specific code**: implementations of common chart types, image export, and tools for data visualization.
+DataViz provides high-level charting APIs built on top of the general-purpose [SCKelemen rendering stack](https://github.com/SCKelemen/layout). It focuses on **chart-specific code**: implementations of common chart types and tools for data visualization.
 
 ## Architecture
 
@@ -17,8 +17,8 @@ This library provides **chart implementations and visualization tools**:
 ┌─────────────────────────────────────────────────────────┐
 │          DataViz Monorepo (Chart-Specific Code)         │
 │  ┌─────────────────────────────────────────────────┐   │
-│  │  charts/     - Line, Bar, Scatter, Heatmap, Pie │   │
-│  │  export/     - PNG/JPEG conversion from SVG     │   │
+│  │  charts/     - Line, Area, Bar, Scatter, Heat-  │   │
+│  │                map, Pie/Donut, Stat cards       │   │
 │  │  mcp/        - Model Context Protocol server    │   │
 │  │  cmd/        - viz-cli, dataviz-mcp binaries    │   │
 │  └─────────────────────────────────────────────────┘   │
@@ -49,19 +49,20 @@ This library provides **chart implementations and visualization tools**:
 ### Use Cases
 
 **1. Data Visualization & Charting**
-- Line graphs, area charts, bar charts, scatter plots, heatmaps, stat cards
+- Line graphs, area charts, bar charts, scatter plots, heatmaps, pie/donut charts, stat cards
 - Time-series visualization with `time.Time` types
 - Smooth curves with configurable tension (Bezier interpolation)
 - Custom markers: circle, square, diamond, triangle, cross, x, dot
 - Gradients, fills, stacked bars
 - Design token integration for consistent styling
-- Dual output: SVG for web, Terminal for CLI
+- Dual output: SVG for web, Terminal for CLI (where applicable)
 
 **2. AI Agent Integration**
 - MCP server for Claude Code and other MCP clients
 - Generic data types (interface{}, float64) for multi-source data
+- Multi-series line charts, generic XY scatter plots, matrix heatmaps
 - Composable with other MCP servers (Omnitron, file systems, APIs)
-- Includes pie/donut charts (MCP-specific implementation)
+- MCP acts as thin wrapper around main library where possible
 
 **3. Command-Line Tools**
 - viz-cli: Interactive terminal chart viewer
@@ -76,19 +77,23 @@ High-level charting API with multiple chart types:
 - **Line graphs** with smooth curves, tension control, area fill, gradients, markers
 - **Area charts** with smooth curves and gradient fills
 - **Bar charts** with stacked support
+- **Pie/Donut charts** with percentage labels and legend
 - **Scatter plots** with custom markers (7 types)
 - **Heatmaps** (linear and GitHub-style weeks view)
 - **Stat cards** with change indicators and mini trend graphs
 - **Time-series** support with `time.Time` types
-- **Dual output**: SVG and Terminal rendering
+- **Dual output**: SVG and Terminal rendering (where applicable)
 
 **Features:**
 - Smooth curves: Bezier interpolation with configurable tension (0-1)
 - Markers: circle, square, diamond, triangle, cross, x, dot
 - Gradients: Vertical fade with opacity control
 - Terminal: ANSI colors + Braille dots for high-resolution
+- Donut mode: Configurable inner radius for donut charts
 
 Built on top of [SCKelemen/layout](https://github.com/SCKelemen/layout) for positioning and layout.
+
+**Note:** Currently focused on time-series data. See [Roadmap](docs/ROADMAP.md) for future generic coordinate support via Observable Plot-style scales and marks architecture.
 
 ### MCP Server
 
@@ -98,6 +103,11 @@ Model Context Protocol server for AI agents:
 - Generic data types (interface{}, float64)
 - Composable with other MCP servers (Omnitron, file systems, APIs)
 - Data-source agnostic design
+
+**Architecture:**
+- **Consolidated charts** (pie, bar): MCP acts as thin wrapper, calls main library
+- **Generic charts** (line with multi-series, XY scatter, matrix heatmap): MCP-specific implementations that complement the time-series-focused main library
+- **Future:** Unified approach via Observable Plot-style scales and marks (see [Roadmap](docs/ROADMAP.md))
 
 ### Command-Line Tools
 
@@ -241,10 +251,9 @@ This separation allows you to:
 - Use the charts API for quick results
 
 ### 2. Dual Output Modes
-Every layout and chart can be rendered to:
+Charts can be rendered to:
 - **SVG** - For web, documentation, high-quality printing
-- **Terminal** - For CLI tools, SSH sessions, logs
-- **PNG/JPEG** - Via export package from SVG
+- **Terminal** - For CLI tools, SSH sessions, logs (where applicable: line, area, bar, scatter, heatmap)
 
 ### 3. Optional Design Tokens
 Design tokens are **opt-in**:
@@ -268,7 +277,6 @@ The MCP server and charts API accept generic data:
 ```go
 // DataViz packages (this monorepo)
 import "github.com/SCKelemen/dataviz/charts"  // Chart implementations
-import "github.com/SCKelemen/dataviz/export"  // Image conversion
 import "github.com/SCKelemen/dataviz/mcp"     // MCP server (usually not imported, used as binary)
 
 // External rendering stack (separate repos)
@@ -287,17 +295,16 @@ import "github.com/SCKelemen/text"            // Unicode text operations
 
 ```
 github.com/SCKelemen/dataviz/
-├── charts/          # Chart implementations (line, bar, scatter, heatmap, pie)
-├── export/          # PNG/JPEG conversion from SVG
+├── charts/          # Chart implementations (line, area, bar, scatter, heatmap, pie/donut, stat cards)
 ├── mcp/             # MCP server implementation
-│   ├── charts/      # MCP chart handlers
+│   ├── charts/      # MCP chart handlers (thin wrappers + generic implementations)
 │   ├── types/       # MCP type definitions
 │   └── mcp/         # MCP protocol implementation
 ├── cmd/
 │   ├── viz-cli/     # CLI binary for terminal charts
 │   └── dataviz-mcp/ # MCP server binary
 ├── examples/        # Example code and data files
-└── docs/            # Documentation
+└── docs/            # Documentation (ROADMAP.md, etc.)
 ```
 
 ## Related Projects
@@ -353,7 +360,7 @@ No, design tokens in `design/` are optional. The rendering engine works fine wit
 
 ### Can I render to PNG/JPEG?
 
-Yes! Use `export/` to convert any SVG to PNG or JPEG.
+SVG output can be converted to PNG/JPEG using external tools or libraries. The core library focuses on SVG and terminal rendering.
 
 ### What's MCP?
 

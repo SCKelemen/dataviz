@@ -9,6 +9,7 @@ import (
 	design "github.com/SCKelemen/design-system"
 	maincharts "github.com/SCKelemen/dataviz/charts"
 	"github.com/SCKelemen/dataviz/mcp/types"
+	"github.com/SCKelemen/dataviz/scales"
 	"github.com/SCKelemen/layout"
 	"github.com/SCKelemen/svg"
 	"github.com/SCKelemen/units"
@@ -399,6 +400,292 @@ func interpolateColor(t float64) string {
 		b := int(37 + (255-37)*t2)
 		return fmt.Sprintf("#%02x%02x%02x", r, g, b)
 	}
+}
+
+// CreateTreemap generates a treemap chart SVG
+func CreateTreemap(config types.TreemapConfig) (string, error) {
+	// Convert MCP TreeNode to charts.TreeNode
+	root := convertTreeNode(&config.Data)
+
+	spec := maincharts.TreemapSpec{
+		Root:         root,
+		Width:        float64(config.Width),
+		Height:       float64(config.Height),
+		Padding:      2,
+		ShowLabels:   config.ShowLabels,
+		MinLabelSize: 30,
+	}
+
+	return maincharts.RenderTreemap(spec), nil
+}
+
+// CreateSunburst generates a sunburst chart SVG
+func CreateSunburst(config types.SunburstConfig) (string, error) {
+	root := convertTreeNode(&config.Data)
+
+	spec := maincharts.SunburstSpec{
+		Root:        root,
+		Width:       float64(config.Width),
+		Height:      float64(config.Height),
+		InnerRadius: 0.3,
+		ShowLabels:  config.ShowLabels,
+	}
+
+	return maincharts.RenderSunburst(spec), nil
+}
+
+// CreateCirclePacking generates a circle packing chart SVG
+func CreateCirclePacking(config types.CirclePackingConfig) (string, error) {
+	root := convertTreeNode(&config.Data)
+
+	spec := maincharts.CirclePackingSpec{
+		Root:       root,
+		Width:      float64(config.Width),
+		Height:     float64(config.Height),
+		ShowLabels: config.ShowLabels,
+	}
+
+	return maincharts.RenderCirclePacking(spec), nil
+}
+
+// CreateIcicle generates an icicle partition chart SVG
+func CreateIcicle(config types.IcicleConfig) (string, error) {
+	root := convertTreeNode(&config.Data)
+
+	orientation := config.Orientation
+	if orientation == "" {
+		orientation = "vertical"
+	}
+
+	spec := maincharts.IcicleSpec{
+		Root:        root,
+		Width:       float64(config.Width),
+		Height:      float64(config.Height),
+		Orientation: orientation,
+		ShowLabels:  config.ShowLabels,
+	}
+
+	return maincharts.RenderIcicle(spec), nil
+}
+
+// CreateBoxPlot generates a box plot SVG
+func CreateBoxPlot(config types.BoxPlotConfig) (string, error) {
+	data := make([]*maincharts.BoxPlotData, len(config.Data))
+	for i, ds := range config.Data {
+		data[i] = &maincharts.BoxPlotData{
+			Values: ds.Values,
+			Label:  ds.Label,
+			Color:  "#3B82F6",
+		}
+	}
+
+	spec := maincharts.BoxPlotSpec{
+		Data:              data,
+		Width:             float64(config.Width),
+		Height:            float64(config.Height),
+		Horizontal:        false,
+		ShowOutliers:      config.ShowOutliers,
+		ShowMean:          config.ShowMean,
+		WhiskerMultiplier: 1.5,
+	}
+
+	return maincharts.RenderVerticalBoxPlot(spec), nil
+}
+
+// CreateViolinPlot generates a violin plot SVG
+func CreateViolinPlot(config types.ViolinPlotConfig) (string, error) {
+	data := make([]*maincharts.ViolinPlotData, len(config.Data))
+	for i, ds := range config.Data {
+		data[i] = &maincharts.ViolinPlotData{
+			Values: ds.Values,
+			Label:  ds.Label,
+			Color:  "#3B82F6",
+		}
+	}
+
+	spec := maincharts.ViolinPlotSpec{
+		Data:       data,
+		Width:      float64(config.Width),
+		Height:     float64(config.Height),
+		Bandwidth:  0, // Auto-calculate
+		ShowBox:    config.ShowBox,
+		ShowMedian: config.ShowMedian,
+		ShowMean:   false,
+	}
+
+	return maincharts.RenderViolinPlot(spec), nil
+}
+
+// CreateHistogram generates a histogram SVG
+func CreateHistogram(config types.HistogramConfig) (string, error) {
+	bins := config.Bins
+	if bins == 0 {
+		bins = 20
+	}
+
+	spec := maincharts.HistogramSpec{
+		Data: &maincharts.HistogramData{
+			Values: config.Values,
+			Color:  "#3B82F6",
+		},
+		Width:    float64(config.Width),
+		Height:   float64(config.Height),
+		BinCount: bins,
+		Nice:     true,
+	}
+
+	return maincharts.RenderHistogram(spec), nil
+}
+
+// CreateRidgeline generates a ridgeline plot SVG
+func CreateRidgeline(config types.RidgelineConfig) (string, error) {
+	data := make([]*maincharts.RidgelineData, len(config.Data))
+	for i, ds := range config.Data {
+		data[i] = &maincharts.RidgelineData{
+			Label:  ds.Label,
+			Values: ds.Values,
+		}
+	}
+
+	overlap := config.Overlap
+	if overlap == 0 {
+		overlap = 0.5
+	}
+
+	spec := maincharts.RidgelineSpec{
+		Data:       data,
+		Width:      float64(config.Width),
+		Height:     float64(config.Height),
+		Overlap:    overlap,
+		ShowFill:   true,
+		ShowLabels: config.ShowLabels,
+	}
+
+	return maincharts.RenderRidgeline(spec), nil
+}
+
+// CreateCandlestick generates a candlestick chart SVG
+func CreateCandlestick(config types.CandlestickConfig) (string, error) {
+	if len(config.Data) == 0 {
+		return "", fmt.Errorf("no candlestick data provided")
+	}
+
+	// Convert to candlestick data
+	candleData := make([]maincharts.CandlestickData, len(config.Data))
+	for i, d := range config.Data {
+		candleData[i] = maincharts.CandlestickData{
+			X:      d.Date,
+			Open:   d.Open,
+			High:   d.High,
+			Low:    d.Low,
+			Close:  d.Close,
+			Volume: d.Volume,
+		}
+	}
+
+	// Find min/max for scales
+	minPrice, maxPrice := candleData[0].Low, candleData[0].High
+	for _, d := range candleData {
+		if d.Low < minPrice {
+			minPrice = d.Low
+		}
+		if d.High > maxPrice {
+			maxPrice = d.High
+		}
+	}
+
+	// Create scales using scales package
+	xScale := scales.NewLinearScale(
+		[2]float64{0, float64(len(candleData))},
+		[2]units.Length{units.Px(50), units.Px(float64(config.Width) - 50)},
+	)
+	yScale := scales.NewLinearScale(
+		[2]float64{minPrice * 0.98, maxPrice * 1.02},
+		[2]units.Length{units.Px(float64(config.Height) - 100), units.Px(50)},
+	)
+
+	spec := maincharts.CandlestickSpec{
+		Data:         candleData,
+		Width:        float64(config.Width),
+		Height:       float64(config.Height),
+		XScale:       xScale,
+		YScale:       yScale,
+		ShowVolume:   config.ShowVolume,
+		VolumeHeight: 100,
+	}
+
+	return maincharts.RenderCandlestick(spec), nil
+}
+
+// CreateOHLC generates an OHLC bar chart SVG
+func CreateOHLC(config types.OHLCConfig) (string, error) {
+	if len(config.Data) == 0 {
+		return "", fmt.Errorf("no OHLC data provided")
+	}
+
+	// Convert to OHLC data
+	ohlcData := make([]maincharts.OHLCData, len(config.Data))
+	for i, d := range config.Data {
+		ohlcData[i] = maincharts.OHLCData{
+			X:     d.Date,
+			Open:  d.Open,
+			High:  d.High,
+			Low:   d.Low,
+			Close: d.Close,
+		}
+	}
+
+	// Find min/max for scales
+	minPrice, maxPrice := ohlcData[0].Low, ohlcData[0].High
+	for _, d := range ohlcData {
+		if d.Low < minPrice {
+			minPrice = d.Low
+		}
+		if d.High > maxPrice {
+			maxPrice = d.High
+		}
+	}
+
+	// Create scales using scales package
+	xScale := scales.NewLinearScale(
+		[2]float64{0, float64(len(ohlcData))},
+		[2]units.Length{units.Px(50), units.Px(float64(config.Width) - 50)},
+	)
+	yScale := scales.NewLinearScale(
+		[2]float64{minPrice * 0.98, maxPrice * 1.02},
+		[2]units.Length{units.Px(float64(config.Height) - 50), units.Px(50)},
+	)
+
+	spec := maincharts.OHLCSpec{
+		Data:   ohlcData,
+		Width:  float64(config.Width),
+		Height: float64(config.Height),
+		XScale: xScale,
+		YScale: yScale,
+	}
+
+	return maincharts.RenderOHLC(spec), nil
+}
+
+// convertTreeNode converts MCP TreeNode to charts.TreeNode recursively
+func convertTreeNode(node *types.TreeNode) *maincharts.TreeNode {
+	if node == nil {
+		return nil
+	}
+
+	result := &maincharts.TreeNode{
+		Name:  node.Name,
+		Value: node.Value,
+	}
+
+	if len(node.Children) > 0 {
+		result.Children = make([]*maincharts.TreeNode, len(node.Children))
+		for i, child := range node.Children {
+			result.Children[i] = convertTreeNode(child)
+		}
+	}
+
+	return result
 }
 
 // Keep unused imports to avoid compiler errors

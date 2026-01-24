@@ -271,7 +271,275 @@ func (s *Server) RegisterTools() {
 		s.handleHeatmap,
 	)
 
-	fmt.Println("Registered 5 chart generation tools")
+	// Tool: treemap
+	s.server.AddTool(
+		&mcp.Tool{
+			Name:        "treemap",
+			Description: "Generate a treemap visualization for hierarchical data",
+			InputSchema: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"title": map[string]interface{}{"type": "string", "description": "Chart title"},
+					"data": map[string]interface{}{
+						"type":        "object",
+						"description": "Hierarchical tree data with name, value, and optional children",
+						"properties": map[string]interface{}{
+							"name":     map[string]string{"type": "string"},
+							"value":    map[string]string{"type": "number"},
+							"children": map[string]interface{}{"type": "array", "items": map[string]string{"type": "object"}},
+						},
+					},
+					"show_labels": map[string]interface{}{"type": "boolean", "default": true},
+					"width":       map[string]interface{}{"type": "number", "default": 800},
+					"height":      map[string]interface{}{"type": "number", "default": 600},
+				},
+				"required": []string{"data"},
+			},
+		},
+		s.handleTreemap,
+	)
+
+	// Tool: sunburst
+	s.server.AddTool(
+		&mcp.Tool{
+			Name:        "sunburst",
+			Description: "Generate a sunburst (radial partition) chart for hierarchical data",
+			InputSchema: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"title":       map[string]interface{}{"type": "string", "description": "Chart title"},
+					"data":        map[string]interface{}{"type": "object", "description": "Hierarchical tree data"},
+					"show_labels": map[string]interface{}{"type": "boolean", "default": true},
+					"width":       map[string]interface{}{"type": "number", "default": 600},
+					"height":      map[string]interface{}{"type": "number", "default": 600},
+				},
+				"required": []string{"data"},
+			},
+		},
+		s.handleSunburst,
+	)
+
+	// Tool: circle_packing
+	s.server.AddTool(
+		&mcp.Tool{
+			Name:        "circle_packing",
+			Description: "Generate a circle packing visualization for hierarchical data",
+			InputSchema: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"title":       map[string]interface{}{"type": "string", "description": "Chart title"},
+					"data":        map[string]interface{}{"type": "object", "description": "Hierarchical tree data"},
+					"show_labels": map[string]interface{}{"type": "boolean", "default": true},
+					"width":       map[string]interface{}{"type": "number", "default": 600},
+					"height":      map[string]interface{}{"type": "number", "default": 600},
+				},
+				"required": []string{"data"},
+			},
+		},
+		s.handleCirclePacking,
+	)
+
+	// Tool: icicle
+	s.server.AddTool(
+		&mcp.Tool{
+			Name:        "icicle",
+			Description: "Generate an icicle partition chart for hierarchical data",
+			InputSchema: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"title":       map[string]interface{}{"type": "string", "description": "Chart title"},
+					"data":        map[string]interface{}{"type": "object", "description": "Hierarchical tree data"},
+					"orientation": map[string]interface{}{"type": "string", "description": "vertical or horizontal", "default": "vertical"},
+					"show_labels": map[string]interface{}{"type": "boolean", "default": true},
+					"width":       map[string]interface{}{"type": "number", "default": 800},
+					"height":      map[string]interface{}{"type": "number", "default": 600},
+				},
+				"required": []string{"data"},
+			},
+		},
+		s.handleIcicle,
+	)
+
+	// Tool: boxplot
+	s.server.AddTool(
+		&mcp.Tool{
+			Name:        "boxplot",
+			Description: "Generate a box plot for showing statistical distribution",
+			InputSchema: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"title": map[string]interface{}{"type": "string", "description": "Chart title"},
+					"data": map[string]interface{}{
+						"type":        "array",
+						"description": "Array of {label, values[]} objects",
+						"items": map[string]interface{}{
+							"type": "object",
+							"properties": map[string]interface{}{
+								"label":  map[string]string{"type": "string"},
+								"values": map[string]interface{}{"type": "array", "items": map[string]string{"type": "number"}},
+							},
+						},
+					},
+					"show_outliers": map[string]interface{}{"type": "boolean", "default": true},
+					"show_mean":     map[string]interface{}{"type": "boolean", "default": false},
+					"width":         map[string]interface{}{"type": "number", "default": 800},
+					"height":        map[string]interface{}{"type": "number", "default": 600},
+				},
+				"required": []string{"data"},
+			},
+		},
+		s.handleBoxplot,
+	)
+
+	// Tool: violin
+	s.server.AddTool(
+		&mcp.Tool{
+			Name:        "violin",
+			Description: "Generate a violin plot with kernel density estimation",
+			InputSchema: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"title": map[string]interface{}{"type": "string", "description": "Chart title"},
+					"data": map[string]interface{}{
+						"type":        "array",
+						"description": "Array of {label, values[]} objects",
+						"items": map[string]interface{}{
+							"type": "object",
+							"properties": map[string]interface{}{
+								"label":  map[string]string{"type": "string"},
+								"values": map[string]interface{}{"type": "array", "items": map[string]string{"type": "number"}},
+							},
+						},
+					},
+					"show_box":    map[string]interface{}{"type": "boolean", "default": true},
+					"show_median": map[string]interface{}{"type": "boolean", "default": true},
+					"width":       map[string]interface{}{"type": "number", "default": 800},
+					"height":      map[string]interface{}{"type": "number", "default": 600},
+				},
+				"required": []string{"data"},
+			},
+		},
+		s.handleViolin,
+	)
+
+	// Tool: histogram
+	s.server.AddTool(
+		&mcp.Tool{
+			Name:        "histogram",
+			Description: "Generate a histogram with automatic binning",
+			InputSchema: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"title":  map[string]interface{}{"type": "string", "description": "Chart title"},
+					"values": map[string]interface{}{"type": "array", "items": map[string]string{"type": "number"}, "description": "Array of numerical values"},
+					"bins":   map[string]interface{}{"type": "number", "description": "Number of bins", "default": 20},
+					"width":  map[string]interface{}{"type": "number", "default": 800},
+					"height": map[string]interface{}{"type": "number", "default": 600},
+				},
+				"required": []string{"values"},
+			},
+		},
+		s.handleHistogram,
+	)
+
+	// Tool: ridgeline
+	s.server.AddTool(
+		&mcp.Tool{
+			Name:        "ridgeline",
+			Description: "Generate a ridgeline (joy) plot for comparing distributions",
+			InputSchema: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"title": map[string]interface{}{"type": "string", "description": "Chart title"},
+					"data": map[string]interface{}{
+						"type":        "array",
+						"description": "Array of {label, values[]} objects",
+						"items": map[string]interface{}{
+							"type": "object",
+							"properties": map[string]interface{}{
+								"label":  map[string]string{"type": "string"},
+								"values": map[string]interface{}{"type": "array", "items": map[string]string{"type": "number"}},
+							},
+						},
+					},
+					"overlap":     map[string]interface{}{"type": "number", "description": "Overlap amount (0-1)", "default": 0.5},
+					"show_labels": map[string]interface{}{"type": "boolean", "default": true},
+					"width":       map[string]interface{}{"type": "number", "default": 800},
+					"height":      map[string]interface{}{"type": "number", "default": 600},
+				},
+				"required": []string{"data"},
+			},
+		},
+		s.handleRidgeline,
+	)
+
+	// Tool: candlestick
+	s.server.AddTool(
+		&mcp.Tool{
+			Name:        "candlestick",
+			Description: "Generate a candlestick chart for financial OHLC data",
+			InputSchema: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"title": map[string]interface{}{"type": "string", "description": "Chart title"},
+					"data": map[string]interface{}{
+						"type":        "array",
+						"description": "Array of {date, open, high, low, close, volume?} objects",
+						"items": map[string]interface{}{
+							"type": "object",
+							"properties": map[string]interface{}{
+								"date":   map[string]string{"type": "string"},
+								"open":   map[string]string{"type": "number"},
+								"high":   map[string]string{"type": "number"},
+								"low":    map[string]string{"type": "number"},
+								"close":  map[string]string{"type": "number"},
+								"volume": map[string]string{"type": "number"},
+							},
+						},
+					},
+					"show_volume": map[string]interface{}{"type": "boolean", "default": true},
+					"width":       map[string]interface{}{"type": "number", "default": 1000},
+					"height":      map[string]interface{}{"type": "number", "default": 600},
+				},
+				"required": []string{"data"},
+			},
+		},
+		s.handleCandlestick,
+	)
+
+	// Tool: ohlc
+	s.server.AddTool(
+		&mcp.Tool{
+			Name:        "ohlc",
+			Description: "Generate an OHLC bar chart for financial data",
+			InputSchema: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"title": map[string]interface{}{"type": "string", "description": "Chart title"},
+					"data": map[string]interface{}{
+						"type":        "array",
+						"description": "Array of {date, open, high, low, close} objects",
+						"items": map[string]interface{}{
+							"type": "object",
+							"properties": map[string]interface{}{
+								"date":  map[string]string{"type": "string"},
+								"open":  map[string]string{"type": "number"},
+								"high":  map[string]string{"type": "number"},
+								"low":   map[string]string{"type": "number"},
+								"close": map[string]string{"type": "number"},
+							},
+						},
+					},
+					"width":  map[string]interface{}{"type": "number", "default": 1000},
+					"height": map[string]interface{}{"type": "number", "default": 600},
+				},
+				"required": []string{"data"},
+			},
+		},
+		s.handleOHLC,
+	)
+
+	fmt.Println("Registered 15 chart generation tools")
 }
 
 // handleBarChart handles the bar_chart tool
@@ -415,6 +683,286 @@ func (s *Server) handleHeatmap(ctx context.Context, request *mcp.CallToolRequest
 	svg, err := charts.CreateHeatmap(config)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create heatmap: %w", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{
+				Text: fmt.Sprintf("```svg\n%s\n```", svg),
+			},
+		},
+	}, nil
+}
+
+// handleTreemap handles the treemap tool
+func (s *Server) handleTreemap(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	var config types.TreemapConfig
+	if err := parseArguments(request.Params.Arguments, &config); err != nil {
+		return nil, fmt.Errorf("invalid arguments: %w", err)
+	}
+
+	if config.Width == 0 {
+		config.Width = 800
+	}
+	if config.Height == 0 {
+		config.Height = 600
+	}
+
+	svg, err := charts.CreateTreemap(config)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create treemap: %w", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{
+				Text: fmt.Sprintf("```svg\n%s\n```", svg),
+			},
+		},
+	}, nil
+}
+
+// handleSunburst handles the sunburst tool
+func (s *Server) handleSunburst(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	var config types.SunburstConfig
+	if err := parseArguments(request.Params.Arguments, &config); err != nil {
+		return nil, fmt.Errorf("invalid arguments: %w", err)
+	}
+
+	if config.Width == 0 {
+		config.Width = 600
+	}
+	if config.Height == 0 {
+		config.Height = 600
+	}
+
+	svg, err := charts.CreateSunburst(config)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create sunburst: %w", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{
+				Text: fmt.Sprintf("```svg\n%s\n```", svg),
+			},
+		},
+	}, nil
+}
+
+// handleCirclePacking handles the circle_packing tool
+func (s *Server) handleCirclePacking(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	var config types.CirclePackingConfig
+	if err := parseArguments(request.Params.Arguments, &config); err != nil {
+		return nil, fmt.Errorf("invalid arguments: %w", err)
+	}
+
+	if config.Width == 0 {
+		config.Width = 600
+	}
+	if config.Height == 0 {
+		config.Height = 600
+	}
+
+	svg, err := charts.CreateCirclePacking(config)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create circle packing: %w", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{
+				Text: fmt.Sprintf("```svg\n%s\n```", svg),
+			},
+		},
+	}, nil
+}
+
+// handleIcicle handles the icicle tool
+func (s *Server) handleIcicle(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	var config types.IcicleConfig
+	if err := parseArguments(request.Params.Arguments, &config); err != nil {
+		return nil, fmt.Errorf("invalid arguments: %w", err)
+	}
+
+	if config.Width == 0 {
+		config.Width = 800
+	}
+	if config.Height == 0 {
+		config.Height = 600
+	}
+
+	svg, err := charts.CreateIcicle(config)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create icicle: %w", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{
+				Text: fmt.Sprintf("```svg\n%s\n```", svg),
+			},
+		},
+	}, nil
+}
+
+// handleBoxplot handles the boxplot tool
+func (s *Server) handleBoxplot(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	var config types.BoxPlotConfig
+	if err := parseArguments(request.Params.Arguments, &config); err != nil {
+		return nil, fmt.Errorf("invalid arguments: %w", err)
+	}
+
+	if config.Width == 0 {
+		config.Width = 800
+	}
+	if config.Height == 0 {
+		config.Height = 600
+	}
+
+	svg, err := charts.CreateBoxPlot(config)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create boxplot: %w", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{
+				Text: fmt.Sprintf("```svg\n%s\n```", svg),
+			},
+		},
+	}, nil
+}
+
+// handleViolin handles the violin tool
+func (s *Server) handleViolin(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	var config types.ViolinPlotConfig
+	if err := parseArguments(request.Params.Arguments, &config); err != nil {
+		return nil, fmt.Errorf("invalid arguments: %w", err)
+	}
+
+	if config.Width == 0 {
+		config.Width = 800
+	}
+	if config.Height == 0 {
+		config.Height = 600
+	}
+
+	svg, err := charts.CreateViolinPlot(config)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create violin plot: %w", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{
+				Text: fmt.Sprintf("```svg\n%s\n```", svg),
+			},
+		},
+	}, nil
+}
+
+// handleHistogram handles the histogram tool
+func (s *Server) handleHistogram(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	var config types.HistogramConfig
+	if err := parseArguments(request.Params.Arguments, &config); err != nil {
+		return nil, fmt.Errorf("invalid arguments: %w", err)
+	}
+
+	if config.Width == 0 {
+		config.Width = 800
+	}
+	if config.Height == 0 {
+		config.Height = 600
+	}
+
+	svg, err := charts.CreateHistogram(config)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create histogram: %w", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{
+				Text: fmt.Sprintf("```svg\n%s\n```", svg),
+			},
+		},
+	}, nil
+}
+
+// handleRidgeline handles the ridgeline tool
+func (s *Server) handleRidgeline(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	var config types.RidgelineConfig
+	if err := parseArguments(request.Params.Arguments, &config); err != nil {
+		return nil, fmt.Errorf("invalid arguments: %w", err)
+	}
+
+	if config.Width == 0 {
+		config.Width = 800
+	}
+	if config.Height == 0 {
+		config.Height = 600
+	}
+
+	svg, err := charts.CreateRidgeline(config)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create ridgeline plot: %w", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{
+				Text: fmt.Sprintf("```svg\n%s\n```", svg),
+			},
+		},
+	}, nil
+}
+
+// handleCandlestick handles the candlestick tool
+func (s *Server) handleCandlestick(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	var config types.CandlestickConfig
+	if err := parseArguments(request.Params.Arguments, &config); err != nil {
+		return nil, fmt.Errorf("invalid arguments: %w", err)
+	}
+
+	if config.Width == 0 {
+		config.Width = 1000
+	}
+	if config.Height == 0 {
+		config.Height = 600
+	}
+
+	svg, err := charts.CreateCandlestick(config)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create candlestick chart: %w", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{
+				Text: fmt.Sprintf("```svg\n%s\n```", svg),
+			},
+		},
+	}, nil
+}
+
+// handleOHLC handles the ohlc tool
+func (s *Server) handleOHLC(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	var config types.OHLCConfig
+	if err := parseArguments(request.Params.Arguments, &config); err != nil {
+		return nil, fmt.Errorf("invalid arguments: %w", err)
+	}
+
+	if config.Width == 0 {
+		config.Width = 1000
+	}
+	if config.Height == 0 {
+		config.Height = 600
+	}
+
+	svg, err := charts.CreateOHLC(config)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create OHLC chart: %w", err)
 	}
 
 	return &mcp.CallToolResult{

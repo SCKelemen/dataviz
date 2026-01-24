@@ -222,8 +222,11 @@ func calculateSankeyLayout(nodes []SankeyNode, links []SankeyLink, width, height
 	}
 
 	// Normalize heights to fit in chart
+	// We'll calculate the proper scale after we know the column distribution
+	// For now, just use a reasonable initial scale
 	if maxTotal > 0 {
-		scale := (height - nodePadding*float64(len(nodes))) / maxTotal
+		// Reserve 20% of height for padding, use 80% for node heights
+		scale := (height * 0.8) / maxTotal
 		for _, pos := range positions {
 			pos.height *= scale
 		}
@@ -268,8 +271,11 @@ func calculateSankeyLayout(nodes []SankeyNode, links []SankeyLink, width, height
 		}
 		totalHeight += nodePadding * float64(len(nodeIDs)-1)
 
-		// Center vertically
+		// Center vertically (but don't go below 0)
 		yOffset := (height - totalHeight) / 2
+		if yOffset < 0 {
+			yOffset = 0
+		}
 
 		for _, id := range nodeIDs {
 			pos := positions[id]

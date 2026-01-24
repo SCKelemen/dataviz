@@ -6,218 +6,60 @@ import (
 	"strings"
 
 	"github.com/SCKelemen/color"
+	design "github.com/SCKelemen/design-system"
+	maincharts "github.com/SCKelemen/dataviz/charts"
 	"github.com/SCKelemen/dataviz/mcp/types"
 	"github.com/SCKelemen/layout"
 	"github.com/SCKelemen/svg"
 	"github.com/SCKelemen/units"
 )
 
-// CreateBarChart generates a bar chart SVG using SCKelemen libraries
+// CreateBarChart generates a bar chart SVG by calling the main library
 func CreateBarChart(config types.BarChartConfig) (string, error) {
-	// Calculate data ranges
-	maxValue := 0.0
-	for _, dp := range config.Data {
-		if dp.Value > maxValue {
-			maxValue = dp.Value
+	// Convert MCP types to main library types
+	bars := make([]maincharts.BarData, len(config.Data))
+	for i, dp := range config.Data {
+		bars[i] = maincharts.BarData{
+			Label: dp.Label,
+			Value: int(dp.Value), // Convert float64 to int
 		}
 	}
 
-	// Chart dimensions and margins
-	margin := 60.0
-	chartWidth := float64(config.Width) - (2 * margin)
-	chartHeight := float64(config.Height) - (2 * margin)
-
-	// Calculate bar dimensions
-	barCount := len(config.Data)
-	barSpacing := 10.0
-	totalSpacing := barSpacing * float64(barCount+1)
-	barWidth := (chartWidth - totalSpacing) / float64(barCount)
-
-	// Start building SVG
-	var sb strings.Builder
-	sb.WriteString(fmt.Sprintf(`<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d">`,
-		config.Width, config.Height, config.Width, config.Height))
-	sb.WriteString("\n")
-
-	// Background
-	sb.WriteString(fmt.Sprintf(`  <rect width="%d" height="%d" fill="#ffffff"/>`, config.Width, config.Height))
-	sb.WriteString("\n")
-
-	// Title
-	if config.Title != "" {
-		sb.WriteString(fmt.Sprintf(`  <text x="%d" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#1f2937">%s</text>`,
-			config.Width/2, config.Title))
-		sb.WriteString("\n")
+	data := maincharts.BarChartData{
+		Bars:  bars,
+		Color: config.Color,
 	}
 
-	// Determine bar color
-	barColor := config.Color
-	if barColor == "" {
-		barColor = "#3b82f6" // Default blue
-	}
+	// Use default theme
+	tokens := design.DefaultTheme()
 
-	// Draw bars
-	x := margin + barSpacing
-	for _, dp := range config.Data {
-		// Calculate bar height based on value
-		barHeight := (dp.Value / maxValue) * chartHeight
-		y := margin + chartHeight - barHeight
+	// Call main library function
+	svg := maincharts.RenderBarChart(data, 0, 0, config.Width, config.Height, tokens)
 
-		// Draw bar with rounded corners
-		sb.WriteString(fmt.Sprintf(`  <rect x="%.2f" y="%.2f" width="%.2f" height="%.2f" fill="%s" rx="4"/>`,
-			x, y, barWidth, barHeight, barColor))
-		sb.WriteString("\n")
-
-		// Draw label
-		labelX := x + (barWidth / 2)
-		labelY := margin + chartHeight + 20
-		sb.WriteString(fmt.Sprintf(`  <text x="%.2f" y="%.2f" text-anchor="middle" font-size="12" fill="#6b7280">%s</text>`,
-			labelX, labelY, dp.Label))
-		sb.WriteString("\n")
-
-		// Draw value on top of bar
-		valueY := y - 5
-		if valueY < margin {
-			valueY = y + 15
-		}
-		sb.WriteString(fmt.Sprintf(`  <text x="%.2f" y="%.2f" text-anchor="middle" font-size="11" fill="#374151">%.1f</text>`,
-			labelX, valueY, dp.Value))
-		sb.WriteString("\n")
-
-		x += barWidth + barSpacing
-	}
-
-	// Draw Y-axis
-	sb.WriteString(fmt.Sprintf(`  <line x1="%.2f" y1="%.2f" x2="%.2f" y2="%.2f" stroke="#d1d5db" stroke-width="2"/>`,
-		margin, margin, margin, margin+chartHeight))
-	sb.WriteString("\n")
-
-	// Draw X-axis
-	sb.WriteString(fmt.Sprintf(`  <line x1="%.2f" y1="%.2f" x2="%.2f" y2="%.2f" stroke="#d1d5db" stroke-width="2"/>`,
-		margin, margin+chartHeight, margin+chartWidth, margin+chartHeight))
-	sb.WriteString("\n")
-
-	// Draw Y-axis scale
-	steps := 5
-	for i := 0; i <= steps; i++ {
-		value := (maxValue / float64(steps)) * float64(i)
-		y := margin + chartHeight - (chartHeight/float64(steps))*float64(i)
-
-		// Grid line
-		sb.WriteString(fmt.Sprintf(`  <line x1="%.2f" y1="%.2f" x2="%.2f" y2="%.2f" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4,4"/>`,
-			margin, y, margin+chartWidth, y))
-		sb.WriteString("\n")
-
-		// Scale label
-		sb.WriteString(fmt.Sprintf(`  <text x="%.2f" y="%.2f" text-anchor="end" font-size="11" fill="#6b7280">%.1f</text>`,
-			margin-10, y+4, value))
-		sb.WriteString("\n")
-	}
-
-	sb.WriteString("</svg>")
-
-	return sb.String(), nil
+	return svg, nil
 }
 
-// CreatePieChart generates a pie chart SVG using SCKelemen libraries
+// CreatePieChart generates a pie chart SVG by calling the main library
 func CreatePieChart(config types.PieChartConfig) (string, error) {
-	// Calculate total for percentages
-	total := 0.0
-	for _, dp := range config.Data {
-		total += dp.Value
-	}
-
-	if total == 0 {
-		return "", fmt.Errorf("total value is zero")
-	}
-
-	// Chart dimensions
-	centerX := float64(config.Width) / 2
-	centerY := float64(config.Height) / 2
-	radius := math.Min(float64(config.Width), float64(config.Height))/2 - 60
-
-	// Start building SVG
-	var sb strings.Builder
-	sb.WriteString(fmt.Sprintf(`<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d">`,
-		config.Width, config.Height))
-	sb.WriteString("\n")
-
-	// Background
-	sb.WriteString(fmt.Sprintf(`  <rect width="%d" height="%d" fill="#ffffff"/>`, config.Width, config.Height))
-	sb.WriteString("\n")
-
-	// Title
-	if config.Title != "" {
-		sb.WriteString(fmt.Sprintf(`  <text x="%d" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#1f2937">%s</text>`,
-			config.Width/2, config.Title))
-		sb.WriteString("\n")
-	}
-
-	// Color palette
-	colors := []string{
-		"#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6",
-		"#ec4899", "#06b6d4", "#84cc16", "#f97316", "#6366f1",
-	}
-
-	// Draw slices
-	startAngle := -90.0 // Start at top
+	// Convert MCP types to main library types
+	slices := make([]maincharts.PieSlice, len(config.Data))
 	for i, dp := range config.Data {
-		angle := (dp.Value / total) * 360.0
-		endAngle := startAngle + angle
-
-		// Calculate slice path
-		startRad := startAngle * math.Pi / 180
-		endRad := endAngle * math.Pi / 180
-
-		x1 := centerX + radius*math.Cos(startRad)
-		y1 := centerY + radius*math.Sin(startRad)
-		x2 := centerX + radius*math.Cos(endRad)
-		y2 := centerY + radius*math.Sin(endRad)
-
-		largeArc := 0
-		if angle > 180 {
-			largeArc = 1
+		slices[i] = maincharts.PieSlice{
+			Label: dp.Label,
+			Value: dp.Value,
 		}
-
-		// Draw slice
-		sliceColor := colors[i%len(colors)]
-		sb.WriteString(fmt.Sprintf(`  <path d="M %.2f,%.2f L %.2f,%.2f A %.2f,%.2f 0 %d,1 %.2f,%.2f Z" fill="%s" stroke="#ffffff" stroke-width="2"/>`,
-			centerX, centerY, x1, y1, radius, radius, largeArc, x2, y2, sliceColor))
-		sb.WriteString("\n")
-
-		// Draw label
-		midAngle := (startAngle + endAngle) / 2
-		midRad := midAngle * math.Pi / 180
-		labelRadius := radius * 0.7
-		labelX := centerX + labelRadius*math.Cos(midRad)
-		labelY := centerY + labelRadius*math.Sin(midRad)
-
-		percentage := (dp.Value / total) * 100
-		sb.WriteString(fmt.Sprintf(`  <text x="%.2f" y="%.2f" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">%.1f%%</text>`,
-			labelX, labelY, percentage))
-		sb.WriteString("\n")
-
-		startAngle = endAngle
 	}
 
-	// Draw legend
-	legendX := float64(config.Width) - 150
-	legendY := 60.0
-	for i, dp := range config.Data {
-		// Color box
-		sb.WriteString(fmt.Sprintf(`  <rect x="%.2f" y="%.2f" width="12" height="12" fill="%s"/>`,
-			legendX, legendY+float64(i)*20, colors[i%len(colors)]))
-		sb.WriteString("\n")
-
-		// Label
-		sb.WriteString(fmt.Sprintf(`  <text x="%.2f" y="%.2f" font-size="12" fill="#374151">%s</text>`,
-			legendX+20, legendY+float64(i)*20+10, dp.Label))
-		sb.WriteString("\n")
+	data := maincharts.PieChartData{
+		Slices: slices,
 	}
 
-	sb.WriteString("</svg>")
+	// Call main library function
+	// Note: config.Donut maps to donutMode parameter
+	// showLegend=true, showPercent=true for MCP compatibility
+	svg := maincharts.RenderPieChart(data, 0, 0, config.Width, config.Height, config.Title, config.Donut, true, true)
 
-	return sb.String(), nil
+	return svg, nil
 }
 
 // CreateLineChart generates a line chart SVG using SCKelemen libraries

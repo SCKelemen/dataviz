@@ -104,6 +104,18 @@ type ScatterPoint struct {
 	Label string  // Optional: label for this specific point
 }
 
+// PieChartData represents data for a pie or donut chart
+type PieChartData struct {
+	Slices []PieSlice
+	Colors []string // Optional custom color palette (uses default if empty)
+}
+
+// PieSlice represents a single slice in a pie chart
+type PieSlice struct {
+	Label string
+	Value float64
+}
+
 // Card represents a visual card container
 type Card struct {
 	Width        int

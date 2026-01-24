@@ -204,14 +204,10 @@ func getTheme(name string) *design.DesignTokens {
 }
 
 func renderSVG(vizType string, data []byte, cfg Config, tokens *design.DesignTokens) string {
+	// Get chart content
 	content := renderVisualization(vizType, data, cfg, tokens)
 
-	// If content already contains a complete SVG document, return it as-is
-	if len(content) > 4 && content[:4] == "<svg" {
-		return content
-	}
-
-	// Otherwise, wrap content in SVG tags
+	// Wrap content in SVG document tags
 	svg := fmt.Sprintf(`<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d">`,
 		cfg.width, cfg.height, cfg.width, cfg.height)
 	svg += "\n"

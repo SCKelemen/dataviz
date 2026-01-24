@@ -16,14 +16,9 @@ func TestRenderPieChart(t *testing.T) {
 
 	result := RenderPieChart(data, 0, 0, 400, 400, "Test Pie Chart", false, true, true)
 
-	// Check that SVG is generated
+	// Check that SVG content is generated
 	if result == "" {
 		t.Error("Expected non-empty SVG output")
-	}
-
-	// Check for SVG element
-	if !strings.Contains(result, "<svg") {
-		t.Error("Expected <svg> element")
 	}
 
 	// Check for path elements (pie slices)

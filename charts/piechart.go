@@ -7,6 +7,7 @@ import (
 
 	"github.com/SCKelemen/color"
 	"github.com/SCKelemen/dataviz/charts/legends"
+	"github.com/SCKelemen/dataviz/scales"
 )
 
 // Default color palette for pie charts
@@ -34,11 +35,30 @@ func RenderPieChart(data PieChartData, x, y int, width, height int, title string
 		return renderEmptyPieChart(width, height, title)
 	}
 
-	// Use default colors if not provided
-	colors := data.Colors
-	if len(colors) == 0 {
-		colors = defaultPieColors
+	// Parse color palette
+	colorPalette := data.Colors
+	if len(colorPalette) == 0 {
+		colorPalette = defaultPieColors
 	}
+
+	// Convert hex colors to color.Color
+	parsedColors := make([]color.Color, len(colorPalette))
+	for i, hexColor := range colorPalette {
+		c, err := color.HexToRGB(hexColor)
+		if err != nil {
+			c, _ = color.HexToRGB("#888888") // Fallback gray
+		}
+		parsedColors[i] = c
+	}
+
+	// Extract category names from slices
+	categories := make([]string, len(data.Slices))
+	for i, slice := range data.Slices {
+		categories[i] = slice.Label
+	}
+
+	// Create categorical color scale
+	colorScale := scales.NewCategoricalColorScale(categories, parsedColors)
 
 	// Chart dimensions with space for title
 	titleHeight := 40
@@ -69,15 +89,16 @@ func RenderPieChart(data PieChartData, x, y int, width, height int, title string
 
 	// Draw slices
 	startAngle := -math.Pi / 2 // Start at top
-	for i, slice := range data.Slices {
+	for _, slice := range data.Slices {
 		angle := (slice.Value / total) * 2 * math.Pi
 		endAngle := startAngle + angle
 
-		// Get color (cycle through palette)
-		color := colors[i%len(colors)]
+		// Get color from scale
+		sliceColor := colorScale.ApplyColor(slice.Label)
+		colorHex := color.RGBToHex(sliceColor)
 
 		// Draw slice
-		sb.WriteString(renderPieSlice(centerX, centerY, radius, innerRadius, startAngle, endAngle, color))
+		sb.WriteString(renderPieSlice(centerX, centerY, radius, innerRadius, startAngle, endAngle, colorHex))
 
 		// Draw percentage label if enabled
 		if showPercent {
@@ -101,24 +122,14 @@ func RenderPieChart(data PieChartData, x, y int, width, height int, title string
 
 	// Draw legend if enabled
 	if showLegend {
-		// Parse colors from hex strings
-		parsedColors := make([]color.Color, len(colors))
-		for i, hexColor := range colors {
-			c, err := color.HexToRGB(hexColor)
-			if err != nil {
-				// Fallback to black if parsing fails
-				c, _ = color.HexToRGB("#000000")
-			}
-			parsedColors[i] = c
-		}
-
-		// Create legend items
+		// Create legend items using color scale
 		items := make([]legends.LegendItem, len(data.Slices))
 		for i, slice := range data.Slices {
 			percentage := (slice.Value / total) * 100
+			sliceColor := colorScale.ApplyColor(slice.Label)
 			items[i] = legends.ItemWithValue(
 				slice.Label,
-				legends.Swatch(parsedColors[i%len(parsedColors)]),
+				legends.Swatch(sliceColor),
 				fmt.Sprintf("%.1f%%", percentage),
 			)
 		}

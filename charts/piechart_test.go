@@ -75,11 +75,12 @@ func TestRenderPieChart_CustomColors(t *testing.T) {
 
 	result := RenderPieChart(data, 0, 0, 400, 400, "", false, false, false)
 
-	// Check for custom colors in output
-	if !strings.Contains(result, "#FF0000") {
+	// Check for custom colors in output (case insensitive)
+	resultLower := strings.ToLower(result)
+	if !strings.Contains(resultLower, "#ff0000") && !strings.Contains(resultLower, "#f00") {
 		t.Error("Expected custom red color in output")
 	}
-	if !strings.Contains(result, "#0000FF") {
+	if !strings.Contains(resultLower, "#0000ff") && !strings.Contains(resultLower, "#00f") {
 		t.Error("Expected custom blue color in output")
 	}
 }

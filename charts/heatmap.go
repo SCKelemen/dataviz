@@ -5,12 +5,14 @@ import (
 	"strings"
 	"time"
 
+	"github.com/SCKelemen/color"
 	design "github.com/SCKelemen/design-system"
+	"github.com/SCKelemen/dataviz/scales"
 	"github.com/SCKelemen/svg"
 )
 
 // RenderLinearHeatmap renders a linear (horizontal) heatmap
-func RenderLinearHeatmap(data HeatmapData, x, y int, width, height int, color string, designTokens *design.DesignTokens) string {
+func RenderLinearHeatmap(data HeatmapData, x, y int, width, height int, baseColorHex string, designTokens *design.DesignTokens) string {
 	var b strings.Builder
 
 	if len(data.Days) == 0 {
@@ -51,6 +53,20 @@ func RenderLinearHeatmap(data HeatmapData, x, y int, width, height int, color st
 		maxCount = 1
 	}
 
+	// Parse base color
+	baseColor, err := color.ParseColor(baseColorHex)
+	if err != nil {
+		baseColor, _ = color.HexToRGB("#888888") // Fallback gray
+	}
+
+	// Create sequential color scale from light to dark
+	lightColor := color.Lighten(baseColor, 0.8) // Very light version
+	colorScale := scales.NewSequentialColorScale(
+		[2]float64{0, float64(maxCount)},
+		lightColor,
+		baseColor,
+	)
+
 	// Position squares at the top of the content area with proper spacing
 	squareY := 8.0 // 8px spacing after title
 
@@ -59,9 +75,9 @@ func RenderLinearHeatmap(data HeatmapData, x, y int, width, height int, color st
 	for i := 0; i < maxDays && i < len(data.Days); i++ {
 		day := data.Days[i]
 
-		// Calculate contribution ratio and adjust color lightness
-		ratio := float64(day.Count) / float64(maxCount)
-		adjustedColor := AdjustColorForContribution(color, ratio)
+		// Use color scale to map count to color
+		cellColor := colorScale.ApplyColor(float64(day.Count))
+		adjustedColor := color.RGBToHex(cellColor)
 
 		// Calculate position to fill the entire width from left to right
 		squareX := float64(i) * (squareSize + 1.0)
@@ -77,7 +93,7 @@ func RenderLinearHeatmap(data HeatmapData, x, y int, width, height int, color st
 }
 
 // RenderWeeksHeatmap renders a GitHub-style weeks heatmap (grid of weeks)
-func RenderWeeksHeatmap(data HeatmapData, x, y int, width, height int, color string, designTokens *design.DesignTokens) string {
+func RenderWeeksHeatmap(data HeatmapData, x, y int, width, height int, baseColorHex string, designTokens *design.DesignTokens) string {
 	var b strings.Builder
 
 	if len(data.Days) == 0 {
@@ -120,6 +136,20 @@ func RenderWeeksHeatmap(data HeatmapData, x, y int, width, height int, color str
 		maxCount = 1
 	}
 
+	// Parse base color
+	baseColor, err := color.ParseColor(baseColorHex)
+	if err != nil {
+		baseColor, _ = color.HexToRGB("#888888") // Fallback gray
+	}
+
+	// Create sequential color scale from light to dark
+	lightColor := color.Lighten(baseColor, 0.8) // Very light version
+	colorScale := scales.NewSequentialColorScale(
+		[2]float64{0, float64(maxCount)},
+		lightColor,
+		baseColor,
+	)
+
 	// Calculate total heatmap height for vertical centering
 	totalHeatmapHeight := float64(daysPerWeek) * cellSize
 
@@ -161,9 +191,9 @@ func RenderWeeksHeatmap(data HeatmapData, x, y int, width, height int, color str
 			key := currentDate.Format("2006-01-02")
 			count := dayMap[key]
 
-			// Calculate contribution ratio and adjust color lightness
-			ratio := float64(count) / float64(maxCount)
-			adjustedColor := AdjustColorForContribution(color, ratio)
+			// Use color scale to map count to color
+			cellColor := colorScale.ApplyColor(float64(count))
+			adjustedColor := color.RGBToHex(cellColor)
 
 			cellX := float64(weekIdx) * weekWidth
 			cellY := float64(dayOfWeek) * cellSize

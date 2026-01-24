@@ -1,0 +1,399 @@
+# DataViz
+
+**Chart and data visualization library for Go with dual output modes (SVG + Terminal) and image export.**
+
+[![License: BearWare 1.0](https://img.shields.io/badge/license-BearWare%201.0-blue.svg)](LICENSE)
+[![Go Version](https://img.shields.io/badge/go-1.23+-blue.svg)](https://go.dev/dl/)
+
+## Overview
+
+DataViz provides high-level charting APIs built on top of the general-purpose [SCKelemen rendering stack](https://github.com/SCKelemen/layout). It focuses on **chart-specific code**: implementations of common chart types, image export, and tools for data visualization.
+
+## Architecture
+
+This library provides **chart implementations and visualization tools**:
+
+```
+┌─────────────────────────────────────────────────────────┐
+│          DataViz Monorepo (Chart-Specific Code)         │
+│  ┌─────────────────────────────────────────────────┐   │
+│  │  charts/     - Line, Bar, Scatter, Heatmap, Pie │   │
+│  │  export/     - PNG/JPEG conversion from SVG     │   │
+│  │  mcp/        - Model Context Protocol server    │   │
+│  │  cmd/        - viz-cli, dataviz-mcp binaries    │   │
+│  └─────────────────────────────────────────────────┘   │
+└────────────────────────┬────────────────────────────────┘
+                         │ depends on
+┌────────────────────────▼────────────────────────────────┐
+│       SCKelemen Rendering Stack (External Deps)         │
+│  ┌──────────────────┐    ┌──────────────────────────┐  │
+│  │  layout          │    │  design-system           │  │
+│  │  • Flexbox       │    │  • Design tokens         │  │
+│  │  • CSS Grid      │    │  • Themes (optional)     │  │
+│  │  • Text layout   │    │  • Radix UI integration  │  │
+│  └──────────────────┘    └──────────────────────────┘  │
+│                                                          │
+│  ┌──────────────────┐    ┌──────────────────────────┐  │
+│  │  cli             │    │  tui                     │  │
+│  │  • SVG output    │    │  • Dashboard framework   │  │
+│  │  • Terminal out  │    │  • Interactive UI        │  │
+│  └──────────────────┘    └──────────────────────────┘  │
+└────────────────────────┬────────────────────────────────┘
+                         │ depends on
+┌────────────────────────▼────────────────────────────────┐
+│            Foundation Libraries (External)              │
+│  unicode, color, units, svg, text                       │
+└─────────────────────────────────────────────────────────┘
+```
+
+### Use Cases
+
+**1. Data Visualization & Charting**
+- Line graphs, bar charts, scatter plots, heatmaps, pie charts
+- Time-series visualization with `time.Time` types
+- Gradients, markers, stacked bars
+- Design token integration for consistent styling
+- Dual output: SVG for web, Terminal for CLI
+
+**2. Image Export**
+- Convert any SVG chart to PNG or JPEG
+- Configurable dimensions and quality
+- Auto-dimension calculation from SVG viewBox
+
+**3. AI Agent Integration**
+- MCP server for Claude Code and other MCP clients
+- Generic data types (interface{}, float64) for multi-source data
+- Composable with other MCP servers (Omnitron, file systems, APIs)
+
+**4. Command-Line Tools**
+- viz-cli: Interactive terminal chart viewer
+- dataviz-mcp: MCP server for AI agents
+
+## Packages
+
+### Chart Implementations
+
+#### `charts/`
+High-level charting API with multiple chart types:
+- **Line graphs** with area fill, gradients, markers
+- **Bar charts** with stacked support
+- **Scatter plots** with multiple series
+- **Heatmaps** (linear and GitHub-style weeks view)
+- **Pie/donut charts**
+- **Time-series** support with `time.Time` types
+- **Dual output**: SVG and Terminal rendering
+
+Built on top of [SCKelemen/layout](https://github.com/SCKelemen/layout) for positioning and layout.
+
+### Image Export
+
+#### `export/`
+Image conversion utilities:
+- SVG → PNG conversion with configurable dimensions
+- SVG → JPEG conversion with quality settings
+- Auto-dimension calculation from SVG viewBox
+- Aspect ratio preservation
+
+Uses `github.com/srwiley/oksvg` and `rasterx` for rasterization.
+
+### MCP Server
+
+#### `mcp/`
+Model Context Protocol server for AI agents:
+- Chart generation tools for Claude Code
+- Generic data types (interface{}, float64)
+- Composable with other MCP servers (Omnitron, file systems, APIs)
+- Data-source agnostic design
+
+### Command-Line Tools
+
+#### `cmd/viz-cli/`
+Interactive terminal chart viewer:
+```bash
+viz-cli data.json              # Visualize JSON data
+viz-cli --watch data.json      # Watch for changes
+viz-cli --output chart.svg     # Export to SVG
+```
+
+#### `cmd/dataviz-mcp/`
+MCP server binary for Claude Code integration:
+```bash
+dataviz-mcp                    # Start MCP server
+```
+
+Configure in Claude Code:
+```json
+{
+  "mcpServers": {
+    "dataviz": {
+      "command": "dataviz-mcp"
+    }
+  }
+}
+```
+
+## External Dependencies
+
+This library depends on the **SCKelemen rendering stack**:
+
+- **[layout](https://github.com/SCKelemen/layout)** - CSS Grid, Flexbox, text layout
+- **[cli](https://github.com/SCKelemen/cli)** - SVG and terminal renderers
+- **[tui](https://github.com/SCKelemen/tui)** - Interactive dashboard framework
+- **[design-system](https://github.com/SCKelemen/design-system)** - Design tokens and themes (optional)
+
+And foundation libraries:
+- **[unicode](https://github.com/SCKelemen/unicode)** - 10 UAX/UTS implementations
+- **[color](https://github.com/SCKelemen/color)** - OKLCH perceptually uniform color
+- **[units](https://github.com/SCKelemen/units)** - Type-safe CSS units
+- **[svg](https://github.com/SCKelemen/svg)** - SVG generation primitives
+- **[text](https://github.com/SCKelemen/text)** - Unicode-aware text operations
+
+## Installation
+
+```bash
+# As a library
+go get github.com/SCKelemen/dataviz
+
+# Build CLI tools
+git clone https://github.com/SCKelemen/dataviz
+cd dataviz
+go build -o viz-cli ./cmd/viz-cli
+go build -o dataviz-mcp ./cmd/dataviz-mcp
+```
+
+## Usage Examples
+
+### 1. Time-Series Line Chart
+
+```go
+import "github.com/SCKelemen/dataviz/charts"
+
+// Time-series line chart
+data := []charts.TimeSeriesData{
+    {Date: time.Date(2024, 1, 1, 0, 0, 0, 0, time.UTC), Value: 100},
+    {Date: time.Date(2024, 1, 2, 0, 0, 0, 0, time.UTC), Value: 150},
+    {Date: time.Date(2024, 1, 3, 0, 0, 0, 0, time.UTC), Value: 120},
+}
+
+config := charts.LineChartConfig{
+    Width: 800,
+    Height: 400,
+    Title: "Sales Over Time",
+    UseGradient: true,
+    ShowMarkers: true,
+}
+
+// Render to SVG
+svgChart := charts.RenderLineChart(data, config)
+
+// Or render to terminal
+termChart := charts.RenderLineChartTerminal(data, config)
+```
+
+### 3. Image Export
+
+```go
+import "github.com/SCKelemen/dataviz/export"
+
+// Convert SVG to PNG
+opts := export.ExportOptions{
+    Format: export.FormatPNG,
+    Width: 1200,
+    Height: 600,
+}
+
+pngData, err := export.Export(svgChart, opts)
+if err != nil {
+    log.Fatal(err)
+}
+
+// Save to file
+os.WriteFile("chart.png", pngData, 0644)
+```
+
+### 4. With Design Tokens (Optional)
+
+```go
+import (
+    design "github.com/SCKelemen/design-system"
+    "github.com/SCKelemen/dataviz/charts"
+)
+
+// Use design tokens for consistent styling
+theme := design.MidnightTheme()
+
+config := charts.LineChartConfig{
+    Width: 800,
+    Height: 400,
+    Colors: theme.Colors.Chart,
+    Typography: theme.Typography,
+    Spacing: theme.Spacing,
+}
+
+svgChart := charts.RenderLineChart(data, config)
+```
+
+### 5. Interactive Dashboard
+
+```go
+import (
+    "github.com/SCKelemen/tui"
+    "github.com/SCKelemen/dataviz/charts"
+    tea "github.com/charmbracelet/bubbletea"
+)
+
+func main() {
+    // Create dashboard model with charts
+    model := tui.NewDashboard()
+    model.AddChart("Sales", salesChartData)
+
+    // Run with bubbletea
+    p := tea.NewProgram(model)
+    if err := p.Start(); err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
+## Key Design Principles
+
+### 1. Layered Architecture
+- **Low-level**: Layout engine (flexbox, grid, text)
+- **Mid-level**: Renderers (SVG, terminal)
+- **High-level**: Charts API (uses layout + renderers)
+
+This separation allows you to:
+- Use the layout engine without charts
+- Use the renderers for custom visualizations
+- Use the charts API for quick results
+
+### 2. Dual Output Modes
+Every layout and chart can be rendered to:
+- **SVG** - For web, documentation, high-quality printing
+- **Terminal** - For CLI tools, SSH sessions, logs
+- **PNG/JPEG** - Via export package from SVG
+
+### 3. Optional Design Tokens
+Design tokens are **opt-in**:
+- Use them for consistent styling across your app
+- Or don't - the rendering engine works fine without them
+- Themes: midnight, nord, paper, wrapped
+
+### 4. Data-Source Agnostic
+The MCP server and charts API accept generic data:
+- `interface{}` for X values (can be time.Time, int, float64, string)
+- `float64` for Y values
+- Works with data from any source (Omnitron, databases, APIs, files)
+
+### 5. Type-Safe
+- Layout uses type-safe CSS units
+- Charts use proper types (time.Time for time-series)
+- Compile-time safety where possible
+
+## Package Import Paths
+
+```go
+// DataViz packages (this monorepo)
+import "github.com/SCKelemen/dataviz/charts"  // Chart implementations
+import "github.com/SCKelemen/dataviz/export"  // Image conversion
+import "github.com/SCKelemen/dataviz/mcp"     // MCP server (usually not imported, used as binary)
+
+// External rendering stack (separate repos)
+import "github.com/SCKelemen/layout"          // CSS Grid, Flexbox, text layout
+import "github.com/SCKelemen/cli"             // SVG and terminal renderers
+import "github.com/SCKelemen/tui"             // Dashboard framework
+import design "github.com/SCKelemen/design-system"  // Design tokens (optional)
+
+// Foundation libraries (separate repos)
+import "github.com/SCKelemen/color"           // OKLCH color operations
+import "github.com/SCKelemen/svg"             // SVG primitives
+import "github.com/SCKelemen/text"            // Unicode text operations
+```
+
+## Project Structure
+
+```
+github.com/SCKelemen/dataviz/
+├── charts/          # Chart implementations (line, bar, scatter, heatmap, pie)
+├── export/          # PNG/JPEG conversion from SVG
+├── mcp/             # MCP server implementation
+│   ├── charts/      # MCP chart handlers
+│   ├── types/       # MCP type definitions
+│   └── mcp/         # MCP protocol implementation
+├── cmd/
+│   ├── viz-cli/     # CLI binary for terminal charts
+│   └── dataviz-mcp/ # MCP server binary
+├── examples/        # Example code and data files
+└── docs/            # Documentation
+```
+
+## Related Projects
+
+This monorepo consolidates three previous repositories:
+- **dataviz** (archived) - Original core library
+- **viz-cli** (archived) - Original CLI tool
+- **dataviz-mcp** (archived) - Original MCP server
+
+### SCKelemen Foundation Libraries
+- [SCKelemen/unicode](https://github.com/SCKelemen/unicode) - 10 UAX/UTS implementations (monorepo)
+- [SCKelemen/color](https://github.com/SCKelemen/color) - OKLCH perceptually uniform color
+- [SCKelemen/units](https://github.com/SCKelemen/units) - Type-safe CSS units
+- [SCKelemen/svg](https://github.com/SCKelemen/svg) - SVG generation primitives
+- [SCKelemen/clix](https://github.com/SCKelemen/clix) - CLI framework with extensions
+
+## Contributing
+
+Contributions welcome! This is a monorepo with multiple packages, so please:
+1. Keep changes to relevant packages
+2. Update tests in the same commit
+3. Follow existing code style
+4. Update documentation
+
+## License
+
+BearWare 1.0 - MIT-compatible license. See [LICENSE](LICENSE) for details.
+
+Help the bear. 🐻🐼🐻‍❄️
+
+## FAQ
+
+### Is this just a charting library?
+
+No! The core is a **general-purpose layout and rendering engine**. Charts are a high-level API built on top. You can use the layout engine to render:
+- Flexbox layouts
+- CSS Grid layouts
+- Text with proper Unicode handling
+- Any custom visualization
+
+### Can I use the layout engine without charts?
+
+Yes! Import `layout/` and `render/svg/` (or `render/terminal/`) directly.
+
+### Do I need to use design tokens?
+
+No, design tokens in `design/` are optional. The rendering engine works fine without them.
+
+### What's the difference between render/svg/ and charts/?
+
+- `render/svg/` is a **general-purpose SVG renderer** (can render any layout)
+- `charts/` is a **high-level API** for common chart types (uses render/svg/ internally)
+
+### Can I render to PNG/JPEG?
+
+Yes! Use `export/` to convert any SVG to PNG or JPEG.
+
+### What's MCP?
+
+Model Context Protocol - a standard for integrating tools with LLMs like Claude. The `mcp/` package implements a server that exposes chart generation as MCP tools.
+
+### Why a monorepo?
+
+- Single source of truth for rendering logic
+- Shared layout engine across all outputs
+- Atomic commits across packages
+- Easier testing and CI/CD
+- Consistent versioning
+
+### What happened to the old repos?
+
+The previous repos (dataviz, viz-cli, dataviz-mcp) have been archived and redirect here. Import paths have changed to `github.com/SCKelemen/dataviz/*`.

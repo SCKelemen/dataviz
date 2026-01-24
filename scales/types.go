@@ -110,8 +110,8 @@ type ContinuousScale interface {
 	Clamp(enabled bool) ContinuousScale
 }
 
-// OrdinalScale extends Scale for categorical scales
-type OrdinalScale interface {
+// CategoricalScale extends Scale for categorical scales (Band, Point, Ordinal)
+type CategoricalScale interface {
 	Scale
 
 	// Values returns all domain values
@@ -119,9 +119,6 @@ type OrdinalScale interface {
 
 	// Index returns the index of a value in the domain
 	Index(value string) int
-
-	// Unknown sets the return value for unknown domain values
-	Unknown(value units.Length) OrdinalScale
 }
 
 // ColorScale maps domain values to colors

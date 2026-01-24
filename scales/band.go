@@ -130,12 +130,6 @@ func (s *BandScale) Index(value string) int {
 	return -1
 }
 
-// Unknown sets the return value for unknown domain values (not applicable for band scales)
-func (s *BandScale) Unknown(value units.Length) OrdinalScale {
-	// BandScale doesn't use unknown values - they map to 0
-	return s
-}
-
 // Bandwidth returns the width of each band
 func (s *BandScale) Bandwidth() units.Length {
 	return units.Length{Value: s.bandwidth, Unit: s.range_[0].Unit}

@@ -1,3 +1,40 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
-<text x="400" y="300" text-anchor="middle">Scatter plot: Use MCP server for full support</text>
+<g transform="translate(0, 0)"><g class="axis axis-right">
+  <line x1="795.00" y1="600.00" x2="795.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="795.00" y1="600.00" x2="801.00" y2="600.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="795.00" y1="600.00" x2="-5.00" y2="600.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="804.00" y="600.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">0</text>
+  <line x1="795.00" y1="480.00" x2="801.00" y2="480.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="795.00" y1="480.00" x2="-5.00" y2="480.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="804.00" y="480.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">20</text>
+  <line x1="795.00" y1="360.00" x2="801.00" y2="360.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="795.00" y1="360.00" x2="-5.00" y2="360.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="804.00" y="360.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">40</text>
+  <line x1="795.00" y1="240.00" x2="801.00" y2="240.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="795.00" y1="240.00" x2="-5.00" y2="240.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="804.00" y="240.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">60</text>
+  <line x1="795.00" y1="120.00" x2="801.00" y2="120.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="795.00" y1="120.00" x2="-5.00" y2="120.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="804.00" y="120.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">80</text>
+  <line x1="795.00" y1="0.00" x2="801.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="795.00" y1="0.00" x2="-5.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="804.00" y="0.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">100</text>
+</g>
+<circle cx="107.18" cy="330.00" r="5.00" fill="#3B82F6" stroke="#020617" stroke-width="1.50"/>
+<text x="107.18" y="338.00" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">A</text>
+<circle cx="535.90" cy="66.00" r="5.00" fill="#3B82F6" stroke="#020617" stroke-width="1.50"/>
+<text x="535.90" y="74.00" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">B</text>
+<circle cx="0.00" cy="264.00" r="5.00" fill="#3B82F6" stroke="#020617" stroke-width="1.50"/>
+<text x="0.00" y="272.00" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">C</text>
+<circle cx="643.08" cy="396.00" r="5.00" fill="#3B82F6" stroke="#020617" stroke-width="1.50"/>
+<text x="643.08" y="404.00" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">D</text>
+<circle cx="321.54" cy="198.00" r="5.00" fill="#3B82F6" stroke="#020617" stroke-width="1.50"/>
+<text x="321.54" y="206.00" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">E</text>
+<circle cx="760.00" cy="462.00" r="5.00" fill="#3B82F6" stroke="#020617" stroke-width="1.50"/>
+<text x="760.00" y="470.00" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">F</text>
+<circle cx="214.36" cy="132.00" r="5.00" fill="#3B82F6" stroke="#020617" stroke-width="1.50"/>
+<text x="214.36" y="140.00" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">G</text>
+<circle cx="428.72" cy="528.00" r="5.00" fill="#3B82F6" stroke="#020617" stroke-width="1.50"/>
+<text x="428.72" y="536.00" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">H</text>
+</g>
 </svg>

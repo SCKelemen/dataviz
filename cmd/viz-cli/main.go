@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"time"
 
 	"github.com/SCKelemen/dataviz/charts"
 	"github.com/SCKelemen/dataviz/scales"
@@ -203,11 +204,17 @@ func getTheme(name string) *design.DesignTokens {
 }
 
 func renderSVG(vizType string, data []byte, cfg Config, tokens *design.DesignTokens) string {
+	content := renderVisualization(vizType, data, cfg, tokens)
+
+	// If content already contains a complete SVG document, return it as-is
+	if len(content) > 4 && content[:4] == "<svg" {
+		return content
+	}
+
+	// Otherwise, wrap content in SVG tags
 	svg := fmt.Sprintf(`<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d">`,
 		cfg.width, cfg.height, cfg.width, cfg.height)
 	svg += "\n"
-
-	content := renderVisualization(vizType, data, cfg, tokens)
 	svg += content
 	svg += "\n</svg>"
 
@@ -582,15 +589,85 @@ func renderOHLC(data []byte, cfg Config) string {
 // Basic charts
 
 func renderScatter(data []byte, cfg Config) string {
-	// Scatter implementation placeholder
-	return fmt.Sprintf(`<text x="%d" y="%d" text-anchor="middle">Scatter plot: Use MCP server for full support</text>`,
-		cfg.width/2, cfg.height/2)
+	var input struct {
+		Data []struct {
+			X     interface{} `json:"x"`     // Can be number, string, or date
+			Y     float64     `json:"y"`
+			Label string      `json:"label,omitempty"`
+			Size  float64     `json:"size,omitempty"`
+		} `json:"data"`
+		XLabel     string `json:"x_label,omitempty"`
+		YLabel     string `json:"y_label,omitempty"`
+		MarkerType string `json:"marker_type,omitempty"`
+	}
+	if err := json.Unmarshal(data, &input); err != nil {
+		fmt.Fprintf(os.Stderr, "Error parsing scatter data: %v\n", err)
+		os.Exit(1)
+	}
+
+	scatterData := charts.ScatterPlotData{
+		Points:     make([]charts.ScatterPoint, len(input.Data)),
+		Color:      cfg.color,
+		MarkerType: input.MarkerType,
+		MarkerSize: 5,
+	}
+
+	for i, d := range input.Data {
+		// Try to parse X as a date, otherwise use current time + index as placeholder
+		var date time.Time
+		switch v := d.X.(type) {
+		case string:
+			parsed, err := time.Parse(time.RFC3339, v)
+			if err == nil {
+				date = parsed
+			} else {
+				// Use index-based time if not a valid date
+				date = time.Now().Add(time.Duration(i) * 24 * time.Hour)
+			}
+		case float64:
+			// Use number as days offset from now
+			date = time.Now().Add(time.Duration(v*24) * time.Hour)
+		default:
+			date = time.Now().Add(time.Duration(i) * 24 * time.Hour)
+		}
+
+		scatterData.Points[i] = charts.ScatterPoint{
+			Date:  date,
+			Value: int(d.Y),
+			Label: d.Label,
+			Size:  d.Size,
+		}
+	}
+
+	tokens := getTheme(cfg.theme)
+	return charts.RenderScatterPlot(scatterData, 0, 0, cfg.width, cfg.height, tokens)
 }
 
 func renderPie(data []byte, cfg Config) string {
-	// Pie implementation placeholder
-	return fmt.Sprintf(`<text x="%d" y="%d" text-anchor="middle">Pie chart: Use MCP server for full support</text>`,
-		cfg.width/2, cfg.height/2)
+	var input struct {
+		Data []struct {
+			Label string  `json:"label"`
+			Value float64 `json:"value"`
+		} `json:"data"`
+		Donut bool `json:"donut,omitempty"`
+	}
+	if err := json.Unmarshal(data, &input); err != nil {
+		fmt.Fprintf(os.Stderr, "Error parsing pie data: %v\n", err)
+		os.Exit(1)
+	}
+
+	pieData := charts.PieChartData{
+		Slices: make([]charts.PieSlice, len(input.Data)),
+	}
+
+	for i, d := range input.Data {
+		pieData.Slices[i] = charts.PieSlice{
+			Label: d.Label,
+			Value: d.Value,
+		}
+	}
+
+	return charts.RenderPieChart(pieData, 0, 0, cfg.width, cfg.height, "", input.Donut, true, true)
 }
 
 func renderArea(data []byte, cfg Config) string {

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500"><rect x="0.00" y="0.00" width="800.00" height="500.00" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="540" viewBox="0 0 800 540"><rect x="0.00" y="0.00" width="800.00" height="540.00" fill="#ffffff"/>
 <text x="400.00" y="30.00" fill="#000000" text-anchor="middle" font-family="sans-serif" font-size="20.00px" font-weight="bold">Heatmap Gallery</text>
 <g transform="translate(25, 60)"><text x="400.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Linear Heatmap</text><g transform="translate(0, 25)"><g transform="translate(0, 0)"><rect x="0.00" y="8.00" width="24.03" height="24.03" rx="2.00" ry="2.00" fill="#98e5fe"/>
 <rect x="25.03" y="8.00" width="24.03" height="24.03" rx="2.00" ry="2.00" fill="#84dafd"/>

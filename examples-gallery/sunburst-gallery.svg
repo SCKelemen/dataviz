@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500"><rect x="0.00" y="0.00" width="900.00" height="500.00" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="530" viewBox="0 0 900 530"><rect x="0.00" y="0.00" width="900.00" height="530.00" fill="#ffffff"/>
 <text x="450.00" y="30.00" fill="#000000" text-anchor="middle" font-family="sans-serif" font-size="20.00px" font-weight="bold">Sunburst Gallery</text>
 <g transform="translate(25, 60)"><text x="200.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Full Sunburst</text><g transform="translate(0, 30)"><path d="M 200.00 200.00 L 200.00 100.00 A 100.00 100.00 0 1 1 200.00 100.00 L 200.00 200.00 A 0.00 0.00 0 1 0 200.00 200.00 Z" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
 <g transform="rotate(90.00 200.00 250.00)"><text x="200.00" y="250.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px" font-weight="bold">Root</text></g>

@@ -91,7 +91,7 @@ func generatePieGallery() (string, error) {
 
 	w, h := 800, 350
 	totalWidth := w * 3
-	totalHeight := h
+	totalHeight := h + 30 // Extra bottom margin
 
 	var content string
 
@@ -191,7 +191,7 @@ func generateBarGallery() (string, error) {
 
 	w, h := 800, 450
 	totalWidth := w*2 + 100
-	totalHeight := h
+	totalHeight := h + 30 // Extra bottom margin
 
 	var content string
 
@@ -268,7 +268,7 @@ func generateLineGallery() (string, error) {
 	chartW, chartH := 560, 260
 	w, h := chartW+90, chartH+90
 	totalWidth := w * 2
-	totalHeight := h * 2
+	totalHeight := h*2 + 40 // Extra bottom margin
 
 	var content string
 
@@ -548,7 +548,7 @@ func generateAreaGallery() (string, error) {
 	chartW, chartH := 700, 300
 	w, h := chartW+100, chartH+100
 	totalWidth := w * 2
-	totalHeight := h
+	totalHeight := h + 40 // Extra bottom margin
 
 	var content string
 
@@ -626,7 +626,7 @@ func generateStackedAreaGallery() (string, error) {
 	chartW, chartH := 700, 300
 	w, h := chartW+100, chartH+100
 	totalWidth := w * 2
-	totalHeight := h
+	totalHeight := h + 40 // Extra bottom margin
 
 	var content string
 
@@ -720,7 +720,7 @@ func generateHeatmapGallery() (string, error) {
 
 	w, h := 800, 250
 	totalWidth := w
-	totalHeight := h * 2
+	totalHeight := h*2 + 40 // Extra bottom margin
 
 	var content string
 
@@ -783,7 +783,7 @@ func generateStatCardGallery() (string, error) {
 	w, h := 300, 200
 	cols := 3
 	totalWidth := w * cols
-	totalHeight := h * 2
+	totalHeight := h*2 + 40 // Extra bottom margin
 
 	var content string
 
@@ -921,7 +921,7 @@ func generateBoxPlotGallery() (string, error) {
 
 	w, h := 600, 400
 	totalWidth := w * 2
-	totalHeight := h
+	totalHeight := h + 30 // Extra bottom margin
 
 	var content string
 
@@ -1006,7 +1006,7 @@ func generateHistogramGallery() (string, error) {
 
 	w, h := 600, 400
 	totalWidth := w * 2
-	totalHeight := h
+	totalHeight := h + 30 // Extra bottom margin
 
 	var content string
 
@@ -1084,7 +1084,7 @@ func generateViolinPlotGallery() (string, error) {
 
 	w, h := 600, 400
 	totalWidth := w * 2
-	totalHeight := h
+	totalHeight := h + 30 // Extra bottom margin
 
 	var content string
 
@@ -1166,7 +1166,7 @@ func generateLollipopGallery() (string, error) {
 
 	w, h := 600, 400
 	totalWidth := w * 2
-	totalHeight := h
+	totalHeight := h + 30 // Extra bottom margin
 
 	var content string
 
@@ -1247,7 +1247,7 @@ func generateCandlestickGallery() (string, error) {
 
 	w, h := 600, 400
 	totalWidth := w * 2
-	totalHeight := h
+	totalHeight := h + 30 // Extra bottom margin
 
 	var content string
 
@@ -1379,7 +1379,7 @@ func generateTreemapGallery() (string, error) {
 
 	w, h := 600, 400
 	totalWidth := w * 2
-	totalHeight := h
+	totalHeight := h + 30 // Extra bottom margin
 
 	var content string
 
@@ -1455,7 +1455,7 @@ func generateSunburstGallery() (string, error) {
 	chartSize := 400
 	w, h := chartSize+50, chartSize+100
 	totalWidth := w * 2
-	totalHeight := h
+	totalHeight := h + 30 // Extra bottom margin
 
 	var content string
 
@@ -1532,7 +1532,7 @@ func generateCirclePackingGallery() (string, error) {
 	// Circle packing needs extra horizontal space as circles extend beyond center
 	w, h := chartSize+200, chartSize+100
 	totalWidth := w * 2
-	totalHeight := h
+	totalHeight := h + 30 // Extra bottom margin
 
 	var content string
 
@@ -1607,7 +1607,7 @@ func generateIcicleGallery() (string, error) {
 
 	w, h := 600, 400
 	totalWidth := w * 2
-	totalHeight := h
+	totalHeight := h + 30 // Extra bottom margin
 
 	var content string
 
@@ -1702,7 +1702,7 @@ func generateRadarGallery() (string, error) {
 
 	w, h := 500, 500
 	totalWidth := w * 2
-	totalHeight := h
+	totalHeight := h + 30 // Extra bottom margin
 
 	var content string
 
@@ -1792,7 +1792,7 @@ func generateStreamChartGallery() (string, error) {
 
 	w, h := 600, 400
 	totalWidth := w * 2
-	totalHeight := h
+	totalHeight := h + 30 // Extra bottom margin
 
 	var content string
 
@@ -1873,7 +1873,7 @@ func generateRidgelineGallery() (string, error) {
 
 	w, h := 600, 400
 	totalWidth := w * 2
-	totalHeight := h
+	totalHeight := h + 30 // Extra bottom margin
 
 	var content string
 

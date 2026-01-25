@@ -40,6 +40,10 @@ func generateGalleries() error {
 		"line":              generateLineGallery,
 		"scatter":           generateScatterGallery,
 		"connected-scatter": generateConnectedScatterGallery,
+		"area":              generateAreaGallery,
+		"stacked-area":      generateStackedAreaGallery,
+		"heatmap":           generateHeatmapGallery,
+		"statcard":          generateStatCardGallery,
 	}
 
 	for name, generator := range generators {
@@ -506,4 +510,383 @@ func generateConnectedScatterGallery() (string, error) {
 func mustParseTime(s string) time.Time {
 	t, _ := time.Parse("2006-01-02", s)
 	return t
+}
+
+// Area chart variations: simple, with gradient
+func generateAreaGallery() (string, error) {
+	tokens := design.DefaultTheme()
+
+	data := charts.AreaChartData{
+		Label: "Sales",
+		Color: "#3b82f6",
+		Points: []charts.TimeSeriesData{
+			{Date: mustParseTime("2024-01-01"), Value: 100},
+			{Date: mustParseTime("2024-02-01"), Value: 120},
+			{Date: mustParseTime("2024-03-01"), Value: 110},
+			{Date: mustParseTime("2024-04-01"), Value: 140},
+			{Date: mustParseTime("2024-05-01"), Value: 130},
+			{Date: mustParseTime("2024-06-01"), Value: 150},
+		},
+	}
+
+	w, h := 800, 400
+	totalWidth := w * 2
+	totalHeight := h
+
+	var content string
+
+	// White background
+	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += "\n"
+
+	// Title
+	titleStyle := svg.Style{
+		FontSize:   units.Px(20),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#000000",
+		TextAnchor: "middle",
+	}
+	content += svg.Text("Area Chart Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += "\n"
+
+	labelStyle := svg.Style{
+		FontSize:   units.Px(14),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#666",
+		TextAnchor: "middle",
+	}
+
+	// Simple area
+	content += svg.Group(
+		svg.Text("Simple Area", 400, 0, labelStyle)+
+			svg.Group(
+				charts.RenderAreaChart(data, 0, 0, w-50, h-70, tokens),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		"translate(0, 60)",
+		svg.Style{},
+	)
+	content += "\n"
+
+	// With gradient
+	dataGradient := data
+	dataGradient.Color = "#10b981"
+	content += svg.Group(
+		svg.Text("Different Color", 400, 0, labelStyle)+
+			svg.Group(
+				charts.RenderAreaChart(dataGradient, 0, 0, w-50, h-70, tokens),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		fmt.Sprintf("translate(%d, 60)", w),
+		svg.Style{},
+	)
+	content += "\n"
+
+	return wrapSVG(content, totalWidth, totalHeight), nil
+}
+
+// Stacked area chart variations
+func generateStackedAreaGallery() (string, error) {
+	series := []charts.StackedAreaSeries{
+		{Label: "Series A", Color: "#3b82f6"},
+		{Label: "Series B", Color: "#10b981"},
+		{Label: "Series C", Color: "#f59e0b"},
+	}
+
+	points := []charts.StackedAreaPoint{
+		{X: 0, Values: []float64{10, 15, 5}},
+		{X: 1, Values: []float64{20, 10, 15}},
+		{X: 2, Values: []float64{15, 20, 10}},
+		{X: 3, Values: []float64{25, 15, 10}},
+		{X: 4, Values: []float64{20, 25, 15}},
+	}
+
+	w, h := 800, 400
+	totalWidth := w * 2
+	totalHeight := h
+
+	var content string
+
+	// White background
+	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += "\n"
+
+	// Title
+	titleStyle := svg.Style{
+		FontSize:   units.Px(20),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#000000",
+		TextAnchor: "middle",
+	}
+	content += svg.Text("Stacked Area Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += "\n"
+
+	labelStyle := svg.Style{
+		FontSize:   units.Px(14),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#666",
+		TextAnchor: "middle",
+	}
+
+	// Standard stacked
+	spec1 := charts.StackedAreaSpec{
+		Points: points,
+		Series: series,
+		Width:  float64(w - 50),
+		Height: float64(h - 80),
+	}
+	content += svg.Group(
+		svg.Text("Standard Stacked", 400, 0, labelStyle)+
+			svg.Group(
+				charts.RenderStackedArea(spec1),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		"translate(25, 60)",
+		svg.Style{},
+	)
+	content += "\n"
+
+	// Smooth curves
+	spec2 := charts.StackedAreaSpec{
+		Points: points,
+		Series: series,
+		Width:  float64(w - 50),
+		Height: float64(h - 80),
+		Smooth: true,
+	}
+	content += svg.Group(
+		svg.Text("Smooth Curves", 400, 0, labelStyle)+
+			svg.Group(
+				charts.RenderStackedArea(spec2),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		fmt.Sprintf("translate(%d, 60)", w+25),
+		svg.Style{},
+	)
+	content += "\n"
+
+	return wrapSVG(content, totalWidth, totalHeight), nil
+}
+
+// Heatmap variations: linear and weeks view
+func generateHeatmapGallery() (string, error) {
+	tokens := design.DefaultTheme()
+
+	// Generate sample data for a year
+	startDate := mustParseTime("2024-01-01")
+	days := make([]charts.ContributionDay, 365)
+	for i := 0; i < 365; i++ {
+		date := startDate.AddDate(0, 0, i)
+		// Create some pattern in the data
+		count := (i%7)*3 + (i%30)/5
+		days[i] = charts.ContributionDay{
+			Date:  date,
+			Count: count,
+		}
+	}
+
+	data := charts.HeatmapData{
+		Days:      days,
+		StartDate: startDate,
+		EndDate:   startDate.AddDate(0, 0, 364),
+	}
+
+	w, h := 800, 250
+	totalWidth := w
+	totalHeight := h * 2
+
+	var content string
+
+	// White background
+	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += "\n"
+
+	// Title
+	titleStyle := svg.Style{
+		FontSize:   units.Px(20),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#000000",
+		TextAnchor: "middle",
+	}
+	content += svg.Text("Heatmap Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += "\n"
+
+	labelStyle := svg.Style{
+		FontSize:   units.Px(14),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#666",
+		TextAnchor: "middle",
+	}
+
+	// Linear heatmap
+	content += svg.Group(
+		svg.Text("Linear Heatmap", 400, 0, labelStyle)+
+			svg.Group(
+				charts.RenderLinearHeatmap(data, 0, 0, w-50, h-80, "#3b82f6", tokens),
+				"translate(0, 25)",
+				svg.Style{},
+			),
+		"translate(25, 60)",
+		svg.Style{},
+	)
+	content += "\n"
+
+	// Weeks heatmap (GitHub style)
+	content += svg.Group(
+		svg.Text("Weeks Heatmap (GitHub Style)", 400, 0, labelStyle)+
+			svg.Group(
+				charts.RenderWeeksHeatmap(data, 0, 0, w-50, h-80, "#10b981", tokens),
+				"translate(0, 25)",
+				svg.Style{},
+			),
+		fmt.Sprintf("translate(25, %d)", h+20),
+		svg.Style{},
+	)
+	content += "\n"
+
+	return wrapSVG(content, totalWidth, totalHeight), nil
+}
+
+// Stat card variations: with different trends
+func generateStatCardGallery() (string, error) {
+	tokens := design.DefaultTheme()
+
+	w, h := 300, 200
+	cols := 3
+	totalWidth := w * cols
+	totalHeight := h * 2
+
+	var content string
+
+	// White background
+	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += "\n"
+
+	// Title
+	titleStyle := svg.Style{
+		FontSize:   units.Px(20),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#000000",
+		TextAnchor: "middle",
+	}
+	content += svg.Text("Stat Card Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += "\n"
+
+	// Helper to create trend data
+	makeTrendData := func(values []int) []charts.TimeSeriesData {
+		result := make([]charts.TimeSeriesData, len(values))
+		startDate := mustParseTime("2024-01-01")
+		for i, v := range values {
+			result[i] = charts.TimeSeriesData{
+				Date:  startDate.AddDate(0, 0, i*7), // Weekly data
+				Value: v,
+			}
+		}
+		return result
+	}
+
+	cards := []struct {
+		data charts.StatCardData
+		name string
+	}{
+		{
+			data: charts.StatCardData{
+				Title:     "Total Revenue",
+				Value:     "$124.5K",
+				Subtitle:  "+12.5% from last month",
+				Change:    12,
+				ChangePct: 12.5,
+				Color:     "#10b981",
+				TrendData: makeTrendData([]int{10, 15, 12, 20, 18, 25, 22, 30}),
+			},
+			name: "Positive Trend",
+		},
+		{
+			data: charts.StatCardData{
+				Title:     "Active Users",
+				Value:     "8,234",
+				Subtitle:  "-3.2% from last month",
+				Change:    -3,
+				ChangePct: -3.2,
+				Color:     "#ef4444",
+				TrendData: makeTrendData([]int{30, 28, 25, 27, 23, 20, 22, 18}),
+			},
+			name: "Negative Trend",
+		},
+		{
+			data: charts.StatCardData{
+				Title:     "Conversion Rate",
+				Value:     "3.45%",
+				Subtitle:  "+0.8% from last month",
+				Change:    1,
+				ChangePct: 0.8,
+				Color:     "#3b82f6",
+				TrendData: makeTrendData([]int{15, 18, 16, 20, 22, 21, 24, 25}),
+			},
+			name: "Steady Growth",
+		},
+		{
+			data: charts.StatCardData{
+				Title:     "Page Views",
+				Value:     "45.2K",
+				Subtitle:  "0.0% from last month",
+				Change:    0,
+				ChangePct: 0.0,
+				Color:     "#6b7280",
+				TrendData: makeTrendData([]int{20, 20, 21, 20, 20, 19, 20, 20}),
+			},
+			name: "Flat Trend",
+		},
+		{
+			data: charts.StatCardData{
+				Title:     "Bounce Rate",
+				Value:     "42.1%",
+				Subtitle:  "+5.3% from last month",
+				Change:    5,
+				ChangePct: 5.3,
+				Color:     "#f59e0b",
+				TrendData: makeTrendData([]int{10, 15, 20, 25, 30, 28, 35, 40}),
+			},
+			name: "Rising",
+		},
+		{
+			data: charts.StatCardData{
+				Title:     "Avg Session",
+				Value:     "4m 23s",
+				Subtitle:  "-1.2% from last month",
+				Change:    -1,
+				ChangePct: -1.2,
+				Color:     "#8b5cf6",
+				TrendData: makeTrendData([]int{25, 24, 23, 24, 22, 21, 20, 19}),
+			},
+			name: "Declining",
+		},
+	}
+
+	for i, card := range cards {
+		col := i % cols
+		row := i / cols
+		x := col * w
+		y := row*h + 60
+
+		content += svg.Group(
+			charts.RenderStatCard(card.data, 0, 0, w-20, h-20, tokens),
+			fmt.Sprintf("translate(%d, %d)", x+10, y),
+			svg.Style{},
+		)
+		content += "\n"
+	}
+
+	return wrapSVG(content, totalWidth, totalHeight), nil
 }

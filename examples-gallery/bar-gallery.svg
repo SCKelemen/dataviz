@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1700" height="450" viewBox="0 0 1700 450"><rect x="0.00" y="0.00" width="1700.00" height="450.00" fill="#ffffff"/>
+<text x="850.00" y="30.00" fill="#000000" text-anchor="middle" font-family="sans-serif" font-size="20.00px" font-weight="bold">Bar Chart Gallery</text>
+<g transform="translate(50, 60)"><text x="400.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Simple Bars</text><g transform="translate(0, 30)"><g transform="translate(0, 0)"><rect x="38.10" y="153.12" width="152.38" height="196.88" fill="#3b82f6"/>
+<rect x="228.57" y="87.50" width="152.38" height="262.50" fill="#3b82f6"/>
+<rect x="419.05" y="109.38" width="152.38" height="240.62" fill="#3b82f6"/>
+<rect x="609.52" y="43.75" width="152.38" height="306.25" fill="#3b82f6"/>
+</g><g class="legend" transform="translate(716.0,10.0)">
+  <rect x="0" y="0" width="74.0" height="32.0" fill="none" stroke="#e5e7eb" stroke-width="1.0"/>
+  <g transform="translate(10.0,10.0)"><rect width="12.0" height="12.0" fill="#3b82f6" stroke="#000" stroke-width="0.5" stroke-opacity="0.2"/></g>
+  <text x="28.0" y="20.2" font-family="Arial, sans-serif" font-size="12.0" fill="#374151">Sales</text>
+</g>
+</g></g>
+<g transform="translate(850, 60)"><text x="400.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Stacked Bars (Open/Closed)</text><g transform="translate(0, 30)"><g transform="translate(0, 0)"><rect x="38.10" y="218.75" width="152.38" height="131.25" fill="#45d69c"/>
+<rect x="38.10" y="131.25" width="152.38" height="87.50" fill="#10b981"/>
+<rect x="228.57" y="153.12" width="152.38" height="196.88" fill="#45d69c"/>
+<rect x="228.57" y="43.75" width="152.38" height="109.38" fill="#10b981"/>
+<rect x="419.05" y="175.00" width="152.38" height="175.00" fill="#45d69c"/>
+<rect x="419.05" y="43.75" width="152.38" height="131.25" fill="#10b981"/>
+<rect x="609.52" y="131.25" width="152.38" height="218.75" fill="#45d69c"/>
+<rect x="609.52" y="65.62" width="152.38" height="65.62" fill="#10b981"/>
+</g><g class="legend" transform="translate(636.8,10.0)">
+  <rect x="0" y="0" width="153.2" height="52.0" fill="none" stroke="#e5e7eb" stroke-width="1.0"/>
+  <g transform="translate(10.0,10.0)"><rect width="12.0" height="12.0" fill="#10b981" stroke="#000" stroke-width="0.5" stroke-opacity="0.2"/></g>
+  <text x="28.0" y="20.2" font-family="Arial, sans-serif" font-size="12.0" fill="#374151">Tickets (closed)</text>
+  <g transform="translate(10.0,30.0)"><rect width="12.0" height="12.0" fill="#45d69c" stroke="#000" stroke-width="0.5" stroke-opacity="0.2"/></g>
+  <text x="28.0" y="40.2" font-family="Arial, sans-serif" font-size="12.0" fill="#374151">Tickets (opened)</text>
+</g>
+</g></g>
+</svg>

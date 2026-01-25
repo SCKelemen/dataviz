@@ -3,7 +3,7 @@
 **Chart and data visualization library for Go with dual output modes (SVG + Terminal).**
 
 [![License: BearWare 1.0](https://img.shields.io/badge/license-BearWare%201.0-blue.svg)](LICENSE)
-[![Go Version](https://img.shields.io/badge/go-1.23+-blue.svg)](https://go.dev/dl/)
+[![Go Version](https://img.shields.io/badge/go-1.25+-blue.svg)](https://go.dev/dl/)
 
 ## Overview
 

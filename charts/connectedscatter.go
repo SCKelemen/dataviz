@@ -213,8 +213,19 @@ func RenderConnectedScatter(spec ConnectedScatterSpec) string {
 				Fill:        "none",
 			}
 
-			// Note: StrokeDashArray not yet supported in svg.Style
-			// TODO: Add support for dashed/dotted lines when available
+			// Apply dash pattern based on line style
+			switch series.LineStyle {
+			case "dashed":
+				lineStyle.StrokeDashArray = "10,5" // 10px dash, 5px gap
+			case "dotted":
+				lineStyle.StrokeDashArray = "2,3" // 2px dot, 3px gap
+			case "dashdot":
+				lineStyle.StrokeDashArray = "10,5,2,5" // dash, gap, dot, gap
+			case "longdash":
+				lineStyle.StrokeDashArray = "20,5" // 20px dash, 5px gap
+			case "solid", "":
+				// No dash array - solid line (default)
+			}
 
 			result += svg.Path(pathData, lineStyle) + "\n"
 		}

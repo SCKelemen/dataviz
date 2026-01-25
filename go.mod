@@ -1,6 +1,6 @@
 module github.com/SCKelemen/dataviz
 
-go 1.25
+go 1.25.4
 
 require (
 	// SCKelemen foundation libraries
@@ -24,6 +24,9 @@ require (
 	golang.org/x/oauth2 v0.30.0 // indirect
 	golang.org/x/text v0.32.0 // indirect
 )
+
+// Exclude problematic test-only dependency
+exclude github.com/SCKelemen/wpt-test-gen v0.0.0-00010101000000-000000000000
 
 // Local development - replace with local paths when developing
 // Commented out for CI/CD - uncomment for local development

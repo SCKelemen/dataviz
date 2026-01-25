@@ -36,6 +36,47 @@ Demonstrates all available line styles:
 - **Dash-Dot**: Alternating dash-dot pattern (10,5,2,5)
 - **Long Dash**: Long dashed pattern (20,5)
 
+### Area Chart Gallery (`area-gallery.svg`)
+- **Simple Area**: Basic area chart with filled region
+- **Different Color**: Area chart with alternative color scheme
+
+### Stacked Area Gallery (`stacked-area-gallery.svg`)
+- **Standard Stacked**: Standard stacked area chart with multiple series
+- **Smooth Curves**: Stacked area with Bezier curve smoothing
+
+### Heatmap Gallery (`heatmap-gallery.svg`)
+- **Linear Heatmap**: Horizontal heatmap showing contributions over time
+- **Weeks Heatmap**: GitHub-style calendar heatmap (grid of weeks)
+
+### Stat Card Gallery (`statcard-gallery.svg`)
+Demonstrates 6 different trend patterns:
+- **Positive Trend**: Rising revenue with positive change indicator
+- **Negative Trend**: Declining active users with negative change indicator
+- **Steady Growth**: Consistent upward trend
+- **Flat Trend**: Stable metrics with no significant change
+- **Rising**: Increasing metric (not necessarily positive)
+- **Declining**: Decreasing metric over time
+
+### Box Plot Gallery (`boxplot-gallery.svg`)
+- **Vertical Box Plot**: Standard vertical box-and-whisker plots with outliers and mean
+- **Horizontal Box Plot**: Horizontal box plots with confidence interval notches
+
+### Histogram Gallery (`histogram-gallery.svg`)
+- **Count Histogram**: Frequency distribution showing counts
+- **Density Histogram**: Normalized histogram showing probability density
+
+### Violin Plot Gallery (`violin-gallery.svg`)
+- **Basic Violin Plot**: Kernel density estimation with mirrored distribution
+- **Violin + Box Plot**: Violin plot with embedded box plot showing quartiles and median
+
+### Lollipop Chart Gallery (`lollipop-gallery.svg`)
+- **Vertical Lollipop**: Standard vertical lollipop chart with value labels
+- **Horizontal Lollipop**: Horizontal orientation with value labels
+
+### Candlestick Gallery (`candlestick-gallery.svg`)
+- **Candlestick Chart**: OHLC data visualized as candlesticks (rising in green, falling in red)
+- **OHLC Chart**: Traditional OHLC bar chart representation
+
 ## Generating Galleries
 
 Galleries are automatically generated using the gallery generator tool:

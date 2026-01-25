@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/SCKelemen/dataviz/charts"
+	"github.com/SCKelemen/dataviz/scales"
 	design "github.com/SCKelemen/design-system"
 	"github.com/SCKelemen/svg"
 	"github.com/SCKelemen/units"
@@ -44,6 +45,11 @@ func generateGalleries() error {
 		"stacked-area":      generateStackedAreaGallery,
 		"heatmap":           generateHeatmapGallery,
 		"statcard":          generateStatCardGallery,
+		"boxplot":           generateBoxPlotGallery,
+		"histogram":         generateHistogramGallery,
+		"violin":            generateViolinPlotGallery,
+		"lollipop":          generateLollipopGallery,
+		"candlestick":       generateCandlestickGallery,
 	}
 
 	for name, generator := range generators {
@@ -887,6 +893,434 @@ func generateStatCardGallery() (string, error) {
 		)
 		content += "\n"
 	}
+
+	return wrapSVG(content, totalWidth, totalHeight), nil
+}
+
+// Box plot variations: vertical and horizontal
+func generateBoxPlotGallery() (string, error) {
+	// Sample data for three groups
+	data := []*charts.BoxPlotData{
+		{Label: "Group A", Values: []float64{12, 15, 18, 20, 22, 25, 28, 30, 32, 35, 40, 45}},
+		{Label: "Group B", Values: []float64{20, 22, 25, 28, 30, 32, 35, 38, 40, 42, 45, 48, 50}},
+		{Label: "Group C", Values: []float64{10, 12, 15, 18, 20, 25, 30, 35, 40, 50, 60}},
+	}
+
+	w, h := 600, 400
+	totalWidth := w * 2
+	totalHeight := h
+
+	var content string
+
+	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += "\n"
+
+	titleStyle := svg.Style{
+		FontSize:   units.Px(20),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#000000",
+		TextAnchor: "middle",
+	}
+	content += svg.Text("Box Plot Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += "\n"
+
+	labelStyle := svg.Style{
+		FontSize:   units.Px(14),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#666",
+		TextAnchor: "middle",
+	}
+
+	// Vertical box plot
+	spec1 := charts.BoxPlotSpec{
+		Data:         data,
+		Width:        float64(w - 50),
+		Height:       float64(h - 80),
+		ShowOutliers: true,
+		ShowMean:     true,
+	}
+	content += svg.Group(
+		svg.Text("Vertical Box Plot", 300, 0, labelStyle)+
+			svg.Group(
+				charts.RenderVerticalBoxPlot(spec1),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		"translate(25, 60)",
+		svg.Style{},
+	)
+	content += "\n"
+
+	// Horizontal box plot
+	spec2 := charts.BoxPlotSpec{
+		Data:         data,
+		Width:        float64(w - 50),
+		Height:       float64(h - 80),
+		Horizontal:   true,
+		ShowOutliers: true,
+		ShowNotch:    true,
+	}
+	content += svg.Group(
+		svg.Text("Horizontal Box Plot", 300, 0, labelStyle)+
+			svg.Group(
+				charts.RenderHorizontalBoxPlot(spec2),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		fmt.Sprintf("translate(%d, 60)", w+25),
+		svg.Style{},
+	)
+	content += "\n"
+
+	return wrapSVG(content, totalWidth, totalHeight), nil
+}
+
+// Histogram variations: basic and with density
+func generateHistogramGallery() (string, error) {
+	// Generate sample data (normal distribution)
+	values := make([]float64, 200)
+	for i := range values {
+		// Simple approximation of normal distribution
+		sum := 0.0
+		for j := 0; j < 12; j++ {
+			sum += float64(i % 20)
+		}
+		values[i] = sum/12*5 + 50 + float64((i%10)-5)*2
+	}
+
+	histData := &charts.HistogramData{Values: values}
+
+	w, h := 600, 400
+	totalWidth := w * 2
+	totalHeight := h
+
+	var content string
+
+	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += "\n"
+
+	titleStyle := svg.Style{
+		FontSize:   units.Px(20),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#000000",
+		TextAnchor: "middle",
+	}
+	content += svg.Text("Histogram Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += "\n"
+
+	labelStyle := svg.Style{
+		FontSize:   units.Px(14),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#666",
+		TextAnchor: "middle",
+	}
+
+	// Basic histogram
+	spec1 := charts.HistogramSpec{
+		Data:     histData,
+		Width:    float64(w - 50),
+		Height:   float64(h - 80),
+		BinCount: 20,
+	}
+	content += svg.Group(
+		svg.Text("Count Histogram", 300, 0, labelStyle)+
+			svg.Group(
+				charts.RenderHistogram(spec1),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		"translate(25, 60)",
+		svg.Style{},
+	)
+	content += "\n"
+
+	// Density histogram
+	spec2 := charts.HistogramSpec{
+		Data:        histData,
+		Width:       float64(w - 50),
+		Height:      float64(h - 80),
+		BinCount:    20,
+		ShowDensity: true,
+	}
+	content += svg.Group(
+		svg.Text("Density Histogram", 300, 0, labelStyle)+
+			svg.Group(
+				charts.RenderHistogram(spec2),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		fmt.Sprintf("translate(%d, 60)", w+25),
+		svg.Style{},
+	)
+	content += "\n"
+
+	return wrapSVG(content, totalWidth, totalHeight), nil
+}
+
+// Violin plot variations
+func generateViolinPlotGallery() (string, error) {
+	// Sample data for three groups
+	data := []*charts.ViolinPlotData{
+		{Label: "Group A", Values: []float64{12, 15, 18, 20, 22, 25, 28, 30, 32, 35, 40}},
+		{Label: "Group B", Values: []float64{20, 22, 25, 28, 30, 32, 35, 38, 40, 42, 45}},
+		{Label: "Group C", Values: []float64{10, 15, 20, 25, 30, 35, 40, 50, 60}},
+	}
+
+	w, h := 600, 400
+	totalWidth := w * 2
+	totalHeight := h
+
+	var content string
+
+	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += "\n"
+
+	titleStyle := svg.Style{
+		FontSize:   units.Px(20),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#000000",
+		TextAnchor: "middle",
+	}
+	content += svg.Text("Violin Plot Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += "\n"
+
+	labelStyle := svg.Style{
+		FontSize:   units.Px(14),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#666",
+		TextAnchor: "middle",
+	}
+
+	// Basic violin plot
+	spec1 := charts.ViolinPlotSpec{
+		Data:   data,
+		Width:  float64(w - 50),
+		Height: float64(h - 80),
+	}
+	content += svg.Group(
+		svg.Text("Basic Violin Plot", 300, 0, labelStyle)+
+			svg.Group(
+				charts.RenderViolinPlot(spec1),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		"translate(25, 60)",
+		svg.Style{},
+	)
+	content += "\n"
+
+	// Violin with box plot inside
+	spec2 := charts.ViolinPlotSpec{
+		Data:       data,
+		Width:      float64(w - 50),
+		Height:     float64(h - 80),
+		ShowBox:    true,
+		ShowMedian: true,
+		ShowMean:   true,
+	}
+	content += svg.Group(
+		svg.Text("Violin + Box Plot", 300, 0, labelStyle)+
+			svg.Group(
+				charts.RenderViolinPlot(spec2),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		fmt.Sprintf("translate(%d, 60)", w+25),
+		svg.Style{},
+	)
+	content += "\n"
+
+	return wrapSVG(content, totalWidth, totalHeight), nil
+}
+
+// Lollipop chart variations: vertical and horizontal
+func generateLollipopGallery() (string, error) {
+	lollipopData := &charts.LollipopData{
+		Values: []charts.LollipopPoint{
+			{Label: "Product A", Value: 45},
+			{Label: "Product B", Value: 62},
+			{Label: "Product C", Value: 38},
+			{Label: "Product D", Value: 71},
+			{Label: "Product E", Value: 54},
+		},
+		Color: "#3b82f6",
+	}
+
+	w, h := 600, 400
+	totalWidth := w * 2
+	totalHeight := h
+
+	var content string
+
+	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += "\n"
+
+	titleStyle := svg.Style{
+		FontSize:   units.Px(20),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#000000",
+		TextAnchor: "middle",
+	}
+	content += svg.Text("Lollipop Chart Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += "\n"
+
+	labelStyle := svg.Style{
+		FontSize:   units.Px(14),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#666",
+		TextAnchor: "middle",
+	}
+
+	// Vertical lollipop
+	spec1 := charts.LollipopSpec{
+		Data:       lollipopData,
+		Width:      float64(w - 50),
+		Height:     float64(h - 80),
+		ShowLabels: true,
+	}
+	content += svg.Group(
+		svg.Text("Vertical Lollipop", 300, 0, labelStyle)+
+			svg.Group(
+				charts.RenderLollipop(spec1),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		"translate(25, 60)",
+		svg.Style{},
+	)
+	content += "\n"
+
+	// Horizontal lollipop
+	spec2 := charts.LollipopSpec{
+		Data:       lollipopData,
+		Width:      float64(w - 50),
+		Height:     float64(h - 80),
+		Horizontal: true,
+		ShowLabels: true,
+	}
+	content += svg.Group(
+		svg.Text("Horizontal Lollipop", 300, 0, labelStyle)+
+			svg.Group(
+				charts.RenderLollipop(spec2),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		fmt.Sprintf("translate(%d, 60)", w+25),
+		svg.Style{},
+	)
+	content += "\n"
+
+	return wrapSVG(content, totalWidth, totalHeight), nil
+}
+
+// Candlestick chart variations
+func generateCandlestickGallery() (string, error) {
+	// Sample OHLC data
+	candleData := []charts.CandlestickData{
+		{X: mustParseTime("2024-01-01"), Open: 100, High: 110, Low: 95, Close: 105, Volume: 1000},
+		{X: mustParseTime("2024-01-02"), Open: 105, High: 115, Low: 103, Close: 112, Volume: 1200},
+		{X: mustParseTime("2024-01-03"), Open: 112, High: 120, Low: 108, Close: 110, Volume: 1100},
+		{X: mustParseTime("2024-01-04"), Open: 110, High: 112, Low: 100, Close: 102, Volume: 1500},
+		{X: mustParseTime("2024-01-05"), Open: 102, High: 108, Low: 98, Close: 106, Volume: 1300},
+		{X: mustParseTime("2024-01-06"), Open: 106, High: 118, Low: 104, Close: 115, Volume: 1400},
+	}
+
+	w, h := 600, 400
+	totalWidth := w * 2
+	totalHeight := h
+
+	var content string
+
+	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += "\n"
+
+	titleStyle := svg.Style{
+		FontSize:   units.Px(20),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#000000",
+		TextAnchor: "middle",
+	}
+	content += svg.Text("Candlestick Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += "\n"
+
+	labelStyle := svg.Style{
+		FontSize:   units.Px(14),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#666",
+		TextAnchor: "middle",
+	}
+
+	// Create scales for both charts
+	xScale := scales.NewTimeScale(
+		[2]time.Time{mustParseTime("2024-01-01"), mustParseTime("2024-01-06")},
+		[2]units.Length{units.Px(0), units.Px(float64(w - 50))},
+	)
+	yScale := scales.NewLinearScale([2]float64{90, 125}, [2]units.Length{units.Px(float64(h - 80)), units.Px(0)})
+
+	// Candlestick chart
+	spec1 := charts.CandlestickSpec{
+		Data:         candleData,
+		Width:        float64(w - 50),
+		Height:       float64(h - 80),
+		XScale:       xScale,
+		YScale:       yScale,
+		RisingColor:  "#10b981",
+		FallingColor: "#ef4444",
+	}
+	content += svg.Group(
+		svg.Text("Candlestick Chart", 300, 0, labelStyle)+
+			svg.Group(
+				charts.RenderCandlestick(spec1),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		"translate(25, 60)",
+		svg.Style{},
+	)
+	content += "\n"
+
+	// OHLC chart - convert data
+	ohlcData := make([]charts.OHLCData, len(candleData))
+	for i, c := range candleData {
+		ohlcData[i] = charts.OHLCData{
+			X:     c.X,
+			Open:  c.Open,
+			High:  c.High,
+			Low:   c.Low,
+			Close: c.Close,
+		}
+	}
+
+	ohlcSpec := charts.OHLCSpec{
+		Data:         ohlcData,
+		Width:        float64(w - 50),
+		Height:       float64(h - 80),
+		XScale:       xScale,
+		YScale:       yScale,
+		RisingColor:  "#10b981",
+		FallingColor: "#ef4444",
+	}
+	content += svg.Group(
+		svg.Text("OHLC Chart", 300, 0, labelStyle)+
+			svg.Group(
+				charts.RenderOHLC(ohlcSpec),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		fmt.Sprintf("translate(%d, 60)", w+25),
+		svg.Style{},
+	)
+	content += "\n"
 
 	return wrapSVG(content, totalWidth, totalHeight), nil
 }

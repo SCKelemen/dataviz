@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400"><rect x="0.00" y="0.00" width="1200.00" height="400.00" fill="#ffffff"/>
+<text x="600.00" y="30.00" fill="#000000" text-anchor="middle" font-family="sans-serif" font-size="20.00px" font-weight="bold">Box Plot Gallery</text>
+<g transform="translate(25, 60)"><text x="300.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Vertical Box Plot</text><g transform="translate(0, 30)"><line x1="118.33" y1="270.40" x2="118.33" y2="170.80" stroke="#333" stroke-width="1.00"/>
+<line x1="118.33" y1="112.00" x2="118.33" y2="234.40" stroke="#333" stroke-width="1.00"/>
+<line x1="104.23" y1="270.40" x2="132.43" y2="270.40" stroke="#333" stroke-width="1.00"/>
+<line x1="104.23" y1="112.00" x2="132.43" y2="112.00" stroke="#333" stroke-width="1.00"/>
+<rect x="71.33" y="170.80" width="94.00" height="63.60" fill="#4285f4" stroke="#333" stroke-width="1.50" opacity="0.70"/>
+<line x1="71.33" y1="200.80" x2="165.33" y2="200.80" stroke="#333" stroke-width="2.00"/>
+<circle cx="118.33" cy="199.20" r="3.00" fill="#333" stroke="#333"/>
+<text x="118.33" y="300.00" text-anchor="middle" font-family="sans-serif" font-size="12.00px">Group A</text>
+<line x1="275.00" y1="232.00" x2="275.00" y2="126.40" stroke="#333" stroke-width="1.00"/>
+<line x1="275.00" y1="88.00" x2="275.00" y2="193.60" stroke="#333" stroke-width="1.00"/>
+<line x1="260.90" y1="232.00" x2="289.10" y2="232.00" stroke="#333" stroke-width="1.00"/>
+<line x1="260.90" y1="88.00" x2="289.10" y2="88.00" stroke="#333" stroke-width="1.00"/>
+<rect x="228.00" y="126.40" width="94.00" height="67.20" fill="#4285f4" stroke="#333" stroke-width="1.50" opacity="0.70"/>
+<line x1="228.00" y1="160.00" x2="322.00" y2="160.00" stroke="#333" stroke-width="2.00"/>
+<circle cx="275.00" cy="160.00" r="3.00" fill="#333" stroke="#333"/>
+<text x="275.00" y="300.00" text-anchor="middle" font-family="sans-serif" font-size="12.00px">Group B</text>
+<line x1="431.67" y1="280.00" x2="431.67" y2="148.00" stroke="#333" stroke-width="1.00"/>
+<line x1="431.67" y1="40.00" x2="431.67" y2="248.80" stroke="#333" stroke-width="1.00"/>
+<line x1="417.57" y1="280.00" x2="445.77" y2="280.00" stroke="#333" stroke-width="1.00"/>
+<line x1="417.57" y1="40.00" x2="445.77" y2="40.00" stroke="#333" stroke-width="1.00"/>
+<rect x="384.67" y="148.00" width="94.00" height="100.80" fill="#4285f4" stroke="#333" stroke-width="1.50" opacity="0.70"/>
+<line x1="384.67" y1="208.00" x2="478.67" y2="208.00" stroke="#333" stroke-width="2.00"/>
+<circle cx="431.67" cy="190.55" r="3.00" fill="#333" stroke="#333"/>
+<text x="431.67" y="300.00" text-anchor="middle" font-family="sans-serif" font-size="12.00px">Group C</text>
+</g></g>
+<g transform="translate(625, 60)"><text x="300.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Horizontal Box Plot</text><g transform="translate(0, 30)"></g></g>
+</svg>

@@ -390,16 +390,30 @@ func ApplyWindow(strategy WindowStrategy, fn AggregateFunc) Transform {
 		}
 
 		// Find all unique window IDs
-		windowIDs := make(map[int]bool)
+		windowIDsMap := make(map[int]bool)
 		for _, wins := range windows {
 			for _, wid := range wins {
-				windowIDs[wid] = true
+				windowIDsMap[wid] = true
+			}
+		}
+
+		// Convert to sorted slice for deterministic ordering
+		windowIDs := make([]int, 0, len(windowIDsMap))
+		for wid := range windowIDsMap {
+			windowIDs = append(windowIDs, wid)
+		}
+		// Sort to ensure consistent ordering
+		for i := 0; i < len(windowIDs); i++ {
+			for j := i + 1; j < len(windowIDs); j++ {
+				if windowIDs[i] > windowIDs[j] {
+					windowIDs[i], windowIDs[j] = windowIDs[j], windowIDs[i]
+				}
 			}
 		}
 
 		// Aggregate each window
 		result := make([]DataPoint, 0, len(windowIDs))
-		for wid := range windowIDs {
+		for _, wid := range windowIDs {
 			start, end := strategy.WindowBounds(wid, data)
 			if start >= end {
 				continue

@@ -7,17 +7,21 @@ import (
 
 // GalleryRegistry contains all gallery configurations
 var GalleryRegistry = map[string]GalleryConfig{
-	"bar":          BarGallery,
-	"area":         AreaGallery,
-	"stacked-area": StackedAreaGallery,
-	"lollipop":     LollipopGallery,
-	"histogram":    HistogramGallery,
-	"pie":          PieGallery,
-	"boxplot":      BoxPlotGallery,
-	"violin":       ViolinGallery,
-	"treemap":      TreemapGallery,
-	"icicle":       IcicleGallery,
-	"ridgeline":    RidgelineGallery,
+	"bar":               BarGallery,
+	"area":              AreaGallery,
+	"stacked-area":      StackedAreaGallery,
+	"lollipop":          LollipopGallery,
+	"histogram":         HistogramGallery,
+	"pie":               PieGallery,
+	"boxplot":           BoxPlotGallery,
+	"violin":            ViolinGallery,
+	"treemap":           TreemapGallery,
+	"icicle":            IcicleGallery,
+	"ridgeline":         RidgelineGallery,
+	"line":              LineGallery,
+	"scatter":           ScatterGallery,
+	"connected-scatter": ConnectedScatterGallery,
+	"statcard":          StatCardGallery,
 }
 
 // BarGallery defines the bar chart gallery configuration
@@ -748,7 +752,621 @@ var RidgelineGallery = GalleryConfig{
 	ChartOffsetY: 30.0,
 }
 
+// LineGallery defines the line graph gallery configuration
+var LineGallery = GalleryConfig{
+	Name:  "line",
+	Title: "Line Graph Gallery",
+	Layout: &GridLayout{
+		Cols:       2,
+		Rows:       2,
+		BaseWidth:  650,
+		BaseHeight: 350,
+	},
+	Variants: []VariantConfig{
+		{
+			Label: "Simple Line",
+			DataProvider: func() interface{} {
+				return charts.LineGraphData{
+					Label: "Temperature",
+					Color: "#3b82f6",
+					Points: []charts.TimeSeriesData{
+						{Date: mustParseTime("2024-01-01"), Value: 15},
+						{Date: mustParseTime("2024-02-01"), Value: 18},
+						{Date: mustParseTime("2024-03-01"), Value: 12},
+						{Date: mustParseTime("2024-04-01"), Value: 22},
+						{Date: mustParseTime("2024-05-01"), Value: 27},
+						{Date: mustParseTime("2024-06-01"), Value: 30},
+					},
+				}
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				lineData := data.(charts.LineGraphData)
+				chartW := int(ctx.ChartWidth)
+				chartH := int(ctx.ChartHeight)
+				tokens := design.DefaultTheme()
+				return charts.RenderLineGraph(lineData, 0, 0, chartW, chartH, tokens)
+			},
+		},
+		{
+			Label: "Smoothed",
+			DataProvider: func() interface{} {
+				return charts.LineGraphData{
+					Label:   "Temperature",
+					Color:   "#3b82f6",
+					Smooth:  true,
+					Tension: 0.3,
+					Points: []charts.TimeSeriesData{
+						{Date: mustParseTime("2024-01-01"), Value: 15},
+						{Date: mustParseTime("2024-02-01"), Value: 18},
+						{Date: mustParseTime("2024-03-01"), Value: 12},
+						{Date: mustParseTime("2024-04-01"), Value: 22},
+						{Date: mustParseTime("2024-05-01"), Value: 27},
+						{Date: mustParseTime("2024-06-01"), Value: 30},
+					},
+				}
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				lineData := data.(charts.LineGraphData)
+				chartW := int(ctx.ChartWidth)
+				chartH := int(ctx.ChartHeight)
+				tokens := design.DefaultTheme()
+				return charts.RenderLineGraph(lineData, 0, 0, chartW, chartH, tokens)
+			},
+		},
+		{
+			Label: "With Markers",
+			DataProvider: func() interface{} {
+				return charts.LineGraphData{
+					Label:      "Temperature",
+					Color:      "#3b82f6",
+					MarkerType: "circle",
+					MarkerSize: 5,
+					Points: []charts.TimeSeriesData{
+						{Date: mustParseTime("2024-01-01"), Value: 15},
+						{Date: mustParseTime("2024-02-01"), Value: 18},
+						{Date: mustParseTime("2024-03-01"), Value: 12},
+						{Date: mustParseTime("2024-04-01"), Value: 22},
+						{Date: mustParseTime("2024-05-01"), Value: 27},
+						{Date: mustParseTime("2024-06-01"), Value: 30},
+					},
+				}
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				lineData := data.(charts.LineGraphData)
+				chartW := int(ctx.ChartWidth)
+				chartH := int(ctx.ChartHeight)
+				tokens := design.DefaultTheme()
+				return charts.RenderLineGraph(lineData, 0, 0, chartW, chartH, tokens)
+			},
+		},
+		{
+			Label: "Filled Area",
+			DataProvider: func() interface{} {
+				return charts.LineGraphData{
+					Label:     "Temperature",
+					Color:     "#3b82f6",
+					FillColor: "#3b82f620",
+					Points: []charts.TimeSeriesData{
+						{Date: mustParseTime("2024-01-01"), Value: 15},
+						{Date: mustParseTime("2024-02-01"), Value: 18},
+						{Date: mustParseTime("2024-03-01"), Value: 12},
+						{Date: mustParseTime("2024-04-01"), Value: 22},
+						{Date: mustParseTime("2024-05-01"), Value: 27},
+						{Date: mustParseTime("2024-06-01"), Value: 30},
+					},
+				}
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				lineData := data.(charts.LineGraphData)
+				chartW := int(ctx.ChartWidth)
+				chartH := int(ctx.ChartHeight)
+				tokens := design.DefaultTheme()
+				return charts.RenderLineGraph(lineData, 0, 0, chartW, chartH, tokens)
+			},
+		},
+	},
+	ChartOffsetX: 10.0,
+	ChartOffsetY: 25.0,
+}
+
+// ScatterGallery defines the scatter plot gallery configuration
+var ScatterGallery = GalleryConfig{
+	Name:  "scatter",
+	Title: "Scatter Plot Gallery",
+	Layout: &GridLayout{
+		Cols:       3,
+		Rows:       2,
+		BaseWidth:  450,
+		BaseHeight: 350,
+	},
+	Variants: []VariantConfig{
+		{
+			Label: "Marker: circle",
+			DataProvider: func() interface{} {
+				return charts.ScatterPlotData{
+					Points: []charts.ScatterPoint{
+						{Label: "A", Date: mustParseTime("2024-01-01"), Value: 55},
+						{Label: "B", Date: mustParseTime("2024-02-01"), Value: 78},
+						{Label: "C", Date: mustParseTime("2024-03-01"), Value: 44},
+						{Label: "D", Date: mustParseTime("2024-04-01"), Value: 66},
+						{Label: "E", Date: mustParseTime("2024-05-01"), Value: 33},
+						{Label: "F", Date: mustParseTime("2024-06-01"), Value: 77},
+						{Label: "G", Date: mustParseTime("2024-07-01"), Value: 22},
+						{Label: "H", Date: mustParseTime("2024-08-01"), Value: 88},
+					},
+					MarkerType: "circle",
+					Color:      "#3b82f6",
+				}
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				scatterData := data.(charts.ScatterPlotData)
+				chartW := int(ctx.ChartWidth - 50)
+				chartH := int(ctx.ChartHeight - 60)
+				tokens := design.DefaultTheme()
+				return charts.RenderScatterPlot(scatterData, 0, 0, chartW, chartH, tokens)
+			},
+		},
+		{
+			Label: "Marker: square",
+			DataProvider: func() interface{} {
+				return charts.ScatterPlotData{
+					Points: []charts.ScatterPoint{
+						{Label: "A", Date: mustParseTime("2024-01-01"), Value: 55},
+						{Label: "B", Date: mustParseTime("2024-02-01"), Value: 78},
+						{Label: "C", Date: mustParseTime("2024-03-01"), Value: 44},
+						{Label: "D", Date: mustParseTime("2024-04-01"), Value: 66},
+						{Label: "E", Date: mustParseTime("2024-05-01"), Value: 33},
+						{Label: "F", Date: mustParseTime("2024-06-01"), Value: 77},
+						{Label: "G", Date: mustParseTime("2024-07-01"), Value: 22},
+						{Label: "H", Date: mustParseTime("2024-08-01"), Value: 88},
+					},
+					MarkerType: "square",
+					Color:      "#3b82f6",
+				}
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				scatterData := data.(charts.ScatterPlotData)
+				chartW := int(ctx.ChartWidth - 50)
+				chartH := int(ctx.ChartHeight - 60)
+				tokens := design.DefaultTheme()
+				return charts.RenderScatterPlot(scatterData, 0, 0, chartW, chartH, tokens)
+			},
+		},
+		{
+			Label: "Marker: diamond",
+			DataProvider: func() interface{} {
+				return charts.ScatterPlotData{
+					Points: []charts.ScatterPoint{
+						{Label: "A", Date: mustParseTime("2024-01-01"), Value: 55},
+						{Label: "B", Date: mustParseTime("2024-02-01"), Value: 78},
+						{Label: "C", Date: mustParseTime("2024-03-01"), Value: 44},
+						{Label: "D", Date: mustParseTime("2024-04-01"), Value: 66},
+						{Label: "E", Date: mustParseTime("2024-05-01"), Value: 33},
+						{Label: "F", Date: mustParseTime("2024-06-01"), Value: 77},
+						{Label: "G", Date: mustParseTime("2024-07-01"), Value: 22},
+						{Label: "H", Date: mustParseTime("2024-08-01"), Value: 88},
+					},
+					MarkerType: "diamond",
+					Color:      "#3b82f6",
+				}
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				scatterData := data.(charts.ScatterPlotData)
+				chartW := int(ctx.ChartWidth - 50)
+				chartH := int(ctx.ChartHeight - 60)
+				tokens := design.DefaultTheme()
+				return charts.RenderScatterPlot(scatterData, 0, 0, chartW, chartH, tokens)
+			},
+		},
+		{
+			Label: "Marker: triangle",
+			DataProvider: func() interface{} {
+				return charts.ScatterPlotData{
+					Points: []charts.ScatterPoint{
+						{Label: "A", Date: mustParseTime("2024-01-01"), Value: 55},
+						{Label: "B", Date: mustParseTime("2024-02-01"), Value: 78},
+						{Label: "C", Date: mustParseTime("2024-03-01"), Value: 44},
+						{Label: "D", Date: mustParseTime("2024-04-01"), Value: 66},
+						{Label: "E", Date: mustParseTime("2024-05-01"), Value: 33},
+						{Label: "F", Date: mustParseTime("2024-06-01"), Value: 77},
+						{Label: "G", Date: mustParseTime("2024-07-01"), Value: 22},
+						{Label: "H", Date: mustParseTime("2024-08-01"), Value: 88},
+					},
+					MarkerType: "triangle",
+					Color:      "#3b82f6",
+				}
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				scatterData := data.(charts.ScatterPlotData)
+				chartW := int(ctx.ChartWidth - 50)
+				chartH := int(ctx.ChartHeight - 60)
+				tokens := design.DefaultTheme()
+				return charts.RenderScatterPlot(scatterData, 0, 0, chartW, chartH, tokens)
+			},
+		},
+		{
+			Label: "Marker: cross",
+			DataProvider: func() interface{} {
+				return charts.ScatterPlotData{
+					Points: []charts.ScatterPoint{
+						{Label: "A", Date: mustParseTime("2024-01-01"), Value: 55},
+						{Label: "B", Date: mustParseTime("2024-02-01"), Value: 78},
+						{Label: "C", Date: mustParseTime("2024-03-01"), Value: 44},
+						{Label: "D", Date: mustParseTime("2024-04-01"), Value: 66},
+						{Label: "E", Date: mustParseTime("2024-05-01"), Value: 33},
+						{Label: "F", Date: mustParseTime("2024-06-01"), Value: 77},
+						{Label: "G", Date: mustParseTime("2024-07-01"), Value: 22},
+						{Label: "H", Date: mustParseTime("2024-08-01"), Value: 88},
+					},
+					MarkerType: "cross",
+					Color:      "#3b82f6",
+				}
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				scatterData := data.(charts.ScatterPlotData)
+				chartW := int(ctx.ChartWidth - 50)
+				chartH := int(ctx.ChartHeight - 60)
+				tokens := design.DefaultTheme()
+				return charts.RenderScatterPlot(scatterData, 0, 0, chartW, chartH, tokens)
+			},
+		},
+		{
+			Label: "Marker: x",
+			DataProvider: func() interface{} {
+				return charts.ScatterPlotData{
+					Points: []charts.ScatterPoint{
+						{Label: "A", Date: mustParseTime("2024-01-01"), Value: 55},
+						{Label: "B", Date: mustParseTime("2024-02-01"), Value: 78},
+						{Label: "C", Date: mustParseTime("2024-03-01"), Value: 44},
+						{Label: "D", Date: mustParseTime("2024-04-01"), Value: 66},
+						{Label: "E", Date: mustParseTime("2024-05-01"), Value: 33},
+						{Label: "F", Date: mustParseTime("2024-06-01"), Value: 77},
+						{Label: "G", Date: mustParseTime("2024-07-01"), Value: 22},
+						{Label: "H", Date: mustParseTime("2024-08-01"), Value: 88},
+					},
+					MarkerType: "x",
+					Color:      "#3b82f6",
+				}
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				scatterData := data.(charts.ScatterPlotData)
+				chartW := int(ctx.ChartWidth - 50)
+				chartH := int(ctx.ChartHeight - 60)
+				tokens := design.DefaultTheme()
+				return charts.RenderScatterPlot(scatterData, 0, 0, chartW, chartH, tokens)
+			},
+		},
+	},
+	ChartOffsetX: 0.0,
+	ChartOffsetY: 25.0,
+}
+
+// ConnectedScatterGallery defines the connected scatter gallery configuration
+var ConnectedScatterGallery = GalleryConfig{
+	Name:  "connected-scatter",
+	Title: "Connected Scatter Gallery",
+	Layout: &GridLayout{
+		Cols:       3,
+		Rows:       2,
+		BaseWidth:  450,
+		BaseHeight: 350,
+	},
+	Variants: []VariantConfig{
+		{
+			Label: "Line: Solid",
+			DataProvider: func() interface{} {
+				return charts.ConnectedScatterSpec{
+					Width:  0, // Will be set in renderer
+					Height: 0,
+					Series: []*charts.ConnectedScatterSeries{
+						{
+							Points: []charts.ConnectedScatterPoint{
+								{X: 0, Y: 10},
+								{X: 1, Y: 25},
+								{X: 2, Y: 15},
+								{X: 3, Y: 30},
+								{X: 4, Y: 20},
+								{X: 5, Y: 35},
+							},
+							Color:     "#3b82f6",
+							LineStyle: "solid",
+						},
+					},
+					ShowLines:   true,
+					ShowMarkers: true,
+				}
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				spec := data.(charts.ConnectedScatterSpec)
+				spec.Width = ctx.ChartWidth - 50
+				spec.Height = ctx.ChartHeight - 80
+				return charts.RenderConnectedScatter(spec)
+			},
+		},
+		{
+			Label: "Line: Dashed",
+			DataProvider: func() interface{} {
+				return charts.ConnectedScatterSpec{
+					Width:  0,
+					Height: 0,
+					Series: []*charts.ConnectedScatterSeries{
+						{
+							Points: []charts.ConnectedScatterPoint{
+								{X: 0, Y: 10},
+								{X: 1, Y: 25},
+								{X: 2, Y: 15},
+								{X: 3, Y: 30},
+								{X: 4, Y: 20},
+								{X: 5, Y: 35},
+							},
+							Color:     "#3b82f6",
+							LineStyle: "dashed",
+						},
+					},
+					ShowLines:   true,
+					ShowMarkers: true,
+				}
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				spec := data.(charts.ConnectedScatterSpec)
+				spec.Width = ctx.ChartWidth - 50
+				spec.Height = ctx.ChartHeight - 80
+				return charts.RenderConnectedScatter(spec)
+			},
+		},
+		{
+			Label: "Line: Dotted",
+			DataProvider: func() interface{} {
+				return charts.ConnectedScatterSpec{
+					Width:  0,
+					Height: 0,
+					Series: []*charts.ConnectedScatterSeries{
+						{
+							Points: []charts.ConnectedScatterPoint{
+								{X: 0, Y: 10},
+								{X: 1, Y: 25},
+								{X: 2, Y: 15},
+								{X: 3, Y: 30},
+								{X: 4, Y: 20},
+								{X: 5, Y: 35},
+							},
+							Color:     "#3b82f6",
+							LineStyle: "dotted",
+						},
+					},
+					ShowLines:   true,
+					ShowMarkers: true,
+				}
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				spec := data.(charts.ConnectedScatterSpec)
+				spec.Width = ctx.ChartWidth - 50
+				spec.Height = ctx.ChartHeight - 80
+				return charts.RenderConnectedScatter(spec)
+			},
+		},
+		{
+			Label: "Line: Dash-Dot",
+			DataProvider: func() interface{} {
+				return charts.ConnectedScatterSpec{
+					Width:  0,
+					Height: 0,
+					Series: []*charts.ConnectedScatterSeries{
+						{
+							Points: []charts.ConnectedScatterPoint{
+								{X: 0, Y: 10},
+								{X: 1, Y: 25},
+								{X: 2, Y: 15},
+								{X: 3, Y: 30},
+								{X: 4, Y: 20},
+								{X: 5, Y: 35},
+							},
+							Color:     "#3b82f6",
+							LineStyle: "dashdot",
+						},
+					},
+					ShowLines:   true,
+					ShowMarkers: true,
+				}
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				spec := data.(charts.ConnectedScatterSpec)
+				spec.Width = ctx.ChartWidth - 50
+				spec.Height = ctx.ChartHeight - 80
+				return charts.RenderConnectedScatter(spec)
+			},
+		},
+		{
+			Label: "Line: Long Dash",
+			DataProvider: func() interface{} {
+				return charts.ConnectedScatterSpec{
+					Width:  0,
+					Height: 0,
+					Series: []*charts.ConnectedScatterSeries{
+						{
+							Points: []charts.ConnectedScatterPoint{
+								{X: 0, Y: 10},
+								{X: 1, Y: 25},
+								{X: 2, Y: 15},
+								{X: 3, Y: 30},
+								{X: 4, Y: 20},
+								{X: 5, Y: 35},
+							},
+							Color:     "#3b82f6",
+							LineStyle: "longdash",
+						},
+					},
+					ShowLines:   true,
+					ShowMarkers: true,
+				}
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				spec := data.(charts.ConnectedScatterSpec)
+				spec.Width = ctx.ChartWidth - 50
+				spec.Height = ctx.ChartHeight - 80
+				return charts.RenderConnectedScatter(spec)
+			},
+		},
+	},
+	ChartOffsetX: 25.0,
+	ChartOffsetY: 25.0,
+}
+
+// StatCardGallery defines the stat card gallery configuration
+var StatCardGallery = GalleryConfig{
+	Name:  "statcard",
+	Title: "Stat Card Gallery",
+	Layout: &GridLayout{
+		Cols:       3,
+		Rows:       2,
+		BaseWidth:  300,
+		BaseHeight: 200,
+	},
+	Variants: []VariantConfig{
+		{
+			Label: "Positive Trend",
+			DataProvider: func() interface{} {
+				return charts.StatCardData{
+					Title:     "Total Revenue",
+					Value:     "$124.5K",
+					Subtitle:  "+12.5% from last month",
+					Change:    12,
+					ChangePct: 12.5,
+					Color:     "#10b981",
+					TrendData: makeTrendData([]int{10, 15, 12, 20, 18, 25, 22, 30}),
+				}
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				cardData := data.(charts.StatCardData)
+				cardW := int(ctx.ChartWidth - 20)
+				cardH := int(ctx.ChartHeight - 20)
+				tokens := design.DefaultTheme()
+				return charts.RenderStatCard(cardData, 0, 0, cardW, cardH, tokens)
+			},
+		},
+		{
+			Label: "Negative Trend",
+			DataProvider: func() interface{} {
+				return charts.StatCardData{
+					Title:     "Active Users",
+					Value:     "8,234",
+					Subtitle:  "-3.2% from last month",
+					Change:    -3,
+					ChangePct: -3.2,
+					Color:     "#ef4444",
+					TrendData: makeTrendData([]int{30, 28, 25, 27, 23, 20, 22, 18}),
+				}
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				cardData := data.(charts.StatCardData)
+				cardW := int(ctx.ChartWidth - 20)
+				cardH := int(ctx.ChartHeight - 20)
+				tokens := design.DefaultTheme()
+				return charts.RenderStatCard(cardData, 0, 0, cardW, cardH, tokens)
+			},
+		},
+		{
+			Label: "Steady Growth",
+			DataProvider: func() interface{} {
+				return charts.StatCardData{
+					Title:     "Conversion Rate",
+					Value:     "3.45%",
+					Subtitle:  "+0.8% from last month",
+					Change:    1,
+					ChangePct: 0.8,
+					Color:     "#3b82f6",
+					TrendData: makeTrendData([]int{15, 18, 16, 20, 22, 21, 24, 25}),
+				}
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				cardData := data.(charts.StatCardData)
+				cardW := int(ctx.ChartWidth - 20)
+				cardH := int(ctx.ChartHeight - 20)
+				tokens := design.DefaultTheme()
+				return charts.RenderStatCard(cardData, 0, 0, cardW, cardH, tokens)
+			},
+		},
+		{
+			Label: "Flat Trend",
+			DataProvider: func() interface{} {
+				return charts.StatCardData{
+					Title:     "Page Views",
+					Value:     "45.2K",
+					Subtitle:  "0.0% from last month",
+					Change:    0,
+					ChangePct: 0.0,
+					Color:     "#6b7280",
+					TrendData: makeTrendData([]int{20, 20, 21, 20, 20, 19, 20, 20}),
+				}
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				cardData := data.(charts.StatCardData)
+				cardW := int(ctx.ChartWidth - 20)
+				cardH := int(ctx.ChartHeight - 20)
+				tokens := design.DefaultTheme()
+				return charts.RenderStatCard(cardData, 0, 0, cardW, cardH, tokens)
+			},
+		},
+		{
+			Label: "Alert Trend",
+			DataProvider: func() interface{} {
+				return charts.StatCardData{
+					Title:     "Bounce Rate",
+					Value:     "42.1%",
+					Subtitle:  "+5.3% from last month",
+					Change:    5,
+					ChangePct: 5.3,
+					Color:     "#f59e0b",
+					TrendData: makeTrendData([]int{18, 20, 22, 25, 24, 28, 26, 30}),
+				}
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				cardData := data.(charts.StatCardData)
+				cardW := int(ctx.ChartWidth - 20)
+				cardH := int(ctx.ChartHeight - 20)
+				tokens := design.DefaultTheme()
+				return charts.RenderStatCard(cardData, 0, 0, cardW, cardH, tokens)
+			},
+		},
+		{
+			Label: "Neutral Trend",
+			DataProvider: func() interface{} {
+				return charts.StatCardData{
+					Title:     "Sessions",
+					Value:     "12.8K",
+					Subtitle:  "-1.2% from last month",
+					Change:    -1,
+					ChangePct: -1.2,
+					Color:     "#8b5cf6",
+					TrendData: makeTrendData([]int{25, 24, 26, 25, 23, 24, 22, 23}),
+				}
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				cardData := data.(charts.StatCardData)
+				cardW := int(ctx.ChartWidth - 20)
+				cardH := int(ctx.ChartHeight - 20)
+				tokens := design.DefaultTheme()
+				return charts.RenderStatCard(cardData, 0, 0, cardW, cardH, tokens)
+			},
+		},
+	},
+	ChartOffsetX: 10.0,
+	ChartOffsetY: 10.0,
+}
+
 // Helper functions for data generation
+
+func makeTrendData(values []int) []charts.TimeSeriesData {
+	result := make([]charts.TimeSeriesData, len(values))
+	startDate := mustParseTime("2024-01-01")
+	for i, v := range values {
+		result[i] = charts.TimeSeriesData{
+			Date:  startDate.AddDate(0, 0, i*7), // Weekly data
+			Value: v,
+		}
+	}
+	return result
+}
 
 func generateViolinValues(mean, stddev float64) []float64 {
 	values := make([]float64, 100)

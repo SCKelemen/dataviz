@@ -1,8 +1,10 @@
 # Relative Sizing in Gallery Generator
 
+> **Note**: The gallery system has been further refactored into a generic configuration-driven system. See [GALLERY_SYSTEM.md](./GALLERY_SYSTEM.md) for the complete architecture overview.
+
 ## Overview
 
-The gallery generator has been refactored to use relative sizing with the `SCKelemen/units` package to avoid error accumulation and rounding errors. Pixel dimensions are calculated at the last possible moment.
+The gallery generator uses relative sizing with the `SCKelemen/units` package to avoid error accumulation and rounding errors. Pixel dimensions are calculated at the last possible moment. This document describes the dimension calculation system that underlies the generic gallery framework.
 
 ## Key Improvements
 
@@ -250,3 +252,14 @@ All 21 gallery SVG files generate successfully with correct dimensions:
 - No error accumulation from repeated multiplications
 - Consistent spacing and positioning across all galleries
 - Maintainable and flexible layout system
+
+## Current Architecture
+
+The relative sizing system is now integrated into a generic gallery framework:
+
+- **`CalculateSingleRowDimensions()`** and **`CalculateGridDimensions()`** are used by `LayoutStrategy` implementations
+- **Layout strategies** (`SingleRowLayout`, `GridLayout`, `VerticalStackLayout`) encapsulate dimension calculations
+- **Gallery configurations** use layouts declaratively
+- **Generic generator** applies dimensions consistently
+
+See [GALLERY_SYSTEM.md](./GALLERY_SYSTEM.md) for the complete architecture documentation.

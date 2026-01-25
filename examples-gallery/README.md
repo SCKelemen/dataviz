@@ -110,10 +110,24 @@ Demonstrates 6 different trend patterns:
 Galleries are automatically generated using the gallery generator tool:
 
 ```bash
+cd /path/to/dataviz
 go run ./cmd/gallery-gen
 ```
 
-The generator uses the SCKelemen/svg library for type-safe SVG element creation and the chart rendering functions from the `charts/` package.
+Or build and run:
+
+```bash
+go build ./cmd/gallery-gen
+./gallery-gen
+```
+
+The generator uses a generic configuration-driven system:
+- **Gallery configurations** define variants declaratively
+- **Layout strategies** handle positioning (single-row, grid, vertical stack)
+- **Generic renderer** generates consistent output
+- Built on the SCKelemen/svg library for type-safe SVG creation
+
+See `cmd/gallery-gen/GALLERY_SYSTEM.md` for architecture details.
 
 ## Usage
 
@@ -125,11 +139,32 @@ These galleries serve as visual documentation of chart capabilities and can be:
 
 ## Implementation
 
-Gallery generation code is located in `cmd/gallery-gen/main.go`. Each gallery:
-1. Creates sample data appropriate for the chart type
-2. Renders multiple chart variations using different configuration options
-3. Positions charts side-by-side using SVG transforms
-4. Adds labels to identify each variation
-5. Wraps everything in a single SVG document
+Gallery generation code is organized across four files in `cmd/gallery-gen/`:
+
+- **`main.go`**: Core utilities and entry point
+- **`gallery.go`**: Generic rendering engine
+- **`layouts.go`**: Layout strategy implementations
+- **`configs.go`**: Gallery configuration registry
+
+Each gallery configuration:
+1. Defines sample data providers for each variant
+2. Specifies a layout strategy (single-row, grid, or vertical stack)
+3. Provides chart renderers that use the main library functions
+4. Declares positioning offsets and labels
+
+The generic system:
+1. Calculates dimensions based on layout strategy
+2. Renders background, title, and labels consistently
+3. Positions variants using layout strategies
+4. Wraps everything in a single SVG document
 
 The galleries use the same rendering functions as the main library, ensuring they accurately represent actual chart output.
+
+### Architecture Benefits
+
+- **No code duplication**: Structural code written once
+- **Easy to extend**: New galleries in ~30-50 lines
+- **Type-safe**: Compiler enforces consistency
+- **Maintainable**: Single source of truth for structure
+
+See [cmd/gallery-gen/GALLERY_SYSTEM.md](../cmd/gallery-gen/GALLERY_SYSTEM.md) for complete documentation.

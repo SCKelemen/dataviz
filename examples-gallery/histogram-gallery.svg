@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="480" viewBox="0 0 1200 480"><rect x="0.00" y="0.00" width="1200.00" height="480.00" fill="#ffffff"/>
 <text x="600.00" y="30.00" fill="#000000" text-anchor="middle" font-family="sans-serif" font-size="20.00px" font-weight="bold">Histogram Gallery</text>
-<g transform="translate(25.00, 60.00)"><text x="300.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Count Histogram</text><g transform="translate(0, 30.00)"><rect x="40.00" y="147.50" width="21.00" height="107.50" fill="#4285f4" stroke="#fff" stroke-width="1.00" opacity="0.80"/>
+<g transform="translate(25.00, 60.00)"><text x="300.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Count Histogram</text><g transform="translate(0.00, 30.00)"><rect x="40.00" y="147.50" width="21.00" height="107.50" fill="#4285f4" stroke="#fff" stroke-width="1.00" opacity="0.80"/>
 <rect x="61.00" y="147.50" width="21.00" height="107.50" fill="#4285f4" stroke="#fff" stroke-width="1.00" opacity="0.80"/>
 <rect x="82.00" y="147.50" width="21.00" height="107.50" fill="#4285f4" stroke="#fff" stroke-width="1.00" opacity="0.80"/>
 <rect x="103.00" y="147.50" width="21.00" height="107.50" fill="#4285f4" stroke="#fff" stroke-width="1.00" opacity="0.80"/>
@@ -21,7 +21,7 @@
 <rect x="418.00" y="147.50" width="21.00" height="107.50" fill="#4285f4" stroke="#fff" stroke-width="1.00" opacity="0.80"/>
 <rect x="439.00" y="147.50" width="21.00" height="107.50" fill="#4285f4" stroke="#fff" stroke-width="1.00" opacity="0.80"/>
 </g></g>
-<g transform="translate(625.00, 60.00)"><text x="300.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Density Histogram</text><g transform="translate(0, 30.00)"><rect x="40.00" y="147.50" width="21.00" height="107.50" fill="#4285f4" stroke="#fff" stroke-width="1.00" opacity="0.80"/>
+<g transform="translate(625.00, 60.00)"><text x="300.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Density Histogram</text><g transform="translate(0.00, 30.00)"><rect x="40.00" y="147.50" width="21.00" height="107.50" fill="#4285f4" stroke="#fff" stroke-width="1.00" opacity="0.80"/>
 <rect x="61.00" y="147.50" width="21.00" height="107.50" fill="#4285f4" stroke="#fff" stroke-width="1.00" opacity="0.80"/>
 <rect x="82.00" y="147.50" width="21.00" height="107.50" fill="#4285f4" stroke="#fff" stroke-width="1.00" opacity="0.80"/>
 <rect x="103.00" y="147.50" width="21.00" height="107.50" fill="#4285f4" stroke="#fff" stroke-width="1.00" opacity="0.80"/>

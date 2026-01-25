@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="480" viewBox="0 0 1200 480"><rect x="0.00" y="0.00" width="1200.00" height="480.00" fill="#ffffff"/>
 <text x="600.00" y="30.00" fill="#000000" text-anchor="middle" font-family="sans-serif" font-size="20.00px" font-weight="bold">Lollipop Chart Gallery</text>
-<g transform="translate(25.00, 60.00)"><text x="300.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Vertical Lollipop</text><g transform="translate(0, 30.00)"><line x1="60.00" y1="227.05" x2="440.00" y2="227.05" stroke="#d1d5db" stroke-width="1.50"/>
+<g transform="translate(25.00, 60.00)"><text x="300.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Vertical Lollipop</text><g transform="translate(0.00, 30.00)"><line x1="60.00" y1="227.05" x2="440.00" y2="227.05" stroke="#d1d5db" stroke-width="1.50"/>
 <line x1="60.00" y1="60.00" x2="60.00" y2="235.00" stroke="#374151" stroke-width="2.00"/>
 <line x1="60.00" y1="235.00" x2="440.00" y2="235.00" stroke="#374151" stroke-width="2.00"/>
 <line x1="98.00" y1="227.05" x2="98.00" y2="126.21" stroke="#3b82f6" stroke-width="2.00" opacity="0.60"/>
@@ -30,7 +30,7 @@
 <text x="50.00" y="95.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">58.9</text>
 <text x="50.00" y="60.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">74.5</text>
 </g></g>
-<g transform="translate(625.00, 60.00)"><text x="300.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Horizontal Lollipop</text><g transform="translate(0, 30.00)"><line x1="80.00" y1="80.00" x2="80.00" y2="215.00" stroke="#374151" stroke-width="2.00"/>
+<g transform="translate(625.00, 60.00)"><text x="300.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Horizontal Lollipop</text><g transform="translate(0.00, 30.00)"><line x1="80.00" y1="80.00" x2="80.00" y2="215.00" stroke="#374151" stroke-width="2.00"/>
 <line x1="80.00" y1="215.00" x2="420.00" y2="215.00" stroke="#374151" stroke-width="2.00"/>
 <line x1="95.45" y1="93.50" x2="291.36" y2="93.50" stroke="#3b82f6" stroke-width="2.00" opacity="0.60"/>
 <circle cx="291.36" cy="93.50" r="6.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>

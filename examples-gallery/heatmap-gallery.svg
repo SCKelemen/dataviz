@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600"><rect x="0.00" y="0.00" width="800.00" height="600.00" fill="#ffffff"/>
 <text x="400.00" y="30.00" fill="#000000" text-anchor="middle" font-family="sans-serif" font-size="20.00px" font-weight="bold">Heatmap Gallery</text>
-<g transform="translate(25, 60.00)"><text x="400.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Linear Heatmap</text><g transform="translate(0, 25.00)"><g transform="translate(0, 0)"><rect x="0.00" y="8.00" width="24.03" height="24.03" rx="2.00" ry="2.00" fill="#98e5fe"/>
+<g transform="translate(25.00, 60.00)"><text x="400.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Linear Heatmap</text><g transform="translate(0.00, 25.00)"><g transform="translate(0, 0)"><rect x="0.00" y="8.00" width="24.03" height="24.03" rx="2.00" ry="2.00" fill="#98e5fe"/>
 <rect x="25.03" y="8.00" width="24.03" height="24.03" rx="2.00" ry="2.00" fill="#84dafd"/>
 <rect x="50.07" y="8.00" width="24.03" height="24.03" rx="2.00" ry="2.00" fill="#70cffc"/>
 <rect x="75.10" y="8.00" width="24.03" height="24.03" rx="2.00" ry="2.00" fill="#5ec3fc"/>
@@ -31,7 +31,7 @@
 <rect x="700.93" y="8.00" width="24.03" height="24.03" rx="2.00" ry="2.00" fill="#77d3fd"/>
 <rect x="725.97" y="8.00" width="24.03" height="24.03" rx="2.00" ry="2.00" fill="#64c7fc"/>
 </g></g></g>
-<g transform="translate(25, 330.00)"><text x="400.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Weeks Heatmap (GitHub Style)</text><g transform="translate(0, 25.00)"><g transform="translate(0, 0)"><g transform="translate(30.0, 41.0)"><rect x="0.00" y="0.00" width="12.58" height="12.58" rx="2.00" ry="2.00" fill="#7ffecd"/>
+<g transform="translate(25.00, 330.00)"><text x="400.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Weeks Heatmap (GitHub Style)</text><g transform="translate(0.00, 25.00)"><g transform="translate(0, 0)"><g transform="translate(30.0, 13.5)"><rect x="0.00" y="0.00" width="12.58" height="12.58" rx="2.00" ry="2.00" fill="#7ffecd"/>
 <rect x="0.00" y="12.58" width="12.58" height="12.58" rx="2.00" ry="2.00" fill="#7ffecd"/>
 <rect x="0.00" y="25.17" width="12.58" height="12.58" rx="2.00" ry="2.00" fill="#74f5c2"/>
 <rect x="0.00" y="37.75" width="12.58" height="12.58" rx="2.00" ry="2.00" fill="#69ecb8"/>

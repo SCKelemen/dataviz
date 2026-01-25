@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1350" height="756" viewBox="0 0 1350 756"><rect x="0.00" y="0.00" width="1350.00" height="756.00" fill="#ffffff"/>
 <text x="675.00" y="24.50" fill="#000000" text-anchor="middle" font-family="sans-serif" font-size="20.00px" font-weight="bold">Scatter Plot Gallery</text>
-<g transform="translate(0.00, 35.00)"><text x="225.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Marker: circle</text><g transform="translate(0, 25.00)"><g transform="translate(0, 0)"><g class="axis axis-right">
+<g transform="translate(0.00, 35.00)"><text x="225.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Marker: circle</text><g transform="translate(0.00, 25.00)"><g transform="translate(0, 0)"><g class="axis axis-right">
   <line x1="377.00" y1="272.00" x2="377.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
   <line x1="377.00" y1="272.00" x2="383.00" y2="272.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
   <line x1="377.00" y1="272.00" x2="-5.00" y2="272.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
@@ -35,7 +35,7 @@
 <circle cx="342.00" cy="40.80" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
 <text x="342.00" y="48.80" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">H</text>
 </g></g></g>
-<g transform="translate(450.00, 35.00)"><text x="225.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Marker: square</text><g transform="translate(0, 25.00)"><g transform="translate(0, 0)"><g class="axis axis-right">
+<g transform="translate(450.00, 35.00)"><text x="225.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Marker: square</text><g transform="translate(0.00, 25.00)"><g transform="translate(0, 0)"><g class="axis axis-right">
   <line x1="377.00" y1="272.00" x2="377.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
   <line x1="377.00" y1="272.00" x2="383.00" y2="272.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
   <line x1="377.00" y1="272.00" x2="-5.00" y2="272.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
@@ -70,7 +70,7 @@
 <rect x="337.00" y="35.80" width="10.00" height="10.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
 <text x="342.00" y="48.80" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">H</text>
 </g></g></g>
-<g transform="translate(900.00, 35.00)"><text x="225.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Marker: diamond</text><g transform="translate(0, 25.00)"><g transform="translate(0, 0)"><g class="axis axis-right">
+<g transform="translate(900.00, 35.00)"><text x="225.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Marker: diamond</text><g transform="translate(0.00, 25.00)"><g transform="translate(0, 0)"><g class="axis axis-right">
   <line x1="377.00" y1="272.00" x2="377.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
   <line x1="377.00" y1="272.00" x2="383.00" y2="272.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
   <line x1="377.00" y1="272.00" x2="-5.00" y2="272.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
@@ -105,7 +105,7 @@
 <polygon points="342.00,35.80 347.00,40.80 342.00,45.80 337.00,40.80" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
 <text x="342.00" y="48.80" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">H</text>
 </g></g></g>
-<g transform="translate(0.00, 385.00)"><text x="225.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Marker: triangle</text><g transform="translate(0, 25.00)"><g transform="translate(0, 0)"><g class="axis axis-right">
+<g transform="translate(0.00, 385.00)"><text x="225.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Marker: triangle</text><g transform="translate(0.00, 25.00)"><g transform="translate(0, 0)"><g class="axis axis-right">
   <line x1="377.00" y1="272.00" x2="377.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
   <line x1="377.00" y1="272.00" x2="383.00" y2="272.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
   <line x1="377.00" y1="272.00" x2="-5.00" y2="272.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
@@ -140,7 +140,7 @@
 <polygon points="342.00,35.80 347.00,45.80 337.00,45.80" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
 <text x="342.00" y="48.80" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">H</text>
 </g></g></g>
-<g transform="translate(450.00, 385.00)"><text x="225.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Marker: cross</text><g transform="translate(0, 25.00)"><g transform="translate(0, 0)"><g class="axis axis-right">
+<g transform="translate(450.00, 385.00)"><text x="225.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Marker: cross</text><g transform="translate(0.00, 25.00)"><g transform="translate(0, 0)"><g class="axis axis-right">
   <line x1="377.00" y1="272.00" x2="377.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
   <line x1="377.00" y1="272.00" x2="383.00" y2="272.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
   <line x1="377.00" y1="272.00" x2="-5.00" y2="272.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
@@ -175,7 +175,7 @@
 <line x1="342.00" y1="35.80" x2="342.00" y2="45.80" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="337.00" y1="40.80" x2="347.00" y2="40.80" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
 <text x="342.00" y="48.80" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">H</text>
 </g></g></g>
-<g transform="translate(900.00, 385.00)"><text x="225.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Marker: x</text><g transform="translate(0, 25.00)"><g transform="translate(0, 0)"><g class="axis axis-right">
+<g transform="translate(900.00, 385.00)"><text x="225.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Marker: x</text><g transform="translate(0.00, 25.00)"><g transform="translate(0, 0)"><g class="axis axis-right">
   <line x1="377.00" y1="272.00" x2="377.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
   <line x1="377.00" y1="272.00" x2="383.00" y2="272.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
   <line x1="377.00" y1="272.00" x2="-5.00" y2="272.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>

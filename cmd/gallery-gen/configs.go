@@ -1,8 +1,12 @@
 package main
 
 import (
+	"time"
+
 	"github.com/SCKelemen/dataviz/charts"
+	"github.com/SCKelemen/dataviz/scales"
 	design "github.com/SCKelemen/design-system"
+	"github.com/SCKelemen/units"
 )
 
 // GalleryRegistry contains all gallery configurations
@@ -22,6 +26,12 @@ var GalleryRegistry = map[string]GalleryConfig{
 	"scatter":           ScatterGallery,
 	"connected-scatter": ConnectedScatterGallery,
 	"statcard":          StatCardGallery,
+	"radar":             RadarGallery,
+	"streamchart":       StreamChartGallery,
+	"candlestick":       CandlestickGallery,
+	"sunburst":          SunburstGallery,
+	"circle-packing":    CirclePackingGallery,
+	"heatmap":           HeatmapGallery,
 }
 
 // BarGallery defines the bar chart gallery configuration
@@ -1354,6 +1364,420 @@ var StatCardGallery = GalleryConfig{
 	ChartOffsetY: 10.0,
 }
 
+// RadarGallery defines the radar chart gallery configuration
+var RadarGallery = GalleryConfig{
+	Name:  "radar",
+	Title: "Radar Chart Gallery",
+	Layout: &SingleRowLayout{
+		Cols:       2,
+		BaseWidth:  500,
+		BaseHeight: 500,
+		StartX:     25.0,
+	},
+	Variants: []VariantConfig{
+		{
+			Label: "With Grid",
+			DataProvider: func() interface{} {
+				axes := []charts.RadarAxis{
+					{Label: "Speed", Max: 100},
+					{Label: "Strength", Max: 100},
+					{Label: "Intelligence", Max: 100},
+					{Label: "Agility", Max: 100},
+					{Label: "Defense", Max: 100},
+				}
+				series := []*charts.RadarSeries{
+					{
+						Label:  "Character A",
+						Values: []float64{80, 70, 60, 90, 50},
+						Color:  "#3b82f6",
+					},
+					{
+						Label:  "Character B",
+						Values: []float64{60, 85, 75, 70, 80},
+						Color:  "#10b981",
+					},
+				}
+				return charts.RadarChartSpec{
+					Axes:       axes,
+					Series:     series,
+					Width:      0, // Will be set in renderer
+					Height:     0,
+					ShowGrid:   true,
+					ShowLabels: true,
+					GridLevels: 5,
+				}
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				spec := data.(charts.RadarChartSpec)
+				spec.Width = ctx.ChartWidth - 50
+				spec.Height = ctx.ChartHeight - 80
+				return charts.RenderRadarChart(spec)
+			},
+		},
+		{
+			Label: "Without Grid",
+			DataProvider: func() interface{} {
+				axes := []charts.RadarAxis{
+					{Label: "Speed", Max: 100},
+					{Label: "Strength", Max: 100},
+					{Label: "Intelligence", Max: 100},
+					{Label: "Agility", Max: 100},
+					{Label: "Defense", Max: 100},
+				}
+				series := []*charts.RadarSeries{
+					{
+						Label:  "Character A",
+						Values: []float64{80, 70, 60, 90, 50},
+						Color:  "#3b82f6",
+					},
+					{
+						Label:  "Character B",
+						Values: []float64{60, 85, 75, 70, 80},
+						Color:  "#10b981",
+					},
+				}
+				return charts.RadarChartSpec{
+					Axes:       axes,
+					Series:     series,
+					Width:      0,
+					Height:     0,
+					ShowGrid:   false,
+					ShowLabels: true,
+					GridLevels: 5,
+				}
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				spec := data.(charts.RadarChartSpec)
+				spec.Width = ctx.ChartWidth - 50
+				spec.Height = ctx.ChartHeight - 80
+				return charts.RenderRadarChart(spec)
+			},
+		},
+	},
+	ChartOffsetX: 0.0,
+	ChartOffsetY: 30.0,
+}
+
+// StreamChartGallery defines the streamchart gallery configuration
+var StreamChartGallery = GalleryConfig{
+	Name:  "streamchart",
+	Title: "Streamchart Gallery",
+	Layout: &SingleRowLayout{
+		Cols:       2,
+		BaseWidth:  600,
+		BaseHeight: 400,
+		StartX:     25.0,
+	},
+	Variants: []VariantConfig{
+		{
+			Label: "Center Layout",
+			DataProvider: func() interface{} {
+				return charts.StreamChartSpec{
+					Points: []charts.StreamPoint{
+						{X: 0, Values: []float64{10, 15, 5}},
+						{X: 1, Values: []float64{20, 10, 15}},
+						{X: 2, Values: []float64{15, 20, 10}},
+						{X: 3, Values: []float64{25, 15, 10}},
+						{X: 4, Values: []float64{20, 25, 15}},
+						{X: 5, Values: []float64{30, 20, 12}},
+					},
+					Series: []charts.StreamSeries{
+						{Label: "Series A", Color: "#3b82f6"},
+						{Label: "Series B", Color: "#10b981"},
+						{Label: "Series C", Color: "#f59e0b"},
+					},
+					Width:  0,
+					Height: 0,
+					Layout: "center",
+				}
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				spec := data.(charts.StreamChartSpec)
+				spec.Width = ctx.ChartWidth - 50
+				spec.Height = ctx.ChartHeight - 80
+				return charts.RenderStreamChart(spec)
+			},
+		},
+		{
+			Label: "Smooth Curves",
+			DataProvider: func() interface{} {
+				return charts.StreamChartSpec{
+					Points: []charts.StreamPoint{
+						{X: 0, Values: []float64{10, 15, 5}},
+						{X: 1, Values: []float64{20, 10, 15}},
+						{X: 2, Values: []float64{15, 20, 10}},
+						{X: 3, Values: []float64{25, 15, 10}},
+						{X: 4, Values: []float64{20, 25, 15}},
+						{X: 5, Values: []float64{30, 20, 12}},
+					},
+					Series: []charts.StreamSeries{
+						{Label: "Series A", Color: "#3b82f6"},
+						{Label: "Series B", Color: "#10b981"},
+						{Label: "Series C", Color: "#f59e0b"},
+					},
+					Width:  0,
+					Height: 0,
+					Layout: "center",
+					Smooth: true,
+				}
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				spec := data.(charts.StreamChartSpec)
+				spec.Width = ctx.ChartWidth - 50
+				spec.Height = ctx.ChartHeight - 80
+				return charts.RenderStreamChart(spec)
+			},
+		},
+	},
+	ChartOffsetX: 0.0,
+	ChartOffsetY: 30.0,
+}
+
+// CandlestickGallery defines the candlestick gallery configuration
+var CandlestickGallery = GalleryConfig{
+	Name:  "candlestick",
+	Title: "Candlestick Gallery",
+	Layout: &SingleRowLayout{
+		Cols:       2,
+		BaseWidth:  600,
+		BaseHeight: 400,
+		StartX:     25.0,
+	},
+	Variants: []VariantConfig{
+		{
+			Label: "Candlestick Chart",
+			DataProvider: func() interface{} {
+				return []charts.CandlestickData{
+					{X: mustParseTime("2024-01-01"), Open: 100, High: 110, Low: 95, Close: 105, Volume: 1000},
+					{X: mustParseTime("2024-01-02"), Open: 105, High: 115, Low: 103, Close: 112, Volume: 1200},
+					{X: mustParseTime("2024-01-03"), Open: 112, High: 120, Low: 108, Close: 110, Volume: 1100},
+					{X: mustParseTime("2024-01-04"), Open: 110, High: 112, Low: 100, Close: 102, Volume: 1500},
+					{X: mustParseTime("2024-01-05"), Open: 102, High: 108, Low: 98, Close: 106, Volume: 1300},
+					{X: mustParseTime("2024-01-06"), Open: 106, High: 118, Low: 104, Close: 115, Volume: 1400},
+				}
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				candleData := data.([]charts.CandlestickData)
+				chartW := ctx.ChartWidth - 50
+				chartH := ctx.ChartHeight - 80
+
+				xScale := scales.NewTimeScale(
+					[2]time.Time{mustParseTime("2024-01-01"), mustParseTime("2024-01-06")},
+					[2]units.Length{units.Px(0), units.Px(chartW)},
+				)
+				yScale := scales.NewLinearScale([2]float64{90, 125}, [2]units.Length{units.Px(chartH), units.Px(0)})
+
+				spec := charts.CandlestickSpec{
+					Data:         candleData,
+					Width:        chartW,
+					Height:       chartH,
+					XScale:       xScale,
+					YScale:       yScale,
+					RisingColor:  "#10b981",
+					FallingColor: "#ef4444",
+				}
+				return charts.RenderCandlestick(spec)
+			},
+		},
+		{
+			Label: "OHLC Chart",
+			DataProvider: func() interface{} {
+				candleData := []charts.CandlestickData{
+					{X: mustParseTime("2024-01-01"), Open: 100, High: 110, Low: 95, Close: 105, Volume: 1000},
+					{X: mustParseTime("2024-01-02"), Open: 105, High: 115, Low: 103, Close: 112, Volume: 1200},
+					{X: mustParseTime("2024-01-03"), Open: 112, High: 120, Low: 108, Close: 110, Volume: 1100},
+					{X: mustParseTime("2024-01-04"), Open: 110, High: 112, Low: 100, Close: 102, Volume: 1500},
+					{X: mustParseTime("2024-01-05"), Open: 102, High: 108, Low: 98, Close: 106, Volume: 1300},
+					{X: mustParseTime("2024-01-06"), Open: 106, High: 118, Low: 104, Close: 115, Volume: 1400},
+				}
+				ohlcData := make([]charts.OHLCData, len(candleData))
+				for i, c := range candleData {
+					ohlcData[i] = charts.OHLCData{
+						X:     c.X,
+						Open:  c.Open,
+						High:  c.High,
+						Low:   c.Low,
+						Close: c.Close,
+					}
+				}
+				return ohlcData
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				ohlcData := data.([]charts.OHLCData)
+				chartW := ctx.ChartWidth - 50
+				chartH := ctx.ChartHeight - 80
+
+				xScale := scales.NewTimeScale(
+					[2]time.Time{mustParseTime("2024-01-01"), mustParseTime("2024-01-06")},
+					[2]units.Length{units.Px(0), units.Px(chartW)},
+				)
+				yScale := scales.NewLinearScale([2]float64{90, 125}, [2]units.Length{units.Px(chartH), units.Px(0)})
+
+				spec := charts.OHLCSpec{
+					Data:         ohlcData,
+					Width:        chartW,
+					Height:       chartH,
+					XScale:       xScale,
+					YScale:       yScale,
+					RisingColor:  "#10b981",
+					FallingColor: "#ef4444",
+				}
+				return charts.RenderOHLC(spec)
+			},
+		},
+	},
+	ChartOffsetX: 0.0,
+	ChartOffsetY: 30.0,
+}
+
+// SunburstGallery defines the sunburst gallery configuration
+var SunburstGallery = GalleryConfig{
+	Name:  "sunburst",
+	Title: "Sunburst Gallery",
+	Layout: &SingleRowLayout{
+		Cols:       2,
+		BaseWidth:  450,
+		BaseHeight: 500,
+		StartX:     25.0,
+	},
+	Variants: []VariantConfig{
+		{
+			Label: "Full Sunburst",
+			DataProvider: func() interface{} {
+				return createSampleTree()
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				tree := data.(*charts.TreeNode)
+				chartSize := 400.0
+				spec := charts.SunburstSpec{
+					Root:        tree,
+					Width:       chartSize,
+					Height:      chartSize,
+					ShowLabels:  true,
+					ColorScheme: []string{"#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6"},
+				}
+				return charts.RenderSunburst(spec)
+			},
+		},
+		{
+			Label: "With Inner Radius",
+			DataProvider: func() interface{} {
+				return createSampleTree()
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				tree := data.(*charts.TreeNode)
+				chartSize := 400.0
+				spec := charts.SunburstSpec{
+					Root:        tree,
+					Width:       chartSize,
+					Height:      chartSize,
+					InnerRadius: 60,
+					ShowLabels:  true,
+					ColorScheme: []string{"#6366f1", "#ec4899", "#14b8a6", "#f97316", "#a855f7"},
+				}
+				return charts.RenderSunburst(spec)
+			},
+		},
+	},
+	ChartOffsetX: 0.0,
+	ChartOffsetY: 30.0,
+}
+
+// CirclePackingGallery defines the circle packing gallery configuration
+var CirclePackingGallery = GalleryConfig{
+	Name:  "circle-packing",
+	Title: "Circle Packing Gallery",
+	Layout: &SingleRowLayout{
+		Cols:       2,
+		BaseWidth:  600,
+		BaseHeight: 500,
+		StartX:     25.0,
+	},
+	Variants: []VariantConfig{
+		{
+			Label: "Standard Packing",
+			DataProvider: func() interface{} {
+				return createSampleTree()
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				tree := data.(*charts.TreeNode)
+				chartSize := 400.0
+				spec := charts.CirclePackingSpec{
+					Root:        tree,
+					Width:       chartSize,
+					Height:      chartSize,
+					ShowLabels:  true,
+					ColorScheme: []string{"#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6"},
+				}
+				return charts.RenderCirclePacking(spec)
+			},
+		},
+		{
+			Label: "With Padding",
+			DataProvider: func() interface{} {
+				return createSampleTree()
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				tree := data.(*charts.TreeNode)
+				chartSize := 400.0
+				spec := charts.CirclePackingSpec{
+					Root:        tree,
+					Width:       chartSize,
+					Height:      chartSize,
+					Padding:     5,
+					ShowLabels:  true,
+					ColorScheme: []string{"#6366f1", "#ec4899", "#14b8a6", "#f97316", "#a855f7"},
+				}
+				return charts.RenderCirclePacking(spec)
+			},
+		},
+	},
+	ChartOffsetX: 100.0,
+	ChartOffsetY: 30.0,
+}
+
+// HeatmapGallery defines the heatmap gallery configuration
+var HeatmapGallery = GalleryConfig{
+	Name:  "heatmap",
+	Title: "Heatmap Gallery",
+	Layout: &VerticalStackLayout{
+		Rows:       2,
+		BaseWidth:  800,
+		RowHeight:  250,
+		RowSpacing: 20,
+	},
+	Variants: []VariantConfig{
+		{
+			Label: "Linear Heatmap",
+			DataProvider: func() interface{} {
+				return generateHeatmapData()
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				heatmapData := data.(charts.HeatmapData)
+				chartW := int(ctx.ChartWidth)
+				chartH := int(ctx.ChartHeight - 55)
+				tokens := design.DefaultTheme()
+				return charts.RenderLinearHeatmap(heatmapData, 0, 0, chartW, chartH, "#3b82f6", tokens)
+			},
+		},
+		{
+			Label: "Weeks Heatmap (GitHub Style)",
+			DataProvider: func() interface{} {
+				return generateHeatmapData()
+			},
+			ChartRenderer: func(data interface{}, ctx RenderContext) string {
+				heatmapData := data.(charts.HeatmapData)
+				chartW := int(ctx.ChartWidth)
+				chartH := int(ctx.ChartHeight - 55)
+				tokens := design.DefaultTheme()
+				return charts.RenderWeeksHeatmap(heatmapData, 0, 0, chartW, chartH, "#10b981", tokens)
+			},
+		},
+	},
+	ChartOffsetX: 0.0,
+	ChartOffsetY: 25.0,
+}
+
 // Helper functions for data generation
 
 func makeTrendData(values []int) []charts.TimeSeriesData {
@@ -1379,4 +1803,23 @@ func generateViolinValues(mean, stddev float64) []float64 {
 		values[i] = mean + (sum-6)*stddev
 	}
 	return values
+}
+
+func generateHeatmapData() charts.HeatmapData {
+	startDate := mustParseTime("2024-01-01")
+	days := make([]charts.ContributionDay, 365)
+	for i := 0; i < 365; i++ {
+		date := startDate.AddDate(0, 0, i)
+		// Create some pattern in the data
+		count := (i%7)*3 + (i%30)/5
+		days[i] = charts.ContributionDay{
+			Date:  date,
+			Count: count,
+		}
+	}
+	return charts.HeatmapData{
+		Days:      days,
+		StartDate: startDate,
+		EndDate:   startDate.AddDate(0, 0, 364),
+	}
 }

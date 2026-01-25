@@ -13,6 +13,86 @@ import (
 	"github.com/SCKelemen/units"
 )
 
+// GalleryDimensions holds calculated dimensions for gallery layouts
+type GalleryDimensions struct {
+	TotalWidth   float64
+	TotalHeight  float64
+	ChartWidth   float64
+	ChartHeight  float64
+	ColWidth     float64
+	RowHeight    float64
+	TitleY       float64
+	ChartStartY  float64
+	BottomMargin float64
+}
+
+// CalculateGridDimensions calculates pixel dimensions for a grid-based gallery
+// using relative units that resolve to exact pixels at render time
+func CalculateGridDimensions(cols, rows int, baseWidth, baseHeight float64) GalleryDimensions {
+	// Use percentages for grid sizing to avoid accumulation errors
+	colPct := units.Percent(100.0 / float64(cols))
+	rowPct := units.Percent(100.0 / float64(rows))
+
+	// Calculate dimensions with proper margins
+	titleMargin := units.Percent(5)  // 5% top margin for title
+	bottomMargin := units.Percent(3) // 3% bottom margin
+	chartPadding := units.Percent(2) // 2% padding within each cell
+
+	totalWidth := baseWidth * float64(cols)
+	totalHeight := baseHeight * float64(rows)
+
+	// Add margins to total height
+	titleSpace := titleMargin.Of(totalHeight)
+	bottomSpace := bottomMargin.Of(totalHeight)
+	totalHeight += titleSpace + bottomSpace
+
+	// Calculate chart dimensions (subtract padding)
+	colWidth := colPct.Of(totalWidth)
+	rowHeight := rowPct.Of(baseHeight * float64(rows))
+
+	padding := chartPadding.Of(colWidth)
+	chartWidth := colWidth - (padding * 2)
+	chartHeight := rowHeight - (padding * 2)
+
+	return GalleryDimensions{
+		TotalWidth:   totalWidth,
+		TotalHeight:  totalHeight,
+		ChartWidth:   chartWidth,
+		ChartHeight:  chartHeight,
+		ColWidth:     colWidth,
+		RowHeight:    rowHeight,
+		TitleY:       titleSpace * 0.7, // Position title 70% down the title space
+		ChartStartY:  titleSpace,
+		BottomMargin: bottomSpace,
+	}
+}
+
+// CalculateSingleRowDimensions calculates dimensions for single-row galleries
+func CalculateSingleRowDimensions(cols int, baseWidth, baseHeight float64) GalleryDimensions {
+	titleHeight := 50.0
+	bottomMargin := 30.0
+	chartPadding := 25.0
+
+	totalWidth := baseWidth * float64(cols)
+	totalHeight := baseHeight + titleHeight + bottomMargin
+
+	colWidth := totalWidth / float64(cols)
+	chartWidth := baseWidth - (chartPadding * 2)
+	chartHeight := baseHeight - chartPadding
+
+	return GalleryDimensions{
+		TotalWidth:   totalWidth,
+		TotalHeight:  totalHeight,
+		ChartWidth:   chartWidth,
+		ChartHeight:  chartHeight,
+		ColWidth:     colWidth,
+		RowHeight:    baseHeight,
+		TitleY:       30,
+		ChartStartY:  titleHeight + 10,
+		BottomMargin: bottomMargin,
+	}
+}
+
 func main() {
 	if err := generateGalleries(); err != nil {
 		fmt.Fprintf(os.Stderr, "Error: %v\n", err)
@@ -89,14 +169,13 @@ func generatePieGallery() (string, error) {
 		},
 	}
 
-	w, h := 800, 350
-	totalWidth := w * 3
-	totalHeight := h + 30 // Extra bottom margin
+	// Use relative sizing - calculate pixels at last moment
+	dims := CalculateSingleRowDimensions(3, 800, 350)
 
 	var content string
 
 	// White background
-	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += svg.Rect(0, 0, dims.TotalWidth, dims.TotalHeight, svg.Style{Fill: "#ffffff"})
 	content += "\n"
 
 	// Title
@@ -107,7 +186,7 @@ func generatePieGallery() (string, error) {
 		Fill:       "#000000",
 		TextAnchor: "middle",
 	}
-	content += svg.Text("Pie Chart Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += svg.Text("Pie Chart Gallery", dims.TotalWidth/2, dims.TitleY, titleStyle)
 	content += "\n"
 
 	labelStyle := svg.Style{
@@ -118,48 +197,59 @@ func generatePieGallery() (string, error) {
 		TextAnchor: "middle",
 	}
 
+	// Calculate cell positions using percentage-based offsets
+	labelOffsetY := 0.0
+	chartOffsetY := 20.0
+
+	// Calculate chart dimensions as int for rendering (pixels resolved at last moment)
+	chartW := int(dims.ChartWidth)
+	chartH := int(dims.ChartHeight - 70)
+
 	// Regular pie chart
+	cellX := 0.0
 	content += svg.Group(
-		svg.Text("Regular Pie", 400, 0, labelStyle)+
+		svg.Text("Regular Pie", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
-				charts.RenderPieChart(data, 0, 0, w, h-70, "", false, true, true),
-				"translate(0, 20)",
+				charts.RenderPieChart(data, 0, 0, chartW, chartH, "", false, true, true),
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		"translate(0, 50)",
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
 	// Donut chart
+	cellX += dims.ColWidth
 	content += svg.Group(
-		svg.Text("Donut Chart", 400, 0, labelStyle)+
+		svg.Text("Donut Chart", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
-				charts.RenderPieChart(data, 0, 0, w, h-70, "", true, true, true),
-				"translate(0, 20)",
+				charts.RenderPieChart(data, 0, 0, chartW, chartH, "", true, true, true),
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		fmt.Sprintf("translate(%d, 50)", w),
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
 	// Custom colors
+	cellX += dims.ColWidth
 	dataColors := data
 	dataColors.Colors = []string{"#ef4444", "#f97316", "#eab308", "#22c55e", "#3b82f6"}
 	content += svg.Group(
-		svg.Text("Custom Colors", 400, 0, labelStyle)+
+		svg.Text("Custom Colors", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
-				charts.RenderPieChart(dataColors, 0, 0, w, h-70, "", false, true, true),
-				"translate(0, 20)",
+				charts.RenderPieChart(dataColors, 0, 0, chartW, chartH, "", false, true, true),
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		fmt.Sprintf("translate(%d, 50)", w*2),
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
-	return wrapSVG(content, totalWidth, totalHeight), nil
+	return wrapSVG(content, int(dims.TotalWidth), int(dims.TotalHeight)), nil
 }
 
 // Bar chart variations: simple, stacked
@@ -189,14 +279,13 @@ func generateBarGallery() (string, error) {
 		},
 	}
 
-	w, h := 800, 450
-	totalWidth := w*2 + 100
-	totalHeight := h + 30 // Extra bottom margin
+	// Use relative sizing with percentage-based calculations
+	dims := CalculateSingleRowDimensions(2, 850, 450)
 
 	var content string
 
 	// White background
-	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += svg.Rect(0, 0, dims.TotalWidth, dims.TotalHeight, svg.Style{Fill: "#ffffff"})
 	content += "\n"
 
 	// Title
@@ -207,7 +296,7 @@ func generateBarGallery() (string, error) {
 		Fill:       "#000000",
 		TextAnchor: "middle",
 	}
-	content += svg.Text("Bar Chart Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += svg.Text("Bar Chart Gallery", dims.TotalWidth/2, dims.TitleY, titleStyle)
 	content += "\n"
 
 	labelStyle := svg.Style{
@@ -218,33 +307,42 @@ func generateBarGallery() (string, error) {
 		TextAnchor: "middle",
 	}
 
+	// Calculate chart dimensions
+	chartW := int(dims.ChartWidth)
+	chartH := int(dims.ChartHeight - 100)
+
+	labelOffsetY := 0.0
+	chartOffsetY := 30.0
+
 	// Simple bars
+	cellX := 50.0
 	content += svg.Group(
-		svg.Text("Simple Bars", 400, 0, labelStyle)+
+		svg.Text("Simple Bars", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
-				charts.RenderBarChart(dataSimple, 0, 0, w, h-100, tokens),
-				"translate(0, 30)",
+				charts.RenderBarChart(dataSimple, 0, 0, chartW, chartH, tokens),
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		"translate(50, 60)",
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
 	// Stacked bars
+	cellX += dims.ColWidth
 	content += svg.Group(
-		svg.Text("Stacked Bars (Open/Closed)", 400, 0, labelStyle)+
+		svg.Text("Stacked Bars (Open/Closed)", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
-				charts.RenderBarChart(dataStacked, 0, 0, w, h-100, tokens),
-				"translate(0, 30)",
+				charts.RenderBarChart(dataStacked, 0, 0, chartW, chartH, tokens),
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		fmt.Sprintf("translate(%d, 60)", w+50),
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
-	return wrapSVG(content, totalWidth, totalHeight), nil
+	return wrapSVG(content, int(dims.TotalWidth), int(dims.TotalHeight)), nil
 }
 
 // Line graph variations: simple, smoothed, markers, filled

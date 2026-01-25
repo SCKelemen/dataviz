@@ -1,213 +1,213 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1350" height="750" viewBox="0 0 1350 750"><rect x="0.00" y="0.00" width="1350.00" height="750.00" fill="#ffffff"/>
-<text x="675.00" y="30.00" fill="#000000" text-anchor="middle" font-family="sans-serif" font-size="20.00px" font-weight="bold">Scatter Plot Gallery</text>
-<g transform="translate(0, 60)"><text x="225.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Marker: circle</text><g transform="translate(0, 25)"><g transform="translate(0, 0)"><g class="axis axis-right">
-  <line x1="395.00" y1="290.00" x2="395.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="290.00" x2="401.00" y2="290.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="290.00" x2="-5.00" y2="290.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="290.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">20</text>
-  <line x1="395.00" y1="217.50" x2="401.00" y2="217.50" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="217.50" x2="-5.00" y2="217.50" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="217.50" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">40</text>
-  <line x1="395.00" y1="145.00" x2="401.00" y2="145.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="145.00" x2="-5.00" y2="145.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="145.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">60</text>
-  <line x1="395.00" y1="72.50" x2="401.00" y2="72.50" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="72.50" x2="-5.00" y2="72.50" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="72.50" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">80</text>
-  <line x1="395.00" y1="0.00" x2="401.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="0.00" x2="-5.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="0.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">100</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1350" height="756" viewBox="0 0 1350 756"><rect x="0.00" y="0.00" width="1350.00" height="756.00" fill="#ffffff"/>
+<text x="675.00" y="24.50" fill="#000000" text-anchor="middle" font-family="sans-serif" font-size="20.00px" font-weight="bold">Scatter Plot Gallery</text>
+<g transform="translate(0.00, 35.00)"><text x="225.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Marker: circle</text><g transform="translate(0, 25.00)"><g transform="translate(0, 0)"><g class="axis axis-right">
+  <line x1="377.00" y1="272.00" x2="377.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="272.00" x2="383.00" y2="272.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="272.00" x2="-5.00" y2="272.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="272.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">20</text>
+  <line x1="377.00" y1="204.00" x2="383.00" y2="204.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="204.00" x2="-5.00" y2="204.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="204.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">40</text>
+  <line x1="377.00" y1="136.00" x2="383.00" y2="136.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="136.00" x2="-5.00" y2="136.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="136.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">60</text>
+  <line x1="377.00" y1="68.00" x2="383.00" y2="68.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="68.00" x2="-5.00" y2="68.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="68.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">80</text>
+  <line x1="377.00" y1="0.00" x2="383.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="0.00" x2="-5.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="0.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">100</text>
 </g>
-<circle cx="0.00" cy="163.12" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="0.00" y="171.12" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">A</text>
-<circle cx="52.39" cy="79.75" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="52.39" y="87.75" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">B</text>
-<circle cx="101.41" cy="203.00" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="101.41" y="211.00" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">C</text>
-<circle cx="153.80" cy="123.25" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="153.80" y="131.25" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">D</text>
-<circle cx="204.51" cy="242.88" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="204.51" y="250.88" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">E</text>
-<circle cx="256.90" cy="83.38" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="256.90" y="91.38" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">F</text>
-<circle cx="307.61" cy="282.75" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="307.61" y="290.75" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">G</text>
-<circle cx="360.00" cy="43.50" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="360.00" y="51.50" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">H</text>
+<circle cx="0.00" cy="153.00" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="0.00" y="161.00" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">A</text>
+<circle cx="49.77" cy="74.80" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="49.77" y="82.80" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">B</text>
+<circle cx="96.34" cy="190.40" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="96.34" y="198.40" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">C</text>
+<circle cx="146.11" cy="115.60" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="146.11" y="123.60" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">D</text>
+<circle cx="194.28" cy="227.80" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="194.28" y="235.80" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">E</text>
+<circle cx="244.06" cy="78.20" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="244.06" y="86.20" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">F</text>
+<circle cx="292.23" cy="265.20" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="292.23" y="273.20" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">G</text>
+<circle cx="342.00" cy="40.80" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="342.00" y="48.80" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">H</text>
 </g></g></g>
-<g transform="translate(450, 60)"><text x="225.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Marker: square</text><g transform="translate(0, 25)"><g transform="translate(0, 0)"><g class="axis axis-right">
-  <line x1="395.00" y1="290.00" x2="395.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="290.00" x2="401.00" y2="290.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="290.00" x2="-5.00" y2="290.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="290.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">20</text>
-  <line x1="395.00" y1="217.50" x2="401.00" y2="217.50" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="217.50" x2="-5.00" y2="217.50" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="217.50" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">40</text>
-  <line x1="395.00" y1="145.00" x2="401.00" y2="145.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="145.00" x2="-5.00" y2="145.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="145.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">60</text>
-  <line x1="395.00" y1="72.50" x2="401.00" y2="72.50" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="72.50" x2="-5.00" y2="72.50" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="72.50" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">80</text>
-  <line x1="395.00" y1="0.00" x2="401.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="0.00" x2="-5.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="0.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">100</text>
+<g transform="translate(450.00, 35.00)"><text x="225.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Marker: square</text><g transform="translate(0, 25.00)"><g transform="translate(0, 0)"><g class="axis axis-right">
+  <line x1="377.00" y1="272.00" x2="377.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="272.00" x2="383.00" y2="272.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="272.00" x2="-5.00" y2="272.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="272.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">20</text>
+  <line x1="377.00" y1="204.00" x2="383.00" y2="204.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="204.00" x2="-5.00" y2="204.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="204.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">40</text>
+  <line x1="377.00" y1="136.00" x2="383.00" y2="136.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="136.00" x2="-5.00" y2="136.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="136.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">60</text>
+  <line x1="377.00" y1="68.00" x2="383.00" y2="68.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="68.00" x2="-5.00" y2="68.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="68.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">80</text>
+  <line x1="377.00" y1="0.00" x2="383.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="0.00" x2="-5.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="0.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">100</text>
 </g>
-<rect x="-5.00" y="158.12" width="10.00" height="10.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="0.00" y="171.12" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">A</text>
-<rect x="47.39" y="74.75" width="10.00" height="10.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="52.39" y="87.75" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">B</text>
-<rect x="96.41" y="198.00" width="10.00" height="10.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="101.41" y="211.00" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">C</text>
-<rect x="148.80" y="118.25" width="10.00" height="10.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="153.80" y="131.25" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">D</text>
-<rect x="199.51" y="237.88" width="10.00" height="10.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="204.51" y="250.88" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">E</text>
-<rect x="251.90" y="78.38" width="10.00" height="10.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="256.90" y="91.38" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">F</text>
-<rect x="302.61" y="277.75" width="10.00" height="10.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="307.61" y="290.75" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">G</text>
-<rect x="355.00" y="38.50" width="10.00" height="10.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="360.00" y="51.50" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">H</text>
+<rect x="-5.00" y="148.00" width="10.00" height="10.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="0.00" y="161.00" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">A</text>
+<rect x="44.77" y="69.80" width="10.00" height="10.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="49.77" y="82.80" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">B</text>
+<rect x="91.34" y="185.40" width="10.00" height="10.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="96.34" y="198.40" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">C</text>
+<rect x="141.11" y="110.60" width="10.00" height="10.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="146.11" y="123.60" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">D</text>
+<rect x="189.28" y="222.80" width="10.00" height="10.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="194.28" y="235.80" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">E</text>
+<rect x="239.06" y="73.20" width="10.00" height="10.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="244.06" y="86.20" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">F</text>
+<rect x="287.23" y="260.20" width="10.00" height="10.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="292.23" y="273.20" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">G</text>
+<rect x="337.00" y="35.80" width="10.00" height="10.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="342.00" y="48.80" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">H</text>
 </g></g></g>
-<g transform="translate(900, 60)"><text x="225.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Marker: diamond</text><g transform="translate(0, 25)"><g transform="translate(0, 0)"><g class="axis axis-right">
-  <line x1="395.00" y1="290.00" x2="395.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="290.00" x2="401.00" y2="290.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="290.00" x2="-5.00" y2="290.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="290.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">20</text>
-  <line x1="395.00" y1="217.50" x2="401.00" y2="217.50" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="217.50" x2="-5.00" y2="217.50" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="217.50" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">40</text>
-  <line x1="395.00" y1="145.00" x2="401.00" y2="145.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="145.00" x2="-5.00" y2="145.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="145.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">60</text>
-  <line x1="395.00" y1="72.50" x2="401.00" y2="72.50" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="72.50" x2="-5.00" y2="72.50" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="72.50" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">80</text>
-  <line x1="395.00" y1="0.00" x2="401.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="0.00" x2="-5.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="0.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">100</text>
+<g transform="translate(900.00, 35.00)"><text x="225.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Marker: diamond</text><g transform="translate(0, 25.00)"><g transform="translate(0, 0)"><g class="axis axis-right">
+  <line x1="377.00" y1="272.00" x2="377.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="272.00" x2="383.00" y2="272.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="272.00" x2="-5.00" y2="272.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="272.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">20</text>
+  <line x1="377.00" y1="204.00" x2="383.00" y2="204.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="204.00" x2="-5.00" y2="204.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="204.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">40</text>
+  <line x1="377.00" y1="136.00" x2="383.00" y2="136.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="136.00" x2="-5.00" y2="136.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="136.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">60</text>
+  <line x1="377.00" y1="68.00" x2="383.00" y2="68.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="68.00" x2="-5.00" y2="68.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="68.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">80</text>
+  <line x1="377.00" y1="0.00" x2="383.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="0.00" x2="-5.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="0.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">100</text>
 </g>
-<polygon points="0.00,158.12 5.00,163.12 0.00,168.12 -5.00,163.12" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="0.00" y="171.12" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">A</text>
-<polygon points="52.39,74.75 57.39,79.75 52.39,84.75 47.39,79.75" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="52.39" y="87.75" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">B</text>
-<polygon points="101.41,198.00 106.41,203.00 101.41,208.00 96.41,203.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="101.41" y="211.00" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">C</text>
-<polygon points="153.80,118.25 158.80,123.25 153.80,128.25 148.80,123.25" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="153.80" y="131.25" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">D</text>
-<polygon points="204.51,237.88 209.51,242.88 204.51,247.88 199.51,242.88" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="204.51" y="250.88" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">E</text>
-<polygon points="256.90,78.38 261.90,83.38 256.90,88.38 251.90,83.38" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="256.90" y="91.38" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">F</text>
-<polygon points="307.61,277.75 312.61,282.75 307.61,287.75 302.61,282.75" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="307.61" y="290.75" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">G</text>
-<polygon points="360.00,38.50 365.00,43.50 360.00,48.50 355.00,43.50" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="360.00" y="51.50" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">H</text>
+<polygon points="0.00,148.00 5.00,153.00 0.00,158.00 -5.00,153.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="0.00" y="161.00" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">A</text>
+<polygon points="49.77,69.80 54.77,74.80 49.77,79.80 44.77,74.80" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="49.77" y="82.80" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">B</text>
+<polygon points="96.34,185.40 101.34,190.40 96.34,195.40 91.34,190.40" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="96.34" y="198.40" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">C</text>
+<polygon points="146.11,110.60 151.11,115.60 146.11,120.60 141.11,115.60" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="146.11" y="123.60" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">D</text>
+<polygon points="194.28,222.80 199.28,227.80 194.28,232.80 189.28,227.80" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="194.28" y="235.80" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">E</text>
+<polygon points="244.06,73.20 249.06,78.20 244.06,83.20 239.06,78.20" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="244.06" y="86.20" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">F</text>
+<polygon points="292.23,260.20 297.23,265.20 292.23,270.20 287.23,265.20" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="292.23" y="273.20" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">G</text>
+<polygon points="342.00,35.80 347.00,40.80 342.00,45.80 337.00,40.80" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="342.00" y="48.80" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">H</text>
 </g></g></g>
-<g transform="translate(0, 410)"><text x="225.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Marker: triangle</text><g transform="translate(0, 25)"><g transform="translate(0, 0)"><g class="axis axis-right">
-  <line x1="395.00" y1="290.00" x2="395.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="290.00" x2="401.00" y2="290.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="290.00" x2="-5.00" y2="290.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="290.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">20</text>
-  <line x1="395.00" y1="217.50" x2="401.00" y2="217.50" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="217.50" x2="-5.00" y2="217.50" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="217.50" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">40</text>
-  <line x1="395.00" y1="145.00" x2="401.00" y2="145.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="145.00" x2="-5.00" y2="145.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="145.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">60</text>
-  <line x1="395.00" y1="72.50" x2="401.00" y2="72.50" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="72.50" x2="-5.00" y2="72.50" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="72.50" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">80</text>
-  <line x1="395.00" y1="0.00" x2="401.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="0.00" x2="-5.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="0.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">100</text>
+<g transform="translate(0.00, 385.00)"><text x="225.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Marker: triangle</text><g transform="translate(0, 25.00)"><g transform="translate(0, 0)"><g class="axis axis-right">
+  <line x1="377.00" y1="272.00" x2="377.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="272.00" x2="383.00" y2="272.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="272.00" x2="-5.00" y2="272.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="272.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">20</text>
+  <line x1="377.00" y1="204.00" x2="383.00" y2="204.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="204.00" x2="-5.00" y2="204.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="204.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">40</text>
+  <line x1="377.00" y1="136.00" x2="383.00" y2="136.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="136.00" x2="-5.00" y2="136.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="136.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">60</text>
+  <line x1="377.00" y1="68.00" x2="383.00" y2="68.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="68.00" x2="-5.00" y2="68.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="68.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">80</text>
+  <line x1="377.00" y1="0.00" x2="383.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="0.00" x2="-5.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="0.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">100</text>
 </g>
-<polygon points="0.00,158.12 5.00,168.12 -5.00,168.12" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="0.00" y="171.12" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">A</text>
-<polygon points="52.39,74.75 57.39,84.75 47.39,84.75" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="52.39" y="87.75" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">B</text>
-<polygon points="101.41,198.00 106.41,208.00 96.41,208.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="101.41" y="211.00" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">C</text>
-<polygon points="153.80,118.25 158.80,128.25 148.80,128.25" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="153.80" y="131.25" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">D</text>
-<polygon points="204.51,237.88 209.51,247.88 199.51,247.88" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="204.51" y="250.88" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">E</text>
-<polygon points="256.90,78.38 261.90,88.38 251.90,88.38" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="256.90" y="91.38" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">F</text>
-<polygon points="307.61,277.75 312.61,287.75 302.61,287.75" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="307.61" y="290.75" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">G</text>
-<polygon points="360.00,38.50 365.00,48.50 355.00,48.50" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
-<text x="360.00" y="51.50" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">H</text>
+<polygon points="0.00,148.00 5.00,158.00 -5.00,158.00" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="0.00" y="161.00" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">A</text>
+<polygon points="49.77,69.80 54.77,79.80 44.77,79.80" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="49.77" y="82.80" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">B</text>
+<polygon points="96.34,185.40 101.34,195.40 91.34,195.40" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="96.34" y="198.40" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">C</text>
+<polygon points="146.11,110.60 151.11,120.60 141.11,120.60" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="146.11" y="123.60" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">D</text>
+<polygon points="194.28,222.80 199.28,232.80 189.28,232.80" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="194.28" y="235.80" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">E</text>
+<polygon points="244.06,73.20 249.06,83.20 239.06,83.20" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="244.06" y="86.20" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">F</text>
+<polygon points="292.23,260.20 297.23,270.20 287.23,270.20" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="292.23" y="273.20" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">G</text>
+<polygon points="342.00,35.80 347.00,45.80 337.00,45.80" fill="#3b82f6" stroke="#020617" stroke-width="1.50"/>
+<text x="342.00" y="48.80" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">H</text>
 </g></g></g>
-<g transform="translate(450, 410)"><text x="225.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Marker: cross</text><g transform="translate(0, 25)"><g transform="translate(0, 0)"><g class="axis axis-right">
-  <line x1="395.00" y1="290.00" x2="395.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="290.00" x2="401.00" y2="290.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="290.00" x2="-5.00" y2="290.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="290.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">20</text>
-  <line x1="395.00" y1="217.50" x2="401.00" y2="217.50" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="217.50" x2="-5.00" y2="217.50" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="217.50" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">40</text>
-  <line x1="395.00" y1="145.00" x2="401.00" y2="145.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="145.00" x2="-5.00" y2="145.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="145.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">60</text>
-  <line x1="395.00" y1="72.50" x2="401.00" y2="72.50" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="72.50" x2="-5.00" y2="72.50" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="72.50" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">80</text>
-  <line x1="395.00" y1="0.00" x2="401.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="0.00" x2="-5.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="0.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">100</text>
+<g transform="translate(450.00, 385.00)"><text x="225.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Marker: cross</text><g transform="translate(0, 25.00)"><g transform="translate(0, 0)"><g class="axis axis-right">
+  <line x1="377.00" y1="272.00" x2="377.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="272.00" x2="383.00" y2="272.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="272.00" x2="-5.00" y2="272.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="272.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">20</text>
+  <line x1="377.00" y1="204.00" x2="383.00" y2="204.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="204.00" x2="-5.00" y2="204.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="204.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">40</text>
+  <line x1="377.00" y1="136.00" x2="383.00" y2="136.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="136.00" x2="-5.00" y2="136.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="136.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">60</text>
+  <line x1="377.00" y1="68.00" x2="383.00" y2="68.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="68.00" x2="-5.00" y2="68.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="68.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">80</text>
+  <line x1="377.00" y1="0.00" x2="383.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="0.00" x2="-5.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="0.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">100</text>
 </g>
-<line x1="0.00" y1="158.12" x2="0.00" y2="168.12" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="-5.00" y1="163.12" x2="5.00" y2="163.12" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
-<text x="0.00" y="171.12" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">A</text>
-<line x1="52.39" y1="74.75" x2="52.39" y2="84.75" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="47.39" y1="79.75" x2="57.39" y2="79.75" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
-<text x="52.39" y="87.75" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">B</text>
-<line x1="101.41" y1="198.00" x2="101.41" y2="208.00" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="96.41" y1="203.00" x2="106.41" y2="203.00" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
-<text x="101.41" y="211.00" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">C</text>
-<line x1="153.80" y1="118.25" x2="153.80" y2="128.25" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="148.80" y1="123.25" x2="158.80" y2="123.25" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
-<text x="153.80" y="131.25" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">D</text>
-<line x1="204.51" y1="237.88" x2="204.51" y2="247.88" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="199.51" y1="242.88" x2="209.51" y2="242.88" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
-<text x="204.51" y="250.88" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">E</text>
-<line x1="256.90" y1="78.38" x2="256.90" y2="88.38" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="251.90" y1="83.38" x2="261.90" y2="83.38" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
-<text x="256.90" y="91.38" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">F</text>
-<line x1="307.61" y1="277.75" x2="307.61" y2="287.75" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="302.61" y1="282.75" x2="312.61" y2="282.75" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
-<text x="307.61" y="290.75" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">G</text>
-<line x1="360.00" y1="38.50" x2="360.00" y2="48.50" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="355.00" y1="43.50" x2="365.00" y2="43.50" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
-<text x="360.00" y="51.50" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">H</text>
+<line x1="0.00" y1="148.00" x2="0.00" y2="158.00" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="-5.00" y1="153.00" x2="5.00" y2="153.00" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
+<text x="0.00" y="161.00" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">A</text>
+<line x1="49.77" y1="69.80" x2="49.77" y2="79.80" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="44.77" y1="74.80" x2="54.77" y2="74.80" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
+<text x="49.77" y="82.80" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">B</text>
+<line x1="96.34" y1="185.40" x2="96.34" y2="195.40" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="91.34" y1="190.40" x2="101.34" y2="190.40" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
+<text x="96.34" y="198.40" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">C</text>
+<line x1="146.11" y1="110.60" x2="146.11" y2="120.60" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="141.11" y1="115.60" x2="151.11" y2="115.60" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
+<text x="146.11" y="123.60" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">D</text>
+<line x1="194.28" y1="222.80" x2="194.28" y2="232.80" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="189.28" y1="227.80" x2="199.28" y2="227.80" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
+<text x="194.28" y="235.80" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">E</text>
+<line x1="244.06" y1="73.20" x2="244.06" y2="83.20" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="239.06" y1="78.20" x2="249.06" y2="78.20" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
+<text x="244.06" y="86.20" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">F</text>
+<line x1="292.23" y1="260.20" x2="292.23" y2="270.20" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="287.23" y1="265.20" x2="297.23" y2="265.20" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
+<text x="292.23" y="273.20" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">G</text>
+<line x1="342.00" y1="35.80" x2="342.00" y2="45.80" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="337.00" y1="40.80" x2="347.00" y2="40.80" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
+<text x="342.00" y="48.80" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">H</text>
 </g></g></g>
-<g transform="translate(900, 410)"><text x="225.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Marker: x</text><g transform="translate(0, 25)"><g transform="translate(0, 0)"><g class="axis axis-right">
-  <line x1="395.00" y1="290.00" x2="395.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="290.00" x2="401.00" y2="290.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="290.00" x2="-5.00" y2="290.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="290.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">20</text>
-  <line x1="395.00" y1="217.50" x2="401.00" y2="217.50" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="217.50" x2="-5.00" y2="217.50" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="217.50" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">40</text>
-  <line x1="395.00" y1="145.00" x2="401.00" y2="145.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="145.00" x2="-5.00" y2="145.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="145.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">60</text>
-  <line x1="395.00" y1="72.50" x2="401.00" y2="72.50" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="72.50" x2="-5.00" y2="72.50" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="72.50" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">80</text>
-  <line x1="395.00" y1="0.00" x2="401.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="395.00" y1="0.00" x2="-5.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="404.00" y="0.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">100</text>
+<g transform="translate(900.00, 385.00)"><text x="225.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Marker: x</text><g transform="translate(0, 25.00)"><g transform="translate(0, 0)"><g class="axis axis-right">
+  <line x1="377.00" y1="272.00" x2="377.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="272.00" x2="383.00" y2="272.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="272.00" x2="-5.00" y2="272.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="272.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">20</text>
+  <line x1="377.00" y1="204.00" x2="383.00" y2="204.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="204.00" x2="-5.00" y2="204.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="204.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">40</text>
+  <line x1="377.00" y1="136.00" x2="383.00" y2="136.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="136.00" x2="-5.00" y2="136.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="136.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">60</text>
+  <line x1="377.00" y1="68.00" x2="383.00" y2="68.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="68.00" x2="-5.00" y2="68.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="68.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">80</text>
+  <line x1="377.00" y1="0.00" x2="383.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="377.00" y1="0.00" x2="-5.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="386.00" y="0.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">100</text>
 </g>
-<line x1="-3.50" y1="159.62" x2="3.50" y2="166.62" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="-3.50" y1="166.62" x2="3.50" y2="159.62" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
-<text x="0.00" y="171.12" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">A</text>
-<line x1="48.89" y1="76.25" x2="55.89" y2="83.25" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="48.89" y1="83.25" x2="55.89" y2="76.25" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
-<text x="52.39" y="87.75" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">B</text>
-<line x1="97.91" y1="199.50" x2="104.91" y2="206.50" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="97.91" y1="206.50" x2="104.91" y2="199.50" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
-<text x="101.41" y="211.00" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">C</text>
-<line x1="150.30" y1="119.75" x2="157.30" y2="126.75" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="150.30" y1="126.75" x2="157.30" y2="119.75" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
-<text x="153.80" y="131.25" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">D</text>
-<line x1="201.01" y1="239.38" x2="208.01" y2="246.38" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="201.01" y1="246.38" x2="208.01" y2="239.38" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
-<text x="204.51" y="250.88" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">E</text>
-<line x1="253.40" y1="79.88" x2="260.40" y2="86.88" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="253.40" y1="86.88" x2="260.40" y2="79.88" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
-<text x="256.90" y="91.38" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">F</text>
-<line x1="304.11" y1="279.25" x2="311.11" y2="286.25" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="304.11" y1="286.25" x2="311.11" y2="279.25" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
-<text x="307.61" y="290.75" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">G</text>
-<line x1="356.50" y1="40.00" x2="363.50" y2="47.00" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="356.50" y1="47.00" x2="363.50" y2="40.00" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
-<text x="360.00" y="51.50" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">H</text>
+<line x1="-3.50" y1="149.50" x2="3.50" y2="156.50" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="-3.50" y1="156.50" x2="3.50" y2="149.50" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
+<text x="0.00" y="161.00" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">A</text>
+<line x1="46.27" y1="71.30" x2="53.27" y2="78.30" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="46.27" y1="78.30" x2="53.27" y2="71.30" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
+<text x="49.77" y="82.80" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">B</text>
+<line x1="92.84" y1="186.90" x2="99.84" y2="193.90" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="92.84" y1="193.90" x2="99.84" y2="186.90" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
+<text x="96.34" y="198.40" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">C</text>
+<line x1="142.61" y1="112.10" x2="149.61" y2="119.10" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="142.61" y1="119.10" x2="149.61" y2="112.10" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
+<text x="146.11" y="123.60" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">D</text>
+<line x1="190.78" y1="224.30" x2="197.78" y2="231.30" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="190.78" y1="231.30" x2="197.78" y2="224.30" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
+<text x="194.28" y="235.80" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">E</text>
+<line x1="240.56" y1="74.70" x2="247.56" y2="81.70" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="240.56" y1="81.70" x2="247.56" y2="74.70" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
+<text x="244.06" y="86.20" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">F</text>
+<line x1="288.73" y1="261.70" x2="295.73" y2="268.70" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="288.73" y1="268.70" x2="295.73" y2="261.70" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
+<text x="292.23" y="273.20" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">G</text>
+<line x1="338.50" y1="37.30" x2="345.50" y2="44.30" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/><line x1="338.50" y1="44.30" x2="345.50" y2="37.30" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round"/>
+<text x="342.00" y="48.80" fill="#E5E7EB" class="mono smaller" text-anchor="middle" dominant-baseline="hanging">H</text>
 </g></g></g>
 </svg>

@@ -1,107 +1,107 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1300" height="740" viewBox="0 0 1300 740"><rect x="0.00" y="0.00" width="1300.00" height="740.00" fill="#ffffff"/>
-<text x="650.00" y="30.00" fill="#000000" text-anchor="middle" font-family="sans-serif" font-size="20.00px" font-weight="bold">Line Graph Gallery</text>
-<g transform="translate(0, 60)"><text x="325.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Simple Line</text><g transform="translate(10, 25)"><g transform="translate(0, 0)"><g class="axis axis-right">
-  <line x1="555.00" y1="260.00" x2="555.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="555.00" y1="260.00" x2="561.00" y2="260.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="555.00" y1="260.00" x2="-5.00" y2="260.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="564.00" y="260.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">10</text>
-  <line x1="555.00" y1="195.00" x2="561.00" y2="195.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="555.00" y1="195.00" x2="-5.00" y2="195.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="564.00" y="195.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">15</text>
-  <line x1="555.00" y1="130.00" x2="561.00" y2="130.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="555.00" y1="130.00" x2="-5.00" y2="130.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="564.00" y="130.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">20</text>
-  <line x1="555.00" y1="65.00" x2="561.00" y2="65.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="555.00" y1="65.00" x2="-5.00" y2="65.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="564.00" y="65.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">25</text>
-  <line x1="555.00" y1="0.00" x2="561.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="555.00" y1="0.00" x2="-5.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="564.00" y="0.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">30</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1300" height="756" viewBox="0 0 1300 756"><rect x="0.00" y="0.00" width="1300.00" height="756.00" fill="#ffffff"/>
+<text x="650.00" y="24.50" fill="#000000" text-anchor="middle" font-family="sans-serif" font-size="20.00px" font-weight="bold">Line Graph Gallery</text>
+<g transform="translate(0.00, 35.00)"><text x="325.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Simple Line</text><g transform="translate(10.00, 25.00)"><g transform="translate(0, 0)"><g class="axis axis-right">
+  <line x1="619.00" y1="324.00" x2="619.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="619.00" y1="324.00" x2="625.00" y2="324.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="619.00" y1="324.00" x2="-5.00" y2="324.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="628.00" y="324.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">10</text>
+  <line x1="619.00" y1="243.00" x2="625.00" y2="243.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="619.00" y1="243.00" x2="-5.00" y2="243.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="628.00" y="243.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">15</text>
+  <line x1="619.00" y1="162.00" x2="625.00" y2="162.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="619.00" y1="162.00" x2="-5.00" y2="162.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="628.00" y="162.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">20</text>
+  <line x1="619.00" y1="81.00" x2="625.00" y2="81.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="619.00" y1="81.00" x2="-5.00" y2="81.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="628.00" y="81.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">25</text>
+  <line x1="619.00" y1="0.00" x2="625.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="619.00" y1="0.00" x2="-5.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="628.00" y="0.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">30</text>
 </g>
-<path d="M 0.00 260.00 L 106.05 234.00 L 205.26 156.00 L 311.32 104.00 L 413.95 39.00 L 520.00 0.00" fill="none" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round" stroke-linejoin="round"/>
-</g><g class="legend" transform="translate(419.8,10.0)">
+<path d="M 0.00 324.00 L 119.11 291.60 L 230.53 194.40 L 349.63 129.60 L 464.89 48.60 L 584.00 0.00" fill="none" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round" stroke-linejoin="round"/>
+</g><g class="legend" transform="translate(483.8,10.0)">
   <rect x="0" y="0" width="130.2" height="32.0" fill="none" stroke="#e5e7eb" stroke-width="1.0"/>
   <g transform="translate(10.0,10.0)"><line x1="0" y1="1.0" x2="25.0" y2="1.0" stroke="#3b82f6" stroke-width="2.0"/></g>
   <text x="41.0" y="20.2" font-family="Arial, sans-serif" font-size="12.0" fill="#374151">Temperature</text>
 </g>
 </g></g>
-<g transform="translate(650, 60)"><text x="325.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Smoothed</text><g transform="translate(10, 25)"><g transform="translate(0, 0)"><g class="axis axis-right">
-  <line x1="555.00" y1="260.00" x2="555.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="555.00" y1="260.00" x2="561.00" y2="260.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="555.00" y1="260.00" x2="-5.00" y2="260.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="564.00" y="260.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">10</text>
-  <line x1="555.00" y1="195.00" x2="561.00" y2="195.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="555.00" y1="195.00" x2="-5.00" y2="195.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="564.00" y="195.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">15</text>
-  <line x1="555.00" y1="130.00" x2="561.00" y2="130.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="555.00" y1="130.00" x2="-5.00" y2="130.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="564.00" y="130.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">20</text>
-  <line x1="555.00" y1="65.00" x2="561.00" y2="65.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="555.00" y1="65.00" x2="-5.00" y2="65.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="564.00" y="65.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">25</text>
-  <line x1="555.00" y1="0.00" x2="561.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="555.00" y1="0.00" x2="-5.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="564.00" y="0.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">30</text>
+<g transform="translate(650.00, 35.00)"><text x="325.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Smoothed</text><g transform="translate(10.00, 25.00)"><g transform="translate(0, 0)"><g class="axis axis-right">
+  <line x1="619.00" y1="324.00" x2="619.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="619.00" y1="324.00" x2="625.00" y2="324.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="619.00" y1="324.00" x2="-5.00" y2="324.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="628.00" y="324.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">10</text>
+  <line x1="619.00" y1="243.00" x2="625.00" y2="243.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="619.00" y1="243.00" x2="-5.00" y2="243.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="628.00" y="243.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">15</text>
+  <line x1="619.00" y1="162.00" x2="625.00" y2="162.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="619.00" y1="162.00" x2="-5.00" y2="162.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="628.00" y="162.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">20</text>
+  <line x1="619.00" y1="81.00" x2="625.00" y2="81.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="619.00" y1="81.00" x2="-5.00" y2="81.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="628.00" y="81.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">25</text>
+  <line x1="619.00" y1="0.00" x2="625.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="619.00" y1="0.00" x2="-5.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="628.00" y="0.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">30</text>
 </g>
-<path d="M 0.00 260.00 C 31.82 252.20, 44.47 265.20, 106.05 234.00 C 167.63 202.80, 143.68 195.00, 205.26 156.00 C 266.84 117.00, 248.71 139.10, 311.32 104.00 C 373.92 68.90, 351.34 70.20, 413.95 39.00 C 476.55 7.80, 488.18 11.70, 520.00 0.00" fill="none" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round" stroke-linejoin="round"/>
-</g><g class="legend" transform="translate(419.8,10.0)">
+<path d="M 0.00 324.00 C 35.73 314.28, 49.95 330.48, 119.11 291.60 C 188.26 252.72, 161.37 243.00, 230.53 194.40 C 299.68 145.80, 279.32 173.34, 349.63 129.60 C 419.94 85.86, 394.58 87.48, 464.89 48.60 C 535.21 9.72, 548.27 14.58, 584.00 0.00" fill="none" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round" stroke-linejoin="round"/>
+</g><g class="legend" transform="translate(483.8,10.0)">
   <rect x="0" y="0" width="130.2" height="32.0" fill="none" stroke="#e5e7eb" stroke-width="1.0"/>
   <g transform="translate(10.0,10.0)"><line x1="0" y1="1.0" x2="25.0" y2="1.0" stroke="#3b82f6" stroke-width="2.0"/></g>
   <text x="41.0" y="20.2" font-family="Arial, sans-serif" font-size="12.0" fill="#374151">Temperature</text>
 </g>
 </g></g>
-<g transform="translate(0, 360)"><text x="325.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">With Markers</text><g transform="translate(10, 25)"><g transform="translate(0, 0)"><g class="axis axis-right">
-  <line x1="555.00" y1="260.00" x2="555.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="555.00" y1="260.00" x2="561.00" y2="260.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="555.00" y1="260.00" x2="-5.00" y2="260.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="564.00" y="260.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">10</text>
-  <line x1="555.00" y1="195.00" x2="561.00" y2="195.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="555.00" y1="195.00" x2="-5.00" y2="195.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="564.00" y="195.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">15</text>
-  <line x1="555.00" y1="130.00" x2="561.00" y2="130.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="555.00" y1="130.00" x2="-5.00" y2="130.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="564.00" y="130.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">20</text>
-  <line x1="555.00" y1="65.00" x2="561.00" y2="65.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="555.00" y1="65.00" x2="-5.00" y2="65.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="564.00" y="65.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">25</text>
-  <line x1="555.00" y1="0.00" x2="561.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="555.00" y1="0.00" x2="-5.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="564.00" y="0.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">30</text>
+<g transform="translate(0.00, 385.00)"><text x="325.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">With Markers</text><g transform="translate(10.00, 25.00)"><g transform="translate(0, 0)"><g class="axis axis-right">
+  <line x1="619.00" y1="324.00" x2="619.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="619.00" y1="324.00" x2="625.00" y2="324.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="619.00" y1="324.00" x2="-5.00" y2="324.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="628.00" y="324.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">10</text>
+  <line x1="619.00" y1="243.00" x2="625.00" y2="243.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="619.00" y1="243.00" x2="-5.00" y2="243.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="628.00" y="243.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">15</text>
+  <line x1="619.00" y1="162.00" x2="625.00" y2="162.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="619.00" y1="162.00" x2="-5.00" y2="162.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="628.00" y="162.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">20</text>
+  <line x1="619.00" y1="81.00" x2="625.00" y2="81.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="619.00" y1="81.00" x2="-5.00" y2="81.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="628.00" y="81.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">25</text>
+  <line x1="619.00" y1="0.00" x2="625.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="619.00" y1="0.00" x2="-5.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="628.00" y="0.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">30</text>
 </g>
-<path d="M 0.00 260.00 L 106.05 234.00 L 205.26 156.00 L 311.32 104.00 L 413.95 39.00 L 520.00 0.00" fill="none" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="0.00" cy="260.00" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.00"/>
-<circle cx="106.05" cy="234.00" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.00"/>
-<circle cx="205.26" cy="156.00" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.00"/>
-<circle cx="311.32" cy="104.00" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.00"/>
-<circle cx="413.95" cy="39.00" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.00"/>
-<circle cx="520.00" cy="0.00" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.00"/>
-</g><g class="legend" transform="translate(419.8,10.0)">
+<path d="M 0.00 324.00 L 119.11 291.60 L 230.53 194.40 L 349.63 129.60 L 464.89 48.60 L 584.00 0.00" fill="none" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="0.00" cy="324.00" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.00"/>
+<circle cx="119.11" cy="291.60" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.00"/>
+<circle cx="230.53" cy="194.40" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.00"/>
+<circle cx="349.63" cy="129.60" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.00"/>
+<circle cx="464.89" cy="48.60" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.00"/>
+<circle cx="584.00" cy="0.00" r="5.00" fill="#3b82f6" stroke="#020617" stroke-width="1.00"/>
+</g><g class="legend" transform="translate(483.8,10.0)">
   <rect x="0" y="0" width="130.2" height="32.0" fill="none" stroke="#e5e7eb" stroke-width="1.0"/>
   <g transform="translate(10.0,10.0)"><line x1="0" y1="3.0" x2="25.0" y2="3.0" stroke="#3b82f6" stroke-width="2.0"/><circle cx="12.5" cy="3.0" r="3.0" fill="#3b82f6" stroke="#fff" stroke-width="1"/></g>
   <text x="41.0" y="20.2" font-family="Arial, sans-serif" font-size="12.0" fill="#374151">Temperature</text>
 </g>
 </g></g>
-<g transform="translate(650, 360)"><text x="325.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Filled Area</text><g transform="translate(10, 25)"><g transform="translate(0, 0)"><g class="axis axis-right">
-  <line x1="555.00" y1="260.00" x2="555.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="555.00" y1="260.00" x2="561.00" y2="260.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="555.00" y1="260.00" x2="-5.00" y2="260.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="564.00" y="260.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">10</text>
-  <line x1="555.00" y1="195.00" x2="561.00" y2="195.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="555.00" y1="195.00" x2="-5.00" y2="195.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="564.00" y="195.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">15</text>
-  <line x1="555.00" y1="130.00" x2="561.00" y2="130.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="555.00" y1="130.00" x2="-5.00" y2="130.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="564.00" y="130.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">20</text>
-  <line x1="555.00" y1="65.00" x2="561.00" y2="65.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="555.00" y1="65.00" x2="-5.00" y2="65.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="564.00" y="65.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">25</text>
-  <line x1="555.00" y1="0.00" x2="561.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <line x1="555.00" y1="0.00" x2="-5.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
-  <text x="564.00" y="0.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">30</text>
+<g transform="translate(650.00, 385.00)"><text x="325.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Filled Area</text><g transform="translate(10.00, 25.00)"><g transform="translate(0, 0)"><g class="axis axis-right">
+  <line x1="619.00" y1="324.00" x2="619.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="619.00" y1="324.00" x2="625.00" y2="324.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="619.00" y1="324.00" x2="-5.00" y2="324.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="628.00" y="324.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">10</text>
+  <line x1="619.00" y1="243.00" x2="625.00" y2="243.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="619.00" y1="243.00" x2="-5.00" y2="243.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="628.00" y="243.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">15</text>
+  <line x1="619.00" y1="162.00" x2="625.00" y2="162.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="619.00" y1="162.00" x2="-5.00" y2="162.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="628.00" y="162.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">20</text>
+  <line x1="619.00" y1="81.00" x2="625.00" y2="81.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="619.00" y1="81.00" x2="-5.00" y2="81.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="628.00" y="81.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">25</text>
+  <line x1="619.00" y1="0.00" x2="625.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <line x1="619.00" y1="0.00" x2="-5.00" y2="0.00" stroke="rgba(255,255,255,0.1)" stroke-width="1.00"/>
+  <text x="628.00" y="0.00" fill="#E5E7EB" text-anchor="start" dominant-baseline="middle" font-family="monospace" font-size="10.00px">30</text>
 </g>
-<path d="M 0.00 260.00 L 0.00 260.00 L 106.05 234.00 L 205.26 156.00 L 311.32 104.00 L 413.95 39.00 L 520.00 0.00 L 520.00 260.00 Z" fill="#3b82f620" fill-opacity="0.20"/>
-<path d="M 0.00 260.00 L 106.05 234.00 L 205.26 156.00 L 311.32 104.00 L 413.95 39.00 L 520.00 0.00" fill="none" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round" stroke-linejoin="round"/>
-</g><g class="legend" transform="translate(419.8,10.0)">
+<path d="M 0.00 324.00 L 0.00 324.00 L 119.11 291.60 L 230.53 194.40 L 349.63 129.60 L 464.89 48.60 L 584.00 0.00 L 584.00 324.00 Z" fill="#3b82f620" fill-opacity="0.20"/>
+<path d="M 0.00 324.00 L 119.11 291.60 L 230.53 194.40 L 349.63 129.60 L 464.89 48.60 L 584.00 0.00" fill="none" stroke="#3b82f6" stroke-width="2.00" stroke-linecap="round" stroke-linejoin="round"/>
+</g><g class="legend" transform="translate(483.8,10.0)">
   <rect x="0" y="0" width="130.2" height="32.0" fill="none" stroke="#e5e7eb" stroke-width="1.0"/>
   <g transform="translate(10.0,10.0)"><line x1="0" y1="1.0" x2="25.0" y2="1.0" stroke="#3b82f6" stroke-width="2.0"/></g>
   <text x="41.0" y="20.2" font-family="Arial, sans-serif" font-size="12.0" fill="#374151">Temperature</text>

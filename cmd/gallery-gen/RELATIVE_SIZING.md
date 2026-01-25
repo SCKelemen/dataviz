@@ -172,7 +172,7 @@ for row := 0; row < 2; row++ {
 }
 ```
 
-## Completed Refactorings (10/21 = 48%)
+## Completed Refactorings (21/21 = 100%)
 
 ### Single Row - 3 Columns
 - ✅ **Pie Gallery**: 3 variations (regular, donut, custom colors)
@@ -185,33 +185,31 @@ for row := 0; row < 2; row++ {
 - ✅ **Box Plot Gallery**: Basic and with confidence notches
 - ✅ **Histogram Gallery**: Count and density
 - ✅ **Violin Gallery**: Basic and with box plot overlay
+- ✅ **Candlestick Gallery**: With scale adjustments
+- ✅ **Treemap Gallery**: Standard and with padding
+- ✅ **Icicle Gallery**: Vertical and horizontal
+- ✅ **Radar Gallery**: With and without grid (500x500 square)
+- ✅ **Streamchart Gallery**: Center layout and smooth curves
+- ✅ **Ridgeline Gallery**: Standard and with fill
+- ✅ **Sunburst Gallery**: Full and with inner radius (chartSize-based)
+- ✅ **Circle Packing Gallery**: Standard and with padding (chartSize-based)
 
-### Multi-Row Grid
-- ✅ **Bar Gallery (2-column)**: Using SingleRowDimensions with 2 cols
+### Vertical Stack - 1 Column, 2 Rows
+- ✅ **Heatmap Gallery**: Linear and weeks heatmaps
 
-### Partially Complete (Dimensions Calculated)
-- ✅ **Line Gallery**: Has extra spacing calculations for axes
+### Multi-Row Grid Layouts
+- ✅ **Line Gallery** (2x2): Simple, smoothed, markers, filled area
+- ✅ **Scatter Gallery** (2x3): 6 marker types (circle, square, diamond, triangle, cross, x)
+- ✅ **Connected Scatter Gallery** (2x3): 5 line styles (solid, dashed, dotted, dash-dot, long dash)
+- ✅ **StatCard Gallery** (2x3): 6 stat cards with trends
 
-## Remaining Galleries (11/21 = 52%)
+## Gallery Types Summary
 
-### Single Row - 2 Columns (9 galleries)
-- Candlestick (with scales depending on w/h)
-- Treemap
-- Sunburst
-- Circle Packing
-- Icicle
-- Radar
-- Streamchart
-- Ridgeline
-- Heatmap
+All 21 galleries have been successfully refactored to use relative sizing:
 
-### Multi-Row Grid (2 galleries)
-- Line (2x2 grid) - needs CalculateGridDimensions
-- StatCard (2x3 grid) - needs CalculateGridDimensions
-
-### Special Cases (1 gallery)
-- Scatter (2x3 grid with 6 variations)
-- Connected Scatter (1x5 row with 5 line styles)
+- **Single Row Layouts**: 17 galleries using `CalculateSingleRowDimensions()`
+- **Vertical Stack Layout**: 1 gallery (Heatmap) using manual relative calculations
+- **Grid Layouts**: 4 galleries using `CalculateGridDimensions()`
 
 ## Benefits Summary
 
@@ -223,32 +221,32 @@ for row := 0; row < 2; row++ {
 
 ## Progress Notes
 
-### Current Status
-- **10 of 21 galleries refactored (48%)**
-- All refactored galleries use `CalculateSingleRowDimensions`
+### Final Status
+- **21 of 21 galleries refactored (100%)**
+- All galleries use either `CalculateSingleRowDimensions` or `CalculateGridDimensions`
 - Pattern is well-established and documented
-- All refactored galleries build and render correctly
+- All galleries build and render correctly
 
 ### Refactoring Process
-Each gallery refactoring involves:
-1. Replace `w, h := 600, 400` with `dims := CalculateSingleRowDimensions(2, 600, 400)`
+Each gallery refactoring involved:
+1. Replace `w, h := 600, 400` with `dims := CalculateSingleRowDimensions(2, 600, 400)` or `dims := CalculateGridDimensions(cols, rows, baseWidth, baseHeight)`
 2. Replace `totalWidth`/`totalHeight` with `dims.TotalWidth`/`dims.TotalHeight`
 3. Replace `float64(w)/2` with `dims.ColWidth/2` for labels
 4. Calculate `chartW := int(dims.ChartWidth - padding)` once
-5. Use `cellX += dims.ColWidth` for cell positioning
+5. Use `cellX += dims.ColWidth` for cell positioning (or loop-based for grids)
 6. Replace `fmt.Sprintf("translate(%d, 60)", w)` with `fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY)`
 7. Convert final dimensions to int: `wrapSVG(content, int(dims.TotalWidth), int(dims.TotalHeight))`
 
-### Special Considerations
-- **Candlestick**: Scales depend on w/h, need to update scale ranges
-- **Line/Scatter/StatCard**: Need `CalculateGridDimensions` for multi-row layouts
-- **Connected Scatter**: May need 5-column layout variant
+### Special Considerations Handled
+- **Candlestick**: Updated scales to use calculated chartW and chartH
+- **Sunburst/CirclePacking**: Preserved chartSize-based calculations within relative sizing framework
+- **Heatmap**: Vertical stack layout with manual relative calculations
+- **Line/Scatter/ConnectedScatter/StatCard**: Used `CalculateGridDimensions` for multi-row grid layouts
 
-## Next Steps
+## Results
 
-To complete the refactoring:
-1. Apply pattern to remaining 9 single-row 2-column galleries
-2. Implement `CalculateGridDimensions` usage for Line, Scatter, StatCard
-3. Handle Connected Scatter special case (5 columns)
-4. Verify all galleries render correctly
-5. Update documentation with any new patterns discovered
+All 21 gallery SVG files generate successfully with correct dimensions:
+- Pixel calculations deferred to render time
+- No error accumulation from repeated multiplications
+- Consistent spacing and positioning across all galleries
+- Maintainable and flexible layout system

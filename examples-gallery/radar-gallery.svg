@@ -1,71 +1,71 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="530" viewBox="0 0 1000 530"><rect x="0.00" y="0.00" width="1000.00" height="530.00" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="580" viewBox="0 0 1000 580"><rect x="0.00" y="0.00" width="1000.00" height="580.00" fill="#ffffff"/>
 <text x="500.00" y="30.00" fill="#000000" text-anchor="middle" font-family="sans-serif" font-size="20.00px" font-weight="bold">Radar Chart Gallery</text>
-<g transform="translate(25, 60)"><text x="225.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">With Grid</text><g transform="translate(0, 30)"><circle cx="225.00" cy="210.00" r="26.00" fill="none" stroke="#e5e7eb" stroke-width="1.00"/>
-<circle cx="225.00" cy="210.00" r="52.00" fill="none" stroke="#e5e7eb" stroke-width="1.00"/>
-<circle cx="225.00" cy="210.00" r="78.00" fill="none" stroke="#e5e7eb" stroke-width="1.00"/>
-<circle cx="225.00" cy="210.00" r="104.00" fill="none" stroke="#e5e7eb" stroke-width="1.00"/>
-<circle cx="225.00" cy="210.00" r="130.00" fill="none" stroke="#e5e7eb" stroke-width="1.00"/>
-<text x="230.00" y="184.00" fill="#6b7280" text-anchor="start" font-family="sans-serif" font-size="9.00px">20%</text>
-<text x="230.00" y="158.00" fill="#6b7280" text-anchor="start" font-family="sans-serif" font-size="9.00px">40%</text>
-<text x="230.00" y="132.00" fill="#6b7280" text-anchor="start" font-family="sans-serif" font-size="9.00px">60%</text>
-<text x="230.00" y="106.00" fill="#6b7280" text-anchor="start" font-family="sans-serif" font-size="9.00px">80%</text>
-<text x="230.00" y="80.00" fill="#6b7280" text-anchor="start" font-family="sans-serif" font-size="9.00px">100%</text>
-<line x1="225.00" y1="210.00" x2="225.00" y2="80.00" stroke="#9ca3af" stroke-width="1.50"/>
-<text x="225.00" y="60.00" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="11.00px" font-weight="bold">Speed</text>
-<line x1="225.00" y1="210.00" x2="348.64" y2="169.83" stroke="#9ca3af" stroke-width="1.50"/>
-<text x="367.66" y="163.65" text-anchor="start" dominant-baseline="middle" font-family="sans-serif" font-size="11.00px" font-weight="bold">Strength</text>
-<line x1="225.00" y1="210.00" x2="301.41" y2="315.17" stroke="#9ca3af" stroke-width="1.50"/>
-<text x="313.17" y="331.35" text-anchor="start" dominant-baseline="middle" font-family="sans-serif" font-size="11.00px" font-weight="bold">Intelligence</text>
-<line x1="225.00" y1="210.00" x2="148.59" y2="315.17" stroke="#9ca3af" stroke-width="1.50"/>
-<text x="136.83" y="331.35" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="11.00px" font-weight="bold">Agility</text>
-<line x1="225.00" y1="210.00" x2="101.36" y2="169.83" stroke="#9ca3af" stroke-width="1.50"/>
-<text x="82.34" y="163.65" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="11.00px" font-weight="bold">Defense</text>
-<path d="M 225.00 106.00 L 311.55 181.88 L 270.85 273.10 L 156.23 304.65 L 163.18 189.91 Z" fill="#3b82f6" stroke="none" fill-opacity="0.30"/>
-<path d="M 225.00 106.00 L 311.55 181.88 L 270.85 273.10 L 156.23 304.65 L 163.18 189.91 Z" fill="none" stroke="#3b82f6" stroke-width="2.00"/>
-<circle cx="225.00" cy="106.00" r="4.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
-<circle cx="311.55" cy="181.88" r="4.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
-<circle cx="270.85" cy="273.10" r="4.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
-<circle cx="156.23" cy="304.65" r="4.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
-<circle cx="163.18" cy="189.91" r="4.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
-<path d="M 225.00 132.00 L 330.09 175.85 L 282.31 288.88 L 171.51 283.62 L 126.09 177.86 Z" fill="#10b981" stroke="none" fill-opacity="0.30"/>
-<path d="M 225.00 132.00 L 330.09 175.85 L 282.31 288.88 L 171.51 283.62 L 126.09 177.86 Z" fill="none" stroke="#10b981" stroke-width="2.00"/>
-<circle cx="225.00" cy="132.00" r="4.00" fill="#10b981" stroke="#ffffff" stroke-width="2.00"/>
-<circle cx="330.09" cy="175.85" r="4.00" fill="#10b981" stroke="#ffffff" stroke-width="2.00"/>
-<circle cx="282.31" cy="288.88" r="4.00" fill="#10b981" stroke="#ffffff" stroke-width="2.00"/>
-<circle cx="171.51" cy="283.62" r="4.00" fill="#10b981" stroke="#ffffff" stroke-width="2.00"/>
-<circle cx="126.09" cy="177.86" r="4.00" fill="#10b981" stroke="#ffffff" stroke-width="2.00"/>
-<rect x="20.00" y="352.00" width="20.00" height="16.00" fill="#3b82f6" stroke="#3b82f6" stroke-width="2.00" fill-opacity="0.50"/>
-<text x="45.00" y="360.00" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">Character A</text>
-<rect x="20.00" y="377.00" width="20.00" height="16.00" fill="#10b981" stroke="#10b981" stroke-width="2.00" fill-opacity="0.50"/>
-<text x="45.00" y="385.00" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">Character B</text>
+<g transform="translate(25.00, 60.00)"><text x="250.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">With Grid</text><g transform="translate(0, 30.00)"><circle cx="200.00" cy="197.50" r="23.50" fill="none" stroke="#e5e7eb" stroke-width="1.00"/>
+<circle cx="200.00" cy="197.50" r="47.00" fill="none" stroke="#e5e7eb" stroke-width="1.00"/>
+<circle cx="200.00" cy="197.50" r="70.50" fill="none" stroke="#e5e7eb" stroke-width="1.00"/>
+<circle cx="200.00" cy="197.50" r="94.00" fill="none" stroke="#e5e7eb" stroke-width="1.00"/>
+<circle cx="200.00" cy="197.50" r="117.50" fill="none" stroke="#e5e7eb" stroke-width="1.00"/>
+<text x="205.00" y="174.00" fill="#6b7280" text-anchor="start" font-family="sans-serif" font-size="9.00px">20%</text>
+<text x="205.00" y="150.50" fill="#6b7280" text-anchor="start" font-family="sans-serif" font-size="9.00px">40%</text>
+<text x="205.00" y="127.00" fill="#6b7280" text-anchor="start" font-family="sans-serif" font-size="9.00px">60%</text>
+<text x="205.00" y="103.50" fill="#6b7280" text-anchor="start" font-family="sans-serif" font-size="9.00px">80%</text>
+<text x="205.00" y="80.00" fill="#6b7280" text-anchor="start" font-family="sans-serif" font-size="9.00px">100%</text>
+<line x1="200.00" y1="197.50" x2="200.00" y2="80.00" stroke="#9ca3af" stroke-width="1.50"/>
+<text x="200.00" y="60.00" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="11.00px" font-weight="bold">Speed</text>
+<line x1="200.00" y1="197.50" x2="311.75" y2="161.19" stroke="#9ca3af" stroke-width="1.50"/>
+<text x="330.77" y="155.01" text-anchor="start" dominant-baseline="middle" font-family="sans-serif" font-size="11.00px" font-weight="bold">Strength</text>
+<line x1="200.00" y1="197.50" x2="269.06" y2="292.56" stroke="#9ca3af" stroke-width="1.50"/>
+<text x="280.82" y="308.74" text-anchor="start" dominant-baseline="middle" font-family="sans-serif" font-size="11.00px" font-weight="bold">Intelligence</text>
+<line x1="200.00" y1="197.50" x2="130.94" y2="292.56" stroke="#9ca3af" stroke-width="1.50"/>
+<text x="119.18" y="308.74" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="11.00px" font-weight="bold">Agility</text>
+<line x1="200.00" y1="197.50" x2="88.25" y2="161.19" stroke="#9ca3af" stroke-width="1.50"/>
+<text x="69.23" y="155.01" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="11.00px" font-weight="bold">Defense</text>
+<path d="M 200.00 103.50 L 278.22 172.08 L 241.44 254.54 L 137.84 283.05 L 144.13 179.35 Z" fill="#3b82f6" stroke="none" fill-opacity="0.30"/>
+<path d="M 200.00 103.50 L 278.22 172.08 L 241.44 254.54 L 137.84 283.05 L 144.13 179.35 Z" fill="none" stroke="#3b82f6" stroke-width="2.00"/>
+<circle cx="200.00" cy="103.50" r="4.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="278.22" cy="172.08" r="4.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="241.44" cy="254.54" r="4.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="137.84" cy="283.05" r="4.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="144.13" cy="179.35" r="4.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
+<path d="M 200.00 127.00 L 294.99 166.64 L 251.80 268.79 L 151.65 264.04 L 110.60 168.45 Z" fill="#10b981" stroke="none" fill-opacity="0.30"/>
+<path d="M 200.00 127.00 L 294.99 166.64 L 251.80 268.79 L 151.65 264.04 L 110.60 168.45 Z" fill="none" stroke="#10b981" stroke-width="2.00"/>
+<circle cx="200.00" cy="127.00" r="4.00" fill="#10b981" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="294.99" cy="166.64" r="4.00" fill="#10b981" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="251.80" cy="268.79" r="4.00" fill="#10b981" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="151.65" cy="264.04" r="4.00" fill="#10b981" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="110.60" cy="168.45" r="4.00" fill="#10b981" stroke="#ffffff" stroke-width="2.00"/>
+<rect x="20.00" y="327.00" width="20.00" height="16.00" fill="#3b82f6" stroke="#3b82f6" stroke-width="2.00" fill-opacity="0.50"/>
+<text x="45.00" y="335.00" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">Character A</text>
+<rect x="20.00" y="352.00" width="20.00" height="16.00" fill="#10b981" stroke="#10b981" stroke-width="2.00" fill-opacity="0.50"/>
+<text x="45.00" y="360.00" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">Character B</text>
 </g></g>
-<g transform="translate(525, 60)"><text x="225.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Without Grid</text><g transform="translate(0, 30)"><line x1="225.00" y1="210.00" x2="225.00" y2="80.00" stroke="#9ca3af" stroke-width="1.50"/>
-<text x="225.00" y="60.00" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="11.00px" font-weight="bold">Speed</text>
-<line x1="225.00" y1="210.00" x2="348.64" y2="169.83" stroke="#9ca3af" stroke-width="1.50"/>
-<text x="367.66" y="163.65" text-anchor="start" dominant-baseline="middle" font-family="sans-serif" font-size="11.00px" font-weight="bold">Strength</text>
-<line x1="225.00" y1="210.00" x2="301.41" y2="315.17" stroke="#9ca3af" stroke-width="1.50"/>
-<text x="313.17" y="331.35" text-anchor="start" dominant-baseline="middle" font-family="sans-serif" font-size="11.00px" font-weight="bold">Intelligence</text>
-<line x1="225.00" y1="210.00" x2="148.59" y2="315.17" stroke="#9ca3af" stroke-width="1.50"/>
-<text x="136.83" y="331.35" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="11.00px" font-weight="bold">Agility</text>
-<line x1="225.00" y1="210.00" x2="101.36" y2="169.83" stroke="#9ca3af" stroke-width="1.50"/>
-<text x="82.34" y="163.65" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="11.00px" font-weight="bold">Defense</text>
-<path d="M 225.00 106.00 L 311.55 181.88 L 270.85 273.10 L 156.23 304.65 L 163.18 189.91 Z" fill="#3b82f6" stroke="none" fill-opacity="0.30"/>
-<path d="M 225.00 106.00 L 311.55 181.88 L 270.85 273.10 L 156.23 304.65 L 163.18 189.91 Z" fill="none" stroke="#3b82f6" stroke-width="2.00"/>
-<circle cx="225.00" cy="106.00" r="4.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
-<circle cx="311.55" cy="181.88" r="4.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
-<circle cx="270.85" cy="273.10" r="4.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
-<circle cx="156.23" cy="304.65" r="4.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
-<circle cx="163.18" cy="189.91" r="4.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
-<path d="M 225.00 132.00 L 330.09 175.85 L 282.31 288.88 L 171.51 283.62 L 126.09 177.86 Z" fill="#10b981" stroke="none" fill-opacity="0.30"/>
-<path d="M 225.00 132.00 L 330.09 175.85 L 282.31 288.88 L 171.51 283.62 L 126.09 177.86 Z" fill="none" stroke="#10b981" stroke-width="2.00"/>
-<circle cx="225.00" cy="132.00" r="4.00" fill="#10b981" stroke="#ffffff" stroke-width="2.00"/>
-<circle cx="330.09" cy="175.85" r="4.00" fill="#10b981" stroke="#ffffff" stroke-width="2.00"/>
-<circle cx="282.31" cy="288.88" r="4.00" fill="#10b981" stroke="#ffffff" stroke-width="2.00"/>
-<circle cx="171.51" cy="283.62" r="4.00" fill="#10b981" stroke="#ffffff" stroke-width="2.00"/>
-<circle cx="126.09" cy="177.86" r="4.00" fill="#10b981" stroke="#ffffff" stroke-width="2.00"/>
-<rect x="20.00" y="352.00" width="20.00" height="16.00" fill="#3b82f6" stroke="#3b82f6" stroke-width="2.00" fill-opacity="0.50"/>
-<text x="45.00" y="360.00" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">Character A</text>
-<rect x="20.00" y="377.00" width="20.00" height="16.00" fill="#10b981" stroke="#10b981" stroke-width="2.00" fill-opacity="0.50"/>
-<text x="45.00" y="385.00" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">Character B</text>
+<g transform="translate(525.00, 60.00)"><text x="250.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Without Grid</text><g transform="translate(0, 30.00)"><line x1="200.00" y1="197.50" x2="200.00" y2="80.00" stroke="#9ca3af" stroke-width="1.50"/>
+<text x="200.00" y="60.00" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="11.00px" font-weight="bold">Speed</text>
+<line x1="200.00" y1="197.50" x2="311.75" y2="161.19" stroke="#9ca3af" stroke-width="1.50"/>
+<text x="330.77" y="155.01" text-anchor="start" dominant-baseline="middle" font-family="sans-serif" font-size="11.00px" font-weight="bold">Strength</text>
+<line x1="200.00" y1="197.50" x2="269.06" y2="292.56" stroke="#9ca3af" stroke-width="1.50"/>
+<text x="280.82" y="308.74" text-anchor="start" dominant-baseline="middle" font-family="sans-serif" font-size="11.00px" font-weight="bold">Intelligence</text>
+<line x1="200.00" y1="197.50" x2="130.94" y2="292.56" stroke="#9ca3af" stroke-width="1.50"/>
+<text x="119.18" y="308.74" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="11.00px" font-weight="bold">Agility</text>
+<line x1="200.00" y1="197.50" x2="88.25" y2="161.19" stroke="#9ca3af" stroke-width="1.50"/>
+<text x="69.23" y="155.01" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="11.00px" font-weight="bold">Defense</text>
+<path d="M 200.00 103.50 L 278.22 172.08 L 241.44 254.54 L 137.84 283.05 L 144.13 179.35 Z" fill="#3b82f6" stroke="none" fill-opacity="0.30"/>
+<path d="M 200.00 103.50 L 278.22 172.08 L 241.44 254.54 L 137.84 283.05 L 144.13 179.35 Z" fill="none" stroke="#3b82f6" stroke-width="2.00"/>
+<circle cx="200.00" cy="103.50" r="4.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="278.22" cy="172.08" r="4.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="241.44" cy="254.54" r="4.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="137.84" cy="283.05" r="4.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="144.13" cy="179.35" r="4.00" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00"/>
+<path d="M 200.00 127.00 L 294.99 166.64 L 251.80 268.79 L 151.65 264.04 L 110.60 168.45 Z" fill="#10b981" stroke="none" fill-opacity="0.30"/>
+<path d="M 200.00 127.00 L 294.99 166.64 L 251.80 268.79 L 151.65 264.04 L 110.60 168.45 Z" fill="none" stroke="#10b981" stroke-width="2.00"/>
+<circle cx="200.00" cy="127.00" r="4.00" fill="#10b981" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="294.99" cy="166.64" r="4.00" fill="#10b981" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="251.80" cy="268.79" r="4.00" fill="#10b981" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="151.65" cy="264.04" r="4.00" fill="#10b981" stroke="#ffffff" stroke-width="2.00"/>
+<circle cx="110.60" cy="168.45" r="4.00" fill="#10b981" stroke="#ffffff" stroke-width="2.00"/>
+<rect x="20.00" y="327.00" width="20.00" height="16.00" fill="#3b82f6" stroke="#3b82f6" stroke-width="2.00" fill-opacity="0.50"/>
+<text x="45.00" y="335.00" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">Character A</text>
+<rect x="20.00" y="352.00" width="20.00" height="16.00" fill="#10b981" stroke="#10b981" stroke-width="2.00" fill-opacity="0.50"/>
+<text x="45.00" y="360.00" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">Character B</text>
 </g></g>
 </svg>

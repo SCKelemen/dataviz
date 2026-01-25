@@ -362,16 +362,20 @@ func generateLineGallery() (string, error) {
 		},
 	}
 
-	// Allocate extra space for axis labels and legends
-	chartW, chartH := 560, 260
-	w, h := chartW+90, chartH+90
-	totalWidth := w * 2
-	totalHeight := h*2 + 40 // Extra bottom margin
+	// Calculate dimensions using relative sizing for 2x2 grid
+	dims := CalculateGridDimensions(2, 2, 650, 350)
+
+	// Calculate chart dimensions once (allocate extra space for axis labels)
+	chartW := int(dims.ChartWidth)
+	chartH := int(dims.ChartHeight)
+	labelOffsetY := 0.0
+	chartOffsetX := 10.0
+	chartOffsetY := 25.0
 
 	var content string
 
 	// White background
-	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += svg.Rect(0, 0, dims.TotalWidth, dims.TotalHeight, svg.Style{Fill: "#ffffff"})
 	content += "\n"
 
 	// Title
@@ -382,7 +386,7 @@ func generateLineGallery() (string, error) {
 		Fill:       "#000000",
 		TextAnchor: "middle",
 	}
-	content += svg.Text("Line Graph Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += svg.Text("Line Graph Gallery", dims.TotalWidth/2, dims.TitleY, titleStyle)
 	content += "\n"
 
 	labelStyle := svg.Style{
@@ -393,67 +397,73 @@ func generateLineGallery() (string, error) {
 		TextAnchor: "middle",
 	}
 
-	// Simple line
+	// Simple line (row 0, col 0)
+	cellX := 0.0
+	cellY := dims.ChartStartY
 	content += svg.Group(
-		svg.Text("Simple Line", float64(w)/2, 0, labelStyle)+
+		svg.Text("Simple Line", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderLineGraph(data, 0, 0, chartW, chartH, tokens),
-				"translate(10, 25)",
+				fmt.Sprintf("translate(%.2f, %.2f)", chartOffsetX, chartOffsetY),
 				svg.Style{},
 			),
-		"translate(0, 60)",
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, cellY),
 		svg.Style{},
 	)
 	content += "\n"
 
-	// Smoothed
+	// Smoothed (row 0, col 1)
+	cellX = dims.ColWidth
 	dataSmooth := data
 	dataSmooth.Smooth = true
 	dataSmooth.Tension = 0.3
 	content += svg.Group(
-		svg.Text("Smoothed", float64(w)/2, 0, labelStyle)+
+		svg.Text("Smoothed", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderLineGraph(dataSmooth, 0, 0, chartW, chartH, tokens),
-				"translate(10, 25)",
+				fmt.Sprintf("translate(%.2f, %.2f)", chartOffsetX, chartOffsetY),
 				svg.Style{},
 			),
-		fmt.Sprintf("translate(%d, 60)", w),
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, cellY),
 		svg.Style{},
 	)
 	content += "\n"
 
-	// With markers
+	// With markers (row 1, col 0)
+	cellX = 0.0
+	cellY = dims.ChartStartY + dims.RowHeight
 	dataMarkers := data
 	dataMarkers.MarkerType = "circle"
 	dataMarkers.MarkerSize = 5
 	content += svg.Group(
-		svg.Text("With Markers", float64(w)/2, 0, labelStyle)+
+		svg.Text("With Markers", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderLineGraph(dataMarkers, 0, 0, chartW, chartH, tokens),
-				"translate(10, 25)",
+				fmt.Sprintf("translate(%.2f, %.2f)", chartOffsetX, chartOffsetY),
 				svg.Style{},
 			),
-		"translate(0, 360)",
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, cellY),
 		svg.Style{},
 	)
 	content += "\n"
 
-	// Filled area (using FillColor)
+	// Filled area (row 1, col 1)
+	cellX = dims.ColWidth
 	dataFilled := data
 	dataFilled.FillColor = "#3b82f620" // Semi-transparent fill
 	content += svg.Group(
-		svg.Text("Filled Area", float64(w)/2, 0, labelStyle)+
+		svg.Text("Filled Area", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderLineGraph(dataFilled, 0, 0, chartW, chartH, tokens),
-				"translate(10, 25)",
+				fmt.Sprintf("translate(%.2f, %.2f)", chartOffsetX, chartOffsetY),
 				svg.Style{},
 			),
-		fmt.Sprintf("translate(%d, 360)", w),
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, cellY),
 		svg.Style{},
 	)
 	content += "\n"
 
-	return wrapSVG(content, totalWidth, totalHeight), nil
+	return wrapSVG(content, int(dims.TotalWidth), int(dims.TotalHeight)), nil
 }
 
 // Scatter plot variations: different markers
@@ -472,16 +482,20 @@ func generateScatterGallery() (string, error) {
 	}
 
 	markerTypes := []string{"circle", "square", "diamond", "triangle", "cross", "x"}
-	w, h := 450, 350
-	cols := 3
-	rows := 2
-	totalWidth := w * cols
-	totalHeight := h*rows + 50
+
+	// Calculate dimensions using relative sizing for 2x3 grid (3 cols, 2 rows)
+	dims := CalculateGridDimensions(3, 2, 450, 350)
+
+	// Calculate chart dimensions once
+	chartW := int(dims.ChartWidth - 50)
+	chartH := int(dims.ChartHeight - 60)
+	labelOffsetY := 0.0
+	chartOffsetY := 25.0
 
 	var content string
 
 	// White background
-	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += svg.Rect(0, 0, dims.TotalWidth, dims.TotalHeight, svg.Style{Fill: "#ffffff"})
 	content += "\n"
 
 	// Title
@@ -492,7 +506,7 @@ func generateScatterGallery() (string, error) {
 		Fill:       "#000000",
 		TextAnchor: "middle",
 	}
-	content += svg.Text("Scatter Plot Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += svg.Text("Scatter Plot Gallery", dims.TotalWidth/2, dims.TitleY, titleStyle)
 	content += "\n"
 
 	labelStyle := svg.Style{
@@ -504,10 +518,10 @@ func generateScatterGallery() (string, error) {
 	}
 
 	for i, markerType := range markerTypes {
-		col := i % cols
-		row := i / cols
-		x := col * w
-		y := row*h + 60
+		col := i % 3
+		row := i / 3
+		cellX := float64(col) * dims.ColWidth
+		cellY := dims.ChartStartY + float64(row)*dims.RowHeight
 
 		data := charts.ScatterPlotData{
 			Points:     points,
@@ -516,19 +530,19 @@ func generateScatterGallery() (string, error) {
 		}
 
 		content += svg.Group(
-			svg.Text(fmt.Sprintf("Marker: %s", markerType), 225, 0, labelStyle)+
+			svg.Text(fmt.Sprintf("Marker: %s", markerType), dims.ColWidth/2, labelOffsetY, labelStyle)+
 				svg.Group(
-					charts.RenderScatterPlot(data, 0, 0, w-50, h-60, tokens),
-					"translate(0, 25)",
+					charts.RenderScatterPlot(data, 0, 0, chartW, chartH, tokens),
+					fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 					svg.Style{},
 				),
-			fmt.Sprintf("translate(%d, %d)", x, y),
+			fmt.Sprintf("translate(%.2f, %.2f)", cellX, cellY),
 			svg.Style{},
 		)
 		content += "\n"
 	}
 
-	return wrapSVG(content, totalWidth, totalHeight), nil
+	return wrapSVG(content, int(dims.TotalWidth), int(dims.TotalHeight)), nil
 }
 
 // Connected scatter variations: different line styles
@@ -553,16 +567,20 @@ func generateConnectedScatterGallery() (string, error) {
 		{"Long Dash", "longdash"},
 	}
 
-	w, h := 450, 350
-	cols := 3
-	rows := 2
-	totalWidth := w * cols
-	totalHeight := h*rows + 50
+	// Calculate dimensions using relative sizing for 2x3 grid (3 cols, 2 rows)
+	dims := CalculateGridDimensions(3, 2, 450, 350)
+
+	// Calculate chart dimensions once
+	chartW := dims.ChartWidth - 50
+	chartH := dims.ChartHeight - 80
+	labelOffsetY := 0.0
+	chartOffsetX := 25.0
+	chartOffsetY := 25.0
 
 	var content string
 
 	// White background
-	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += svg.Rect(0, 0, dims.TotalWidth, dims.TotalHeight, svg.Style{Fill: "#ffffff"})
 	content += "\n"
 
 	// Title
@@ -573,7 +591,7 @@ func generateConnectedScatterGallery() (string, error) {
 		Fill:       "#000000",
 		TextAnchor: "middle",
 	}
-	content += svg.Text("Connected Scatter Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += svg.Text("Connected Scatter Gallery", dims.TotalWidth/2, dims.TitleY, titleStyle)
 	content += "\n"
 
 	labelStyle := svg.Style{
@@ -585,14 +603,14 @@ func generateConnectedScatterGallery() (string, error) {
 	}
 
 	for i, ls := range lineStyles {
-		col := i % cols
-		row := i / cols
-		x := col * w
-		y := row*h + 60
+		col := i % 3
+		row := i / 3
+		cellX := float64(col) * dims.ColWidth
+		cellY := dims.ChartStartY + float64(row)*dims.RowHeight
 
 		spec := charts.ConnectedScatterSpec{
-			Width:  float64(w - 50),
-			Height: float64(h - 80),
+			Width:  chartW,
+			Height: chartH,
 			Series: []*charts.ConnectedScatterSeries{
 				{
 					Points:    points,
@@ -605,19 +623,19 @@ func generateConnectedScatterGallery() (string, error) {
 		}
 
 		content += svg.Group(
-			svg.Text(fmt.Sprintf("Line: %s", ls.name), 225, 0, labelStyle)+
+			svg.Text(fmt.Sprintf("Line: %s", ls.name), dims.ColWidth/2, labelOffsetY, labelStyle)+
 				svg.Group(
 					charts.RenderConnectedScatter(spec),
-					"translate(25, 25)",
+					fmt.Sprintf("translate(%.2f, %.2f)", chartOffsetX, chartOffsetY),
 					svg.Style{},
 				),
-			fmt.Sprintf("translate(%d, %d)", x, y),
+			fmt.Sprintf("translate(%.2f, %.2f)", cellX, cellY),
 			svg.Style{},
 		)
 		content += "\n"
 	}
 
-	return wrapSVG(content, totalWidth, totalHeight), nil
+	return wrapSVG(content, int(dims.TotalWidth), int(dims.TotalHeight)), nil
 }
 
 func mustParseTime(s string) time.Time {
@@ -824,14 +842,25 @@ func generateHeatmapGallery() (string, error) {
 		EndDate:   startDate.AddDate(0, 0, 364),
 	}
 
-	w, h := 800, 250
-	totalWidth := w
-	totalHeight := h*2 + 40 // Extra bottom margin
+	// Calculate dimensions for vertical stack (1 column, 2 rows)
+	baseWidth := 800.0
+	baseHeight := 250.0
+	titleHeight := 50.0
+	rowSpacing := 20.0
+
+	totalWidth := baseWidth
+	totalHeight := baseHeight*2 + titleHeight + rowSpacing + 30 // title + 2 rows + spacing + bottom margin
+
+	// Calculate chart dimensions once
+	chartW := int(baseWidth - 50)
+	chartH := int(baseHeight - 80)
+	labelOffsetY := 0.0
+	chartOffsetY := 25.0
 
 	var content string
 
 	// White background
-	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += svg.Rect(0, 0, totalWidth, totalHeight, svg.Style{Fill: "#ffffff"})
 	content += "\n"
 
 	// Title
@@ -842,7 +871,7 @@ func generateHeatmapGallery() (string, error) {
 		Fill:       "#000000",
 		TextAnchor: "middle",
 	}
-	content += svg.Text("Heatmap Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += svg.Text("Heatmap Gallery", totalWidth/2, 30, titleStyle)
 	content += "\n"
 
 	labelStyle := svg.Style{
@@ -853,48 +882,57 @@ func generateHeatmapGallery() (string, error) {
 		TextAnchor: "middle",
 	}
 
+	// Position first row
+	rowY := titleHeight + 10
+
 	// Linear heatmap
 	content += svg.Group(
-		svg.Text("Linear Heatmap", 400, 0, labelStyle)+
+		svg.Text("Linear Heatmap", totalWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
-				charts.RenderLinearHeatmap(data, 0, 0, w-50, h-80, "#3b82f6", tokens),
-				"translate(0, 25)",
+				charts.RenderLinearHeatmap(data, 0, 0, chartW, chartH, "#3b82f6", tokens),
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		"translate(25, 60)",
+		fmt.Sprintf("translate(25, %.2f)", rowY),
 		svg.Style{},
 	)
 	content += "\n"
+
+	// Position second row
+	rowY += baseHeight + rowSpacing
 
 	// Weeks heatmap (GitHub style)
 	content += svg.Group(
-		svg.Text("Weeks Heatmap (GitHub Style)", 400, 0, labelStyle)+
+		svg.Text("Weeks Heatmap (GitHub Style)", totalWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
-				charts.RenderWeeksHeatmap(data, 0, 0, w-50, h-80, "#10b981", tokens),
-				"translate(0, 25)",
+				charts.RenderWeeksHeatmap(data, 0, 0, chartW, chartH, "#10b981", tokens),
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		fmt.Sprintf("translate(25, %d)", h+20),
+		fmt.Sprintf("translate(25, %.2f)", rowY),
 		svg.Style{},
 	)
 	content += "\n"
 
-	return wrapSVG(content, totalWidth, totalHeight), nil
+	return wrapSVG(content, int(totalWidth), int(totalHeight)), nil
 }
 
 // Stat card variations: with different trends
 func generateStatCardGallery() (string, error) {
 	tokens := design.DefaultTheme()
 
-	w, h := 300, 200
-	cols := 3
-	totalWidth := w * cols
-	totalHeight := h*2 + 40 // Extra bottom margin
+	// Calculate dimensions using relative sizing for 2x3 grid (3 cols, 2 rows)
+	dims := CalculateGridDimensions(3, 2, 300, 200)
+
+	// Calculate card dimensions once
+	cardW := int(dims.ChartWidth - 20)
+	cardH := int(dims.ChartHeight - 20)
+	cardOffsetX := 10.0
 
 	var content string
 
 	// White background
-	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += svg.Rect(0, 0, dims.TotalWidth, dims.TotalHeight, svg.Style{Fill: "#ffffff"})
 	content += "\n"
 
 	// Title
@@ -905,7 +943,7 @@ func generateStatCardGallery() (string, error) {
 		Fill:       "#000000",
 		TextAnchor: "middle",
 	}
-	content += svg.Text("Stat Card Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += svg.Text("Stat Card Gallery", dims.TotalWidth/2, dims.TitleY, titleStyle)
 	content += "\n"
 
 	// Helper to create trend data
@@ -1000,20 +1038,20 @@ func generateStatCardGallery() (string, error) {
 	}
 
 	for i, card := range cards {
-		col := i % cols
-		row := i / cols
-		x := col * w
-		y := row*h + 60
+		col := i % 3
+		row := i / 3
+		cellX := float64(col)*dims.ColWidth + cardOffsetX
+		cellY := dims.ChartStartY + float64(row)*dims.RowHeight
 
 		content += svg.Group(
-			charts.RenderStatCard(card.data, 0, 0, w-20, h-20, tokens),
-			fmt.Sprintf("translate(%d, %d)", x+10, y),
+			charts.RenderStatCard(card.data, 0, 0, cardW, cardH, tokens),
+			fmt.Sprintf("translate(%.2f, %.2f)", cellX, cellY),
 			svg.Style{},
 		)
 		content += "\n"
 	}
 
-	return wrapSVG(content, totalWidth, totalHeight), nil
+	return wrapSVG(content, int(dims.TotalWidth), int(dims.TotalHeight)), nil
 }
 
 // Box plot variations: vertical and horizontal
@@ -1375,13 +1413,12 @@ func generateCandlestickGallery() (string, error) {
 		{X: mustParseTime("2024-01-06"), Open: 106, High: 118, Low: 104, Close: 115, Volume: 1400},
 	}
 
-	w, h := 600, 400
-	totalWidth := w * 2
-	totalHeight := h + 30 // Extra bottom margin
+	// Use relative sizing
+	dims := CalculateSingleRowDimensions(2, 600, 400)
 
 	var content string
 
-	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += svg.Rect(0, 0, dims.TotalWidth, dims.TotalHeight, svg.Style{Fill: "#ffffff"})
 	content += "\n"
 
 	titleStyle := svg.Style{
@@ -1391,7 +1428,7 @@ func generateCandlestickGallery() (string, error) {
 		Fill:       "#000000",
 		TextAnchor: "middle",
 	}
-	content += svg.Text("Candlestick Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += svg.Text("Candlestick Gallery", dims.TotalWidth/2, dims.TitleY, titleStyle)
 	content += "\n"
 
 	labelStyle := svg.Style{
@@ -1402,36 +1439,43 @@ func generateCandlestickGallery() (string, error) {
 		TextAnchor: "middle",
 	}
 
+	chartW := dims.ChartWidth - 50
+	chartH := dims.ChartHeight - 80
+	labelOffsetY := 0.0
+	chartOffsetY := 30.0
+
 	// Create scales for both charts
 	xScale := scales.NewTimeScale(
 		[2]time.Time{mustParseTime("2024-01-01"), mustParseTime("2024-01-06")},
-		[2]units.Length{units.Px(0), units.Px(float64(w - 50))},
+		[2]units.Length{units.Px(0), units.Px(chartW)},
 	)
-	yScale := scales.NewLinearScale([2]float64{90, 125}, [2]units.Length{units.Px(float64(h - 80)), units.Px(0)})
+	yScale := scales.NewLinearScale([2]float64{90, 125}, [2]units.Length{units.Px(chartH), units.Px(0)})
 
 	// Candlestick chart
+	cellX := 25.0
 	spec1 := charts.CandlestickSpec{
 		Data:         candleData,
-		Width:        float64(w - 50),
-		Height:       float64(h - 80),
+		Width:        chartW,
+		Height:       chartH,
 		XScale:       xScale,
 		YScale:       yScale,
 		RisingColor:  "#10b981",
 		FallingColor: "#ef4444",
 	}
 	content += svg.Group(
-		svg.Text("Candlestick Chart", 300, 0, labelStyle)+
+		svg.Text("Candlestick Chart", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderCandlestick(spec1),
-				"translate(0, 30)",
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		"translate(25, 60)",
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
 	// OHLC chart - convert data
+	cellX += dims.ColWidth
 	ohlcData := make([]charts.OHLCData, len(candleData))
 	for i, c := range candleData {
 		ohlcData[i] = charts.OHLCData{
@@ -1445,26 +1489,26 @@ func generateCandlestickGallery() (string, error) {
 
 	ohlcSpec := charts.OHLCSpec{
 		Data:         ohlcData,
-		Width:        float64(w - 50),
-		Height:       float64(h - 80),
+		Width:        chartW,
+		Height:       chartH,
 		XScale:       xScale,
 		YScale:       yScale,
 		RisingColor:  "#10b981",
 		FallingColor: "#ef4444",
 	}
 	content += svg.Group(
-		svg.Text("OHLC Chart", 300, 0, labelStyle)+
+		svg.Text("OHLC Chart", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderOHLC(ohlcSpec),
-				"translate(0, 30)",
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		fmt.Sprintf("translate(%d, 60)", w+25),
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
-	return wrapSVG(content, totalWidth, totalHeight), nil
+	return wrapSVG(content, int(dims.TotalWidth), int(dims.TotalHeight)), nil
 }
 
 // Helper to create sample tree data
@@ -1507,13 +1551,12 @@ func createSampleTree() *charts.TreeNode {
 func generateTreemapGallery() (string, error) {
 	tree := createSampleTree()
 
-	w, h := 600, 400
-	totalWidth := w * 2
-	totalHeight := h + 30 // Extra bottom margin
+	// Use relative sizing
+	dims := CalculateSingleRowDimensions(2, 600, 400)
 
 	var content string
 
-	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += svg.Rect(0, 0, dims.TotalWidth, dims.TotalHeight, svg.Style{Fill: "#ffffff"})
 	content += "\n"
 
 	titleStyle := svg.Style{
@@ -1523,7 +1566,7 @@ func generateTreemapGallery() (string, error) {
 		Fill:       "#000000",
 		TextAnchor: "middle",
 	}
-	content += svg.Text("Treemap Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += svg.Text("Treemap Gallery", dims.TotalWidth/2, dims.TitleY, titleStyle)
 	content += "\n"
 
 	labelStyle := svg.Style{
@@ -1534,62 +1577,77 @@ func generateTreemapGallery() (string, error) {
 		TextAnchor: "middle",
 	}
 
+	chartW := dims.ChartWidth - 50
+	chartH := dims.ChartHeight - 80
+	labelOffsetY := 0.0
+	chartOffsetY := 30.0
+
 	// Standard treemap
+	cellX := 25.0
 	spec1 := charts.TreemapSpec{
 		Root:       tree,
-		Width:      float64(w - 50),
-		Height:     float64(h - 80),
+		Width:      chartW,
+		Height:     chartH,
 		ShowLabels: true,
 		ColorScheme: []string{"#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6"},
 	}
 	content += svg.Group(
-		svg.Text("Standard Treemap", 300, 0, labelStyle)+
+		svg.Text("Standard Treemap", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderTreemap(spec1),
-				"translate(0, 30)",
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		"translate(25, 60)",
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
 	// Treemap with padding
+	cellX += dims.ColWidth
 	spec2 := charts.TreemapSpec{
 		Root:       tree,
-		Width:      float64(w - 50),
-		Height:     float64(h - 80),
+		Width:      chartW,
+		Height:     chartH,
 		Padding:    2,
 		ShowLabels: true,
 		ColorScheme: []string{"#6366f1", "#ec4899", "#14b8a6", "#f97316", "#a855f7"},
 	}
 	content += svg.Group(
-		svg.Text("With Padding", 300, 0, labelStyle)+
+		svg.Text("With Padding", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderTreemap(spec2),
-				"translate(0, 30)",
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		fmt.Sprintf("translate(%d, 60)", w+25),
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
-	return wrapSVG(content, totalWidth, totalHeight), nil
+	return wrapSVG(content, int(dims.TotalWidth), int(dims.TotalHeight)), nil
 }
 
 // Sunburst variations
 func generateSunburstGallery() (string, error) {
 	tree := createSampleTree()
 
-	chartSize := 400
-	w, h := chartSize+50, chartSize+100
-	totalWidth := w * 2
-	totalHeight := h + 30 // Extra bottom margin
+	// Calculate dimensions using relative sizing
+	// Sunburst charts are square, so we use chartSize for both dimensions
+	chartSize := 400.0
+	baseWidth := chartSize + 50
+	baseHeight := chartSize + 100
+	dims := CalculateSingleRowDimensions(2, baseWidth, baseHeight)
+
+	// Chart dimensions
+	chartW := chartSize
+	chartH := chartSize
+	labelOffsetY := 0.0
+	chartOffsetY := 30.0
 
 	var content string
 
-	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += svg.Rect(0, 0, dims.TotalWidth, dims.TotalHeight, svg.Style{Fill: "#ffffff"})
 	content += "\n"
 
 	titleStyle := svg.Style{
@@ -1599,7 +1657,7 @@ func generateSunburstGallery() (string, error) {
 		Fill:       "#000000",
 		TextAnchor: "middle",
 	}
-	content += svg.Text("Sunburst Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += svg.Text("Sunburst Gallery", dims.TotalWidth/2, dims.TitleY, titleStyle)
 	content += "\n"
 
 	labelStyle := svg.Style{
@@ -1610,63 +1668,77 @@ func generateSunburstGallery() (string, error) {
 		TextAnchor: "middle",
 	}
 
+	// Position first cell
+	cellX := 25.0
+
 	// Full sunburst
 	spec1 := charts.SunburstSpec{
 		Root:        tree,
-		Width:       float64(chartSize),
-		Height:      float64(chartSize),
+		Width:       chartW,
+		Height:      chartH,
 		ShowLabels:  true,
 		ColorScheme: []string{"#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6"},
 	}
 	content += svg.Group(
-		svg.Text("Full Sunburst", float64(chartSize/2), 0, labelStyle)+
+		svg.Text("Full Sunburst", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderSunburst(spec1),
-				"translate(0, 30)",
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		"translate(25, 60)",
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
+	// Position second cell
+	cellX += dims.ColWidth
+
 	// Sunburst with inner radius (donut style)
 	spec2 := charts.SunburstSpec{
 		Root:        tree,
-		Width:       float64(chartSize),
-		Height:      float64(chartSize),
+		Width:       chartW,
+		Height:      chartH,
 		InnerRadius: 60,
 		ShowLabels:  true,
 		ColorScheme: []string{"#6366f1", "#ec4899", "#14b8a6", "#f97316", "#a855f7"},
 	}
 	content += svg.Group(
-		svg.Text("With Inner Radius", float64(chartSize/2), 0, labelStyle)+
+		svg.Text("With Inner Radius", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderSunburst(spec2),
-				"translate(0, 30)",
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		fmt.Sprintf("translate(%d, 60)", w+25),
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
-	return wrapSVG(content, totalWidth, totalHeight), nil
+	return wrapSVG(content, int(dims.TotalWidth), int(dims.TotalHeight)), nil
 }
 
 // Circle packing variations
 func generateCirclePackingGallery() (string, error) {
 	tree := createSampleTree()
 
-	chartSize := 400
+	// Calculate dimensions using relative sizing
 	// Circle packing needs extra horizontal space as circles extend beyond center
-	w, h := chartSize+200, chartSize+100
-	totalWidth := w * 2
-	totalHeight := h + 30 // Extra bottom margin
+	chartSize := 400.0
+	baseWidth := chartSize + 200
+	baseHeight := chartSize + 100
+	dims := CalculateSingleRowDimensions(2, baseWidth, baseHeight)
+
+	// Chart dimensions
+	chartW := chartSize
+	chartH := chartSize
+	labelOffsetY := 0.0
+	chartOffsetY := 30.0
+	chartOffsetX := 100.0 // Extra horizontal centering for circle packing
 
 	var content string
 
-	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += svg.Rect(0, 0, dims.TotalWidth, dims.TotalHeight, svg.Style{Fill: "#ffffff"})
 	content += "\n"
 
 	titleStyle := svg.Style{
@@ -1676,7 +1748,7 @@ func generateCirclePackingGallery() (string, error) {
 		Fill:       "#000000",
 		TextAnchor: "middle",
 	}
-	content += svg.Text("Circle Packing Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += svg.Text("Circle Packing Gallery", dims.TotalWidth/2, dims.TitleY, titleStyle)
 	content += "\n"
 
 	labelStyle := svg.Style{
@@ -1687,61 +1759,72 @@ func generateCirclePackingGallery() (string, error) {
 		TextAnchor: "middle",
 	}
 
+	// Position first cell
+	cellX := 25.0
+
 	// Standard circle packing
 	spec1 := charts.CirclePackingSpec{
 		Root:        tree,
-		Width:       float64(chartSize),
-		Height:      float64(chartSize),
+		Width:       chartW,
+		Height:      chartH,
 		ShowLabels:  true,
 		ColorScheme: []string{"#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6"},
 	}
 	content += svg.Group(
-		svg.Text("Standard Packing", float64(w)/2, 0, labelStyle)+
+		svg.Text("Standard Packing", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderCirclePacking(spec1),
-				"translate(100, 30)",
+				fmt.Sprintf("translate(%.2f, %.2f)", chartOffsetX, chartOffsetY),
 				svg.Style{},
 			),
-		"translate(25, 60)",
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
+	// Position second cell
+	cellX += dims.ColWidth
+
 	// With padding
 	spec2 := charts.CirclePackingSpec{
 		Root:        tree,
-		Width:       float64(chartSize),
-		Height:      float64(chartSize),
+		Width:       chartW,
+		Height:      chartH,
 		Padding:     5,
 		ShowLabels:  true,
 		ColorScheme: []string{"#6366f1", "#ec4899", "#14b8a6", "#f97316", "#a855f7"},
 	}
 	content += svg.Group(
-		svg.Text("With Padding", float64(w)/2, 0, labelStyle)+
+		svg.Text("With Padding", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderCirclePacking(spec2),
-				"translate(100, 30)",
+				fmt.Sprintf("translate(%.2f, %.2f)", chartOffsetX, chartOffsetY),
 				svg.Style{},
 			),
-		fmt.Sprintf("translate(%d, 60)", w+25),
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
-	return wrapSVG(content, totalWidth, totalHeight), nil
+	return wrapSVG(content, int(dims.TotalWidth), int(dims.TotalHeight)), nil
 }
 
 // Icicle chart variations
 func generateIcicleGallery() (string, error) {
 	tree := createSampleTree()
 
-	w, h := 600, 400
-	totalWidth := w * 2
-	totalHeight := h + 30 // Extra bottom margin
+	// Calculate dimensions using relative sizing
+	dims := CalculateSingleRowDimensions(2, 600, 400)
+
+	// Calculate chart dimensions once
+	chartW := dims.ChartWidth - 50
+	chartH := dims.ChartHeight - 80
+	labelOffsetY := 0.0
+	chartOffsetY := 30.0
 
 	var content string
 
-	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += svg.Rect(0, 0, dims.TotalWidth, dims.TotalHeight, svg.Style{Fill: "#ffffff"})
 	content += "\n"
 
 	titleStyle := svg.Style{
@@ -1751,7 +1834,7 @@ func generateIcicleGallery() (string, error) {
 		Fill:       "#000000",
 		TextAnchor: "middle",
 	}
-	content += svg.Text("Icicle Chart Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += svg.Text("Icicle Chart Gallery", dims.TotalWidth/2, dims.TitleY, titleStyle)
 	content += "\n"
 
 	labelStyle := svg.Style{
@@ -1762,49 +1845,55 @@ func generateIcicleGallery() (string, error) {
 		TextAnchor: "middle",
 	}
 
+	// Position first cell
+	cellX := 25.0
+
 	// Vertical icicle
 	spec1 := charts.IcicleSpec{
 		Root:        tree,
-		Width:       float64(w - 50),
-		Height:      float64(h - 80),
+		Width:       chartW,
+		Height:      chartH,
 		Orientation: "vertical",
 		ShowLabels:  true,
 		ColorScheme: []string{"#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6"},
 	}
 	content += svg.Group(
-		svg.Text("Vertical Icicle", 300, 0, labelStyle)+
+		svg.Text("Vertical Icicle", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderIcicle(spec1),
-				"translate(0, 30)",
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		"translate(25, 60)",
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
+	// Position second cell
+	cellX += dims.ColWidth
+
 	// Horizontal icicle
 	spec2 := charts.IcicleSpec{
 		Root:        tree,
-		Width:       float64(w - 50),
-		Height:      float64(h - 80),
+		Width:       chartW,
+		Height:      chartH,
 		Orientation: "horizontal",
 		ShowLabels:  true,
 		ColorScheme: []string{"#6366f1", "#ec4899", "#14b8a6", "#f97316", "#a855f7"},
 	}
 	content += svg.Group(
-		svg.Text("Horizontal Icicle", 300, 0, labelStyle)+
+		svg.Text("Horizontal Icicle", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderIcicle(spec2),
-				"translate(0, 30)",
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		fmt.Sprintf("translate(%d, 60)", w+25),
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
-	return wrapSVG(content, totalWidth, totalHeight), nil
+	return wrapSVG(content, int(dims.TotalWidth), int(dims.TotalHeight)), nil
 }
 
 // Radar chart variations
@@ -1830,13 +1919,18 @@ func generateRadarGallery() (string, error) {
 		},
 	}
 
-	w, h := 500, 500
-	totalWidth := w * 2
-	totalHeight := h + 30 // Extra bottom margin
+	// Calculate dimensions using relative sizing
+	dims := CalculateSingleRowDimensions(2, 500, 500)
+
+	// Calculate chart dimensions once
+	chartW := dims.ChartWidth - 50
+	chartH := dims.ChartHeight - 80
+	labelOffsetY := 0.0
+	chartOffsetY := 30.0
 
 	var content string
 
-	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += svg.Rect(0, 0, dims.TotalWidth, dims.TotalHeight, svg.Style{Fill: "#ffffff"})
 	content += "\n"
 
 	titleStyle := svg.Style{
@@ -1846,7 +1940,7 @@ func generateRadarGallery() (string, error) {
 		Fill:       "#000000",
 		TextAnchor: "middle",
 	}
-	content += svg.Text("Radar Chart Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += svg.Text("Radar Chart Gallery", dims.TotalWidth/2, dims.TitleY, titleStyle)
 	content += "\n"
 
 	labelStyle := svg.Style{
@@ -1857,50 +1951,56 @@ func generateRadarGallery() (string, error) {
 		TextAnchor: "middle",
 	}
 
+	// Position first cell
+	cellX := 25.0
+
 	// With grid
 	spec1 := charts.RadarChartSpec{
 		Axes:       axes,
 		Series:     series,
-		Width:      float64(w - 50),
-		Height:     float64(h - 80),
+		Width:      chartW,
+		Height:     chartH,
 		ShowGrid:   true,
 		ShowLabels: true,
 		GridLevels: 5,
 	}
 	content += svg.Group(
-		svg.Text("With Grid", 225, 0, labelStyle)+
+		svg.Text("With Grid", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderRadarChart(spec1),
-				"translate(0, 30)",
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		"translate(25, 60)",
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
+
+	// Position second cell
+	cellX += dims.ColWidth
 
 	// Without grid
 	spec2 := charts.RadarChartSpec{
 		Axes:       axes,
 		Series:     series,
-		Width:      float64(w - 50),
-		Height:     float64(h - 80),
+		Width:      chartW,
+		Height:     chartH,
 		ShowGrid:   false,
 		ShowLabels: true,
 	}
 	content += svg.Group(
-		svg.Text("Without Grid", 225, 0, labelStyle)+
+		svg.Text("Without Grid", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderRadarChart(spec2),
-				"translate(0, 30)",
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		fmt.Sprintf("translate(%d, 60)", w+25),
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
-	return wrapSVG(content, totalWidth, totalHeight), nil
+	return wrapSVG(content, int(dims.TotalWidth), int(dims.TotalHeight)), nil
 }
 
 // Streamchart variations
@@ -1920,13 +2020,18 @@ func generateStreamChartGallery() (string, error) {
 		{X: 5, Values: []float64{30, 20, 12}},
 	}
 
-	w, h := 600, 400
-	totalWidth := w * 2
-	totalHeight := h + 30 // Extra bottom margin
+	// Calculate dimensions using relative sizing
+	dims := CalculateSingleRowDimensions(2, 600, 400)
+
+	// Calculate chart dimensions once
+	chartW := dims.ChartWidth - 50
+	chartH := dims.ChartHeight - 80
+	labelOffsetY := 0.0
+	chartOffsetY := 30.0
 
 	var content string
 
-	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += svg.Rect(0, 0, dims.TotalWidth, dims.TotalHeight, svg.Style{Fill: "#ffffff"})
 	content += "\n"
 
 	titleStyle := svg.Style{
@@ -1936,7 +2041,7 @@ func generateStreamChartGallery() (string, error) {
 		Fill:       "#000000",
 		TextAnchor: "middle",
 	}
-	content += svg.Text("Streamchart Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += svg.Text("Streamchart Gallery", dims.TotalWidth/2, dims.TitleY, titleStyle)
 	content += "\n"
 
 	labelStyle := svg.Style{
@@ -1947,48 +2052,54 @@ func generateStreamChartGallery() (string, error) {
 		TextAnchor: "middle",
 	}
 
+	// Position first cell
+	cellX := 25.0
+
 	// Center layout
 	spec1 := charts.StreamChartSpec{
 		Points: points,
 		Series: series,
-		Width:  float64(w - 50),
-		Height: float64(h - 80),
+		Width:  chartW,
+		Height: chartH,
 		Layout: "center",
 	}
 	content += svg.Group(
-		svg.Text("Center Layout", 300, 0, labelStyle)+
+		svg.Text("Center Layout", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderStreamChart(spec1),
-				"translate(0, 30)",
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		"translate(25, 60)",
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
+
+	// Position second cell
+	cellX += dims.ColWidth
 
 	// Smooth curves
 	spec2 := charts.StreamChartSpec{
 		Points: points,
 		Series: series,
-		Width:  float64(w - 50),
-		Height: float64(h - 80),
+		Width:  chartW,
+		Height: chartH,
 		Layout: "center",
 		Smooth: true,
 	}
 	content += svg.Group(
-		svg.Text("Smooth Curves", 300, 0, labelStyle)+
+		svg.Text("Smooth Curves", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderStreamChart(spec2),
-				"translate(0, 30)",
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		fmt.Sprintf("translate(%d, 60)", w+25),
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
-	return wrapSVG(content, totalWidth, totalHeight), nil
+	return wrapSVG(content, int(dims.TotalWidth), int(dims.TotalHeight)), nil
 }
 
 // Ridgeline chart variations
@@ -2001,13 +2112,18 @@ func generateRidgelineGallery() (string, error) {
 		{Label: "April", Values: []float64{25, 28, 30, 32, 35, 38, 40, 38, 35, 32, 30, 28}},
 	}
 
-	w, h := 600, 400
-	totalWidth := w * 2
-	totalHeight := h + 30 // Extra bottom margin
+	// Calculate dimensions using relative sizing
+	dims := CalculateSingleRowDimensions(2, 600, 400)
+
+	// Calculate chart dimensions once
+	chartW := dims.ChartWidth - 50
+	chartH := dims.ChartHeight - 80
+	labelOffsetY := 0.0
+	chartOffsetY := 30.0
 
 	var content string
 
-	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += svg.Rect(0, 0, dims.TotalWidth, dims.TotalHeight, svg.Style{Fill: "#ffffff"})
 	content += "\n"
 
 	titleStyle := svg.Style{
@@ -2017,7 +2133,7 @@ func generateRidgelineGallery() (string, error) {
 		Fill:       "#000000",
 		TextAnchor: "middle",
 	}
-	content += svg.Text("Ridgeline Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += svg.Text("Ridgeline Gallery", dims.TotalWidth/2, dims.TitleY, titleStyle)
 	content += "\n"
 
 	labelStyle := svg.Style{
@@ -2028,46 +2144,52 @@ func generateRidgelineGallery() (string, error) {
 		TextAnchor: "middle",
 	}
 
+	// Position first cell
+	cellX := 25.0
+
 	// Standard ridgeline
 	spec1 := charts.RidgelineSpec{
 		Data:       data,
-		Width:      float64(w - 50),
-		Height:     float64(h - 80),
+		Width:      chartW,
+		Height:     chartH,
 		Overlap:    0.5,
 		ShowLabels: true,
 	}
 	content += svg.Group(
-		svg.Text("Standard Ridgeline", 300, 0, labelStyle)+
+		svg.Text("Standard Ridgeline", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderRidgeline(spec1),
-				"translate(0, 30)",
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		"translate(25, 60)",
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
+	// Position second cell
+	cellX += dims.ColWidth
+
 	// With fill
 	spec2 := charts.RidgelineSpec{
 		Data:       data,
-		Width:      float64(w - 50),
-		Height:     float64(h - 80),
+		Width:      chartW,
+		Height:     chartH,
 		Overlap:    0.5,
 		ShowFill:   true,
 		ShowLabels: true,
 	}
 	content += svg.Group(
-		svg.Text("With Fill", 300, 0, labelStyle)+
+		svg.Text("With Fill", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderRidgeline(spec2),
-				"translate(0, 30)",
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		fmt.Sprintf("translate(%d, 60)", w+25),
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
-	return wrapSVG(content, totalWidth, totalHeight), nil
+	return wrapSVG(content, int(dims.TotalWidth), int(dims.TotalHeight)), nil
 }

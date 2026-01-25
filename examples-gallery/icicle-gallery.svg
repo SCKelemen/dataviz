@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400"><rect x="0.00" y="0.00" width="1200.00" height="400.00" fill="#ffffff"/>
+<text x="600.00" y="30.00" fill="#000000" text-anchor="middle" font-family="sans-serif" font-size="20.00px" font-weight="bold">Icicle Chart Gallery</text>
+<g transform="translate(25, 60)"><text x="300.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Vertical Icicle</text><g transform="translate(0, 30)"><rect x="0.00" y="0.00" width="550.00" height="106.67" fill="#3b82f6" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="275.00" y="53.33" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Root</text>
+<rect x="0.00" y="106.67" width="220.00" height="71.11" fill="#10b981" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="110.00" y="142.22" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px" font-weight="bold">Branch A</text>
+<rect x="0.00" y="177.78" width="82.50" height="47.41" fill="#f59e0b" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="41.25" y="201.48" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px" font-weight="bold">Leaf A1</text>
+<rect x="82.50" y="177.78" width="66.00" height="47.41" fill="#f59e0b" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="115.50" y="201.48" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px" font-weight="bold">Leaf A2</text>
+<rect x="148.50" y="177.78" width="71.50" height="47.41" fill="#f59e0b" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="184.25" y="201.48" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px" font-weight="bold">Leaf A3</text>
+<rect x="220.00" y="106.67" width="192.50" height="71.11" fill="#10b981" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="316.25" y="142.22" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px" font-weight="bold">Branch B</text>
+<rect x="220.00" y="177.78" width="110.00" height="47.41" fill="#f59e0b" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="275.00" y="201.48" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px" font-weight="bold">Leaf B1</text>
+<rect x="330.00" y="177.78" width="82.50" height="47.41" fill="#f59e0b" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="371.25" y="201.48" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px" font-weight="bold">Leaf B2</text>
+<rect x="412.50" y="106.67" width="137.50" height="71.11" fill="#10b981" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="481.25" y="142.22" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px" font-weight="bold">Branch C</text>
+<rect x="412.50" y="177.78" width="55.00" height="47.41" fill="#f59e0b" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="440.00" y="201.48" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px" font-weight="bold">Leaf C1</text>
+<rect x="467.50" y="177.78" width="44.00" height="47.41" fill="#f59e0b" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="489.50" y="201.48" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px" font-weight="bold">Leaf C2</text>
+<rect x="511.50" y="177.78" width="38.50" height="47.41" fill="#f59e0b" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="530.75" y="201.48" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px" font-weight="bold">Leaf C3</text>
+</g></g>
+<g transform="translate(625, 60)"><text x="300.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Horizontal Icicle</text><g transform="translate(0, 30)"><rect x="0.00" y="0.00" width="183.33" height="320.00" fill="#6366f1" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="91.67" y="160.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Root</text>
+<rect x="183.33" y="0.00" width="122.22" height="128.00" fill="#ec4899" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="244.44" y="64.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Branch A</text>
+<rect x="305.56" y="0.00" width="81.48" height="48.00" fill="#14b8a6" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="346.30" y="24.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px" font-weight="bold">Leaf A1</text>
+<rect x="305.56" y="48.00" width="81.48" height="38.40" fill="#14b8a6" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="346.30" y="67.20" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px" font-weight="bold">Leaf A2</text>
+<rect x="305.56" y="86.40" width="81.48" height="41.60" fill="#14b8a6" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="346.30" y="107.20" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px" font-weight="bold">Leaf A3</text>
+<rect x="183.33" y="128.00" width="122.22" height="112.00" fill="#ec4899" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="244.44" y="184.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Branch B</text>
+<rect x="305.56" y="128.00" width="81.48" height="64.00" fill="#14b8a6" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="346.30" y="160.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px" font-weight="bold">Leaf B1</text>
+<rect x="305.56" y="192.00" width="81.48" height="48.00" fill="#14b8a6" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="346.30" y="216.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px" font-weight="bold">Leaf B2</text>
+<rect x="183.33" y="240.00" width="122.22" height="80.00" fill="#ec4899" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="244.44" y="280.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Branch C</text>
+<rect x="305.56" y="240.00" width="81.48" height="32.00" fill="#14b8a6" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="346.30" y="256.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px" font-weight="bold">Leaf C1</text>
+<rect x="305.56" y="272.00" width="81.48" height="25.60" fill="#14b8a6" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="346.30" y="284.80" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px" font-weight="bold">Leaf C2</text>
+<rect x="305.56" y="297.60" width="81.48" height="22.40" fill="#14b8a6" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="346.30" y="308.80" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px" font-weight="bold">Leaf C3</text>
+</g></g>
+</svg>

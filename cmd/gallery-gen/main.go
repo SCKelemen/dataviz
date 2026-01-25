@@ -50,6 +50,13 @@ func generateGalleries() error {
 		"violin":            generateViolinPlotGallery,
 		"lollipop":          generateLollipopGallery,
 		"candlestick":       generateCandlestickGallery,
+		"treemap":           generateTreemapGallery,
+		"sunburst":          generateSunburstGallery,
+		"circle-packing":    generateCirclePackingGallery,
+		"icicle":            generateIcicleGallery,
+		"radar":             generateRadarGallery,
+		"streamchart":       generateStreamChartGallery,
+		"ridgeline":         generateRidgelineGallery,
 	}
 
 	for name, generator := range generators {
@@ -1314,6 +1321,608 @@ func generateCandlestickGallery() (string, error) {
 		svg.Text("OHLC Chart", 300, 0, labelStyle)+
 			svg.Group(
 				charts.RenderOHLC(ohlcSpec),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		fmt.Sprintf("translate(%d, 60)", w+25),
+		svg.Style{},
+	)
+	content += "\n"
+
+	return wrapSVG(content, totalWidth, totalHeight), nil
+}
+
+// Helper to create sample tree data
+func createSampleTree() *charts.TreeNode {
+	return &charts.TreeNode{
+		Name:  "Root",
+		Value: 100,
+		Children: []*charts.TreeNode{
+			{
+				Name:  "Branch A",
+				Value: 40,
+				Children: []*charts.TreeNode{
+					{Name: "Leaf A1", Value: 15},
+					{Name: "Leaf A2", Value: 12},
+					{Name: "Leaf A3", Value: 13},
+				},
+			},
+			{
+				Name:  "Branch B",
+				Value: 35,
+				Children: []*charts.TreeNode{
+					{Name: "Leaf B1", Value: 20},
+					{Name: "Leaf B2", Value: 15},
+				},
+			},
+			{
+				Name:  "Branch C",
+				Value: 25,
+				Children: []*charts.TreeNode{
+					{Name: "Leaf C1", Value: 10},
+					{Name: "Leaf C2", Value: 8},
+					{Name: "Leaf C3", Value: 7},
+				},
+			},
+		},
+	}
+}
+
+// Treemap variations
+func generateTreemapGallery() (string, error) {
+	tree := createSampleTree()
+
+	w, h := 600, 400
+	totalWidth := w * 2
+	totalHeight := h
+
+	var content string
+
+	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += "\n"
+
+	titleStyle := svg.Style{
+		FontSize:   units.Px(20),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#000000",
+		TextAnchor: "middle",
+	}
+	content += svg.Text("Treemap Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += "\n"
+
+	labelStyle := svg.Style{
+		FontSize:   units.Px(14),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#666",
+		TextAnchor: "middle",
+	}
+
+	// Standard treemap
+	spec1 := charts.TreemapSpec{
+		Root:       tree,
+		Width:      float64(w - 50),
+		Height:     float64(h - 80),
+		ShowLabels: true,
+		ColorScheme: []string{"#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6"},
+	}
+	content += svg.Group(
+		svg.Text("Standard Treemap", 300, 0, labelStyle)+
+			svg.Group(
+				charts.RenderTreemap(spec1),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		"translate(25, 60)",
+		svg.Style{},
+	)
+	content += "\n"
+
+	// Treemap with padding
+	spec2 := charts.TreemapSpec{
+		Root:       tree,
+		Width:      float64(w - 50),
+		Height:     float64(h - 80),
+		Padding:    2,
+		ShowLabels: true,
+		ColorScheme: []string{"#6366f1", "#ec4899", "#14b8a6", "#f97316", "#a855f7"},
+	}
+	content += svg.Group(
+		svg.Text("With Padding", 300, 0, labelStyle)+
+			svg.Group(
+				charts.RenderTreemap(spec2),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		fmt.Sprintf("translate(%d, 60)", w+25),
+		svg.Style{},
+	)
+	content += "\n"
+
+	return wrapSVG(content, totalWidth, totalHeight), nil
+}
+
+// Sunburst variations
+func generateSunburstGallery() (string, error) {
+	tree := createSampleTree()
+
+	w, h := 500, 500
+	totalWidth := w * 2
+	totalHeight := h
+
+	var content string
+
+	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += "\n"
+
+	titleStyle := svg.Style{
+		FontSize:   units.Px(20),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#000000",
+		TextAnchor: "middle",
+	}
+	content += svg.Text("Sunburst Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += "\n"
+
+	labelStyle := svg.Style{
+		FontSize:   units.Px(14),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#666",
+		TextAnchor: "middle",
+	}
+
+	// Full sunburst
+	spec1 := charts.SunburstSpec{
+		Root:        tree,
+		Width:       float64(w - 50),
+		Height:      float64(h - 80),
+		ShowLabels:  true,
+		ColorScheme: []string{"#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6"},
+	}
+	content += svg.Group(
+		svg.Text("Full Sunburst", 225, 0, labelStyle)+
+			svg.Group(
+				charts.RenderSunburst(spec1),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		"translate(25, 60)",
+		svg.Style{},
+	)
+	content += "\n"
+
+	// Sunburst with inner radius (donut style)
+	spec2 := charts.SunburstSpec{
+		Root:        tree,
+		Width:       float64(w - 50),
+		Height:      float64(h - 80),
+		InnerRadius: 60,
+		ShowLabels:  true,
+		ColorScheme: []string{"#6366f1", "#ec4899", "#14b8a6", "#f97316", "#a855f7"},
+	}
+	content += svg.Group(
+		svg.Text("With Inner Radius", 225, 0, labelStyle)+
+			svg.Group(
+				charts.RenderSunburst(spec2),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		fmt.Sprintf("translate(%d, 60)", w+25),
+		svg.Style{},
+	)
+	content += "\n"
+
+	return wrapSVG(content, totalWidth, totalHeight), nil
+}
+
+// Circle packing variations
+func generateCirclePackingGallery() (string, error) {
+	tree := createSampleTree()
+
+	w, h := 500, 500
+	totalWidth := w * 2
+	totalHeight := h
+
+	var content string
+
+	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += "\n"
+
+	titleStyle := svg.Style{
+		FontSize:   units.Px(20),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#000000",
+		TextAnchor: "middle",
+	}
+	content += svg.Text("Circle Packing Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += "\n"
+
+	labelStyle := svg.Style{
+		FontSize:   units.Px(14),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#666",
+		TextAnchor: "middle",
+	}
+
+	// Standard circle packing
+	spec1 := charts.CirclePackingSpec{
+		Root:        tree,
+		Width:       float64(w - 50),
+		Height:      float64(h - 80),
+		ShowLabels:  true,
+		ColorScheme: []string{"#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6"},
+	}
+	content += svg.Group(
+		svg.Text("Standard Packing", 225, 0, labelStyle)+
+			svg.Group(
+				charts.RenderCirclePacking(spec1),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		"translate(25, 60)",
+		svg.Style{},
+	)
+	content += "\n"
+
+	// With padding
+	spec2 := charts.CirclePackingSpec{
+		Root:        tree,
+		Width:       float64(w - 50),
+		Height:      float64(h - 80),
+		Padding:     5,
+		ShowLabels:  true,
+		ColorScheme: []string{"#6366f1", "#ec4899", "#14b8a6", "#f97316", "#a855f7"},
+	}
+	content += svg.Group(
+		svg.Text("With Padding", 225, 0, labelStyle)+
+			svg.Group(
+				charts.RenderCirclePacking(spec2),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		fmt.Sprintf("translate(%d, 60)", w+25),
+		svg.Style{},
+	)
+	content += "\n"
+
+	return wrapSVG(content, totalWidth, totalHeight), nil
+}
+
+// Icicle chart variations
+func generateIcicleGallery() (string, error) {
+	tree := createSampleTree()
+
+	w, h := 600, 400
+	totalWidth := w * 2
+	totalHeight := h
+
+	var content string
+
+	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += "\n"
+
+	titleStyle := svg.Style{
+		FontSize:   units.Px(20),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#000000",
+		TextAnchor: "middle",
+	}
+	content += svg.Text("Icicle Chart Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += "\n"
+
+	labelStyle := svg.Style{
+		FontSize:   units.Px(14),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#666",
+		TextAnchor: "middle",
+	}
+
+	// Vertical icicle
+	spec1 := charts.IcicleSpec{
+		Root:        tree,
+		Width:       float64(w - 50),
+		Height:      float64(h - 80),
+		Orientation: "vertical",
+		ShowLabels:  true,
+		ColorScheme: []string{"#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6"},
+	}
+	content += svg.Group(
+		svg.Text("Vertical Icicle", 300, 0, labelStyle)+
+			svg.Group(
+				charts.RenderIcicle(spec1),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		"translate(25, 60)",
+		svg.Style{},
+	)
+	content += "\n"
+
+	// Horizontal icicle
+	spec2 := charts.IcicleSpec{
+		Root:        tree,
+		Width:       float64(w - 50),
+		Height:      float64(h - 80),
+		Orientation: "horizontal",
+		ShowLabels:  true,
+		ColorScheme: []string{"#6366f1", "#ec4899", "#14b8a6", "#f97316", "#a855f7"},
+	}
+	content += svg.Group(
+		svg.Text("Horizontal Icicle", 300, 0, labelStyle)+
+			svg.Group(
+				charts.RenderIcicle(spec2),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		fmt.Sprintf("translate(%d, 60)", w+25),
+		svg.Style{},
+	)
+	content += "\n"
+
+	return wrapSVG(content, totalWidth, totalHeight), nil
+}
+
+// Radar chart variations
+func generateRadarGallery() (string, error) {
+	axes := []charts.RadarAxis{
+		{Label: "Speed", Max: 100},
+		{Label: "Strength", Max: 100},
+		{Label: "Intelligence", Max: 100},
+		{Label: "Agility", Max: 100},
+		{Label: "Defense", Max: 100},
+	}
+
+	series := []*charts.RadarSeries{
+		{
+			Label:   "Character A",
+			Values: []float64{80, 70, 60, 90, 50},
+			Color:  "#3b82f6",
+		},
+		{
+			Label:   "Character B",
+			Values: []float64{60, 85, 75, 70, 80},
+			Color:  "#10b981",
+		},
+	}
+
+	w, h := 500, 500
+	totalWidth := w * 2
+	totalHeight := h
+
+	var content string
+
+	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += "\n"
+
+	titleStyle := svg.Style{
+		FontSize:   units.Px(20),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#000000",
+		TextAnchor: "middle",
+	}
+	content += svg.Text("Radar Chart Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += "\n"
+
+	labelStyle := svg.Style{
+		FontSize:   units.Px(14),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#666",
+		TextAnchor: "middle",
+	}
+
+	// With grid
+	spec1 := charts.RadarChartSpec{
+		Axes:       axes,
+		Series:     series,
+		Width:      float64(w - 50),
+		Height:     float64(h - 80),
+		ShowGrid:   true,
+		ShowLabels: true,
+		GridLevels: 5,
+	}
+	content += svg.Group(
+		svg.Text("With Grid", 225, 0, labelStyle)+
+			svg.Group(
+				charts.RenderRadarChart(spec1),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		"translate(25, 60)",
+		svg.Style{},
+	)
+	content += "\n"
+
+	// Without grid
+	spec2 := charts.RadarChartSpec{
+		Axes:       axes,
+		Series:     series,
+		Width:      float64(w - 50),
+		Height:     float64(h - 80),
+		ShowGrid:   false,
+		ShowLabels: true,
+	}
+	content += svg.Group(
+		svg.Text("Without Grid", 225, 0, labelStyle)+
+			svg.Group(
+				charts.RenderRadarChart(spec2),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		fmt.Sprintf("translate(%d, 60)", w+25),
+		svg.Style{},
+	)
+	content += "\n"
+
+	return wrapSVG(content, totalWidth, totalHeight), nil
+}
+
+// Streamchart variations
+func generateStreamChartGallery() (string, error) {
+	series := []charts.StreamSeries{
+		{Label: "Series A", Color: "#3b82f6"},
+		{Label: "Series B", Color: "#10b981"},
+		{Label: "Series C", Color: "#f59e0b"},
+	}
+
+	points := []charts.StreamPoint{
+		{X: 0, Values: []float64{10, 15, 5}},
+		{X: 1, Values: []float64{20, 10, 15}},
+		{X: 2, Values: []float64{15, 20, 10}},
+		{X: 3, Values: []float64{25, 15, 10}},
+		{X: 4, Values: []float64{20, 25, 15}},
+		{X: 5, Values: []float64{30, 20, 12}},
+	}
+
+	w, h := 600, 400
+	totalWidth := w * 2
+	totalHeight := h
+
+	var content string
+
+	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += "\n"
+
+	titleStyle := svg.Style{
+		FontSize:   units.Px(20),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#000000",
+		TextAnchor: "middle",
+	}
+	content += svg.Text("Streamchart Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += "\n"
+
+	labelStyle := svg.Style{
+		FontSize:   units.Px(14),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#666",
+		TextAnchor: "middle",
+	}
+
+	// Center layout
+	spec1 := charts.StreamChartSpec{
+		Points: points,
+		Series: series,
+		Width:  float64(w - 50),
+		Height: float64(h - 80),
+		Layout: "center",
+	}
+	content += svg.Group(
+		svg.Text("Center Layout", 300, 0, labelStyle)+
+			svg.Group(
+				charts.RenderStreamChart(spec1),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		"translate(25, 60)",
+		svg.Style{},
+	)
+	content += "\n"
+
+	// Smooth curves
+	spec2 := charts.StreamChartSpec{
+		Points: points,
+		Series: series,
+		Width:  float64(w - 50),
+		Height: float64(h - 80),
+		Layout: "center",
+		Smooth: true,
+	}
+	content += svg.Group(
+		svg.Text("Smooth Curves", 300, 0, labelStyle)+
+			svg.Group(
+				charts.RenderStreamChart(spec2),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		fmt.Sprintf("translate(%d, 60)", w+25),
+		svg.Style{},
+	)
+	content += "\n"
+
+	return wrapSVG(content, totalWidth, totalHeight), nil
+}
+
+// Ridgeline chart variations
+func generateRidgelineGallery() (string, error) {
+	// Create sample data for 4 distributions
+	data := []*charts.RidgelineData{
+		{Label: "January", Values: []float64{10, 12, 15, 18, 20, 22, 25, 23, 20, 18, 15, 12}},
+		{Label: "February", Values: []float64{15, 18, 20, 22, 25, 28, 30, 28, 25, 22, 20, 18}},
+		{Label: "March", Values: []float64{20, 22, 25, 28, 30, 32, 35, 33, 30, 28, 25, 22}},
+		{Label: "April", Values: []float64{25, 28, 30, 32, 35, 38, 40, 38, 35, 32, 30, 28}},
+	}
+
+	w, h := 600, 400
+	totalWidth := w * 2
+	totalHeight := h
+
+	var content string
+
+	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += "\n"
+
+	titleStyle := svg.Style{
+		FontSize:   units.Px(20),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#000000",
+		TextAnchor: "middle",
+	}
+	content += svg.Text("Ridgeline Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += "\n"
+
+	labelStyle := svg.Style{
+		FontSize:   units.Px(14),
+		FontWeight: "bold",
+		FontFamily: "sans-serif",
+		Fill:       "#666",
+		TextAnchor: "middle",
+	}
+
+	// Standard ridgeline
+	spec1 := charts.RidgelineSpec{
+		Data:       data,
+		Width:      float64(w - 50),
+		Height:     float64(h - 80),
+		Overlap:    0.5,
+		ShowLabels: true,
+	}
+	content += svg.Group(
+		svg.Text("Standard Ridgeline", 300, 0, labelStyle)+
+			svg.Group(
+				charts.RenderRidgeline(spec1),
+				"translate(0, 30)",
+				svg.Style{},
+			),
+		"translate(25, 60)",
+		svg.Style{},
+	)
+	content += "\n"
+
+	// With fill
+	spec2 := charts.RidgelineSpec{
+		Data:       data,
+		Width:      float64(w - 50),
+		Height:     float64(h - 80),
+		Overlap:    0.5,
+		ShowFill:   true,
+		ShowLabels: true,
+	}
+	content += svg.Group(
+		svg.Text("With Fill", 300, 0, labelStyle)+
+			svg.Group(
+				charts.RenderRidgeline(spec2),
 				"translate(0, 30)",
 				svg.Style{},
 			),

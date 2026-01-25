@@ -77,6 +77,34 @@ Demonstrates 6 different trend patterns:
 - **Candlestick Chart**: OHLC data visualized as candlesticks (rising in green, falling in red)
 - **OHLC Chart**: Traditional OHLC bar chart representation
 
+### Treemap Gallery (`treemap-gallery.svg`)
+- **Standard Treemap**: Squarified treemap showing hierarchical data as nested rectangles
+- **With Padding**: Treemap with padding between rectangles for better visual separation
+
+### Sunburst Gallery (`sunburst-gallery.svg`)
+- **Full Sunburst**: Radial partition chart showing hierarchy as concentric rings
+- **With Inner Radius**: Sunburst with hollow center (donut style) for better readability
+
+### Circle Packing Gallery (`circle-packing-gallery.svg`)
+- **Standard Packing**: Hierarchical circle packing with nested circles
+- **With Padding**: Circle packing with padding between circles
+
+### Icicle Gallery (`icicle-gallery.svg`)
+- **Vertical Icicle**: Top-down icicle chart showing hierarchy as stacked rectangles
+- **Horizontal Icicle**: Left-to-right icicle chart orientation
+
+### Radar Chart Gallery (`radar-gallery.svg`)
+- **With Grid**: Spider/radar chart with concentric grid circles
+- **Without Grid**: Clean radar chart without background grid
+
+### Streamchart Gallery (`streamchart-gallery.svg`)
+- **Center Layout**: Streamchart with centered baseline (flowing river effect)
+- **Smooth Curves**: Streamchart with Bezier curve smoothing
+
+### Ridgeline Gallery (`ridgeline-gallery.svg`)
+- **Standard Ridgeline**: Joy plot showing overlapping density distributions
+- **With Fill**: Ridgeline plot with filled areas under curves
+
 ## Generating Galleries
 
 Galleries are automatically generated using the gallery generator tool:

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400"><rect x="0.00" y="0.00" width="1200.00" height="400.00" fill="#ffffff"/>
+<text x="600.00" y="30.00" fill="#000000" text-anchor="middle" font-family="sans-serif" font-size="20.00px" font-weight="bold">Treemap Gallery</text>
+<g transform="translate(25, 60)"><text x="300.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Standard Treemap</text><g transform="translate(0, 30)"><rect x="0.00" y="0.00" width="220.00" height="120.00" fill="#f59e0b" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="110.00" y="60.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Leaf A1</text>
+<rect x="0.00" y="120.00" width="220.00" height="104.00" fill="#f59e0b" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="110.00" y="172.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Leaf A3</text>
+<rect x="0.00" y="224.00" width="220.00" height="96.00" fill="#f59e0b" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="110.00" y="272.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px" font-weight="bold">Leaf A2</text>
+<rect x="220.00" y="0.00" width="192.50" height="182.86" fill="#f59e0b" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="316.25" y="91.43" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="16.00px" font-weight="bold">Leaf B1</text>
+<rect x="220.00" y="182.86" width="192.50" height="137.14" fill="#f59e0b" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="316.25" y="251.43" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Leaf B2</text>
+<rect x="412.50" y="0.00" width="137.50" height="128.00" fill="#f59e0b" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="481.25" y="64.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Leaf C1</text>
+<rect x="412.50" y="128.00" width="137.50" height="102.40" fill="#f59e0b" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="481.25" y="179.20" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Leaf C2</text>
+<rect x="412.50" y="230.40" width="137.50" height="89.60" fill="#f59e0b" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="481.25" y="275.20" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px" font-weight="bold">Leaf C3</text>
+</g></g>
+<g transform="translate(625, 60)"><text x="300.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">With Padding</text><g transform="translate(0, 30)"><rect x="2.00" y="2.00" width="216.00" height="116.00" fill="#14b8a6" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="110.00" y="60.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Leaf A1</text>
+<rect x="2.00" y="122.00" width="216.00" height="100.00" fill="#14b8a6" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="110.00" y="172.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Leaf A3</text>
+<rect x="2.00" y="226.00" width="216.00" height="92.00" fill="#14b8a6" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="110.00" y="272.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px" font-weight="bold">Leaf A2</text>
+<rect x="222.00" y="2.00" width="188.50" height="178.86" fill="#14b8a6" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="316.25" y="91.43" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="16.00px" font-weight="bold">Leaf B1</text>
+<rect x="222.00" y="184.86" width="188.50" height="133.14" fill="#14b8a6" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="316.25" y="251.43" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Leaf B2</text>
+<rect x="414.50" y="2.00" width="133.50" height="124.00" fill="#14b8a6" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="481.25" y="64.00" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Leaf C1</text>
+<rect x="414.50" y="130.00" width="133.50" height="98.40" fill="#14b8a6" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="481.25" y="179.20" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px" font-weight="bold">Leaf C2</text>
+<rect x="414.50" y="232.40" width="133.50" height="85.60" fill="#14b8a6" stroke="#ffffff" stroke-width="2.00" opacity="0.80"/>
+<text x="481.25" y="275.20" fill="#ffffff" text-anchor="middle" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px" font-weight="bold">Leaf C3</text>
+</g></g>
+</svg>

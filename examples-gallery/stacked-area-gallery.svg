@@ -1,21 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="400" viewBox="0 0 1600 400"><rect x="0.00" y="0.00" width="1600.00" height="400.00" fill="#ffffff"/>
 <text x="800.00" y="30.00" fill="#000000" text-anchor="middle" font-family="sans-serif" font-size="20.00px" font-weight="bold">Stacked Area Gallery</text>
-<g transform="translate(25, 60)"><text x="400.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Standard Stacked</text><g transform="translate(0, 30)"><line x1="60.00" y1="60.00" x2="60.00" y2="260.00" stroke="#374151" stroke-width="2.00"/>
-<line x1="60.00" y1="260.00" x2="690.00" y2="260.00" stroke="#374151" stroke-width="2.00"/>
-<path d="M 60.00 164.76 L 217.50 117.14 L 375.00 117.14 L 532.50 101.27 L 690.00 69.52 L 690.00 117.14 L 532.50 133.02 L 375.00 148.89 L 217.50 164.76 L 60.00 180.63 Z" fill="#f59e0b" stroke="#f59e0b" stroke-width="1.00" fill-opacity="0.70"/>
-<path d="M 60.00 180.63 L 217.50 164.76 L 375.00 148.89 L 532.50 133.02 L 690.00 117.14 L 690.00 196.51 L 532.50 180.63 L 375.00 212.38 L 217.50 196.51 L 60.00 228.25 Z" fill="#10b981" stroke="#10b981" stroke-width="1.00" fill-opacity="0.70"/>
-<path d="M 60.00 228.25 L 217.50 196.51 L 375.00 212.38 L 532.50 180.63 L 690.00 196.51 L 690.00 260.00 L 532.50 260.00 L 375.00 260.00 L 217.50 260.00 L 60.00 260.00 Z" fill="#3b82f6" stroke="#3b82f6" stroke-width="1.00" fill-opacity="0.70"/>
-<text x="60.00" y="270.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">0.00</text>
-<text x="186.00" y="270.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">0.80</text>
-<text x="312.00" y="270.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">1.60</text>
-<text x="438.00" y="270.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">2.40</text>
-<text x="564.00" y="270.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">3.20</text>
-<text x="690.00" y="270.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">4.00</text>
-<text x="50.00" y="260.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">0.00</text>
-<text x="50.00" y="220.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">12.60</text>
-<text x="50.00" y="180.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">25.20</text>
-<text x="50.00" y="140.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">37.80</text>
-<text x="50.00" y="100.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">50.40</text>
+<g transform="translate(25, 60)"><text x="400.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Standard Stacked</text><g transform="translate(10, 30)"><line x1="60.00" y1="60.00" x2="60.00" y2="240.00" stroke="#374151" stroke-width="2.00"/>
+<line x1="60.00" y1="240.00" x2="640.00" y2="240.00" stroke="#374151" stroke-width="2.00"/>
+<path d="M 60.00 154.29 L 205.00 111.43 L 350.00 111.43 L 495.00 97.14 L 640.00 68.57 L 640.00 111.43 L 495.00 125.71 L 350.00 140.00 L 205.00 154.29 L 60.00 168.57 Z" fill="#f59e0b" stroke="#f59e0b" stroke-width="1.00" fill-opacity="0.70"/>
+<path d="M 60.00 168.57 L 205.00 154.29 L 350.00 140.00 L 495.00 125.71 L 640.00 111.43 L 640.00 182.86 L 495.00 168.57 L 350.00 197.14 L 205.00 182.86 L 60.00 211.43 Z" fill="#10b981" stroke="#10b981" stroke-width="1.00" fill-opacity="0.70"/>
+<path d="M 60.00 211.43 L 205.00 182.86 L 350.00 197.14 L 495.00 168.57 L 640.00 182.86 L 640.00 240.00 L 495.00 240.00 L 350.00 240.00 L 205.00 240.00 L 60.00 240.00 Z" fill="#3b82f6" stroke="#3b82f6" stroke-width="1.00" fill-opacity="0.70"/>
+<text x="60.00" y="250.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">0.00</text>
+<text x="176.00" y="250.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">0.80</text>
+<text x="292.00" y="250.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">1.60</text>
+<text x="408.00" y="250.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">2.40</text>
+<text x="524.00" y="250.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">3.20</text>
+<text x="640.00" y="250.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">4.00</text>
+<text x="50.00" y="240.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">0.00</text>
+<text x="50.00" y="204.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">12.60</text>
+<text x="50.00" y="168.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">25.20</text>
+<text x="50.00" y="132.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">37.80</text>
+<text x="50.00" y="96.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">50.40</text>
 <text x="50.00" y="60.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">63.00</text>
 <rect x="80.00" y="72.00" width="20.00" height="16.00" fill="#3b82f6" stroke="#3b82f6" stroke-width="1.00" fill-opacity="0.70"/>
 <text x="105.00" y="80.00" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">Series A</text>
@@ -24,22 +24,22 @@
 <rect x="80.00" y="122.00" width="20.00" height="16.00" fill="#f59e0b" stroke="#f59e0b" stroke-width="1.00" fill-opacity="0.70"/>
 <text x="105.00" y="130.00" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">Series C</text>
 </g></g>
-<g transform="translate(825, 60)"><text x="400.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Smooth Curves</text><g transform="translate(0, 30)"><line x1="60.00" y1="60.00" x2="60.00" y2="260.00" stroke="#374151" stroke-width="2.00"/>
-<line x1="60.00" y1="260.00" x2="690.00" y2="260.00" stroke="#374151" stroke-width="2.00"/>
-<path d="M 60.00 164.76 L 217.50 117.14 L 375.00 117.14 L 532.50 101.27 L 690.00 69.52 L 690.00 117.14 L 532.50 133.02 L 375.00 148.89 L 217.50 164.76 L 60.00 180.63 Z" fill="#f59e0b" stroke="#f59e0b" stroke-width="1.00" fill-opacity="0.70"/>
-<path d="M 60.00 180.63 L 217.50 164.76 L 375.00 148.89 L 532.50 133.02 L 690.00 117.14 L 690.00 196.51 L 532.50 180.63 L 375.00 212.38 L 217.50 196.51 L 60.00 228.25 Z" fill="#10b981" stroke="#10b981" stroke-width="1.00" fill-opacity="0.70"/>
-<path d="M 60.00 228.25 L 217.50 196.51 L 375.00 212.38 L 532.50 180.63 L 690.00 196.51 L 690.00 260.00 L 532.50 260.00 L 375.00 260.00 L 217.50 260.00 L 60.00 260.00 Z" fill="#3b82f6" stroke="#3b82f6" stroke-width="1.00" fill-opacity="0.70"/>
-<text x="60.00" y="270.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">0.00</text>
-<text x="186.00" y="270.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">0.80</text>
-<text x="312.00" y="270.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">1.60</text>
-<text x="438.00" y="270.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">2.40</text>
-<text x="564.00" y="270.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">3.20</text>
-<text x="690.00" y="270.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">4.00</text>
-<text x="50.00" y="260.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">0.00</text>
-<text x="50.00" y="220.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">12.60</text>
-<text x="50.00" y="180.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">25.20</text>
-<text x="50.00" y="140.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">37.80</text>
-<text x="50.00" y="100.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">50.40</text>
+<g transform="translate(825, 60)"><text x="400.00" y="0.00" fill="#666" text-anchor="middle" font-family="sans-serif" font-size="14.00px" font-weight="bold">Smooth Curves</text><g transform="translate(10, 30)"><line x1="60.00" y1="60.00" x2="60.00" y2="240.00" stroke="#374151" stroke-width="2.00"/>
+<line x1="60.00" y1="240.00" x2="640.00" y2="240.00" stroke="#374151" stroke-width="2.00"/>
+<path d="M 60.00 154.29 L 205.00 111.43 L 350.00 111.43 L 495.00 97.14 L 640.00 68.57 L 640.00 111.43 L 495.00 125.71 L 350.00 140.00 L 205.00 154.29 L 60.00 168.57 Z" fill="#f59e0b" stroke="#f59e0b" stroke-width="1.00" fill-opacity="0.70"/>
+<path d="M 60.00 168.57 L 205.00 154.29 L 350.00 140.00 L 495.00 125.71 L 640.00 111.43 L 640.00 182.86 L 495.00 168.57 L 350.00 197.14 L 205.00 182.86 L 60.00 211.43 Z" fill="#10b981" stroke="#10b981" stroke-width="1.00" fill-opacity="0.70"/>
+<path d="M 60.00 211.43 L 205.00 182.86 L 350.00 197.14 L 495.00 168.57 L 640.00 182.86 L 640.00 240.00 L 495.00 240.00 L 350.00 240.00 L 205.00 240.00 L 60.00 240.00 Z" fill="#3b82f6" stroke="#3b82f6" stroke-width="1.00" fill-opacity="0.70"/>
+<text x="60.00" y="250.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">0.00</text>
+<text x="176.00" y="250.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">0.80</text>
+<text x="292.00" y="250.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">1.60</text>
+<text x="408.00" y="250.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">2.40</text>
+<text x="524.00" y="250.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">3.20</text>
+<text x="640.00" y="250.00" text-anchor="middle" dominant-baseline="hanging" font-family="sans-serif" font-size="10.00px">4.00</text>
+<text x="50.00" y="240.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">0.00</text>
+<text x="50.00" y="204.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">12.60</text>
+<text x="50.00" y="168.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">25.20</text>
+<text x="50.00" y="132.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">37.80</text>
+<text x="50.00" y="96.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">50.40</text>
 <text x="50.00" y="60.00" text-anchor="end" dominant-baseline="middle" font-family="sans-serif" font-size="10.00px">63.00</text>
 <rect x="80.00" y="72.00" width="20.00" height="16.00" fill="#3b82f6" stroke="#3b82f6" stroke-width="1.00" fill-opacity="0.70"/>
 <text x="105.00" y="80.00" dominant-baseline="middle" font-family="sans-serif" font-size="12.00px">Series A</text>

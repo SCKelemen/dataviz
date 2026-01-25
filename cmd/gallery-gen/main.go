@@ -264,7 +264,9 @@ func generateLineGallery() (string, error) {
 		},
 	}
 
-	w, h := 650, 350
+	// Allocate extra space for axis labels and legends
+	chartW, chartH := 560, 260
+	w, h := chartW+90, chartH+90
 	totalWidth := w * 2
 	totalHeight := h * 2
 
@@ -295,10 +297,10 @@ func generateLineGallery() (string, error) {
 
 	// Simple line
 	content += svg.Group(
-		svg.Text("Simple Line", 325, 0, labelStyle)+
+		svg.Text("Simple Line", float64(w)/2, 0, labelStyle)+
 			svg.Group(
-				charts.RenderLineGraph(data, 0, 0, w-50, h-90, tokens),
-				"translate(0, 25)",
+				charts.RenderLineGraph(data, 0, 0, chartW, chartH, tokens),
+				"translate(10, 25)",
 				svg.Style{},
 			),
 		"translate(0, 60)",
@@ -311,10 +313,10 @@ func generateLineGallery() (string, error) {
 	dataSmooth.Smooth = true
 	dataSmooth.Tension = 0.3
 	content += svg.Group(
-		svg.Text("Smoothed", 325, 0, labelStyle)+
+		svg.Text("Smoothed", float64(w)/2, 0, labelStyle)+
 			svg.Group(
-				charts.RenderLineGraph(dataSmooth, 0, 0, w-50, h-90, tokens),
-				"translate(0, 25)",
+				charts.RenderLineGraph(dataSmooth, 0, 0, chartW, chartH, tokens),
+				"translate(10, 25)",
 				svg.Style{},
 			),
 		fmt.Sprintf("translate(%d, 60)", w),
@@ -327,10 +329,10 @@ func generateLineGallery() (string, error) {
 	dataMarkers.MarkerType = "circle"
 	dataMarkers.MarkerSize = 5
 	content += svg.Group(
-		svg.Text("With Markers", 325, 0, labelStyle)+
+		svg.Text("With Markers", float64(w)/2, 0, labelStyle)+
 			svg.Group(
-				charts.RenderLineGraph(dataMarkers, 0, 0, w-50, h-90, tokens),
-				"translate(0, 25)",
+				charts.RenderLineGraph(dataMarkers, 0, 0, chartW, chartH, tokens),
+				"translate(10, 25)",
 				svg.Style{},
 			),
 		"translate(0, 360)",
@@ -342,10 +344,10 @@ func generateLineGallery() (string, error) {
 	dataFilled := data
 	dataFilled.FillColor = "#3b82f620" // Semi-transparent fill
 	content += svg.Group(
-		svg.Text("Filled Area", 325, 0, labelStyle)+
+		svg.Text("Filled Area", float64(w)/2, 0, labelStyle)+
 			svg.Group(
-				charts.RenderLineGraph(dataFilled, 0, 0, w-50, h-90, tokens),
-				"translate(0, 25)",
+				charts.RenderLineGraph(dataFilled, 0, 0, chartW, chartH, tokens),
+				"translate(10, 25)",
 				svg.Style{},
 			),
 		fmt.Sprintf("translate(%d, 360)", w),
@@ -542,7 +544,9 @@ func generateAreaGallery() (string, error) {
 		},
 	}
 
-	w, h := 800, 400
+	// Allocate extra space for axis labels
+	chartW, chartH := 700, 300
+	w, h := chartW+100, chartH+100
 	totalWidth := w * 2
 	totalHeight := h
 
@@ -573,10 +577,10 @@ func generateAreaGallery() (string, error) {
 
 	// Simple area
 	content += svg.Group(
-		svg.Text("Simple Area", 400, 0, labelStyle)+
+		svg.Text("Simple Area", float64(w)/2, 0, labelStyle)+
 			svg.Group(
-				charts.RenderAreaChart(data, 0, 0, w-50, h-70, tokens),
-				"translate(0, 30)",
+				charts.RenderAreaChart(data, 0, 0, chartW, chartH, tokens),
+				"translate(10, 30)",
 				svg.Style{},
 			),
 		"translate(0, 60)",
@@ -588,10 +592,10 @@ func generateAreaGallery() (string, error) {
 	dataGradient := data
 	dataGradient.Color = "#10b981"
 	content += svg.Group(
-		svg.Text("Different Color", 400, 0, labelStyle)+
+		svg.Text("Different Color", float64(w)/2, 0, labelStyle)+
 			svg.Group(
-				charts.RenderAreaChart(dataGradient, 0, 0, w-50, h-70, tokens),
-				"translate(0, 30)",
+				charts.RenderAreaChart(dataGradient, 0, 0, chartW, chartH, tokens),
+				"translate(10, 30)",
 				svg.Style{},
 			),
 		fmt.Sprintf("translate(%d, 60)", w),
@@ -618,7 +622,9 @@ func generateStackedAreaGallery() (string, error) {
 		{X: 4, Values: []float64{20, 25, 15}},
 	}
 
-	w, h := 800, 400
+	// Allocate extra space for axis labels
+	chartW, chartH := 700, 300
+	w, h := chartW+100, chartH+100
 	totalWidth := w * 2
 	totalHeight := h
 
@@ -651,14 +657,14 @@ func generateStackedAreaGallery() (string, error) {
 	spec1 := charts.StackedAreaSpec{
 		Points: points,
 		Series: series,
-		Width:  float64(w - 50),
-		Height: float64(h - 80),
+		Width:  float64(chartW),
+		Height: float64(chartH),
 	}
 	content += svg.Group(
-		svg.Text("Standard Stacked", 400, 0, labelStyle)+
+		svg.Text("Standard Stacked", float64(w)/2, 0, labelStyle)+
 			svg.Group(
 				charts.RenderStackedArea(spec1),
-				"translate(0, 30)",
+				"translate(10, 30)",
 				svg.Style{},
 			),
 		"translate(25, 60)",
@@ -670,15 +676,15 @@ func generateStackedAreaGallery() (string, error) {
 	spec2 := charts.StackedAreaSpec{
 		Points: points,
 		Series: series,
-		Width:  float64(w - 50),
-		Height: float64(h - 80),
+		Width:  float64(chartW),
+		Height: float64(chartH),
 		Smooth: true,
 	}
 	content += svg.Group(
-		svg.Text("Smooth Curves", 400, 0, labelStyle)+
+		svg.Text("Smooth Curves", float64(w)/2, 0, labelStyle)+
 			svg.Group(
 				charts.RenderStackedArea(spec2),
-				"translate(0, 30)",
+				"translate(10, 30)",
 				svg.Style{},
 			),
 		fmt.Sprintf("translate(%d, 60)", w+25),
@@ -960,19 +966,18 @@ func generateBoxPlotGallery() (string, error) {
 	)
 	content += "\n"
 
-	// Horizontal box plot
+	// Vertical box plot with notches
 	spec2 := charts.BoxPlotSpec{
 		Data:         data,
 		Width:        float64(w - 50),
 		Height:       float64(h - 80),
-		Horizontal:   true,
 		ShowOutliers: true,
 		ShowNotch:    true,
 	}
 	content += svg.Group(
-		svg.Text("Horizontal Box Plot", 300, 0, labelStyle)+
+		svg.Text("With Confidence Notches", 300, 0, labelStyle)+
 			svg.Group(
-				charts.RenderHorizontalBoxPlot(spec2),
+				charts.RenderVerticalBoxPlot(spec2),
 				"translate(0, 30)",
 				svg.Style{},
 			),
@@ -1447,7 +1452,8 @@ func generateTreemapGallery() (string, error) {
 func generateSunburstGallery() (string, error) {
 	tree := createSampleTree()
 
-	w, h := 500, 500
+	chartSize := 400
+	w, h := chartSize+50, chartSize+100
 	totalWidth := w * 2
 	totalHeight := h
 
@@ -1477,13 +1483,13 @@ func generateSunburstGallery() (string, error) {
 	// Full sunburst
 	spec1 := charts.SunburstSpec{
 		Root:        tree,
-		Width:       float64(w - 50),
-		Height:      float64(h - 80),
+		Width:       float64(chartSize),
+		Height:      float64(chartSize),
 		ShowLabels:  true,
 		ColorScheme: []string{"#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6"},
 	}
 	content += svg.Group(
-		svg.Text("Full Sunburst", 225, 0, labelStyle)+
+		svg.Text("Full Sunburst", float64(chartSize/2), 0, labelStyle)+
 			svg.Group(
 				charts.RenderSunburst(spec1),
 				"translate(0, 30)",
@@ -1497,14 +1503,14 @@ func generateSunburstGallery() (string, error) {
 	// Sunburst with inner radius (donut style)
 	spec2 := charts.SunburstSpec{
 		Root:        tree,
-		Width:       float64(w - 50),
-		Height:      float64(h - 80),
+		Width:       float64(chartSize),
+		Height:      float64(chartSize),
 		InnerRadius: 60,
 		ShowLabels:  true,
 		ColorScheme: []string{"#6366f1", "#ec4899", "#14b8a6", "#f97316", "#a855f7"},
 	}
 	content += svg.Group(
-		svg.Text("With Inner Radius", 225, 0, labelStyle)+
+		svg.Text("With Inner Radius", float64(chartSize/2), 0, labelStyle)+
 			svg.Group(
 				charts.RenderSunburst(spec2),
 				"translate(0, 30)",
@@ -1522,7 +1528,9 @@ func generateSunburstGallery() (string, error) {
 func generateCirclePackingGallery() (string, error) {
 	tree := createSampleTree()
 
-	w, h := 500, 500
+	chartSize := 400
+	// Circle packing needs extra horizontal space as circles extend beyond center
+	w, h := chartSize+200, chartSize+100
 	totalWidth := w * 2
 	totalHeight := h
 
@@ -1552,16 +1560,16 @@ func generateCirclePackingGallery() (string, error) {
 	// Standard circle packing
 	spec1 := charts.CirclePackingSpec{
 		Root:        tree,
-		Width:       float64(w - 50),
-		Height:      float64(h - 80),
+		Width:       float64(chartSize),
+		Height:      float64(chartSize),
 		ShowLabels:  true,
 		ColorScheme: []string{"#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6"},
 	}
 	content += svg.Group(
-		svg.Text("Standard Packing", 225, 0, labelStyle)+
+		svg.Text("Standard Packing", float64(w)/2, 0, labelStyle)+
 			svg.Group(
 				charts.RenderCirclePacking(spec1),
-				"translate(0, 30)",
+				"translate(100, 30)",
 				svg.Style{},
 			),
 		"translate(25, 60)",
@@ -1572,17 +1580,17 @@ func generateCirclePackingGallery() (string, error) {
 	// With padding
 	spec2 := charts.CirclePackingSpec{
 		Root:        tree,
-		Width:       float64(w - 50),
-		Height:      float64(h - 80),
+		Width:       float64(chartSize),
+		Height:      float64(chartSize),
 		Padding:     5,
 		ShowLabels:  true,
 		ColorScheme: []string{"#6366f1", "#ec4899", "#14b8a6", "#f97316", "#a855f7"},
 	}
 	content += svg.Group(
-		svg.Text("With Padding", 225, 0, labelStyle)+
+		svg.Text("With Padding", float64(w)/2, 0, labelStyle)+
 			svg.Group(
 				charts.RenderCirclePacking(spec2),
-				"translate(0, 30)",
+				"translate(100, 30)",
 				svg.Style{},
 			),
 		fmt.Sprintf("translate(%d, 60)", w+25),

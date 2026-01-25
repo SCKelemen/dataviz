@@ -642,16 +642,13 @@ func generateAreaGallery() (string, error) {
 		},
 	}
 
-	// Allocate extra space for axis labels
-	chartW, chartH := 700, 300
-	w, h := chartW+100, chartH+100
-	totalWidth := w * 2
-	totalHeight := h + 40 // Extra bottom margin
+	// Use relative sizing
+	dims := CalculateSingleRowDimensions(2, 800, 400)
 
 	var content string
 
 	// White background
-	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += svg.Rect(0, 0, dims.TotalWidth, dims.TotalHeight, svg.Style{Fill: "#ffffff"})
 	content += "\n"
 
 	// Title
@@ -662,7 +659,7 @@ func generateAreaGallery() (string, error) {
 		Fill:       "#000000",
 		TextAnchor: "middle",
 	}
-	content += svg.Text("Area Chart Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += svg.Text("Area Chart Gallery", dims.TotalWidth/2, dims.TitleY, titleStyle)
 	content += "\n"
 
 	labelStyle := svg.Style{
@@ -673,35 +670,42 @@ func generateAreaGallery() (string, error) {
 		TextAnchor: "middle",
 	}
 
+	chartW := int(dims.ChartWidth)
+	chartH := int(dims.ChartHeight)
+	labelOffsetY := 0.0
+	chartOffsetY := 30.0
+
 	// Simple area
+	cellX := 0.0
 	content += svg.Group(
-		svg.Text("Simple Area", float64(w)/2, 0, labelStyle)+
+		svg.Text("Simple Area", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderAreaChart(data, 0, 0, chartW, chartH, tokens),
-				"translate(10, 30)",
+				fmt.Sprintf("translate(10, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		"translate(0, 60)",
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
 	// With gradient
+	cellX += dims.ColWidth
 	dataGradient := data
 	dataGradient.Color = "#10b981"
 	content += svg.Group(
-		svg.Text("Different Color", float64(w)/2, 0, labelStyle)+
+		svg.Text("Different Color", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderAreaChart(dataGradient, 0, 0, chartW, chartH, tokens),
-				"translate(10, 30)",
+				fmt.Sprintf("translate(10, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		fmt.Sprintf("translate(%d, 60)", w),
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
-	return wrapSVG(content, totalWidth, totalHeight), nil
+	return wrapSVG(content, int(dims.TotalWidth), int(dims.TotalHeight)), nil
 }
 
 // Stacked area chart variations
@@ -720,16 +724,13 @@ func generateStackedAreaGallery() (string, error) {
 		{X: 4, Values: []float64{20, 25, 15}},
 	}
 
-	// Allocate extra space for axis labels
-	chartW, chartH := 700, 300
-	w, h := chartW+100, chartH+100
-	totalWidth := w * 2
-	totalHeight := h + 40 // Extra bottom margin
+	// Use relative sizing
+	dims := CalculateSingleRowDimensions(2, 800, 400)
 
 	var content string
 
 	// White background
-	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += svg.Rect(0, 0, dims.TotalWidth, dims.TotalHeight, svg.Style{Fill: "#ffffff"})
 	content += "\n"
 
 	// Title
@@ -740,7 +741,7 @@ func generateStackedAreaGallery() (string, error) {
 		Fill:       "#000000",
 		TextAnchor: "middle",
 	}
-	content += svg.Text("Stacked Area Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += svg.Text("Stacked Area Gallery", dims.TotalWidth/2, dims.TitleY, titleStyle)
 	content += "\n"
 
 	labelStyle := svg.Style{
@@ -751,7 +752,13 @@ func generateStackedAreaGallery() (string, error) {
 		TextAnchor: "middle",
 	}
 
+	chartW := int(dims.ChartWidth)
+	chartH := int(dims.ChartHeight)
+	labelOffsetY := 0.0
+	chartOffsetY := 30.0
+
 	// Standard stacked
+	cellX := 25.0
 	spec1 := charts.StackedAreaSpec{
 		Points: points,
 		Series: series,
@@ -759,18 +766,19 @@ func generateStackedAreaGallery() (string, error) {
 		Height: float64(chartH),
 	}
 	content += svg.Group(
-		svg.Text("Standard Stacked", float64(w)/2, 0, labelStyle)+
+		svg.Text("Standard Stacked", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderStackedArea(spec1),
-				"translate(10, 30)",
+				fmt.Sprintf("translate(10, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		"translate(25, 60)",
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
 	// Smooth curves
+	cellX += dims.ColWidth
 	spec2 := charts.StackedAreaSpec{
 		Points: points,
 		Series: series,
@@ -779,18 +787,18 @@ func generateStackedAreaGallery() (string, error) {
 		Smooth: true,
 	}
 	content += svg.Group(
-		svg.Text("Smooth Curves", float64(w)/2, 0, labelStyle)+
+		svg.Text("Smooth Curves", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderStackedArea(spec2),
-				"translate(10, 30)",
+				fmt.Sprintf("translate(10, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		fmt.Sprintf("translate(%d, 60)", w+25),
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
-	return wrapSVG(content, totalWidth, totalHeight), nil
+	return wrapSVG(content, int(dims.TotalWidth), int(dims.TotalHeight)), nil
 }
 
 // Heatmap variations: linear and weeks view
@@ -1017,13 +1025,12 @@ func generateBoxPlotGallery() (string, error) {
 		{Label: "Group C", Values: []float64{10, 12, 15, 18, 20, 25, 30, 35, 40, 50, 60}},
 	}
 
-	w, h := 600, 400
-	totalWidth := w * 2
-	totalHeight := h + 30 // Extra bottom margin
+	// Use relative sizing
+	dims := CalculateSingleRowDimensions(2, 600, 400)
 
 	var content string
 
-	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += svg.Rect(0, 0, dims.TotalWidth, dims.TotalHeight, svg.Style{Fill: "#ffffff"})
 	content += "\n"
 
 	titleStyle := svg.Style{
@@ -1033,7 +1040,7 @@ func generateBoxPlotGallery() (string, error) {
 		Fill:       "#000000",
 		TextAnchor: "middle",
 	}
-	content += svg.Text("Box Plot Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += svg.Text("Box Plot Gallery", dims.TotalWidth/2, dims.TitleY, titleStyle)
 	content += "\n"
 
 	labelStyle := svg.Style{
@@ -1044,47 +1051,54 @@ func generateBoxPlotGallery() (string, error) {
 		TextAnchor: "middle",
 	}
 
+	chartW := int(dims.ChartWidth - 50)
+	chartH := int(dims.ChartHeight - 80)
+	labelOffsetY := 0.0
+	chartOffsetY := 30.0
+
 	// Vertical box plot
+	cellX := 25.0
 	spec1 := charts.BoxPlotSpec{
 		Data:         data,
-		Width:        float64(w - 50),
-		Height:       float64(h - 80),
+		Width:        float64(chartW),
+		Height:       float64(chartH),
 		ShowOutliers: true,
 		ShowMean:     true,
 	}
 	content += svg.Group(
-		svg.Text("Vertical Box Plot", 300, 0, labelStyle)+
+		svg.Text("Vertical Box Plot", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderVerticalBoxPlot(spec1),
-				"translate(0, 30)",
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		"translate(25, 60)",
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
 	// Vertical box plot with notches
+	cellX += dims.ColWidth
 	spec2 := charts.BoxPlotSpec{
 		Data:         data,
-		Width:        float64(w - 50),
-		Height:       float64(h - 80),
+		Width:        float64(chartW),
+		Height:       float64(chartH),
 		ShowOutliers: true,
 		ShowNotch:    true,
 	}
 	content += svg.Group(
-		svg.Text("With Confidence Notches", 300, 0, labelStyle)+
+		svg.Text("With Confidence Notches", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderVerticalBoxPlot(spec2),
-				"translate(0, 30)",
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		fmt.Sprintf("translate(%d, 60)", w+25),
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
-	return wrapSVG(content, totalWidth, totalHeight), nil
+	return wrapSVG(content, int(dims.TotalWidth), int(dims.TotalHeight)), nil
 }
 
 // Histogram variations: basic and with density
@@ -1102,13 +1116,12 @@ func generateHistogramGallery() (string, error) {
 
 	histData := &charts.HistogramData{Values: values}
 
-	w, h := 600, 400
-	totalWidth := w * 2
-	totalHeight := h + 30 // Extra bottom margin
+	// Use relative sizing
+	dims := CalculateSingleRowDimensions(2, 600, 400)
 
 	var content string
 
-	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += svg.Rect(0, 0, dims.TotalWidth, dims.TotalHeight, svg.Style{Fill: "#ffffff"})
 	content += "\n"
 
 	titleStyle := svg.Style{
@@ -1118,7 +1131,7 @@ func generateHistogramGallery() (string, error) {
 		Fill:       "#000000",
 		TextAnchor: "middle",
 	}
-	content += svg.Text("Histogram Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += svg.Text("Histogram Gallery", dims.TotalWidth/2, dims.TitleY, titleStyle)
 	content += "\n"
 
 	labelStyle := svg.Style{
@@ -1129,46 +1142,53 @@ func generateHistogramGallery() (string, error) {
 		TextAnchor: "middle",
 	}
 
+	chartW := int(dims.ChartWidth - 50)
+	chartH := int(dims.ChartHeight - 80)
+	labelOffsetY := 0.0
+	chartOffsetY := 30.0
+
 	// Basic histogram
+	cellX := 25.0
 	spec1 := charts.HistogramSpec{
 		Data:     histData,
-		Width:    float64(w - 50),
-		Height:   float64(h - 80),
+		Width:    float64(chartW),
+		Height:   float64(chartH),
 		BinCount: 20,
 	}
 	content += svg.Group(
-		svg.Text("Count Histogram", 300, 0, labelStyle)+
+		svg.Text("Count Histogram", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderHistogram(spec1),
-				"translate(0, 30)",
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		"translate(25, 60)",
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
 	// Density histogram
+	cellX += dims.ColWidth
 	spec2 := charts.HistogramSpec{
 		Data:        histData,
-		Width:       float64(w - 50),
-		Height:      float64(h - 80),
+		Width:       float64(chartW),
+		Height:      float64(chartH),
 		BinCount:    20,
 		ShowDensity: true,
 	}
 	content += svg.Group(
-		svg.Text("Density Histogram", 300, 0, labelStyle)+
+		svg.Text("Density Histogram", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderHistogram(spec2),
-				"translate(0, 30)",
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		fmt.Sprintf("translate(%d, 60)", w+25),
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
-	return wrapSVG(content, totalWidth, totalHeight), nil
+	return wrapSVG(content, int(dims.TotalWidth), int(dims.TotalHeight)), nil
 }
 
 // Violin plot variations
@@ -1180,13 +1200,12 @@ func generateViolinPlotGallery() (string, error) {
 		{Label: "Group C", Values: []float64{10, 15, 20, 25, 30, 35, 40, 50, 60}},
 	}
 
-	w, h := 600, 400
-	totalWidth := w * 2
-	totalHeight := h + 30 // Extra bottom margin
+	// Use relative sizing
+	dims := CalculateSingleRowDimensions(2, 600, 400)
 
 	var content string
 
-	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += svg.Rect(0, 0, dims.TotalWidth, dims.TotalHeight, svg.Style{Fill: "#ffffff"})
 	content += "\n"
 
 	titleStyle := svg.Style{
@@ -1196,7 +1215,7 @@ func generateViolinPlotGallery() (string, error) {
 		Fill:       "#000000",
 		TextAnchor: "middle",
 	}
-	content += svg.Text("Violin Plot Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += svg.Text("Violin Plot Gallery", dims.TotalWidth/2, dims.TitleY, titleStyle)
 	content += "\n"
 
 	labelStyle := svg.Style{
@@ -1207,46 +1226,53 @@ func generateViolinPlotGallery() (string, error) {
 		TextAnchor: "middle",
 	}
 
+	chartW := int(dims.ChartWidth - 50)
+	chartH := int(dims.ChartHeight - 80)
+	labelOffsetY := 0.0
+	chartOffsetY := 30.0
+
 	// Basic violin plot
+	cellX := 25.0
 	spec1 := charts.ViolinPlotSpec{
 		Data:   data,
-		Width:  float64(w - 50),
-		Height: float64(h - 80),
+		Width:  float64(chartW),
+		Height: float64(chartH),
 	}
 	content += svg.Group(
-		svg.Text("Basic Violin Plot", 300, 0, labelStyle)+
+		svg.Text("Basic Violin Plot", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderViolinPlot(spec1),
-				"translate(0, 30)",
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		"translate(25, 60)",
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
 	// Violin with box plot inside
+	cellX += dims.ColWidth
 	spec2 := charts.ViolinPlotSpec{
 		Data:       data,
-		Width:      float64(w - 50),
-		Height:     float64(h - 80),
+		Width:      float64(chartW),
+		Height:     float64(chartH),
 		ShowBox:    true,
 		ShowMedian: true,
 		ShowMean:   true,
 	}
 	content += svg.Group(
-		svg.Text("Violin + Box Plot", 300, 0, labelStyle)+
+		svg.Text("Violin + Box Plot", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderViolinPlot(spec2),
-				"translate(0, 30)",
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		fmt.Sprintf("translate(%d, 60)", w+25),
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
-	return wrapSVG(content, totalWidth, totalHeight), nil
+	return wrapSVG(content, int(dims.TotalWidth), int(dims.TotalHeight)), nil
 }
 
 // Lollipop chart variations: vertical and horizontal
@@ -1262,13 +1288,12 @@ func generateLollipopGallery() (string, error) {
 		Color: "#3b82f6",
 	}
 
-	w, h := 600, 400
-	totalWidth := w * 2
-	totalHeight := h + 30 // Extra bottom margin
+	// Use relative sizing
+	dims := CalculateSingleRowDimensions(2, 600, 400)
 
 	var content string
 
-	content += svg.Rect(0, 0, float64(totalWidth), float64(totalHeight), svg.Style{Fill: "#ffffff"})
+	content += svg.Rect(0, 0, dims.TotalWidth, dims.TotalHeight, svg.Style{Fill: "#ffffff"})
 	content += "\n"
 
 	titleStyle := svg.Style{
@@ -1278,7 +1303,7 @@ func generateLollipopGallery() (string, error) {
 		Fill:       "#000000",
 		TextAnchor: "middle",
 	}
-	content += svg.Text("Lollipop Chart Gallery", float64(totalWidth)/2, 30, titleStyle)
+	content += svg.Text("Lollipop Chart Gallery", dims.TotalWidth/2, dims.TitleY, titleStyle)
 	content += "\n"
 
 	labelStyle := svg.Style{
@@ -1289,46 +1314,53 @@ func generateLollipopGallery() (string, error) {
 		TextAnchor: "middle",
 	}
 
+	chartW := int(dims.ChartWidth - 50)
+	chartH := int(dims.ChartHeight - 80)
+	labelOffsetY := 0.0
+	chartOffsetY := 30.0
+
 	// Vertical lollipop
+	cellX := 25.0
 	spec1 := charts.LollipopSpec{
 		Data:       lollipopData,
-		Width:      float64(w - 50),
-		Height:     float64(h - 80),
+		Width:      float64(chartW),
+		Height:     float64(chartH),
 		ShowLabels: true,
 	}
 	content += svg.Group(
-		svg.Text("Vertical Lollipop", 300, 0, labelStyle)+
+		svg.Text("Vertical Lollipop", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderLollipop(spec1),
-				"translate(0, 30)",
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		"translate(25, 60)",
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
 	// Horizontal lollipop
+	cellX += dims.ColWidth
 	spec2 := charts.LollipopSpec{
 		Data:       lollipopData,
-		Width:      float64(w - 50),
-		Height:     float64(h - 80),
+		Width:      float64(chartW),
+		Height:     float64(chartH),
 		Horizontal: true,
 		ShowLabels: true,
 	}
 	content += svg.Group(
-		svg.Text("Horizontal Lollipop", 300, 0, labelStyle)+
+		svg.Text("Horizontal Lollipop", dims.ColWidth/2, labelOffsetY, labelStyle)+
 			svg.Group(
 				charts.RenderLollipop(spec2),
-				"translate(0, 30)",
+				fmt.Sprintf("translate(0, %.2f)", chartOffsetY),
 				svg.Style{},
 			),
-		fmt.Sprintf("translate(%d, 60)", w+25),
+		fmt.Sprintf("translate(%.2f, %.2f)", cellX, dims.ChartStartY),
 		svg.Style{},
 	)
 	content += "\n"
 
-	return wrapSVG(content, totalWidth, totalHeight), nil
+	return wrapSVG(content, int(dims.TotalWidth), int(dims.TotalHeight)), nil
 }
 
 // Candlestick chart variations

@@ -141,7 +141,18 @@ func generateGalleries() error {
 
 	for name, generator := range generators {
 		fmt.Printf("Generating %s gallery...\n", name)
-		svg, err := generator()
+
+		var svg string
+		var err error
+
+		// Check if gallery exists in the new registry system
+		if config, ok := GalleryRegistry[name]; ok {
+			svg, err = GenerateGallery(config)
+		} else {
+			// Fall back to old generator
+			svg, err = generator()
+		}
+
 		if err != nil {
 			fmt.Printf("  ✗ Failed: %v\n", err)
 			continue

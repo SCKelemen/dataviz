@@ -1,4 +1,73 @@
-package main
+package gallery
+
+import "github.com/SCKelemen/units"
+
+// CalculateGridDimensions calculates pixel dimensions for a grid-based gallery
+// using relative units that resolve to exact pixels at render time
+func CalculateGridDimensions(cols, rows int, baseWidth, baseHeight float64) GalleryDimensions {
+	// Use percentages for grid sizing to avoid accumulation errors
+	colPct := units.Percent(100.0 / float64(cols))
+	rowPct := units.Percent(100.0 / float64(rows))
+
+	// Calculate dimensions with proper margins
+	titleMargin := units.Percent(5)  // 5% top margin for title
+	bottomMargin := units.Percent(3) // 3% bottom margin
+	chartPadding := units.Percent(2) // 2% padding within each cell
+
+	totalWidth := baseWidth * float64(cols)
+	totalHeight := baseHeight * float64(rows)
+
+	// Add margins to total height
+	titleSpace := titleMargin.Of(totalHeight)
+	bottomSpace := bottomMargin.Of(totalHeight)
+	totalHeight += titleSpace + bottomSpace
+
+	// Calculate chart dimensions (subtract padding)
+	colWidth := colPct.Of(totalWidth)
+	rowHeight := rowPct.Of(baseHeight * float64(rows))
+
+	padding := chartPadding.Of(colWidth)
+	chartWidth := colWidth - (padding * 2)
+	chartHeight := rowHeight - (padding * 2)
+
+	return GalleryDimensions{
+		TotalWidth:   totalWidth,
+		TotalHeight:  totalHeight,
+		ChartWidth:   chartWidth,
+		ChartHeight:  chartHeight,
+		ColWidth:     colWidth,
+		RowHeight:    rowHeight,
+		TitleY:       titleSpace * 0.7, // Position title 70% down the title space
+		ChartStartY:  titleSpace,
+		BottomMargin: bottomSpace,
+	}
+}
+
+// CalculateSingleRowDimensions calculates dimensions for single-row galleries
+func CalculateSingleRowDimensions(cols int, baseWidth, baseHeight float64) GalleryDimensions {
+	titleHeight := 50.0
+	bottomMargin := 30.0
+	chartPadding := 25.0
+
+	totalWidth := baseWidth * float64(cols)
+	totalHeight := baseHeight + titleHeight + bottomMargin
+
+	colWidth := totalWidth / float64(cols)
+	chartWidth := baseWidth - (chartPadding * 2)
+	chartHeight := baseHeight - chartPadding
+
+	return GalleryDimensions{
+		TotalWidth:   totalWidth,
+		TotalHeight:  totalHeight,
+		ChartWidth:   chartWidth,
+		ChartHeight:  chartHeight,
+		ColWidth:     colWidth,
+		RowHeight:    baseHeight,
+		TitleY:       30,
+		ChartStartY:  titleHeight + 10,
+		BottomMargin: bottomMargin,
+	}
+}
 
 // SingleRowLayout represents a single-row gallery layout
 type SingleRowLayout struct {

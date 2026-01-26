@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"github.com/SCKelemen/dataviz/internal/gallery"
 	"github.com/SCKelemen/dataviz/mcp/charts"
 	"github.com/SCKelemen/dataviz/mcp/types"
 	"github.com/modelcontextprotocol/go-sdk/mcp"
@@ -1029,7 +1030,33 @@ func (s *Server) RegisterTools() {
 		s.handleDendrogram,
 	)
 
-	fmt.Println("Registered 28 chart generation tools")
+	// Tool: generate_gallery
+	s.server.AddTool(
+		&mcp.Tool{
+			Name:        "generate_gallery",
+			Description: "Generate a gallery SVG showcasing multiple variations of a chart type side-by-side for comparison and demonstration purposes",
+			InputSchema: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"gallery_type": map[string]interface{}{
+						"type":        "string",
+						"description": "Type of gallery to generate",
+						"enum": []string{
+							"bar", "area", "stacked-area", "lollipop", "histogram",
+							"pie", "boxplot", "violin", "treemap", "icicle", "ridgeline",
+							"line", "scatter", "connected-scatter", "statcard",
+							"radar", "streamchart", "candlestick", "sunburst", "circle-packing",
+							"heatmap",
+						},
+					},
+				},
+				"required": []string{"gallery_type"},
+			},
+		},
+		s.handleGallery,
+	)
+
+	fmt.Println("Registered 29 chart generation tools")
 }
 
 // handleBarChart handles the bar_chart tool
@@ -1817,6 +1844,36 @@ func (s *Server) handleDendrogram(ctx context.Context, request *mcp.CallToolRequ
 	svg, err := charts.CreateDendrogram(config)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create dendrogram: %w", err)
+	}
+
+	return &mcp.CallToolResult{
+		Content: []mcp.Content{
+			&mcp.TextContent{
+				Text: fmt.Sprintf("```svg\n%s\n```", svg),
+			},
+		},
+	}, nil
+}
+
+// handleGallery handles the generate_gallery tool
+func (s *Server) handleGallery(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+	var input struct {
+		GalleryType string `json:"gallery_type"`
+	}
+	if err := parseArguments(request.Params.Arguments, &input); err != nil {
+		return nil, fmt.Errorf("invalid arguments: %w", err)
+	}
+
+	// Look up gallery configuration
+	config, ok := gallery.GalleryRegistry[input.GalleryType]
+	if !ok {
+		return nil, fmt.Errorf("unknown gallery type: %s", input.GalleryType)
+	}
+
+	// Generate gallery SVG
+	svg, err := gallery.GenerateGallery(config)
+	if err != nil {
+		return nil, fmt.Errorf("failed to generate gallery: %w", err)
 	}
 
 	return &mcp.CallToolResult{

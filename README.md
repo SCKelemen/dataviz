@@ -4,6 +4,9 @@
 
 [![License: BearWare 1.0](https://img.shields.io/badge/license-BearWare%201.0-blue.svg)](LICENSE)
 [![Go Version](https://img.shields.io/badge/go-1.25+-blue.svg)](https://go.dev/dl/)
+[![CI](https://github.com/SCKelemen/dataviz/actions/workflows/ci.yml/badge.svg)](https://github.com/SCKelemen/dataviz/actions/workflows/ci.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/SCKelemen/dataviz)](https://goreportcard.com/report/github.com/SCKelemen/dataviz)
+[![codecov](https://codecov.io/gh/SCKelemen/dataviz/branch/main/graph/badge.svg)](https://codecov.io/gh/SCKelemen/dataviz)
 
 ## Overview
 

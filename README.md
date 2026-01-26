@@ -99,14 +99,23 @@ Built on top of [SCKelemen/layout](https://github.com/SCKelemen/layout) for posi
 
 #### `mcp/`
 Model Context Protocol server for AI agents:
-- Chart generation tools for Claude Code
+- **29 chart generation tools** for Claude Code and MCP clients
+- **Gallery tool** for generating comparison galleries of chart variations
 - Generic data types (interface{}, float64)
 - Composable with other MCP servers (Omnitron, file systems, APIs)
 - Data-source agnostic design
 
+**Tools Include:**
+- Statistical: bar, pie, line, scatter, histogram, boxplot, violin, density, ridgeline
+- Hierarchical: treemap, sunburst, icicle, circle_packing, dendrogram
+- Financial: candlestick, ohlc
+- Specialized: heatmap, radar, parallel, streamchart, sankey, chord, wordcloud
+- Gallery: generate_gallery (comparison galleries of chart variants)
+
 **Architecture:**
 - **Consolidated charts** (pie, bar): MCP acts as thin wrapper, calls main library
 - **Generic charts** (line with multi-series, XY scatter, matrix heatmap): MCP-specific implementations that complement the time-series-focused main library
+- **Gallery system**: Reusable internal/gallery package for generating comparison views
 - **Future:** Unified approach via Observable Plot-style scales and marks (see [Roadmap](docs/ROADMAP.md))
 
 ### Command-Line Tools

@@ -4,8 +4,21 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/SCKelemen/dataviz/internal/textutil"
 	"github.com/SCKelemen/svg"
 	"github.com/SCKelemen/units"
+)
+
+// TextOverflow defines how long text should be handled
+type TextOverflow int
+
+const (
+	// TextOverflowEllipsis truncates text with "..." when it's too long
+	TextOverflowEllipsis TextOverflow = iota
+	// TextOverflowWrap wraps text onto multiple lines (future enhancement)
+	TextOverflowWrap
+	// TextOverflowClip clips text without ellipsis
+	TextOverflowClip
 )
 
 // AxisStyle contains styling options for axis rendering
@@ -20,6 +33,7 @@ type AxisStyle struct {
 	GridDashArray    string
 	TitleFontSize    float64
 	TitleFontWeight  string
+	TextOverflow     TextOverflow // How to handle long labels
 }
 
 // DefaultAxisStyle returns the default axis styling
@@ -35,6 +49,7 @@ func DefaultAxisStyle() AxisStyle {
 		GridDashArray:    "",
 		TitleFontSize:    12,
 		TitleFontWeight:  "bold",
+		TextOverflow:     TextOverflowEllipsis, // Default to ellipsis
 	}
 }
 
@@ -121,7 +136,9 @@ func (a *Axis) renderHorizontalBottom(sb *strings.Builder, ticks []Tick, rangeSt
 			sb.WriteString("\n")
 		}
 
-		// Label
+		// Label (with text overflow handling)
+		maxWidth := calculateMaxLabelWidth(opts.Style.FontSize, AxisOrientationBottom)
+		processedLabel := processLabel(tick.Label, maxWidth, opts.Style.TextOverflow)
 		labelY := y + a.tickSize.Value + a.tickPadding.Value + opts.Style.FontSize
 		textStyle := svg.Style{
 			Fill:       opts.Style.TextColor,
@@ -130,7 +147,7 @@ func (a *Axis) renderHorizontalBottom(sb *strings.Builder, ticks []Tick, rangeSt
 			TextAnchor: svg.TextAnchorMiddle,
 		}
 		sb.WriteString("  ")
-		sb.WriteString(svg.Text(tick.Label, x, labelY, textStyle))
+		sb.WriteString(svg.Text(processedLabel, x, labelY, textStyle))
 		sb.WriteString("\n")
 	}
 
@@ -185,7 +202,9 @@ func (a *Axis) renderHorizontalTop(sb *strings.Builder, ticks []Tick, rangeStart
 			sb.WriteString("\n")
 		}
 
-		// Label (above tick)
+		// Label (above tick, with text overflow handling)
+		maxWidth := calculateMaxLabelWidth(opts.Style.FontSize, AxisOrientationTop)
+		processedLabel := processLabel(tick.Label, maxWidth, opts.Style.TextOverflow)
 		labelY := y - a.tickSize.Value - a.tickPadding.Value
 		textStyle := svg.Style{
 			Fill:       opts.Style.TextColor,
@@ -194,7 +213,7 @@ func (a *Axis) renderHorizontalTop(sb *strings.Builder, ticks []Tick, rangeStart
 			TextAnchor: svg.TextAnchorMiddle,
 		}
 		sb.WriteString("  ")
-		sb.WriteString(svg.Text(tick.Label, x, labelY, textStyle))
+		sb.WriteString(svg.Text(processedLabel, x, labelY, textStyle))
 		sb.WriteString("\n")
 	}
 
@@ -249,7 +268,9 @@ func (a *Axis) renderVerticalLeft(sb *strings.Builder, ticks []Tick, rangeStart,
 			sb.WriteString("\n")
 		}
 
-		// Label (left of tick)
+		// Label (left of tick, with text overflow handling)
+		maxWidth := calculateMaxLabelWidth(opts.Style.FontSize, AxisOrientationLeft)
+		processedLabel := processLabel(tick.Label, maxWidth, opts.Style.TextOverflow)
 		labelX := x - a.tickSize.Value - a.tickPadding.Value
 		textStyle := svg.Style{
 			Fill:              opts.Style.TextColor,
@@ -259,7 +280,7 @@ func (a *Axis) renderVerticalLeft(sb *strings.Builder, ticks []Tick, rangeStart,
 			DominantBaseline:  svg.DominantBaselineMiddle,
 		}
 		sb.WriteString("  ")
-		sb.WriteString(svg.Text(tick.Label, labelX, y, textStyle))
+		sb.WriteString(svg.Text(processedLabel, labelX, y, textStyle))
 		sb.WriteString("\n")
 	}
 
@@ -317,7 +338,9 @@ func (a *Axis) renderVerticalRight(sb *strings.Builder, ticks []Tick, rangeStart
 			sb.WriteString("\n")
 		}
 
-		// Label (right of tick)
+		// Label (right of tick, with text overflow handling)
+		maxWidth := calculateMaxLabelWidth(opts.Style.FontSize, AxisOrientationRight)
+		processedLabel := processLabel(tick.Label, maxWidth, opts.Style.TextOverflow)
 		labelX := x + a.tickSize.Value + a.tickPadding.Value
 		textStyle := svg.Style{
 			Fill:              opts.Style.TextColor,
@@ -327,7 +350,7 @@ func (a *Axis) renderVerticalRight(sb *strings.Builder, ticks []Tick, rangeStart
 			DominantBaseline:  svg.DominantBaselineMiddle,
 		}
 		sb.WriteString("  ")
-		sb.WriteString(svg.Text(tick.Label, labelX, y, textStyle))
+		sb.WriteString(svg.Text(processedLabel, labelX, y, textStyle))
 		sb.WriteString("\n")
 	}
 
@@ -358,6 +381,40 @@ func (a *Axis) String(opts RenderOptions) string {
 }
 
 // Helper functions
+
+// calculateMaxLabelWidth determines reasonable max width for labels based on font size
+// This prevents labels from overlapping and maintains readability
+func calculateMaxLabelWidth(fontSize float64, orientation AxisOrientation) float64 {
+	// For horizontal axes (labels below), use a multiple of font size
+	// For vertical axes (labels on side), allow more space
+	switch orientation {
+	case AxisOrientationBottom, AxisOrientationTop:
+		// Horizontal axis: limit to ~15 characters at typical font size
+		return fontSize * 10
+	case AxisOrientationLeft, AxisOrientationRight:
+		// Vertical axis: limit to ~25 characters for better horizontal space usage
+		return fontSize * 15
+	default:
+		return fontSize * 12
+	}
+}
+
+// processLabel applies text overflow handling to a label based on style settings
+func processLabel(label string, maxWidth float64, overflow TextOverflow) string {
+	switch overflow {
+	case TextOverflowEllipsis:
+		return textutil.ElideLabel(label, maxWidth)
+	case TextOverflowWrap:
+		// TODO: Implement text wrapping using text library
+		// For now, fall back to ellipsis
+		return textutil.ElideLabel(label, maxWidth)
+	case TextOverflowClip:
+		// No processing - let SVG handle clipping
+		return label
+	default:
+		return textutil.ElideLabel(label, maxWidth)
+	}
+}
 
 func formatStyleAttrs(style svg.Style) string {
 	var attrs []string

@@ -31,10 +31,3 @@ require (
 exclude github.com/SCKelemen/wpt-test-gen v0.0.0-00010101000000-000000000000
 
 exclude github.com/SCKelemen/wpt-test-gen v0.0.0-20251213153317-6265321ae2a1
-
-// Use replace for layout to avoid wpt-test-gen issues
-replace github.com/SCKelemen/layout => github.com/SCKelemen/layout v1.1.0
-
-// Local development - replace with local paths when developing
-// Commented out for CI/CD - uncomment for local development
-// replace github.com/SCKelemen/text => /Users/samuel.kelemen/Code/github.com/SCKelemen/text

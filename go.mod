@@ -26,8 +26,3 @@ require (
 	golang.org/x/oauth2 v0.30.0 // indirect
 	golang.org/x/text v0.32.0 // indirect
 )
-
-// Exclude problematic test-only dependency (used only in layout tests)
-exclude github.com/SCKelemen/wpt-test-gen v0.0.0-00010101000000-000000000000
-
-exclude github.com/SCKelemen/wpt-test-gen v0.0.0-20251213153317-6265321ae2a1

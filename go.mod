@@ -9,7 +9,7 @@ require (
 
 	// SCKelemen rendering stack
 	github.com/SCKelemen/layout v1.1.0
-	github.com/SCKelemen/svg v0.2.0
+	github.com/SCKelemen/svg v0.3.0
 	github.com/SCKelemen/text v1.0.0
 	github.com/SCKelemen/units v1.0.2
 	github.com/modelcontextprotocol/go-sdk v1.2.0
@@ -21,8 +21,8 @@ require (
 	github.com/SCKelemen/unicode v1.0.1-0.20251225190048-233be2b0d647 // indirect
 	github.com/google/jsonschema-go v0.3.0 // indirect
 	github.com/yosida95/uritemplate/v3 v3.0.2 // indirect
-	golang.org/x/image v0.34.0 // indirect
+	golang.org/x/image v0.35.0 // indirect
 	golang.org/x/net v0.0.0-20211118161319-6a13c67c3ce4 // indirect
 	golang.org/x/oauth2 v0.30.0 // indirect
-	golang.org/x/text v0.32.0 // indirect
+	golang.org/x/text v0.33.0 // indirect
 )

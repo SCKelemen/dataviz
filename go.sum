@@ -1,7 +1,7 @@
 cel.dev/expr v0.24.0 h1:56OvJKSH3hDGL0ml5uSxZmz3/3Pq4tJ+fb1unVLAFcY=
 cel.dev/expr v0.24.0/go.mod h1:hLPLo1W4QUmuYdA72RBX06QTs6MXw941piREPl3Yfiw=
-github.com/SCKelemen/color v1.0.3 h1:cYFQE4LYZ32R/Fjzf3gv+4Bi0shMTRkdpIpD7pD5D0E=
-github.com/SCKelemen/color v1.0.3/go.mod h1:Of/rXNH00Qe2j3crJFlrvezNqDcLMOrRb+lB+/S60Lo=
+github.com/SCKelemen/color v1.0.4 h1:87xcsRgKrQ7E4GDBwWKB6+sbLCUHH02dnFCs9qmFDjM=
+github.com/SCKelemen/color v1.0.4/go.mod h1:xS5seesOTUxlTeMY3+ptYtF2BUjoCNmg1mPel8pHhYU=
 github.com/SCKelemen/design-system v1.0.0 h1:39/io/7zkypQwL0QCXhu0nfC40QkVeH14sFagUporDI=
 github.com/SCKelemen/design-system v1.0.0/go.mod h1:IxHo26HhNJsXBtQ3cv8AhgT8NzuoNGPiWyz9RV23Hcs=
 github.com/SCKelemen/layout v1.1.1 h1:fboKcm39eJRTynCbxe5OWjZwKEemWgJMyV/0s7TuL88=

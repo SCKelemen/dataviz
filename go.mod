@@ -4,7 +4,7 @@ go 1.25.4
 
 require (
 	// SCKelemen foundation libraries
-	github.com/SCKelemen/color v1.0.3
+	github.com/SCKelemen/color v1.0.4
 	github.com/SCKelemen/design-system v1.0.0
 
 	// SCKelemen rendering stack

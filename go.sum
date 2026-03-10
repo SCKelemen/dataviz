@@ -4,8 +4,8 @@ github.com/SCKelemen/color v1.0.3 h1:cYFQE4LYZ32R/Fjzf3gv+4Bi0shMTRkdpIpD7pD5D0E
 github.com/SCKelemen/color v1.0.3/go.mod h1:Of/rXNH00Qe2j3crJFlrvezNqDcLMOrRb+lB+/S60Lo=
 github.com/SCKelemen/design-system v1.0.0 h1:39/io/7zkypQwL0QCXhu0nfC40QkVeH14sFagUporDI=
 github.com/SCKelemen/design-system v1.0.0/go.mod h1:IxHo26HhNJsXBtQ3cv8AhgT8NzuoNGPiWyz9RV23Hcs=
-github.com/SCKelemen/layout v1.1.1 h1:fboKcm39eJRTynCbxe5OWjZwKEemWgJMyV/0s7TuL88=
-github.com/SCKelemen/layout v1.1.1/go.mod h1:61Bc3oyGWcwO9aST05Z/NLoW7sOziYDtvC6Bs8HC+c4=
+github.com/SCKelemen/layout v1.1.2 h1:T3ZzCBwlNTE6D7XZkhqxCmeHLH2O+tZ9AZ+Jfxb9NTY=
+github.com/SCKelemen/layout v1.1.2/go.mod h1:LMehxdBtG0hHIlH1BUk/re+lv9cvGL7AgYxhH43Z7T4=
 github.com/SCKelemen/svg v1.0.0 h1:N4x6HwzmPl1cdpwkvOmS0xIyRywMkwWr0VprkqraakY=
 github.com/SCKelemen/svg v1.0.0/go.mod h1:RmBGxTludjJkhfqHsBSdZtoqBAPZ9oftw4hVqe+DImk=
 github.com/SCKelemen/text v1.1.2 h1:gDgcSxJ+/X2mUjJqDaUZ2cgmzfLW8ZBw5swH6+BKC3s=

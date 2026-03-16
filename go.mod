@@ -8,7 +8,7 @@ require (
 	github.com/SCKelemen/design-system v1.0.2
 
 	// SCKelemen rendering stack
-	github.com/SCKelemen/layout v1.1.3
+	github.com/SCKelemen/layout v1.1.4
 	github.com/SCKelemen/svg v1.0.2
 	github.com/SCKelemen/text v1.1.3
 	github.com/SCKelemen/units v1.1.0

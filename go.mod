@@ -11,7 +11,7 @@ require (
 	github.com/SCKelemen/layout v1.1.3
 	github.com/SCKelemen/svg v1.0.2
 	github.com/SCKelemen/text v1.1.3
-	github.com/SCKelemen/units v1.1.0
+	github.com/SCKelemen/units v1.2.0
 	github.com/modelcontextprotocol/go-sdk v1.2.0
 	github.com/srwiley/oksvg v0.0.0-20220731023508-a61f04f16b76
 	github.com/srwiley/rasterx v0.0.0-20220730225603-2ab79fcdd4ef
